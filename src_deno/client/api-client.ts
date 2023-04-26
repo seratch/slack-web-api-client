@@ -403,7 +403,7 @@ import {
   AdminRolesAddAssignmentsResponse,
   AdminRolesListAssignmentsResponse,
   AdminRolesRemoveAssignmentsResponse,
-} from "./generated-response.ts"
+} from "./generated-response/index.ts"
 
 import { SlackAPIResponse } from "./response.ts"
 import { isDebugLogEnabled } from "../logging/debug-logging.ts"

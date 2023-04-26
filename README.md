@@ -42,7 +42,7 @@ You can use this library in Slack's automation platform too!
 
 ```typescript
 import { SlackFunction } from "deno-slack-sdk/mod.ts";
-import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.1.3/mod.ts";
+import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.1.4/mod.ts";
 
 export const def = DefineFunction({
   callback_id: "hello",
