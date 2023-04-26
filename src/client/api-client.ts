@@ -430,10 +430,12 @@ export class SlackAPIClient {
 
   async call(
     name: string,
+    // deno-lint-ignore no-explicit-any
     params: Record<string, any>
   ): Promise<SlackAPIResponse> {
     const url = `https://slack.com/api/${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
+    // deno-lint-ignore no-explicit-any
     const _params: any = {};
     Object.assign(_params, params);
     if (_params && _params.token) {

@@ -1,6 +1,6 @@
-import type { Confirm } from "./confirm.ts"
-import type { AnyOption, PlainTextOption } from "./options.ts"
-import type { PlainTextField } from "./text-fields.ts"
+import type { Confirm } from "./confirm.ts";
+import type { AnyOption, PlainTextOption } from "./options.ts";
+import type { PlainTextField } from "./text-fields.ts";
 
 // -----------------------------
 // Basic types
@@ -32,13 +32,13 @@ export type AnyActionBlockElementType =
   | "number_input";
 
 export interface BlockElement<
-  T extends AnyBlockElementType = AnyBlockElementType
+  T extends AnyBlockElementType = AnyBlockElementType,
 > {
   type: T;
 }
 
 export interface ActionBlockElement<
-  T extends AnyActionBlockElementType = AnyActionBlockElementType
+  T extends AnyActionBlockElementType = AnyActionBlockElementType,
 > extends BlockElement<T> {
   type: T;
   action_id?: string;
@@ -107,7 +107,8 @@ export interface ImageElement extends BlockElement<"image"> {
 }
 
 export interface UsersSelect
-  extends ActionBlockElement<"users_select">,
+  extends
+    ActionBlockElement<"users_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -115,7 +116,8 @@ export interface UsersSelect
   initial_user?: string;
 }
 export interface MultiUsersSelect
-  extends ActionBlockElement<"multi_users_select">,
+  extends
+    ActionBlockElement<"multi_users_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -124,7 +126,8 @@ export interface MultiUsersSelect
   max_selected_items?: number;
 }
 export interface StaticSelect
-  extends ActionBlockElement<"static_select">,
+  extends
+    ActionBlockElement<"static_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -137,7 +140,8 @@ export interface StaticSelect
   }[];
 }
 export interface MultiStaticSelect
-  extends ActionBlockElement<"multi_static_select">,
+  extends
+    ActionBlockElement<"multi_static_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -151,7 +155,8 @@ export interface MultiStaticSelect
   max_selected_items?: number;
 }
 export interface ConversationsSelect
-  extends ActionBlockElement<"conversations_select">,
+  extends
+    ActionBlockElement<"conversations_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -166,7 +171,8 @@ export interface ConversationsSelect
   };
 }
 export interface MultiConversationsSelect
-  extends ActionBlockElement<"multi_conversations_select">,
+  extends
+    ActionBlockElement<"multi_conversations_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -181,7 +187,8 @@ export interface MultiConversationsSelect
   };
 }
 export interface ChannelsSelect
-  extends ActionBlockElement<"channels_select">,
+  extends
+    ActionBlockElement<"channels_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -189,7 +196,8 @@ export interface ChannelsSelect
   initial_channel?: string;
 }
 export interface MultiChannelsSelect
-  extends ActionBlockElement<"multi_channels_select">,
+  extends
+    ActionBlockElement<"multi_channels_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -198,7 +206,8 @@ export interface MultiChannelsSelect
   max_selected_items?: number;
 }
 export interface ExternalSelect
-  extends ActionBlockElement<"external_select">,
+  extends
+    ActionBlockElement<"external_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -207,7 +216,8 @@ export interface ExternalSelect
   min_query_length?: number;
 }
 export interface MultiExternalSelect
-  extends ActionBlockElement<"multi_external_select">,
+  extends
+    ActionBlockElement<"multi_external_select">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -229,7 +239,8 @@ export interface Overflow extends ActionBlockElement<"overflow">, Confirmable {
   options: PlainTextOption[];
 }
 export interface Datepicker
-  extends ActionBlockElement<"datepicker">,
+  extends
+    ActionBlockElement<"datepicker">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -237,7 +248,8 @@ export interface Datepicker
   initial_date?: string;
 }
 export interface Timepicker
-  extends ActionBlockElement<"timepicker">,
+  extends
+    ActionBlockElement<"timepicker">,
     Confirmable,
     Focusable,
     Placeholdable {
@@ -246,32 +258,27 @@ export interface Timepicker
   timezone?: string;
 }
 export interface RadioButtons
-  extends ActionBlockElement<"radio_buttons">,
-    Confirmable,
-    Focusable {
+  extends ActionBlockElement<"radio_buttons">, Confirmable, Focusable {
   type: "radio_buttons";
   initial_option?: AnyOption;
   options: AnyOption[];
 }
 export interface DateTimepicker
-  extends ActionBlockElement<"datetimepicker">,
-    Confirmable,
-    Focusable {
+  extends ActionBlockElement<"datetimepicker">, Confirmable, Focusable {
   type: "datetimepicker";
   // The initial date and time that is selected when the element is loaded,
   // represented as a UNIX timestamp (seconds)
   initial_date_time?: number;
 }
 export interface Checkboxes
-  extends ActionBlockElement<"checkboxes">,
-    Confirmable,
-    Focusable {
+  extends ActionBlockElement<"checkboxes">, Confirmable, Focusable {
   type: "checkboxes";
   initial_options?: AnyOption[];
   options: AnyOption[];
 }
 export interface PlainTextInput
-  extends ActionBlockElement<"plain_text_input">,
+  extends
+    ActionBlockElement<"plain_text_input">,
     Dispatchable,
     Focusable,
     Placeholdable {
@@ -284,7 +291,8 @@ export interface PlainTextInput
   focus_on_load?: boolean;
 }
 export interface URLInput
-  extends ActionBlockElement<"url_text_input">,
+  extends
+    ActionBlockElement<"url_text_input">,
     Dispatchable,
     Focusable,
     Placeholdable {
@@ -292,7 +300,8 @@ export interface URLInput
   initial_value?: string;
 }
 export interface EmailInput
-  extends ActionBlockElement<"email_text_input">,
+  extends
+    ActionBlockElement<"email_text_input">,
     Dispatchable,
     Focusable,
     Placeholdable {
@@ -300,7 +309,8 @@ export interface EmailInput
   initial_value?: string;
 }
 export interface NumberInput
-  extends ActionBlockElement<"number_input">,
+  extends
+    ActionBlockElement<"number_input">,
     Dispatchable,
     Focusable,
     Placeholdable {

@@ -1,8 +1,8 @@
-import type { AnyMessageBlock } from "../block-kit/blocks.ts"
-import type { LinkUnfurls } from "../block-kit/link-unfurls.ts"
-import type { MessageAttachment } from "../block-kit/message-attachment.ts"
-import type { MessageMetadata } from "../block-kit/message-metadata.ts"
-import type { ModalView, HomeTabView } from "../block-kit/views.ts"
+import type { AnyMessageBlock } from "../block-kit/blocks.ts";
+import type { LinkUnfurls } from "../block-kit/link-unfurls.ts";
+import type { MessageAttachment } from "../block-kit/message-attachment.ts";
+import type { MessageMetadata } from "../block-kit/message-metadata.ts";
+import type { HomeTabView, ModalView } from "../block-kit/views.ts";
 
 export interface SlackAPIRequest {
   token?: string;
@@ -54,8 +54,7 @@ export interface AdminAppsApproveRequest extends SlackAPIRequest {
   team_id?: string;
 }
 export interface AdminAppsApprovedListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id?: string;
   enterprise_id?: string;
 }
@@ -70,8 +69,7 @@ export interface AdminAppsRequestsCancelRequest extends SlackAPIRequest {
   team_id?: string;
 }
 export interface AdminAppsRequestsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id?: string;
 }
 export interface AdminAppsRestrictRequest extends SlackAPIRequest {
@@ -80,8 +78,7 @@ export interface AdminAppsRestrictRequest extends SlackAPIRequest {
   team_id?: string;
 }
 export interface AdminAppsRestrictedListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id?: string;
   enterprise_id?: string;
 }
@@ -96,8 +93,7 @@ export interface AdminAuthPolicyAssignEntitiesRequest extends SlackAPIRequest {
   policy_name: string;
 }
 export interface AdminAuthPolicyGetEntitiesRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   policy_name: string;
   entity_type?: string;
 }
@@ -117,8 +113,7 @@ export interface AdminBarriersDeleteRequest extends SlackAPIRequest {
 }
 
 export interface AdminBarriersListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {}
+  extends SlackAPIRequest, CursorPaginationEnabled {}
 
 export interface AdminBarriersUpdateRequest extends SlackAPIRequest {
   barrier_id: string;
@@ -164,8 +159,7 @@ export interface AdminConversationsDisconnectSharedRequest
   leaving_team_ids?: string[];
 }
 export interface AdminConversationsEKMListOriginalConnectedChannelInfoRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   channel_ids?: string[];
   team_ids?: string[];
 }
@@ -174,8 +168,7 @@ export interface AdminConversationsGetConversationPrefsRequest
   channel_id: string;
 }
 export interface AdminConversationsGetTeamsRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   channel_id: string;
 }
 export interface AdminConversationsInviteRequest extends SlackAPIRequest {
@@ -217,15 +210,13 @@ export interface AdminConversationsRemoveCustomRetentionRequest
   channel_id: string;
 }
 export interface AdminConversationsLookupRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   last_message_activity_before: number;
   team_ids: string[];
   max_member_count?: number;
 }
 export interface AdminConversationsSearchRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   query?: string;
   search_channel_types?: string[];
   sort?: "relevant" | "name" | "member_count" | "created";
@@ -255,8 +246,7 @@ export interface AdminEmojiAddAliasRequest extends SlackAPIRequest {
   alias_for: string;
 }
 export interface AdminEmojiListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {}
+  extends SlackAPIRequest, CursorPaginationEnabled {}
 export interface AdminEmojiRemoveRequest extends SlackAPIRequest {
   name: string;
 }
@@ -269,8 +259,7 @@ export interface AdminInviteRequestsApproveRequest extends SlackAPIRequest {
   team_id: string;
 }
 export interface AdminInviteRequestsApprovedListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id: string;
 }
 export interface AdminInviteRequestsDenyRequest extends SlackAPIRequest {
@@ -278,13 +267,11 @@ export interface AdminInviteRequestsDenyRequest extends SlackAPIRequest {
   team_id: string;
 }
 export interface AdminInviteRequestsDeniedListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id: string;
 }
 export interface AdminInviteRequestsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id: string;
 }
 export interface AdminRolesAddAssignmentsRequest extends SlackAPIRequest {
@@ -293,8 +280,7 @@ export interface AdminRolesAddAssignmentsRequest extends SlackAPIRequest {
   user_ids: string[];
 }
 export interface AdminRolesListAssignmentsRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   entity_ids?: string[];
   role_ids?: string[];
   sort_dir?: string;
@@ -305,8 +291,7 @@ export interface AdminRolesRemoveAssignmentsRequest extends SlackAPIRequest {
   user_ids: string[];
 }
 export interface AdminTeamsAdminsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id: string;
 }
 export interface AdminTeamsCreateRequest extends SlackAPIRequest {
@@ -316,11 +301,9 @@ export interface AdminTeamsCreateRequest extends SlackAPIRequest {
   team_discoverability?: string;
 }
 export interface AdminTeamsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {}
+  extends SlackAPIRequest, CursorPaginationEnabled {}
 export interface AdminTeamsOwnersListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id: string;
 }
 export interface AdminTeamsSettingsInfoRequest extends SlackAPIRequest {
@@ -387,8 +370,7 @@ export interface AdminUsersInviteRequest extends SlackAPIRequest {
   resend?: boolean;
 }
 export interface AdminUsersListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   team_id: string;
 }
 export interface AdminUsersRemoveRequest extends SlackAPIRequest {
@@ -413,8 +395,7 @@ export interface AdminUsersSetRegularRequest extends SlackAPIRequest {
   user_id: string;
 }
 export interface AdminUsersSessionListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   user_id?: string;
   team_id?: string;
 }
@@ -453,19 +434,15 @@ export interface AdminUsersUnsupportedVersionsExportRequest
 /*
  * `api.*`
  */
-export interface APITestRequest extends SlackAPIRequest {}
+export type APITestRequest = SlackAPIRequest;
 
 /*
  * `apps.*`
  */
-export interface AppsConnectionsOpenRequest extends SlackAPIRequest {
-  // currently the method page lists Client id and client secret as optional Request
-  // circle back here to see if they stay as optional or are removed
-}
+export type AppsConnectionsOpenRequest = SlackAPIRequest;
 
 export interface AppsEventAuthorizationsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   event_context: string;
 }
 export interface AppsUninstallRequest extends SlackAPIRequest {
@@ -480,11 +457,10 @@ export interface AuthRevokeRequest extends SlackAPIRequest {
   test?: boolean;
 }
 export interface AuthTeamsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   include_icon?: boolean;
 }
-export interface AuthTestRequest extends SlackAPIRequest {}
+export type AuthTestRequest = SlackAPIRequest;
 
 /*
  * `bots.*`
@@ -604,8 +580,7 @@ export interface ChatScheduleMessageRequest extends SlackAPIRequest {
   parse?: "full" | "none";
 }
 export interface ChatScheduledMessagesListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   channel: string;
   latest: number;
   oldest: number;
@@ -621,11 +596,13 @@ interface SourceAndUnfurlIDRequest {
   source: "composer" | "conversations_history";
   unfurl_id: string;
 }
-export type ChatUnfurlRequest = (
-  | ChannelAndTSRequest
-  | SourceAndUnfurlIDRequest
-) &
-  SlackAPIRequest & {
+export type ChatUnfurlRequest =
+  & (
+    | ChannelAndTSRequest
+    | SourceAndUnfurlIDRequest
+  )
+  & SlackAPIRequest
+  & {
     unfurls: LinkUnfurls;
     user_auth_message?: string;
     user_auth_required?: boolean;
@@ -682,9 +659,7 @@ export interface ConversationsDeclineSharedInviteRequest
   target_team?: string;
 }
 export interface ConversationsHistoryRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled,
-    TimelinePaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled, TimelinePaginationEnabled {
   channel: string;
   include_all_metadata?: boolean;
 }
@@ -712,8 +687,7 @@ export interface ConversationsLeaveRequest extends SlackAPIRequest {
   channel: string;
 }
 export interface ConversationsListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   exclude_archived?: boolean;
   types?: string; // comma-separated list of conversation types
   team_id?: string;
@@ -729,8 +703,7 @@ export interface ConversationsMarkRequest extends SlackAPIRequest {
   ts: string;
 }
 export interface ConversationsMembersRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   channel: string;
 }
 export interface ConversationsOpenRequest extends SlackAPIRequest {
@@ -743,9 +716,7 @@ export interface ConversationsRenameRequest extends SlackAPIRequest {
   name: string;
 }
 export interface ConversationsRepliesRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled,
-    TimelinePaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled, TimelinePaginationEnabled {
   channel: string;
   ts: string;
   include_all_metadata?: boolean;
@@ -765,8 +736,8 @@ export interface ConversationsUnarchiveRequest extends SlackAPIRequest {
 /*
  * `dnd.*`
  */
-export interface DndEndDndRequest extends SlackAPIRequest {}
-export interface DndEndSnoozeRequest extends SlackAPIRequest {}
+export type DndEndDndRequest = SlackAPIRequest;
+export type DndEndSnoozeRequest = SlackAPIRequest;
 export interface DndInfoRequest extends SlackAPIRequest {
   user: string;
 }
@@ -791,15 +762,13 @@ export interface FilesDeleteRequest extends SlackAPIRequest {
   file: string; // file id
 }
 export interface FilesInfoRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   file: string; // file id
   count?: number;
   page?: number;
 }
 export interface FilesListRequest
-  extends SlackAPIRequest,
-    TraditionalPagingEnabled {
+  extends SlackAPIRequest, TraditionalPagingEnabled {
   channel?: string;
   user?: string;
   ts_from?: string;
@@ -816,8 +785,7 @@ export interface FilesSharedPublicURLRequest extends SlackAPIRequest {
 }
 /**
  * Legacy files.upload API files upload Request
- * */
-export interface FilesUploadRequest extends FileUpload, SlackAPIRequest {}
+ */
 interface FileUpload {
   channels?: string; // comma-separated list of channels
   content?: string; // if omitted, must provide `file`
@@ -828,6 +796,7 @@ interface FileUpload {
   thread_ts?: string; // if specified, `channels` must be set
   title?: string;
 }
+export type FilesUploadRequest = FileUpload & SlackAPIRequest;
 
 export interface FilesUploadV2Request extends FileUploadV2, SlackAPIRequest {
   file_uploads?: Omit<
@@ -856,7 +825,7 @@ export interface FilesGetUploadURLExternalRequest extends SlackAPIRequest {
 /**
  * Finishes an upload started with files.getUploadURLExternal. Method:
  * {@link https://api.slack.com/methods/files.completeUploadExternal files.completeUploadExternal}
- * */
+ */
 export interface FilesCompleteUploadExternalRequest extends SlackAPIRequest {
   files: FileUploadComplete[];
   channel_id?: string; // if omitted, file will be private
@@ -878,8 +847,7 @@ export interface FilesRemoteInfoRequest extends SlackAPIRequest {
   external_id?: string;
 }
 export interface FilesRemoteListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   ts_from?: string;
   ts_to?: string;
   channel?: string;
@@ -952,7 +920,7 @@ export interface OpenIDConnectTokenRequest extends SlackAPIRequest {
   grant_type?: "authorization_code" | "refresh_token";
   refresh_token?: string;
 }
-export interface OpenIDConnectUserInfoRequest extends SlackAPIRequest {}
+export type OpenIDConnectUserInfoRequest = SlackAPIRequest;
 
 /*
  * `pins.*`
@@ -989,9 +957,7 @@ export interface ReactionsGetRequest extends SlackAPIRequest {
   file_comment?: string;
 }
 export interface ReactionsListRequest
-  extends SlackAPIRequest,
-    TraditionalPagingEnabled,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, TraditionalPagingEnabled, CursorPaginationEnabled {
   user?: string;
   full?: boolean;
   team_id?: string;
@@ -1022,7 +988,7 @@ export interface RemindersDeleteRequest extends SlackAPIRequest {
 export interface RemindersInfoRequest extends SlackAPIRequest {
   reminder: string;
 }
-export interface RemindersListRequest extends SlackAPIRequest {}
+export type RemindersListRequest = SlackAPIRequest;
 
 /*
  * `rtm.*`
@@ -1044,17 +1010,11 @@ export interface RTMStartRequest extends SlackAPIRequest, LocaleAware {
  * `search.*`
  */
 export interface SearchAllRequest
-  extends SlackAPIRequest,
-    TraditionalPagingEnabled,
-    Searchable {}
+  extends SlackAPIRequest, TraditionalPagingEnabled, Searchable {}
 export interface SearchFilesRequest
-  extends SlackAPIRequest,
-    TraditionalPagingEnabled,
-    Searchable {}
+  extends SlackAPIRequest, TraditionalPagingEnabled, Searchable {}
 export interface SearchMessagesRequest
-  extends SlackAPIRequest,
-    TraditionalPagingEnabled,
-    Searchable {}
+  extends SlackAPIRequest, TraditionalPagingEnabled, Searchable {}
 
 /*
  * `stars.*`
@@ -1067,9 +1027,7 @@ export interface StarsAddRequest extends SlackAPIRequest {
   file_comment?: string;
 }
 export interface StarsListRequest
-  extends SlackAPIRequest,
-    TraditionalPagingEnabled,
-    CursorPaginationEnabled {}
+  extends SlackAPIRequest, TraditionalPagingEnabled, CursorPaginationEnabled {}
 export interface StarsRemoveRequest extends SlackAPIRequest {
   // must supply one of:
   channel?: string; // paired with `timestamp`
@@ -1091,7 +1049,7 @@ export interface TeamBillableInfoRequest extends SlackAPIRequest {
   user?: string;
   team_id?: string;
 }
-export interface TeamBillingInfoRequest extends SlackAPIRequest {}
+export type TeamBillingInfoRequest = SlackAPIRequest;
 export interface TeamInfoRequest extends SlackAPIRequest {
   // Team to get info on, if omitted, will return information about the current team.
   // Will only return team that the authenticated token is allowed to see through external shared channels
@@ -1111,7 +1069,7 @@ export interface TeamProfileGetRequest extends SlackAPIRequest {
   visibility?: "all" | "visible" | "hidden";
   team_id?: string;
 }
-export interface TeamPreferencesListRequest extends SlackAPIRequest {}
+export type TeamPreferencesListRequest = SlackAPIRequest;
 
 /*
  * `usergroups.*`
@@ -1158,25 +1116,22 @@ export interface UsergroupsUsersUpdateRequest extends SlackAPIRequest {
  * `users.*`
  */
 export interface UsersConversationsRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled {
+  extends SlackAPIRequest, CursorPaginationEnabled {
   exclude_archived?: boolean;
   types?: string; // comma-separated list of conversation types
   user?: string;
   team_id?: string;
 }
-export interface UsersDeletePhotoRequest extends SlackAPIRequest {}
+export type UsersDeletePhotoRequest = SlackAPIRequest;
 export interface UsersGetPresenceRequest extends SlackAPIRequest {
   user: string;
 }
-export interface UsersIdentityRequest extends SlackAPIRequest {}
+export type UsersIdentityRequest = SlackAPIRequest;
 export interface UsersInfoRequest extends SlackAPIRequest, LocaleAware {
   user: string;
 }
 export interface UsersListRequest
-  extends SlackAPIRequest,
-    CursorPaginationEnabled,
-    LocaleAware {
+  extends SlackAPIRequest, CursorPaginationEnabled, LocaleAware {
   presence?: boolean; // deprecated, defaults to false
   team_id?: string;
 }

@@ -453,15 +453,12 @@ export interface AdminUsersUnsupportedVersionsExportRequest
 /*
  * `api.*`
  */
-export interface APITestRequest extends SlackAPIRequest {}
+export type APITestRequest = SlackAPIRequest;
 
 /*
  * `apps.*`
  */
-export interface AppsConnectionsOpenRequest extends SlackAPIRequest {
-  // currently the method page lists Client id and client secret as optional Request
-  // circle back here to see if they stay as optional or are removed
-}
+export type AppsConnectionsOpenRequest = SlackAPIRequest;
 
 export interface AppsEventAuthorizationsListRequest
   extends SlackAPIRequest,
@@ -484,7 +481,7 @@ export interface AuthTeamsListRequest
     CursorPaginationEnabled {
   include_icon?: boolean;
 }
-export interface AuthTestRequest extends SlackAPIRequest {}
+export type AuthTestRequest = SlackAPIRequest;
 
 /*
  * `bots.*`
@@ -765,8 +762,8 @@ export interface ConversationsUnarchiveRequest extends SlackAPIRequest {
 /*
  * `dnd.*`
  */
-export interface DndEndDndRequest extends SlackAPIRequest {}
-export interface DndEndSnoozeRequest extends SlackAPIRequest {}
+export type DndEndDndRequest = SlackAPIRequest;
+export type DndEndSnoozeRequest = SlackAPIRequest;
 export interface DndInfoRequest extends SlackAPIRequest {
   user: string;
 }
@@ -817,7 +814,6 @@ export interface FilesSharedPublicURLRequest extends SlackAPIRequest {
 /**
  * Legacy files.upload API files upload Request
  * */
-export interface FilesUploadRequest extends FileUpload, SlackAPIRequest {}
 interface FileUpload {
   channels?: string; // comma-separated list of channels
   content?: string; // if omitted, must provide `file`
@@ -828,6 +824,7 @@ interface FileUpload {
   thread_ts?: string; // if specified, `channels` must be set
   title?: string;
 }
+export type FilesUploadRequest = FileUpload & SlackAPIRequest;
 
 export interface FilesUploadV2Request extends FileUploadV2, SlackAPIRequest {
   file_uploads?: Omit<
@@ -952,7 +949,7 @@ export interface OpenIDConnectTokenRequest extends SlackAPIRequest {
   grant_type?: "authorization_code" | "refresh_token";
   refresh_token?: string;
 }
-export interface OpenIDConnectUserInfoRequest extends SlackAPIRequest {}
+export type OpenIDConnectUserInfoRequest = SlackAPIRequest;
 
 /*
  * `pins.*`
@@ -1022,7 +1019,7 @@ export interface RemindersDeleteRequest extends SlackAPIRequest {
 export interface RemindersInfoRequest extends SlackAPIRequest {
   reminder: string;
 }
-export interface RemindersListRequest extends SlackAPIRequest {}
+export type RemindersListRequest = SlackAPIRequest;
 
 /*
  * `rtm.*`
@@ -1091,7 +1088,7 @@ export interface TeamBillableInfoRequest extends SlackAPIRequest {
   user?: string;
   team_id?: string;
 }
-export interface TeamBillingInfoRequest extends SlackAPIRequest {}
+export type TeamBillingInfoRequest = SlackAPIRequest;
 export interface TeamInfoRequest extends SlackAPIRequest {
   // Team to get info on, if omitted, will return information about the current team.
   // Will only return team that the authenticated token is allowed to see through external shared channels
@@ -1111,7 +1108,7 @@ export interface TeamProfileGetRequest extends SlackAPIRequest {
   visibility?: "all" | "visible" | "hidden";
   team_id?: string;
 }
-export interface TeamPreferencesListRequest extends SlackAPIRequest {}
+export type TeamPreferencesListRequest = SlackAPIRequest;
 
 /*
  * `usergroups.*`
@@ -1165,11 +1162,11 @@ export interface UsersConversationsRequest
   user?: string;
   team_id?: string;
 }
-export interface UsersDeletePhotoRequest extends SlackAPIRequest {}
+export type UsersDeletePhotoRequest = SlackAPIRequest;
 export interface UsersGetPresenceRequest extends SlackAPIRequest {
   user: string;
 }
-export interface UsersIdentityRequest extends SlackAPIRequest {}
+export type UsersIdentityRequest = SlackAPIRequest;
 export interface UsersInfoRequest extends SlackAPIRequest, LocaleAware {
   user: string;
 }

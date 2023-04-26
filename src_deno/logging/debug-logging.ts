@@ -6,6 +6,7 @@ export function isDebugLogEnabled(logLevel: string | undefined): boolean {
   );
 }
 
+// deno-lint-ignore no-explicit-any
 export function prettyPrint(obj: any) {
   return JSON.stringify(obj, null, 2);
 }

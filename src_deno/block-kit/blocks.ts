@@ -3,8 +3,8 @@ import type {
   AnySelectElement,
   Button,
   Checkboxes,
-  DateTimepicker,
   Datepicker,
+  DateTimepicker,
   EmailInput,
   ImageElement,
   NumberInput,
@@ -13,8 +13,8 @@ import type {
   RadioButtons,
   Timepicker,
   URLInput,
-} from "./block-elements.ts"
-import type { PlainTextField, AnyTextField } from "./text-fields.ts"
+} from "./block-elements.ts";
+import type { AnyTextField, PlainTextField } from "./text-fields.ts";
 
 // -----------------------------
 // Basic types

@@ -1,8 +1,8 @@
-import { TokenRotationError } from "../errors.ts"
-import { SlackAPIClient } from "../client/api-client.ts"
-import type { TokenRotatorOptions } from "./token-rotator-options.ts"
-import type { TokenRefreshResults } from "./token-refresh-results.ts"
-import type { TokenRefreshTargets } from "./token-refresh-targets.ts"
+import { TokenRotationError } from "../errors.ts";
+import { SlackAPIClient } from "../client/api-client.ts";
+import type { TokenRotatorOptions } from "./token-rotator-options.ts";
+import type { TokenRefreshResults } from "./token-refresh-results.ts";
+import type { TokenRefreshTargets } from "./token-refresh-targets.ts";
 
 export class TokenRotator {
   #clientId: string;
@@ -16,11 +16,11 @@ export class TokenRotator {
   }
 
   async performRotation(
-    targets: TokenRefreshTargets
+    targets: TokenRefreshTargets,
   ): Promise<TokenRefreshResults> {
     const refreshResults: TokenRefreshResults = {};
     const randomSeconds = Math.round(
-      crypto.getRandomValues(new Uint16Array(1))[0] / 100
+      crypto.getRandomValues(new Uint16Array(1))[0] / 100,
     );
     const expireAt = new Date().getTime() / 1000 + randomSeconds;
     if (targets.bot && targets.bot.token_expires_at < expireAt) {

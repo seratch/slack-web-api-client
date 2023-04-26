@@ -3,7 +3,7 @@ Dir.glob(__dir__ + '/../src_deno/**/*').select { |f| File.file? f }.each do |fil
   output = "";
   File.readlines(filepath).each do |line|
     if line.include?(' from "')
-      output += line.sub(/";$/, '.ts"')
+      output += line.sub(/";$/, '.ts";')
     else
       output += line
     end

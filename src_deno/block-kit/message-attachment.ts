@@ -1,5 +1,5 @@
-import type { AnyMessageBlock } from "./blocks.ts"
-import type { PlainTextField } from "./text-fields.ts"
+import type { AnyMessageBlock } from "./blocks.ts";
+import type { PlainTextField } from "./text-fields.ts";
 
 export interface MessageAttachment {
   blocks?: AnyMessageBlock[];
