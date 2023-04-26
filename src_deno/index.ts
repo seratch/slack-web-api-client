@@ -11,7 +11,7 @@ export * from "./block-kit/views.ts"
 export * from "./client/api-client.ts"
 export * from "./client/request.ts"
 export * from "./client/response.ts"
-export * from "./client/generated-response.ts"
+export * from "./client/generated-response/index.ts"
 
 export * from "./token-rotation/token-refresh-targets.ts"
 export * from "./token-rotation/token-refresh-results.ts"

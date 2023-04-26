@@ -11,7 +11,7 @@ export * from "./block-kit/views";
 export * from "./client/api-client";
 export * from "./client/request";
 export * from "./client/response";
-export * from "./client/generated-response";
+export * from "./client/generated-response/index";
 
 export * from "./token-rotation/token-refresh-targets";
 export * from "./token-rotation/token-refresh-results";
