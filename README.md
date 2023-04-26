@@ -1,6 +1,7 @@
 ## Slack Web API Client for TypeScript
 
 [![npm version](https://badge.fury.io/js/slack-web-api-client.svg)](https://badge.fury.io/js/slack-web-api-client) 
+[![deno module](https://shield.deno.dev/x/slack_web_api_client)](https://deno.land/x/slack_web_api_client)
 
 The **slack-web-api-client** library is a type-safe Slack Web API client library. The key benefits it provides are:
 
@@ -57,6 +58,7 @@ export default SlackFunction(def, async ({ token }) => {
     channel: "#random",
     text: ":wave: what's up?",
   });
-  // ....
+
+// ....
 });
 ```
