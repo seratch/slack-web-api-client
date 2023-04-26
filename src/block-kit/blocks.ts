@@ -1,4 +1,4 @@
-import {
+import type {
   AnyMultiSelectElement,
   AnySelectElement,
   Button,
@@ -14,7 +14,7 @@ import {
   Timepicker,
   URLInput,
 } from "./block-elements";
-import { PlainTextField, AnyTextField } from "./text-fields";
+import type { PlainTextField, AnyTextField } from "./text-fields";
 
 // -----------------------------
 // Basic types

@@ -1,4 +1,4 @@
-import {
+import type {
   AnyMultiSelectElement,
   AnySelectElement,
   Button,
@@ -14,7 +14,7 @@ import {
   Timepicker,
   URLInput,
 } from "./block-elements.ts"
-import { PlainTextField, AnyTextField } from "./text-fields.ts"
+import type { PlainTextField, AnyTextField } from "./text-fields.ts"
 
 // -----------------------------
 // Basic types

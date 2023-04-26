@@ -1,6 +1,6 @@
-import { Confirm } from "./confirm.ts"
-import { AnyOption, PlainTextOption } from "./options.ts"
-import { PlainTextField } from "./text-fields.ts"
+import type { Confirm } from "./confirm.ts"
+import type { AnyOption, PlainTextOption } from "./options.ts"
+import type { PlainTextField } from "./text-fields.ts"
 
 // -----------------------------
 // Basic types

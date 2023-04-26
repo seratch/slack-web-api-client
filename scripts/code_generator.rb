@@ -41,13 +41,7 @@ class TsWriter
 
   def append_to_index(root_class_name, index_file)
     File.open(index_file, 'a') do |index_f|
-      index_f.puts("export { #{root_class_name} } from './#{root_class_name}';")
-    end
-  end
-
-  def append_multiple_classes_to_index(classes, class_file_name, index_file)
-    File.open(index_file, 'a') do |index_f|
-      index_f.puts("export { #{classes.join(', ')} } from './#{class_file_name}';")
+      index_f.puts("export type { #{root_class_name} } from './#{root_class_name}';")
     end
   end
 end

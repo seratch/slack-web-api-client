@@ -1,4 +1,4 @@
-import { MrkdwnTextField, PlainTextField } from "./text-fields.ts"
+import type { MrkdwnTextField, PlainTextField } from "./text-fields.ts"
 
 export interface MrkdwnOption {
   text: MrkdwnTextField;

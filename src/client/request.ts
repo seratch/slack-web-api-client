@@ -1,8 +1,8 @@
-import { AnyMessageBlock } from "../block-kit/blocks";
-import { LinkUnfurls } from "../block-kit/link-unfurls";
-import { MessageAttachment } from "../block-kit/message-attachment";
-import { MessageMetadata } from "../block-kit/message-metadata";
-import { ModalView, HomeTabView } from "../block-kit/views";
+import type { AnyMessageBlock } from "../block-kit/blocks";
+import type { LinkUnfurls } from "../block-kit/link-unfurls";
+import type { MessageAttachment } from "../block-kit/message-attachment";
+import type { MessageMetadata } from "../block-kit/message-metadata";
+import type { ModalView, HomeTabView } from "../block-kit/views";
 
 export interface SlackAPIRequest {
   token?: string;

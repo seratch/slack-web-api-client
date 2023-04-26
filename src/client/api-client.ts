@@ -1,5 +1,5 @@
 import { SlackAPIError } from "../errors";
-import {
+import type {
   APITestRequest,
   AdminAppsApproveRequest,
   AdminAppsApprovedListRequest,
@@ -202,7 +202,7 @@ import {
   ViewsPushRequest,
   ViewsUpdateRequest,
 } from "./request";
-import {
+import type {
   AdminAppsApproveResponse,
   AdminAppsApprovedListResponse,
   AdminAppsClearResolutionResponse,
@@ -405,9 +405,9 @@ import {
   AdminRolesRemoveAssignmentsResponse,
 } from "./generated-response/index";
 
-import { SlackAPIResponse } from "./response";
+import type { SlackAPIResponse } from "./response";
 import { isDebugLogEnabled } from "../logging/debug-logging";
-import { SlackAPIClientOptions } from "./api-client-options";
+import type { SlackAPIClientOptions } from "./api-client-options";
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,

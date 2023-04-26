@@ -1,5 +1,5 @@
-import { AnyHomeTabBlock, AnyModalBlock } from "./blocks";
-import { PlainTextField } from "./text-fields";
+import type { AnyHomeTabBlock, AnyModalBlock } from "./blocks";
+import type { PlainTextField } from "./text-fields";
 
 export interface HomeTabView {
   type: "home";

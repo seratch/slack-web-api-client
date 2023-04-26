@@ -1,4 +1,4 @@
-import { PlainTextField, AnyTextField } from "./text-fields";
+import type { PlainTextField, AnyTextField } from "./text-fields";
 
 export interface Confirm {
   title?: PlainTextField;

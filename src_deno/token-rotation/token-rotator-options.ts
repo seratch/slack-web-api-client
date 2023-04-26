@@ -1,4 +1,4 @@
-import { SlackAPIClientOptions } from "../client/api-client-options.ts"
+import type { SlackAPIClientOptions } from "../client/api-client-options.ts"
 
 export type TokenRotatorOptions = SlackAPIClientOptions & {
   clientId: string;

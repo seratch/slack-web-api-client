@@ -1,8 +1,8 @@
 import { TokenRotationError } from "../errors.ts"
 import { SlackAPIClient } from "../client/api-client.ts"
-import { TokenRotatorOptions } from "./token-rotator-options.ts"
-import { TokenRefreshResults } from "./token-refresh-results.ts"
-import { TokenRefreshTargets } from "./token-refresh-targets.ts"
+import type { TokenRotatorOptions } from "./token-rotator-options.ts"
+import type { TokenRefreshResults } from "./token-refresh-results.ts"
+import type { TokenRefreshTargets } from "./token-refresh-targets.ts"
 
 export class TokenRotator {
   #clientId: string;

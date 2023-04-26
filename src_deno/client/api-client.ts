@@ -1,5 +1,5 @@
 import { SlackAPIError } from "../errors.ts"
-import {
+import type {
   APITestRequest,
   AdminAppsApproveRequest,
   AdminAppsApprovedListRequest,
@@ -202,7 +202,7 @@ import {
   ViewsPushRequest,
   ViewsUpdateRequest,
 } from "./request.ts"
-import {
+import type {
   AdminAppsApproveResponse,
   AdminAppsApprovedListResponse,
   AdminAppsClearResolutionResponse,
@@ -405,9 +405,9 @@ import {
   AdminRolesRemoveAssignmentsResponse,
 } from "./generated-response/index.ts"
 
-import { SlackAPIResponse } from "./response.ts"
+import type { SlackAPIResponse } from "./response.ts"
 import { isDebugLogEnabled } from "../logging/debug-logging.ts"
-import { SlackAPIClientOptions } from "./api-client-options.ts"
+import type { SlackAPIClientOptions } from "./api-client-options.ts"
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,

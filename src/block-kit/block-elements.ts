@@ -1,6 +1,6 @@
-import { Confirm } from "./confirm";
-import { AnyOption, PlainTextOption } from "./options";
-import { PlainTextField } from "./text-fields";
+import type { Confirm } from "./confirm";
+import type { AnyOption, PlainTextOption } from "./options";
+import type { PlainTextField } from "./text-fields";
 
 // -----------------------------
 // Basic types
