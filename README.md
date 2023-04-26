@@ -1,17 +1,62 @@
-## Slack Cloudflare Workers
+## Slack Web API Client for TypeScript
 
-[![npm version](https://badge.fury.io/js/slack-cloudflare-workers.svg)](https://badge.fury.io/js/slack-cloudflare-workers) 
+[![npm version](https://badge.fury.io/js/slack-web-api-client.svg)](https://badge.fury.io/js/slack-web-api-client) 
 
-The **slack-cloudflare-workers** library is a Slack app development framework designed specifically for **Cloudflare Workers**. This framework draws significant inspiration from Slack's [Bolt framework](https://api.slack.com/tools/bolt), but its design does not strictly follow the [bolt-js](https://github.com/slackapi/bolt-js) blueprint.
+The **slack-web-api-client** library is a type-safe Slack Web API client library. The key benefits it provides are:
 
-```bash
-npm i slack-cloudflare-workers
+* A fetch-based implementation
+* Strong types for Web API responses and Block Kit
+* Zero additional dependency
+
+### Getting Started
+
+#### npm package
+
+You install the library by npm/yarn command as always:
+```
+npm i slack-web-api-client
 ```
 
-Key differences include:
+```typescript
+import { SlackAPIClient } from "slack-web-api-client";
 
-* _TypeScript focused_: Enhances type safety and clarifies typings for developers
-* _Lazy listener enabled_: [bolt-python's lazy listener feature](https://slack.dev/bolt-python/concepts#lazy-listeners) is provided out of the box
-* _Zero additional dependencies_: No other dependencies required beyond TypeScript types
+const client = new SlackAPIClient(process.env.SLACK_BOT_TOKEN);
+const response = await client.chat.postMessage({
+  channel: "#random",
+  text: ":wave: what's up?",
+});
+```
 
-Check [our documents](https://github.com/seratch/slack-cloudflare-workers/blob/main/docs/index.md) for more details!
+The second argument for more customize options is optional:
+
+```typescript
+const client = new SlackAPIClient(process.env.SLACK_BOT_TOKEN, {
+  logLevel: "DEBUG",
+});
+```
+
+#### Deno module
+
+You can use this library in Slack's automation platform too!
+
+```typescript
+import { SlackFunction } from "deno-slack-sdk/mod.ts";
+import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.1.1/mod.ts";
+
+export const def = DefineFunction({
+  callback_id: "hello",
+  title: "Hello World",
+  source_file: "functions/hello.ts",
+  input_parameters: { properties: {}, required: [] },
+  output_parameters: { properties: {}, required: [] },
+});
+
+export default SlackFunction(def, async ({ token }) => {
+  const client = new SlackAPIClient(token);
+  const repsonse = await client.chat.postMessage({
+    channel: "#random",
+    text: ":wave: what's up?",
+  });
+  // ....
+});
+```
