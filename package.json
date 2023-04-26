@@ -1,0 +1,34 @@
+{
+  "name": "slack-web-api-client",
+  "version": "0.1.0",
+  "description": "Slack Web API client in TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:clean": "rm -rf ./dist && tsc",
+    "format": "npx prettier --write src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seratch/slack-web-api-client.git"
+  },
+  "keywords": [
+    "Slack",
+    "ChatBot",
+    "TypeScript",
+    "Node.js",
+    "Deno",
+    "Cloudflare Workers"
+  ],
+  "author": "Kazuhiro Sera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seratch/slack-web-api-client/issues"
+  },
+  "homepage": "https://github.com/seratch/slack-web-api-client#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  }
+}
