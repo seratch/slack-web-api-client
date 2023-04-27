@@ -832,20 +832,6 @@ interface FileUpload {
 }
 export type FilesUploadRequest = FileUpload & SlackAPIRequest;
 
-export interface FilesUploadV2Request extends FileUploadV2, SlackAPIRequest {
-  file_uploads?: Omit<
-    FileUploadV2,
-    "channel_id" | "channels" | "initial_comment" | "thread_ts"
-  >[];
-  request_file_info?: boolean;
-}
-
-export type FileUploadV2 = FileUpload & {
-  alt_text?: string; // for image uploads
-  channel_id?: string;
-  snippet_type?: string; // for code snippets
-};
-
 /**
  * Gets a URL for an edge external file upload. Method:
  * {@link https://api.slack.com/methods/files.getUploadURLExternal files.getUploadURLExternal}
@@ -869,10 +855,6 @@ export interface FilesCompleteUploadExternalRequest extends SlackAPIRequest {
 interface FileUploadComplete {
   id: string; // file id
   title?: string; // filename
-}
-export interface FilesCommentsDeleteRequest extends SlackAPIRequest {
-  file: string; // file id
-  id: string; // comment id
 }
 // either file or external_id is required
 export interface FilesRemoteInfoRequest extends SlackAPIRequest {
@@ -1036,22 +1018,6 @@ export interface RemindersInfoRequest extends SlackAPIRequest {
   reminder: string;
 }
 export type RemindersListRequest = SlackAPIRequest;
-
-/*
- * `rtm.*`
- */
-export interface RTMConnectRequest extends SlackAPIRequest {
-  batch_presence_aware?: boolean;
-  presence_sub?: boolean;
-}
-export interface RTMStartRequest extends SlackAPIRequest, LocaleAware {
-  batch_presence_aware?: boolean;
-  mpim_aware?: boolean;
-  no_latest?: "0" | "1";
-  no_unreads?: string;
-  presence_sub?: boolean;
-  simple_latest?: boolean;
-}
 
 /*
  * `search.*`
