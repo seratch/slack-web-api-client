@@ -2,7 +2,7 @@ import type {
   EventDetails,
   ScheduleDetails,
   WebhookDeails,
-} from "../automation/types.ts";
+} from "./automation-response/types.ts";
 import type { AnyMessageBlock } from "../block-kit/blocks.ts";
 import type { LinkUnfurls } from "../block-kit/link-unfurls.ts";
 import type { MessageAttachment } from "../block-kit/message-attachment.ts";
@@ -449,7 +449,12 @@ export type AppsConnectionsOpenRequest = SlackAPIRequest;
 export interface AppsDatastorePutRequest extends SlackAPIRequest {
   datastore: string;
   // deno-lint-ignore no-explicit-any
-  attributes: Record<string, any>;
+  item: Record<string, any>;
+}
+export interface AppsDatastoreUpdateRequest extends SlackAPIRequest {
+  datastore: string;
+  // deno-lint-ignore no-explicit-any
+  item: Record<string, any>;
 }
 export interface AppsDatastoreGetRequest extends SlackAPIRequest {
   datastore: string;

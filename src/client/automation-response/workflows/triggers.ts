@@ -1,4 +1,4 @@
-import { AnyTrigger } from "../../../automation/types";
+import { AnyTrigger } from "../types";
 import { SlackAPIResponse } from "../../response";
 
 export interface WorkflowsTriggersCreateResponse extends SlackAPIResponse {

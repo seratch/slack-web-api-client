@@ -89,6 +89,7 @@ import type {
   AppsDatastoreGetRequest,
   AppsDatastorePutRequest,
   AppsDatastoreQueryRequest,
+  AppsDatastoreUpdateRequest,
   AppsEventAuthorizationsListRequest,
   AppsUninstallRequest,
   AuthRevokeRequest,
@@ -423,6 +424,7 @@ import type {
   AppsDatastoreGetResponse,
   AppsDatastorePutResponse,
   AppsDatastoreQueryResponse,
+  AppsDatastoreUpdateResponse,
   FunctionsCompleteErrorResponse,
   FunctionsCompleteSuccessResponse,
   WorkflowsTriggersCreateResponse,
@@ -904,6 +906,10 @@ export class SlackAPIClient {
         this,
         "admin.apps.datastore.put",
       ),
+      update: this.bindApiCall<
+        AppsDatastoreUpdateRequest,
+        AppsDatastoreUpdateResponse
+      >(this, "admin.apps.datastore.update"),
       get: this.bindApiCall<AppsDatastoreGetRequest, AppsDatastoreGetResponse>(
         this,
         "admin.apps.datastore.get",
