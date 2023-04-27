@@ -1,5 +1,6 @@
 import type {
   AnyMultiSelectElement,
+  AnyRichTextBlockElement,
   AnySelectElement,
   Button,
   Checkboxes,
@@ -29,7 +30,8 @@ export type AnyBlockType =
   | "input"
   | "file"
   | "header"
-  | "video";
+  | "video"
+  | "rich_text";
 
 export interface Block<T extends AnyBlockType = AnyBlockType> {
   type: T;
@@ -40,7 +42,7 @@ export interface Block<T extends AnyBlockType = AnyBlockType> {
 // Union types
 // -----------------------------
 
-export declare type AnyMessageBlock =
+export declare type AnySendableMessageBlock =
   | ActionsBlock
   | ContextBlock
   | DividerBlock
@@ -50,6 +52,8 @@ export declare type AnyMessageBlock =
   | InputBlock
   | SectionBlock
   | VideoBlock;
+
+export declare type AnyMessageBlock = AnySendableMessageBlock | RichTextBlock;
 
 export declare type AnyModalBlock =
   | ActionsBlock
@@ -164,4 +168,9 @@ export interface VideoBlock extends Block<"video"> {
   provider_name?: string;
   provider_icon_url?: string;
   description?: PlainTextField;
+}
+
+export interface RichTextBlock extends Block<"rich_text"> {
+  type: "rich_text";
+  elements: AnyRichTextBlockElement[];
 }

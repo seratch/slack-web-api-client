@@ -4,6 +4,8 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response";
+import { AnyMessageBlock } from "../../block-kit/blocks";
+import { MessageAttachment } from "../../block-kit/message-attachment";
 export type SearchAllResponse = SlackAPIResponse & {
   error?: string;
   files?: Files;
@@ -154,8 +156,8 @@ export interface Messages {
 }
 
 export interface MessagesMatch {
-  attachments?: Attachment[];
-  blocks?: Block[];
+  attachments?: MessageAttachment[];
+  blocks?: AnyMessageBlock[];
   channel?: Channel;
   files?: File[];
   iid?: string;
@@ -182,7 +184,7 @@ export interface Attachment {
   author_link?: string;
   author_name?: string;
   author_subname?: string;
-  blocks?: Block[];
+  blocks?: AnyMessageBlock[];
   bot_id?: string;
   callback_id?: string;
   channel_id?: string;
@@ -690,8 +692,8 @@ export interface Channel {
 }
 
 export interface Previous {
-  attachments?: Attachment[];
-  blocks?: Block[];
+  attachments?: MessageAttachment[];
+  blocks?: AnyMessageBlock[];
   iid?: string;
   permalink?: string;
   text?: string;

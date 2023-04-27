@@ -25,12 +25,45 @@ class TsWriter
     Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
       stdin.write(input_json)
       stdin.close()
-      source = "#{NOTICE}\nimport { SlackAPIResponse } from '../response';\n" + stdout.read
+      generated_code = stdout.read
+      source = "#{NOTICE}\nimport { SlackAPIResponse } from '../response';\n"
+      if generated_code.match? /blocks\?:\s+Block\[\]/
+        if root_class_name.start_with? "Views"
+          if root_class_name.start_with? "viewsPublish"
+            source += "import { AnyModalBlock } from '../../block-kit/blocks';\n"
+          else
+            source += "import { AnyHomeTabBlock } from '../../block-kit/blocks';\n"
+          end
+        else
+          source += "import { AnyMessageBlock } from '../../block-kit/blocks';\n"
+        end
+      end
+      if generated_code.match? /attachments\?:\s+Attachment\[\]/
+        source += "import { MessageAttachment } from '../../block-kit/message-attachment';\n"
+      end
+      source += generated_code
+
       source.gsub!(
         "export interface #{root_class_name} {",
         "export type #{root_class_name} = SlackAPIResponse & {"
       )
       source.gsub!(" ok?:", " ok: ")
+
+      if generated_code.match? /blocks\?:\s+Block\[\]/
+        if root_class_name.start_with? "Views"
+          if root_class_name.start_with? "viewsPublish"
+            source.gsub!(" Block[];", " AnyModalBlock[];")
+          else
+            source.gsub!(" Block[];", " AnyHomeTabBlock[];")
+          end
+        else
+          source.gsub!(" Block[];", " AnyMessageBlock[];")
+        end
+      end
+      if generated_code.match? /attachments\?:\s+Attachment\[\]/
+        source.gsub!(" Attachment[];", " MessageAttachment[];")
+      end
+
       source.gsub!(/^    /, '  ')
       source.gsub!('"', "'")
       source.sub!(/^}$/, '};')

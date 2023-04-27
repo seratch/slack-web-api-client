@@ -1,9 +1,9 @@
 import type {
-  EventDetails,
-  ScheduleDetails,
-  WebhookDeails,
+  EventTriggerSettings,
+  ScheduleTriggerSettings,
+  WebhookTriggerSettings,
 } from "./automation-response/types";
-import type { AnyMessageBlock } from "../block-kit/blocks";
+import type { AnySendableMessageBlock } from "../block-kit/blocks";
 import type { LinkUnfurls } from "../block-kit/link-unfurls";
 import type { MessageAttachment } from "../block-kit/message-attachment";
 import type { MessageMetadata } from "../block-kit/message-metadata";
@@ -580,7 +580,7 @@ export interface ChatPostEphemeralRequest extends SlackAPIRequest {
   channel: string;
   text: string;
   user: string;
-  blocks?: AnyMessageBlock[];
+  blocks?: AnySendableMessageBlock[];
   attachments?: MessageAttachment[];
   thread_ts?: string;
 
@@ -597,7 +597,7 @@ export interface ChatPostEphemeralRequest extends SlackAPIRequest {
 export interface ChatPostMessageRequest extends SlackAPIRequest {
   channel: string;
   text: string;
-  blocks?: AnyMessageBlock[];
+  blocks?: AnySendableMessageBlock[];
   attachments?: MessageAttachment[];
   metadata?: MessageMetadata;
   thread_ts?: string;
@@ -620,7 +620,7 @@ export interface ChatScheduleMessageRequest extends SlackAPIRequest {
   channel: string;
   text: string;
   post_at: string | number;
-  blocks?: AnyMessageBlock[];
+  blocks?: AnySendableMessageBlock[];
   attachments?: MessageAttachment[];
   thread_ts?: string;
   metadata?: MessageMetadata;
@@ -661,13 +661,13 @@ export type ChatUnfurlRequest = (
     user_auth_message?: string;
     user_auth_required?: boolean;
     user_auth_url?: string;
-    user_auth_blocks?: AnyMessageBlock[];
+    user_auth_blocks?: AnySendableMessageBlock[];
   };
 export interface ChatUpdateRequest extends SlackAPIRequest {
   channel: string;
   text: string;
   ts: string;
-  blocks?: AnyMessageBlock[];
+  blocks?: AnySendableMessageBlock[];
   attachments?: MessageAttachment[];
   metadata?: MessageMetadata;
   file_ids?: string[];
@@ -1255,17 +1255,17 @@ export interface LinkTriggerParameters extends CommonTriggerParameters {
 // https://api.slack.com/automation/triggers/scheduled
 export interface ScheduledTriggerParameters extends CommonTriggerParameters {
   type: "scheduled";
-  schedule: ScheduleDetails;
+  schedule: ScheduleTriggerSettings;
 }
 // https://api.slack.com/automation/triggers/webhook
 export interface WebhookTriggerParameters extends CommonTriggerParameters {
   type: "webhook";
-  webhook?: WebhookDeails;
+  webhook?: WebhookTriggerSettings;
 }
 // https://api.slack.com/automation/triggers/event
 export interface EventTriggerParameters extends CommonTriggerParameters {
   type: "event";
-  event: EventDetails;
+  event: EventTriggerSettings;
 }
 
 export type AnyTriggerParameters =

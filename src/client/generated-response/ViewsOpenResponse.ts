@@ -4,6 +4,7 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response";
+import { AnyHomeTabBlock } from "../../block-kit/blocks";
 export type ViewsOpenResponse = SlackAPIResponse & {
   error?: string;
   needed?: string;
@@ -21,7 +22,7 @@ export interface ResponseMetadata {
 export interface View {
   app_id?: string;
   app_installed_team_id?: string;
-  blocks?: Block[];
+  blocks?: AnyHomeTabBlock[];
   bot_id?: string;
   callback_id?: string;
   clear_on_close?: boolean;

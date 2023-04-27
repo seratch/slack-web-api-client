@@ -1,4 +1,4 @@
-export interface ScheduleDetails {
+export interface ScheduleTriggerSettings {
   start_time: string; // ISO date string
   end_time?: string; // ISO date string
   timezone?: string;
@@ -13,53 +13,20 @@ export interface ScheduleDetails {
     };
 }
 
-export interface EventDetails {
+export interface EventTriggerSettings {
   event_type: string; // "slack#/events/reaction_added"
   channel_ids?: string[];
   team_ids?: string[];
   filter?: { version: number; root: { statement: string } };
 }
 
-export interface WebhookDeails {
+export interface WebhookTriggerSettings {
   filter?: Filter;
 }
 
 export interface Filter {
   version: number;
   root: { statement: string };
-}
-
-export interface Workflow {
-  id: string;
-  workflow_id: string;
-  callback_id: string;
-  title: string;
-  description: string;
-  type: string;
-  input_parameters: {
-    type: string;
-    name: string;
-    title: string;
-    description?: string;
-    is_required: boolean;
-  }[];
-  // deno-lint-ignore no-explicit-any
-  output_parameters: Record<string, any>[];
-  app_id: string;
-  app: {
-    id: string;
-    name: string;
-    icons: {
-      image_32: string;
-      image_48: string;
-      image_64: string;
-      image_72: string;
-    };
-    is_workflow_app: boolean;
-  };
-  date_created: number;
-  date_updated: number;
-  date_deleted: number; // can be 0 when it's not deleted
 }
 
 export interface Trigger {
@@ -95,7 +62,38 @@ export interface Trigger {
       description: string;
     };
   };
-  workflow: Workflow;
+  workflow: {
+    id: string;
+    workflow_id: string;
+    callback_id: string;
+    title: string;
+    description: string;
+    type: string;
+    input_parameters: {
+      type: string;
+      name: string;
+      title: string;
+      description?: string;
+      is_required: boolean;
+    }[];
+    // deno-lint-ignore no-explicit-any
+    output_parameters: Record<string, any>[];
+    app_id: string;
+    app: {
+      id: string;
+      name: string;
+      icons: {
+        image_32: string;
+        image_48: string;
+        image_64: string;
+        image_72: string;
+      };
+      is_workflow_app: boolean;
+    };
+    date_created: number;
+    date_updated: number;
+    date_deleted: number; // can be 0 when it's not deleted
+  };
   date_created: number;
   date_updated: number;
   owning_team_id: string;
@@ -113,11 +111,11 @@ export interface EventTrigger extends Trigger {
 export interface WebhookTrigger extends Trigger {
   type: "webhook";
   webhook_url: string;
-  webhook?: WebhookDeails;
+  webhook?: WebhookTriggerSettings;
 }
 export interface ScheduledTrigger extends Trigger {
   type: "scheduled";
-  schedule: ScheduleDetails;
+  schedule: ScheduleTriggerSettings;
 }
 export type AnyTrigger =
   | LinkTrigger

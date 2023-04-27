@@ -9,6 +9,10 @@ import type { PlainTextField } from "./text-fields.ts";
 export type AnyBlockElementType = "image" | AnyActionBlockElementType;
 
 export type AnyActionBlockElementType =
+  | "rich_text_section"
+  | "rich_text_list"
+  | "rich_text_quote"
+  | "rich_text_preformatted"
   | "users_select"
   | "multi_users_select"
   | "static_select"
@@ -319,4 +323,106 @@ export interface NumberInput
   initial_value?: string;
   min_value?: string;
   max_value?: string;
+}
+
+// https://api.slack.com/changelog/2019-09-what-they-see-is-what-you-get-and-more-and-less
+
+export type RichTextBlockElement = BlockElement<
+  | "rich_text_list"
+  | "rich_text_preformatted"
+  | "rich_text_quote"
+  | "rich_text_section"
+>;
+
+export interface RichTextList extends RichTextBlockElement {
+  type: "rich_text_list";
+  style?: "bullet" | "ordered";
+  indent?: number;
+  offset?: number;
+  border?: number;
+  elements: RichTextBlockElement[];
+}
+export interface RichTextPreformatted extends RichTextBlockElement {
+  type: "rich_text_preformatted";
+  elements: RichTextBlockElement[];
+}
+export interface RichTextQuote extends RichTextBlockElement {
+  type: "rich_text_quote";
+  elements: RichTextBlockElement[];
+}
+export interface RichTextSection {
+  type:
+    | "text"
+    | "channel"
+    | "user"
+    | "emoji"
+    | "link"
+    | "team"
+    | "usergroup"
+    | "date"
+    | "broadcast"
+    | "color";
+  style: RichTextSectionElementStyle;
+}
+
+export type AnyRichTextBlockElement =
+  | RichTextList
+  | RichTextPreformatted
+  | RichTextQuote
+  | RichTextSection;
+
+export interface RichTextSectionText extends RichTextSection {
+  type: "text";
+  text: string;
+}
+export interface RichTextSectionChannel extends RichTextSection {
+  type: "channel";
+  channel_id: string;
+}
+export interface RichTextSectionUser extends RichTextSection {
+  type: "user";
+  user_id: string;
+}
+export interface RichTextSectionEmoji extends RichTextSection {
+  type: "emoji";
+  name: string;
+  skin_tone: number;
+  unicode: string;
+}
+export interface RichTextSectionLink extends RichTextSection {
+  type: "link";
+  url: string;
+  text: string;
+}
+export interface RichTextSectionTeam extends RichTextSection {
+  type: "team";
+  team_id: string;
+}
+export interface RichTextSectionUsergroup extends RichTextSection {
+  type: "usergroup";
+  usergroup_id: string;
+}
+export interface RichTextSectionDate extends RichTextSection {
+  type: "date";
+  timestamp: string;
+}
+export interface RichTextSectionBroadcast extends RichTextSection {
+  type: "broadcast";
+  range: string;
+}
+export interface RichTextSectionColor extends RichTextSection {
+  type: "color";
+  value: string;
+}
+
+export interface RichTextSectionElementStyle {
+  bold?: boolean;
+  italic?: boolean;
+  strike?: boolean;
+  code?: boolean;
+}
+
+export interface RichTextSectionElement extends RichTextBlockElement {
+  type: "rich_text_section";
+  elements: RichTextSection[];
 }

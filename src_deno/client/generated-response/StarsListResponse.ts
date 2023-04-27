@@ -4,6 +4,8 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response.ts";
+import { AnyMessageBlock } from "../../block-kit/blocks.ts";
+import { MessageAttachment } from "../../block-kit/message-attachment.ts";
 export type StarsListResponse = SlackAPIResponse & {
   error?: string;
   items?: Item[];
@@ -220,8 +222,8 @@ export interface Transcription {
 }
 
 export interface Message {
-  attachments?: Attachment[];
-  blocks?: Block[];
+  attachments?: MessageAttachment[];
+  blocks?: AnyMessageBlock[];
   bot_id?: string;
   bot_profile?: BotProfile;
   client_msg_id?: string;
@@ -259,7 +261,7 @@ export interface Attachment {
   author_link?: string;
   author_name?: string;
   author_subname?: string;
-  blocks?: Block[];
+  blocks?: AnyMessageBlock[];
   bot_id?: string;
   callback_id?: string;
   channel_id?: string;
