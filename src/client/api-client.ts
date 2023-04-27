@@ -904,24 +904,24 @@ export class SlackAPIClient {
     datastore: {
       put: this.bindApiCall<AppsDatastorePutRequest, AppsDatastorePutResponse>(
         this,
-        "admin.apps.datastore.put"
+        "apps.datastore.put"
       ),
       update: this.bindApiCall<
         AppsDatastoreUpdateRequest,
         AppsDatastoreUpdateResponse
-      >(this, "admin.apps.datastore.update"),
+      >(this, "apps.datastore.update"),
       get: this.bindApiCall<AppsDatastoreGetRequest, AppsDatastoreGetResponse>(
         this,
-        "admin.apps.datastore.get"
+        "apps.datastore.get"
       ),
       query: this.bindApiCall<
         AppsDatastoreQueryRequest,
         AppsDatastoreQueryResponse
-      >(this, "admin.apps.datastore.query"),
+      >(this, "apps.datastore.query"),
       delete: this.bindApiCall<
         AppsDatastoreDeleteRequest,
         AppsDatastoreDeleteResponse
-      >(this, "admin.apps.datastore.delete"),
+      >(this, "apps.datastore.delete"),
     },
     event: {
       authorizations: {
