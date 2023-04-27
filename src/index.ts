@@ -1,3 +1,5 @@
+export * from "./automation/types";
+
 export * from "./block-kit/block-elements";
 export * from "./block-kit/blocks";
 export * from "./block-kit/confirm";
@@ -11,6 +13,7 @@ export * from "./block-kit/views";
 export * from "./client/api-client";
 export * from "./client/request";
 export * from "./client/response";
+export * from "./client/automation-response/index";
 export * from "./client/generated-response/index";
 
 export * from "./token-rotation/token-refresh-targets";

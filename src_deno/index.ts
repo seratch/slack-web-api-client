@@ -1,3 +1,5 @@
+export * from "./automation/types.ts";
+
 export * from "./block-kit/block-elements.ts";
 export * from "./block-kit/blocks.ts";
 export * from "./block-kit/confirm.ts";
@@ -11,6 +13,7 @@ export * from "./block-kit/views.ts";
 export * from "./client/api-client.ts";
 export * from "./client/request.ts";
 export * from "./client/response.ts";
+export * from "./client/automation-response/index.ts";
 export * from "./client/generated-response/index.ts";
 
 export * from "./token-rotation/token-refresh-targets.ts";

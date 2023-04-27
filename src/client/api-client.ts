@@ -85,6 +85,10 @@ import type {
   AdminUsersSetRegularRequest,
   AdminUsersUnsupportedVersionsExportRequest,
   AppsConnectionsOpenRequest,
+  AppsDatastoreDeleteRequest,
+  AppsDatastoreGetRequest,
+  AppsDatastorePutRequest,
+  AppsDatastoreQueryRequest,
   AppsEventAuthorizationsListRequest,
   AppsUninstallRequest,
   AuthRevokeRequest,
@@ -148,6 +152,8 @@ import type {
   FilesRevokePublicURLRequest,
   FilesSharedPublicURLRequest,
   FilesUploadRequest,
+  FunctionsCompleteErrorRequest,
+  FunctionsCompleteSuccessRequest,
   MigrationExchangeRequest,
   OAuthV2AccessRequest,
   OAuthV2ExchangeRequest,
@@ -201,6 +207,10 @@ import type {
   ViewsPublishRequest,
   ViewsPushRequest,
   ViewsUpdateRequest,
+  WorkflowsTriggersCreateRequest,
+  WorkflowsTriggersDeleteRequest,
+  WorkflowsTriggersListRequest,
+  WorkflowsTriggersUpdateRequest,
 } from "./request";
 import type {
   AdminAppsApproveResponse,
@@ -408,6 +418,18 @@ import type {
 import type { SlackAPIResponse } from "./response";
 import { isDebugLogEnabled } from "../logging/debug-logging";
 import type { SlackAPIClientOptions } from "./api-client-options";
+import type {
+  AppsDatastoreDeleteResponse,
+  AppsDatastoreGetResponse,
+  AppsDatastorePutResponse,
+  AppsDatastoreQueryResponse,
+  FunctionsCompleteErrorResponse,
+  FunctionsCompleteSuccessResponse,
+  WorkflowsTriggersCreateResponse,
+  WorkflowsTriggersDeleteResponse,
+  WorkflowsTriggersListResponse,
+  WorkflowsTriggersUpdateResponse,
+} from "./automation-response/index";
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,
@@ -877,6 +899,24 @@ export class SlackAPIClient {
         AppsConnectionsOpenResponse
       >(this, "apps.connections.open"),
     },
+    datastore: {
+      put: this.bindApiCall<AppsDatastorePutRequest, AppsDatastorePutResponse>(
+        this,
+        "admin.apps.datastore.put"
+      ),
+      get: this.bindApiCall<AppsDatastoreGetRequest, AppsDatastoreGetResponse>(
+        this,
+        "admin.apps.datastore.get"
+      ),
+      query: this.bindApiCall<
+        AppsDatastoreQueryRequest,
+        AppsDatastoreQueryResponse
+      >(this, "admin.apps.datastore.query"),
+      delete: this.bindApiCall<
+        AppsDatastoreDeleteRequest,
+        AppsDatastoreDeleteResponse
+      >(this, "admin.apps.datastore.delete"),
+    },
     event: {
       authorizations: {
         list: this.bindApiCall<
@@ -1162,6 +1202,19 @@ export class SlackAPIClient {
     },
   };
 
+  public readonly functions = {
+    complete: {
+      success: this.bindApiCall<
+        FunctionsCompleteSuccessRequest,
+        FunctionsCompleteSuccessResponse
+      >(this, "functions.complete.success"),
+      error: this.bindApiCall<
+        FunctionsCompleteErrorRequest,
+        FunctionsCompleteErrorResponse
+      >(this, "functions.complete.error"),
+    },
+  };
+
   public readonly migration = {
     exchange: this.bindApiCall<
       MigrationExchangeRequest,
@@ -1412,5 +1465,26 @@ export class SlackAPIClient {
       this,
       "views.update"
     ),
+  };
+
+  public readonly workflows = {
+    triggers: {
+      create: this.bindApiCall<
+        WorkflowsTriggersCreateRequest,
+        WorkflowsTriggersCreateResponse
+      >(this, "workflows.triggers.create"),
+      update: this.bindApiCall<
+        WorkflowsTriggersUpdateRequest,
+        WorkflowsTriggersUpdateResponse
+      >(this, "workflows.triggers.update"),
+      delete: this.bindApiCall<
+        WorkflowsTriggersDeleteRequest,
+        WorkflowsTriggersDeleteResponse
+      >(this, "workflows.triggers.delete"),
+      list: this.bindApiCall<
+        WorkflowsTriggersListRequest,
+        WorkflowsTriggersListResponse
+      >(this, "workflows.triggers.list"),
+    },
   };
 }

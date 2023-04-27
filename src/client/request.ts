@@ -1,3 +1,8 @@
+import type {
+  EventDetails,
+  ScheduleDetails,
+  WebhookDeails,
+} from "../automation/types";
 import type { AnyMessageBlock } from "../block-kit/blocks";
 import type { LinkUnfurls } from "../block-kit/link-unfurls";
 import type { MessageAttachment } from "../block-kit/message-attachment";
@@ -460,6 +465,30 @@ export type APITestRequest = SlackAPIRequest;
  */
 export type AppsConnectionsOpenRequest = SlackAPIRequest;
 
+export interface AppsDatastorePutRequest extends SlackAPIRequest {
+  datastore: string;
+  // deno-lint-ignore no-explicit-any
+  attributes: Record<string, any>;
+}
+export interface AppsDatastoreGetRequest extends SlackAPIRequest {
+  datastore: string;
+  id: string;
+}
+export interface AppsDatastoreQueryRequest extends SlackAPIRequest {
+  datastore: string;
+  app_id?: string;
+  cursor?: string;
+  // deno-lint-ignore no-explicit-any
+  expression_attributes?: Record<string, any>;
+  // deno-lint-ignore no-explicit-any
+  expression_values?: Record<string, any>;
+  limit?: number;
+}
+export interface AppsDatastoreDeleteRequest extends SlackAPIRequest {
+  datastore: string;
+  id: string;
+}
+
 export interface AppsEventAuthorizationsListRequest
   extends SlackAPIRequest,
     CursorPaginationEnabled {
@@ -914,6 +943,19 @@ export interface FilesRemoteShareRequest extends SlackAPIRequest {
 }
 
 /*
+ * `functions.*`
+ */
+export interface FunctionsCompleteSuccessRequest extends SlackAPIRequest {
+  // deno-lint-ignore no-explicit-any
+  outputs: Record<string, any>;
+  function_execution_id: string;
+}
+export interface FunctionsCompleteErrorRequest extends SlackAPIRequest {
+  error: string;
+  function_execution_id: string;
+}
+
+/*
  * `migration.*`
  */
 export interface MigrationExchangeRequest extends SlackAPIRequest {
@@ -1225,4 +1267,54 @@ export interface ViewsUpdateRequest extends SlackAPIRequest {
   view: ModalView;
   external_id?: string;
   hash?: string;
+}
+
+export interface CommonTriggerParameters {
+  type: string;
+  name: string;
+  description?: string;
+  workflow: string; // "#/workflows/myWorkflow"
+  // deno-lint-ignore no-explicit-any
+  inputs: Record<string, { value: any }>;
+}
+// https://api.slack.com/automation/triggers/link
+export interface LinkTriggerParameters extends CommonTriggerParameters {
+  type: "shortcut";
+}
+// https://api.slack.com/automation/triggers/scheduled
+export interface ScheduledTriggerParameters extends CommonTriggerParameters {
+  type: "scheduled";
+  schedule: ScheduleDetails;
+}
+// https://api.slack.com/automation/triggers/webhook
+export interface WebhookTriggerParameters extends CommonTriggerParameters {
+  type: "webhook";
+  webhook?: WebhookDeails;
+}
+// https://api.slack.com/automation/triggers/event
+export interface EventTriggerParameters extends CommonTriggerParameters {
+  type: "event";
+  event: EventDetails;
+}
+
+export type AnyTriggerParameters =
+  | LinkTriggerParameters
+  | ScheduledTriggerParameters
+  | WebhookTriggerParameters
+  | EventTriggerParameters;
+
+export type WorkflowsTriggersCreateRequest = SlackAPIRequest &
+  AnyTriggerParameters;
+export type WorkflowsTriggersUpdateRequest = SlackAPIRequest &
+  AnyTriggerParameters & {
+    trigger_id: string;
+  };
+export interface WorkflowsTriggersDeleteRequest extends SlackAPIRequest {
+  trigger_id: string;
+}
+export interface WorkflowsTriggersListRequest
+  extends SlackAPIRequest,
+    CursorPaginationEnabled {
+  is_owner?: boolean;
+  is_published?: boolean;
 }
