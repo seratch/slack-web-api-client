@@ -1,5 +1,4 @@
-// deno-lint-ignore-file ban-unused-ignore no-explicit-any no-empty-interface
-import { SlackAPIResponse } from "../response";
+import { SlackAPIResponse } from "../../response";
 
 interface ErrorResponse {
   ok: false;
@@ -19,6 +18,7 @@ interface SingleItemRepsonse {
     messages?: string[];
   };
   datastore: string;
+  // deno-lint-ignore no-explicit-any
   item: Record<string, any>;
 }
 
@@ -30,6 +30,7 @@ interface ListItemRepsonse {
     messages?: string[];
   };
   datastore: string;
+  // deno-lint-ignore no-explicit-any
   items: Record<string, any>[];
 }
 
