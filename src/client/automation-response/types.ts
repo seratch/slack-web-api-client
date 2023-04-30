@@ -31,6 +31,8 @@ export interface Filter {
 
 export interface Trigger {
   id: string;
+  name: string;
+  description: string;
   inputs: {
     [key: string]: {
       value: string;
@@ -106,7 +108,8 @@ export interface LinkTrigger extends Trigger {
 export interface EventTrigger extends Trigger {
   type: "event";
   event_type: string;
-  team_ids: string[];
+  team_ids?: string[]; // TODO: better typing based on the event_type
+  channel_ids?: string[]; // TODO: better typing based on the event_type
 }
 export interface WebhookTrigger extends Trigger {
   type: "webhook";

@@ -1219,6 +1219,7 @@ export interface UsersProfileSetRequest extends SlackAPIRequest {
 
 export interface ViewsOpenRequest extends SlackAPIRequest {
   trigger_id: string;
+  interactivity_pointer: string; // only for the automation platform
   view: ModalView;
 }
 
