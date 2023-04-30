@@ -63,6 +63,7 @@ class TsWriter
       if generated_code.match? /attachments\?:\s+Attachment\[\]/
         source.gsub!(" Attachment[];", " MessageAttachment[];")
       end
+      source.gsub!(" EventPayload;", " any;")
 
       source.gsub!(/^    /, '  ')
       source.gsub!('"', "'")
