@@ -1,9 +1,13 @@
 // deno-lint-ignore-file no-unused-vars
 
-import { EventTrigger, LinkTrigger, ScheduledTrigger, WebhookTrigger } from "../types";
+import {
+  EventTrigger,
+  LinkTrigger,
+  ScheduledTrigger,
+  WebhookTrigger,
+} from "../types.ts";
 
-const eventTrigger: EventTrigger =
-{
+const eventTrigger: EventTrigger = {
   "id": "Ft055EQZ1J2G",
   "inputs": {
     "channel_id": {
@@ -499,8 +503,7 @@ const scheduledTrigger: ScheduledTrigger = {
       "is_required": true,
       "is_hidden": true,
       "nullable": true,
-      "description":
-        "",
+      "description": "",
     },
   },
   "available_data": {
@@ -541,8 +544,7 @@ const scheduledTrigger: ScheduledTrigger = {
       "is_required": true,
       "is_hidden": true,
       "nullable": true,
-      "description":
-        "",
+      "description": "",
     },
   },
   "date_created": 1682647944,
@@ -630,8 +632,7 @@ const webhookTrigger: WebhookTrigger = {
       "is_required": true,
       "is_hidden": true,
       "nullable": true,
-      "description":
-        "",
+      "description": "",
     },
   },
   "available_data": {
@@ -672,8 +673,7 @@ const webhookTrigger: WebhookTrigger = {
       "is_required": true,
       "is_hidden": true,
       "nullable": true,
-      "description":
-        "",
+      "description": "",
     },
   },
   "date_created": 1682648002,
