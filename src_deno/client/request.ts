@@ -1175,9 +1175,16 @@ export interface UsersProfileSetRequest extends SlackAPIRequest {
  * `views.*`
  */
 
-export interface ViewsOpenRequest extends SlackAPIRequest {
+export type ViewsOpenRequest =
+  | ViewsOpenAppPlatformRequest
+  | ViewsOpenAutomationPlatformRequest;
+
+export interface ViewsOpenAppPlatformRequest extends SlackAPIRequest {
   trigger_id: string;
-  interactivity_pointer: string; // only for the automation platform
+  view: ModalView;
+}
+export interface ViewsOpenAutomationPlatformRequest extends SlackAPIRequest {
+  interactivity_pointer: string;
   view: ModalView;
 }
 
