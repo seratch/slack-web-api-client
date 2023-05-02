@@ -28,7 +28,7 @@ export class WebhookSender {
   }
 }
 
-export type ResponseUrlSender = WebhookSender;
+export const ResponseUrlSender = WebhookSender;
 
 export interface WebhookParams {
   response_type?: "ephemeral" | "in_channel";

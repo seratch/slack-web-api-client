@@ -1,6 +1,6 @@
 {
   "name": "slack-web-api-client",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Slack Web API Client for TypeScript",
   "main": "dist/index.js",
   "scripts": {
