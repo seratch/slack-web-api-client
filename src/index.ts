@@ -13,6 +13,7 @@ export * from "./client/request";
 export * from "./client/response";
 export * from "./client/automation-response/index";
 export * from "./client/generated-response/index";
+export * from "./client/webhook-client";
 
 export * from "./token-rotation/token-refresh-targets";
 export * from "./token-rotation/token-refresh-results";

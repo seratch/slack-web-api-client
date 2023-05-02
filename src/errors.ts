@@ -15,3 +15,11 @@ export class TokenRotationError extends Error {
     this.name = "TokenRotationError";
   }
 }
+
+export class WebhookError extends Error {
+  constructor(status: number, body: string) {
+    const message = `Failed to send a message using incoming webhook/response_url (status: ${status}, body: ${body})`;
+    super(message);
+    this.name = "ResponseUrlError";
+  }
+}

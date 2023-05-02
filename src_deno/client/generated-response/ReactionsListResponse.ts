@@ -388,6 +388,7 @@ export interface BlockFile {
   mimetype?: string;
   mode?: string;
   mp4?: string;
+  mp4_low?: string;
   name?: string;
   non_owner_editable?: boolean;
   num_stars?: number;
@@ -589,6 +590,7 @@ export interface FileElement {
   mimetype?: string;
   mode?: string;
   mp4?: string;
+  mp4_low?: string;
   name?: string;
   non_owner_editable?: boolean;
   num_stars?: number;
