@@ -1,4 +1,4 @@
-export * from "./apps/datastore.ts";
-export * from "./functions.ts";
-export * from "./workflows/triggers.ts";
-export * from "./types.ts";
+export type * from "./apps/datastore.ts";
+export type * from "./functions.ts";
+export type * from "./workflows/triggers.ts";
+export type * from "./types.ts";

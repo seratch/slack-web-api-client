@@ -11,6 +11,7 @@ export type TeamAccessLogsResponse = SlackAPIResponse & {
   ok: boolean;
   paging?: Paging;
   provided?: string;
+  response_metadata?: ResponseMetadata;
 };
 
 export interface Login {
@@ -31,4 +32,8 @@ export interface Paging {
   page?: number;
   pages?: number;
   total?: number;
+}
+
+export interface ResponseMetadata {
+  next_cursor?: string;
 }

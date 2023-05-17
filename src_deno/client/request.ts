@@ -823,7 +823,7 @@ export interface FilesSharedPublicURLRequest extends SlackAPIRequest {
 interface FileUpload {
   channels?: string; // comma-separated list of channels
   content?: string; // if omitted, must provide `file`
-  file?: Uint8Array | string; // if omitted, must provide `content`
+  file?: Blob | ArrayBuffer; // if omitted, must provide `content`
   filename?: string;
   filetype?: string;
   initial_comment?: string;

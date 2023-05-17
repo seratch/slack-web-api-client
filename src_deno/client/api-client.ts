@@ -502,11 +502,67 @@ export class SlackAPIClient {
     return result;
   }
 
+  async sendMultipartData(
+    name: string,
+    // deno-lint-ignore no-explicit-any
+    params: Record<string, any>,
+  ): Promise<SlackAPIResponse> {
+    const url = `https://slack.com/api/${name}`;
+    const token = params ? params.token ?? this.#token : this.#token;
+    const body = new FormData();
+    for (const [key, value] of Object.entries(params)) {
+      if (value === undefined || value === null || key === "token") {
+        continue;
+      }
+      if (typeof value === "object") {
+        if (value instanceof Blob) {
+          body.append(key, value);
+        } else {
+          body.append(key, new Blob([value]));
+        }
+      } else {
+        body.append(key, value);
+      }
+    }
+    const headers: Record<string, string> = {};
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+    if (isDebugLogEnabled(this.#options.logLevel)) {
+      const bodyParamNames = Array.from(body.keys()).join(", ");
+      console.log(`Slack API request (${name}): Sending ${bodyParamNames}`);
+    }
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body,
+    });
+    const responseBody = await response.json();
+    const result: SlackAPIResponse = {
+      ...responseBody,
+      headers: response.headers,
+    } as SlackAPIResponse;
+    if (isDebugLogEnabled(this.#options.logLevel)) {
+      console.log(`Slack API response (${name}): ${JSON.stringify(result)}}`);
+    }
+    if (result.error) {
+      throw new SlackAPIError(name, result.error, result);
+    }
+    return result;
+  }
+
   bindApiCall<A extends SlackAPIRequest, R extends SlackAPIResponse>(
     self: SlackAPIClient,
     method: string,
   ): SlackAPI<A, R> {
     return self.call.bind(self, method) as SlackAPI<A, R>;
+  }
+
+  bindMultipartApiCall<A extends SlackAPIRequest, R extends SlackAPIResponse>(
+    self: SlackAPIClient,
+    method: string,
+  ): SlackAPI<A, R> {
+    return self.sendMultipartData.bind(self, method) as SlackAPI<A, R>;
   }
 
   public readonly admin = {
@@ -1168,7 +1224,7 @@ export class SlackAPIClient {
       FilesSharedPublicURLRequest,
       FilesSharedPublicURLResponse
     >(this, "files.sharedPublicURL"),
-    upload: this.bindApiCall<FilesUploadRequest, FilesUploadResponse>(
+    upload: this.bindMultipartApiCall<FilesUploadRequest, FilesUploadResponse>(
       this,
       "files.upload",
     ),
