@@ -58,7 +58,7 @@ import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.3.0/m
 
 export default SlackFunction(def, async ({ token }) => {
   const client = new SlackAPIClient(token);
-  const repsonse = await client.chat.postMessage({
+  const response = await client.chat.postMessage({
     channel: "#random",
     text: ":wave: what's up?",
   });
