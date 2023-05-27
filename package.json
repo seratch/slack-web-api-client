@@ -26,9 +26,8 @@
     "url": "https://github.com/seratch/slack-web-api-client/issues"
   },
   "homepage": "https://github.com/seratch/slack-web-api-client#readme",
-  "dependencies": {},
   "devDependencies": {
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "typescript": "^5.0.4"
   }
 }
