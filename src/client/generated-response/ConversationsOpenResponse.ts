@@ -319,6 +319,7 @@ export interface File {
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
+  thumb_1024_w?: string;
   thumb_160?: string;
   thumb_160_gif?: string;
   thumb_160_h?: string;
@@ -343,6 +344,8 @@ export interface File {
   thumb_800?: string;
   thumb_800_gif?: string;
   thumb_800_h?: string;
+  thumb_800_w?: string;
+  thumb_80_gif?: string;
   thumb_80_h?: string;
   thumb_80_w?: string;
   thumb_960?: string;
