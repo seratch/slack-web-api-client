@@ -25,6 +25,9 @@ export interface Files {
 }
 
 export interface FilesMatch {
+  attachments?: MessageAttachment[];
+  bot_id?: string;
+  cc?: Cc[];
   channels?: string[];
   comments_count?: number;
   converted_pdf?: string;
@@ -37,9 +40,12 @@ export interface FilesMatch {
   external_url?: string;
   file_access?: string;
   filetype?: string;
+  from?: Cc[];
   groups?: string[];
+  has_more?: boolean;
   has_more_shares?: boolean;
   has_rich_preview?: boolean;
+  headers?: MatchHeaders;
   id?: string;
   image_exif_rotation?: number;
   ims?: string[];
@@ -54,17 +60,22 @@ export interface FilesMatch {
   mode?: string;
   name?: string;
   non_owner_editable?: boolean;
+  original_attachment_count?: number;
   original_h?: number;
   original_w?: number;
   permalink?: string;
   permalink_public?: string;
+  plain_text?: string;
   pretty_type?: string;
   preview?: string;
   preview_highlight?: string;
   preview_is_truncated?: boolean;
+  preview_plain_text?: string;
   public_url_shared?: boolean;
+  sent_to_self?: boolean;
   shares?: MatchShares;
   size?: number;
+  subject?: string;
   thumb_1024?: string;
   thumb_1024_h?: number;
   thumb_1024_w?: number;
@@ -93,85 +104,12 @@ export interface FilesMatch {
   thumb_video?: string;
   timestamp?: number;
   title?: string;
+  to?: Cc[];
   updated?: number;
   url_private?: string;
   url_private_download?: string;
   user?: LastEditor;
   user_team?: UserTeam;
-  username?: string;
-}
-
-export enum LastEditor {
-  Empty = "",
-  U00000000 = "U00000000",
-}
-
-export interface MatchShares {
-  public?: { [key: string]: Public[] };
-}
-
-export interface Public {
-  channel_name?: string;
-  latest_reply?: string;
-  reply_count?: number;
-  reply_users?: string[];
-  reply_users_count?: number;
-  share_user_id?: LastEditor;
-  team_id?: UserTeam;
-  thread_ts?: string;
-  ts?: Ts;
-}
-
-export enum UserTeam {
-  Empty = "",
-  T00000000 = "T00000000",
-}
-
-export enum Ts {
-  Empty = "",
-  The0000000000000000 = "0000000000.000000",
-}
-
-export interface Pagination {
-  first?: number;
-  last?: number;
-  page?: number;
-  page_count?: number;
-  per_page?: number;
-  total_count?: number;
-}
-
-export interface Paging {
-  count?: number;
-  page?: number;
-  pages?: number;
-  total?: number;
-}
-
-export interface Messages {
-  matches?: MessagesMatch[];
-  pagination?: Pagination;
-  paging?: Paging;
-  total?: number;
-}
-
-export interface MessagesMatch {
-  attachments?: MessageAttachment[];
-  blocks?: AnyMessageBlock[];
-  channel?: Channel;
-  files?: File[];
-  iid?: string;
-  is_mpim?: boolean;
-  no_reactions?: boolean;
-  permalink?: string;
-  previous?: Previous;
-  previous_2?: Previous;
-  score?: number;
-  team?: UserTeam;
-  text?: string;
-  ts?: Ts;
-  type?: string;
-  user?: LastEditor;
   username?: string;
 }
 
@@ -492,7 +430,7 @@ export interface File {
   has_more?: boolean;
   has_more_shares?: boolean;
   has_rich_preview?: boolean;
-  headers?: Headers;
+  headers?: FileHeaders;
   hls?: string;
   hls_embed?: string;
   id?: string;
@@ -600,7 +538,7 @@ export interface Cc {
   original?: string;
 }
 
-export interface Headers {
+export interface FileHeaders {
   date?: string;
   in_reply_to?: string;
   message_id?: string;
@@ -642,6 +580,33 @@ export interface FileShares {
   public?: { [key: string]: Public[] };
 }
 
+export interface Public {
+  channel_name?: string;
+  latest_reply?: string;
+  reply_count?: number;
+  reply_users?: string[];
+  reply_users_count?: number;
+  share_user_id?: LastEditor;
+  team_id?: UserTeam;
+  thread_ts?: string;
+  ts?: Ts;
+}
+
+export enum LastEditor {
+  Empty = "",
+  U00000000 = "U00000000",
+}
+
+export enum UserTeam {
+  Empty = "",
+  T00000000 = "T00000000",
+}
+
+export enum Ts {
+  Empty = "",
+  The0000000000000000 = "0000000000.000000",
+}
+
 export interface Transcription {
   locale?: string;
   status?: string;
@@ -673,6 +638,57 @@ export interface Preview {
   subtitle?: Description;
   title?: Description;
   type?: string;
+}
+
+export interface MatchHeaders {
+  date?: string;
+}
+
+export interface MatchShares {
+  public?: { [key: string]: Public[] };
+}
+
+export interface Pagination {
+  first?: number;
+  last?: number;
+  page?: number;
+  page_count?: number;
+  per_page?: number;
+  total_count?: number;
+}
+
+export interface Paging {
+  count?: number;
+  page?: number;
+  pages?: number;
+  total?: number;
+}
+
+export interface Messages {
+  matches?: MessagesMatch[];
+  pagination?: Pagination;
+  paging?: Paging;
+  total?: number;
+}
+
+export interface MessagesMatch {
+  attachments?: MessageAttachment[];
+  blocks?: AnyMessageBlock[];
+  channel?: Channel;
+  files?: File[];
+  iid?: string;
+  is_mpim?: boolean;
+  no_reactions?: boolean;
+  permalink?: string;
+  previous?: Previous;
+  previous_2?: Previous;
+  score?: number;
+  team?: UserTeam;
+  text?: string;
+  ts?: Ts;
+  type?: string;
+  user?: LastEditor;
+  username?: string;
 }
 
 export interface Channel {
