@@ -69,6 +69,8 @@ export default SlackFunction(def, async ({ token }) => {
 
 This allows you to use the powerful features of the **slack-web-api-client** library in your Deno projects with ease.
 
+<img width="600" src="https://user-images.githubusercontent.com/19658/252261924-75522081-0ceb-47c3-9d0a-2cc99772ff7f.png">
+
 An alternative way is to use skypack CDN. If you prefer this way, you need to add `"cdn.skypack.dev"` to `outgoingDomains` in `manifest.ts`.
 
 An alternative way to use the **slack-web-api-client** library is through the skypack CDN. To do this, simply add `"cdn.skypack.dev"` to the `outgoingDomains` section in your `manifest.ts` file. This allows you to use the library within your project:
