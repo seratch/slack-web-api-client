@@ -144,6 +144,7 @@ export interface Attachment {
   is_msg_unfurl?: boolean;
   is_reply_unfurl?: boolean;
   is_thread_root_unfurl?: boolean;
+  message_blocks?: MessageBlock[];
   metadata?: Metadata;
   mimetype?: string;
   mrkdwn_in?: string[];
@@ -614,6 +615,36 @@ export interface Field {
   short?: boolean;
   title?: string;
   value?: string;
+}
+
+export interface MessageBlock {
+  accessory?: Accessory;
+  alt_text?: string;
+  app_collaborators?: string[];
+  app_id?: string;
+  author_name?: string;
+  block_id?: string;
+  bot_user_id?: string;
+  button_label?: string;
+  description?: Subtitle;
+  elements?: Accessory[];
+  fallback?: string;
+  fields?: Subtitle[];
+  function_trigger_id?: string;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  is_workflow_app?: boolean;
+  provider_icon_url?: string;
+  provider_name?: string;
+  text?: Subtitle;
+  thumbnail_url?: string;
+  title?: Subtitle;
+  title_url?: string;
+  type?: string;
+  url?: string;
+  video_url?: string;
 }
 
 export interface Metadata {
