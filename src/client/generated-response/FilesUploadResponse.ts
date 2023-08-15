@@ -13,6 +13,7 @@ export type FilesUploadResponse = SlackAPIResponse & {
 };
 
 export interface File {
+  access?: string;
   alt_txt?: string;
   app_id?: string;
   app_name?: string;
@@ -27,6 +28,7 @@ export interface File {
   deanimate?: string;
   deanimate_gif?: string;
   display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   duration_ms?: number;
   edit_link?: string;
   editable?: boolean;
@@ -48,12 +50,15 @@ export interface File {
   image_exif_rotation?: number;
   ims?: string[];
   initial_comment?: InitialComment;
+  is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
   is_starred?: boolean;
   last_editor?: string;
+  last_read?: number;
   lines?: number;
   lines_more?: number;
+  linked_channel_id?: string;
   media_display_type?: string;
   media_progress?: MediaProgress;
   mimetype?: string;
@@ -63,6 +68,7 @@ export interface File {
   name?: string;
   non_owner_editable?: boolean;
   num_stars?: number;
+  org_or_workspace_access?: string;
   original_attachment_count?: number;
   original_h?: string;
   original_w?: string;
@@ -76,7 +82,9 @@ export interface File {
   preview_highlight?: string;
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
   public_url_shared?: boolean;
+  quip_thread_id?: string;
   reactions?: Reaction[];
   saved?: Saved;
   sent_to_self?: boolean;
@@ -86,6 +94,7 @@ export interface File {
   source_team?: string;
   subject?: string;
   subtype?: string;
+  teams_shared_with?: any[];
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -132,11 +141,13 @@ export interface File {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
+  title_blocks?: TitleBlock[];
   to?: Cc[];
   transcription?: Transcription;
   updated?: number;
   url_private?: string;
   url_private_download?: string;
+  url_static_preview?: string;
   user?: string;
   user_team?: string;
   username?: string;
@@ -147,6 +158,11 @@ export interface Cc {
   address?: string;
   name?: string;
   original?: string;
+}
+
+export interface DmMpdmUsersWithFileAccess {
+  access?: string;
+  user_id?: string;
 }
 
 export interface Headers {
@@ -201,6 +217,162 @@ export interface Private {
   team_id?: string;
   thread_ts?: string;
   ts?: string;
+}
+
+export interface TitleBlock {
+  accessory?: Accessory;
+  alt_text?: string;
+  app_collaborators?: string[];
+  app_id?: string;
+  author_name?: string;
+  block_id?: string;
+  bot_user_id?: string;
+  button_label?: string;
+  description?: Text | string;
+  elements?: Accessory[];
+  fallback?: string;
+  fields?: Text[];
+  function_trigger_id?: string;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  is_workflow_app?: boolean;
+  provider_icon_url?: string;
+  provider_name?: string;
+  text?: Text;
+  thumbnail_url?: string;
+  title?: Text | string;
+  title_url?: string;
+  type?: string;
+  url?: string;
+  video_url?: string;
+}
+
+export interface Accessory {
+  accessibility_label?: string;
+  action_id?: string;
+  alt_text?: string;
+  border?: number;
+  confirm?: Confirm;
+  default_to_current_conversation?: boolean;
+  elements?: AccessoryElement[];
+  fallback?: string;
+  filter?: Filter;
+  focus_on_load?: boolean;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  indent?: number;
+  initial_channel?: string;
+  initial_channels?: string[];
+  initial_conversation?: string;
+  initial_conversations?: string[];
+  initial_date?: string;
+  initial_date_time?: number;
+  initial_option?: Option;
+  initial_options?: Option[];
+  initial_time?: string;
+  initial_user?: string;
+  initial_users?: string[];
+  max_selected_items?: number;
+  min_query_length?: number;
+  offset?: number;
+  option_groups?: OptionGroup[];
+  options?: Option[];
+  placeholder?: Text;
+  response_url_enabled?: boolean;
+  style?: string;
+  text?: Text;
+  timezone?: string;
+  type?: string;
+  url?: string;
+  value?: string;
+}
+
+export interface Confirm {
+  confirm?: Text;
+  deny?: Text;
+  style?: string;
+  text?: Text;
+  title?: Text;
+}
+
+export interface Text {
+  emoji?: boolean;
+  text?: string;
+  type?: TextType;
+  verbatim?: boolean;
+}
+
+export enum TextType {
+  Mrkdwn = "mrkdwn",
+  PlainText = "plain_text",
+}
+
+export interface AccessoryElement {
+  border?: number;
+  elements?: PurpleElement[];
+  indent?: number;
+  offset?: number;
+  style?: string;
+  type?: string;
+}
+
+export interface PurpleElement {
+  channel_id?: string;
+  name?: string;
+  range?: string;
+  skin_tone?: number;
+  style?: Style;
+  team_id?: string;
+  text?: string;
+  timestamp?: string;
+  type?: ElementType;
+  unicode?: string;
+  url?: string;
+  user_id?: string;
+  usergroup_id?: string;
+  value?: string;
+}
+
+export interface Style {
+  bold?: boolean;
+  code?: boolean;
+  italic?: boolean;
+  strike?: boolean;
+}
+
+export enum ElementType {
+  Broadcast = "broadcast",
+  Channel = "channel",
+  Color = "color",
+  Date = "date",
+  Emoji = "emoji",
+  Link = "link",
+  Team = "team",
+  Text = "text",
+  User = "user",
+  Usergroup = "usergroup",
+}
+
+export interface Filter {
+  exclude_bot_users?: boolean;
+  exclude_external_shared_channels?: boolean;
+  include?: any[];
+}
+
+export interface Option {
+  description?: Text;
+  text?: Text;
+  url?: string;
+  value?: string;
+}
+
+export interface OptionGroup {
+  label?: Text;
+  options?: Option[];
 }
 
 export interface Transcription {

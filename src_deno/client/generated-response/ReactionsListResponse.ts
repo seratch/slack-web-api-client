@@ -4,7 +4,6 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response.ts";
-import { AnyMessageBlock } from "../../block-kit/blocks.ts";
 import { MessageAttachment } from "../../block-kit/message-attachment.ts";
 export type ReactionsListResponse = SlackAPIResponse & {
   error?: string;
@@ -25,22 +24,26 @@ export interface Item {
 export interface Message {
   app_id?: string;
   attachments?: MessageAttachment[];
-  blocks?: AnyMessageBlock[];
+  blocks?: TitleBlockElement[];
   bot_id?: string;
   bot_profile?: BotProfile;
+  channel?: string;
   client_msg_id?: string;
   display_as_bot?: boolean;
-  files?: FileElement[];
+  edited?: Edited;
+  files?: MessageFile[];
   icons?: Icons;
   inviter?: string;
   is_locked?: boolean;
   latest_reply?: string;
+  no_notifications?: boolean;
   parent_user_id?: string;
   permalink?: string;
   reactions?: Reaction[];
   reply_count?: number;
   reply_users?: string[];
   reply_users_count?: number;
+  room?: Room;
   subscribed?: boolean;
   subtype?: string;
   team?: string;
@@ -62,7 +65,7 @@ export interface Attachment {
   author_link?: string;
   author_name?: string;
   author_subname?: string;
-  blocks?: AnyMessageBlock[];
+  blocks?: AttachmentBlock[];
   bot_id?: string;
   callback_id?: string;
   channel_id?: string;
@@ -72,7 +75,7 @@ export interface Attachment {
   fallback?: string;
   fields?: Field[];
   filename?: string;
-  files?: FileElement[];
+  files?: AttachmentFile[];
   footer?: string;
   footer_icon?: string;
   from_url?: string;
@@ -145,7 +148,7 @@ export interface SelectedOptionElement {
   value?: string;
 }
 
-export interface Block {
+export interface AttachmentBlock {
   accessory?: Accessory;
   alt_text?: string;
   api_decoration_available?: boolean;
@@ -157,30 +160,30 @@ export interface Block {
   button_label?: string;
   call?: Call;
   call_id?: string;
-  description?: Description;
+  description?: DescriptionElement | string;
   dispatch_action?: boolean;
   element?: Accessory;
   elements?: Accessory[];
   external_id?: string;
   fallback?: string;
-  fields?: Description[];
-  file?: BlockFile;
+  fields?: DescriptionElement[];
+  file?: PurpleFile;
   file_id?: string;
   function_trigger_id?: string;
-  hint?: Description;
+  hint?: DescriptionElement;
   image_bytes?: number;
   image_height?: number;
   image_url?: string;
   image_width?: number;
   is_workflow_app?: boolean;
-  label?: Description;
+  label?: DescriptionElement;
   optional?: boolean;
   provider_icon_url?: string;
   provider_name?: string;
   source?: string;
-  text?: Description;
+  text?: DescriptionElement;
   thumbnail_url?: string;
-  title?: Description;
+  title?: DescriptionElement | string;
   title_url?: string;
   type?: string;
   url?: string;
@@ -219,10 +222,10 @@ export interface Accessory {
   offset?: number;
   option_groups?: AccessoryOptionGroup[];
   options?: InitialOptionElement[];
-  placeholder?: Description;
+  placeholder?: DescriptionElement;
   response_url_enabled?: boolean;
   style?: string;
-  text?: Description;
+  text?: DescriptionElement;
   timezone?: string;
   type?: string;
   url?: string;
@@ -230,18 +233,24 @@ export interface Accessory {
 }
 
 export interface AccessoryConfirm {
-  confirm?: Description;
-  deny?: Description;
+  confirm?: DescriptionElement;
+  deny?: DescriptionElement;
   style?: string;
-  text?: Description;
-  title?: Description;
+  text?: DescriptionElement;
+  title?: DescriptionElement;
 }
 
-export interface Description {
+export interface DescriptionElement {
   emoji?: boolean;
   text?: string;
-  type?: string;
+  type?: DescriptionType;
   verbatim?: boolean;
+}
+
+export enum DescriptionType {
+  Empty = "",
+  Mrkdwn = "mrkdwn",
+  PlainText = "plain_text",
 }
 
 export interface AccessoryElement {
@@ -250,7 +259,7 @@ export interface AccessoryElement {
   indent?: number;
   offset?: number;
   style?: string;
-  type?: string;
+  type?: FluffyType;
 }
 
 export interface PurpleElement {
@@ -262,7 +271,7 @@ export interface PurpleElement {
   team_id?: string;
   text?: string;
   timestamp?: string;
-  type?: string;
+  type?: PurpleType;
   unicode?: string;
   url?: string;
   user_id?: string;
@@ -277,6 +286,28 @@ export interface Style {
   strike?: boolean;
 }
 
+export enum PurpleType {
+  Broadcast = "broadcast",
+  Channel = "channel",
+  Color = "color",
+  Date = "date",
+  Emoji = "emoji",
+  Empty = "",
+  Link = "link",
+  Team = "team",
+  Text = "text",
+  User = "user",
+  Usergroup = "usergroup",
+}
+
+export enum FluffyType {
+  Empty = "",
+  RichTextList = "rich_text_list",
+  RichTextPreformatted = "rich_text_preformatted",
+  RichTextQuote = "rich_text_quote",
+  RichTextSection = "rich_text_section",
+}
+
 export interface Filter {
   exclude_bot_users?: boolean;
   exclude_external_shared_channels?: boolean;
@@ -284,14 +315,14 @@ export interface Filter {
 }
 
 export interface InitialOptionElement {
-  description?: Description;
-  text?: Description;
+  description?: DescriptionElement;
+  text?: DescriptionElement;
   url?: string;
   value?: string;
 }
 
 export interface AccessoryOptionGroup {
-  label?: Description;
+  label?: DescriptionElement;
   options?: InitialOptionElement[];
 }
 
@@ -342,7 +373,32 @@ export interface AppIconUrls {
   image_original?: string;
 }
 
-export interface BlockFile {
+export interface PurpleFile {
+  thumb_1024?: string;
+  thumb_1024_gif?: string;
+  thumb_1024_w?: string;
+  thumb_720_gif?: string;
+  thumb_720_h?: string;
+  thumb_720_w?: string;
+  thumb_800?: string;
+  thumb_800_gif?: string;
+  thumb_800_h?: string;
+  thumb_800_w?: string;
+  thumb_960?: string;
+  thumb_960_gif?: string;
+  thumb_960_h?: string;
+  thumb_960_w?: string;
+  title?: string;
+}
+
+export interface Field {
+  short?: boolean;
+  title?: string;
+  value?: string;
+}
+
+export interface AttachmentFile {
+  access?: string;
   alt_txt?: string;
   app_id?: string;
   app_name?: string;
@@ -357,6 +413,7 @@ export interface BlockFile {
   deanimate?: string;
   deanimate_gif?: string;
   display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   duration_ms?: number;
   edit_link?: string;
   editable?: boolean;
@@ -378,12 +435,15 @@ export interface BlockFile {
   image_exif_rotation?: number;
   ims?: string[];
   initial_comment?: InitialComment;
+  is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
   is_starred?: boolean;
   last_editor?: string;
+  last_read?: number;
   lines?: number;
   lines_more?: number;
+  linked_channel_id?: string;
   media_display_type?: string;
   media_progress?: MediaProgress;
   mimetype?: string;
@@ -393,6 +453,7 @@ export interface BlockFile {
   name?: string;
   non_owner_editable?: boolean;
   num_stars?: number;
+  org_or_workspace_access?: string;
   original_attachment_count?: number;
   original_h?: string;
   original_w?: string;
@@ -406,7 +467,9 @@ export interface BlockFile {
   preview_highlight?: string;
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
   public_url_shared?: boolean;
+  quip_thread_id?: string;
   reactions?: Reaction[];
   saved?: Saved;
   sent_to_self?: boolean;
@@ -416,6 +479,7 @@ export interface BlockFile {
   source_team?: string;
   subject?: string;
   subtype?: string;
+  teams_shared_with?: string[];
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -462,11 +526,13 @@ export interface BlockFile {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
+  title_blocks?: PurpleTitleBlock[];
   to?: Cc[];
   transcription?: Transcription;
   updated?: number;
   url_private?: string;
   url_private_download?: string;
+  url_static_preview?: string;
   user?: string;
   user_team?: string;
   username?: string;
@@ -477,6 +543,11 @@ export interface Cc {
   address?: string;
   name?: string;
   original?: string;
+}
+
+export interface DmMpdmUsersWithFileAccess {
+  access?: string;
+  user_id?: string;
 }
 
 export interface Headers {
@@ -533,18 +604,149 @@ export interface Private {
   ts?: string;
 }
 
+export interface PurpleTitleBlock {
+  accessory?: Accessory;
+  alt_text?: string;
+  api_decoration_available?: boolean;
+  app_collaborators?: string[];
+  app_id?: string;
+  author_name?: string;
+  block_id?: string;
+  bot_user_id?: string;
+  button_label?: string;
+  call?: Call;
+  call_id?: string;
+  description?: DescriptionElement;
+  dispatch_action?: boolean;
+  element?: Accessory;
+  elements?: Accessory[];
+  external_id?: string;
+  fallback?: string;
+  fields?: DescriptionElement[];
+  file?: PurpleFile;
+  file_id?: string;
+  function_trigger_id?: string;
+  hint?: DescriptionElement;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  is_workflow_app?: boolean;
+  label?: DescriptionElement;
+  optional?: boolean;
+  provider_icon_url?: string;
+  provider_name?: string;
+  source?: string;
+  text?: DescriptionElement;
+  thumbnail_url?: string;
+  title?: DescriptionElement;
+  title_url?: string;
+  type?: string;
+  url?: string;
+  video_url?: string;
+}
+
 export interface Transcription {
   locale?: string;
   status?: string;
 }
 
-export interface Field {
-  short?: boolean;
-  title?: string;
-  value?: string;
+export interface MessageBlock {
+  accessory?: Accessory;
+  alt_text?: string;
+  app_collaborators?: string[];
+  app_id?: string;
+  author_name?: string;
+  block_id?: string;
+  bot_user_id?: string;
+  button_label?: string;
+  description?: DescriptionElement;
+  elements?: Accessory[];
+  fallback?: string;
+  fields?: DescriptionElement[];
+  function_trigger_id?: string;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  is_workflow_app?: boolean;
+  provider_icon_url?: string;
+  provider_name?: string;
+  text?: DescriptionElement;
+  thumbnail_url?: string;
+  title?: DescriptionElement;
+  title_url?: string;
+  type?: string;
+  url?: string;
+  video_url?: string;
 }
 
-export interface FileElement {
+export interface Metadata {
+  extension?: string;
+  format?: string;
+  original_h?: number;
+  original_w?: number;
+  rotation?: number;
+  thumb_160?: boolean;
+  thumb_360_h?: number;
+  thumb_360_w?: number;
+  thumb_64?: boolean;
+  thumb_80?: boolean;
+  thumb_tiny?: string;
+}
+
+export interface Preview {
+  can_remove?: boolean;
+  icon_url?: string;
+  subtitle?: DescriptionElement;
+  title?: DescriptionElement;
+  type?: string;
+}
+
+export interface TitleBlockElement {
+  accessory?: Accessory;
+  alt_text?: string;
+  api_decoration_available?: boolean;
+  app_collaborators?: string[];
+  app_id?: string;
+  author_name?: string;
+  block_id?: string;
+  bot_user_id?: string;
+  button_label?: string;
+  call?: Call;
+  call_id?: string;
+  description?: DescriptionElement;
+  dispatch_action?: boolean;
+  element?: Accessory;
+  elements?: Accessory[];
+  external_id?: string;
+  fallback?: string;
+  fields?: DescriptionElement[];
+  file?: FluffyFile;
+  file_id?: string;
+  function_trigger_id?: string;
+  hint?: DescriptionElement;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  is_workflow_app?: boolean;
+  label?: DescriptionElement;
+  optional?: boolean;
+  provider_icon_url?: string;
+  provider_name?: string;
+  source?: string;
+  text?: DescriptionElement;
+  thumbnail_url?: string;
+  title?: DescriptionElement;
+  title_url?: string;
+  type?: string;
+  url?: string;
+  video_url?: string;
+}
+
+export interface FluffyFile {
+  access?: string;
   alt_txt?: string;
   app_id?: string;
   app_name?: string;
@@ -559,6 +761,7 @@ export interface FileElement {
   deanimate?: string;
   deanimate_gif?: string;
   display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   duration_ms?: number;
   edit_link?: string;
   editable?: boolean;
@@ -580,12 +783,15 @@ export interface FileElement {
   image_exif_rotation?: number;
   ims?: string[];
   initial_comment?: InitialComment;
+  is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
   is_starred?: boolean;
   last_editor?: string;
+  last_read?: number;
   lines?: number;
   lines_more?: number;
+  linked_channel_id?: string;
   media_display_type?: string;
   media_progress?: MediaProgress;
   mimetype?: string;
@@ -595,6 +801,7 @@ export interface FileElement {
   name?: string;
   non_owner_editable?: boolean;
   num_stars?: number;
+  org_or_workspace_access?: string;
   original_attachment_count?: number;
   original_h?: string;
   original_w?: string;
@@ -608,7 +815,9 @@ export interface FileElement {
   preview_highlight?: string;
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
   public_url_shared?: boolean;
+  quip_thread_id?: string;
   reactions?: Reaction[];
   saved?: Saved;
   sent_to_self?: boolean;
@@ -618,6 +827,7 @@ export interface FileElement {
   source_team?: string;
   subject?: string;
   subtype?: string;
+  teams_shared_with?: any[];
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -664,18 +874,20 @@ export interface FileElement {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
+  title_blocks?: FluffyTitleBlock[];
   to?: Cc[];
   transcription?: Transcription;
   updated?: number;
   url_private?: string;
   url_private_download?: string;
+  url_static_preview?: string;
   user?: string;
   user_team?: string;
   username?: string;
   vtt?: string;
 }
 
-export interface MessageBlock {
+export interface FluffyTitleBlock {
   accessory?: Accessory;
   alt_text?: string;
   app_collaborators?: string[];
@@ -684,10 +896,10 @@ export interface MessageBlock {
   block_id?: string;
   bot_user_id?: string;
   button_label?: string;
-  description?: Description;
+  description?: DescriptionElement | string;
   elements?: Accessory[];
   fallback?: string;
-  fields?: Description[];
+  fields?: DescriptionElement[];
   function_trigger_id?: string;
   image_bytes?: number;
   image_height?: number;
@@ -696,35 +908,13 @@ export interface MessageBlock {
   is_workflow_app?: boolean;
   provider_icon_url?: string;
   provider_name?: string;
-  text?: Description;
+  text?: DescriptionElement;
   thumbnail_url?: string;
-  title?: Description;
+  title?: DescriptionElement | string;
   title_url?: string;
   type?: string;
   url?: string;
   video_url?: string;
-}
-
-export interface Metadata {
-  extension?: string;
-  format?: string;
-  original_h?: number;
-  original_w?: number;
-  rotation?: number;
-  thumb_160?: boolean;
-  thumb_360_h?: number;
-  thumb_360_w?: number;
-  thumb_64?: boolean;
-  thumb_80?: boolean;
-  thumb_tiny?: string;
-}
-
-export interface Preview {
-  can_remove?: boolean;
-  icon_url?: string;
-  subtitle?: Description;
-  title?: Description;
-  type?: string;
 }
 
 export interface BotProfile {
@@ -742,6 +932,189 @@ export interface Icons {
   image_48?: string;
   image_72?: string;
 }
+
+export interface Edited {
+  ts?: string;
+  user?: string;
+}
+
+export interface MessageFile {
+  access?: string;
+  alt_txt?: string;
+  app_id?: string;
+  app_name?: string;
+  bot_id?: string;
+  cc?: Cc[];
+  channel_actions_count?: number;
+  channel_actions_ts?: string;
+  channels?: string[];
+  comments_count?: number;
+  converted_pdf?: string;
+  created?: number;
+  deanimate?: string;
+  deanimate_gif?: string;
+  display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
+  duration_ms?: number;
+  edit_link?: string;
+  editable?: boolean;
+  editor?: string;
+  external_id?: string;
+  external_type?: string;
+  external_url?: string;
+  file_access?: string;
+  filetype?: string;
+  from?: Cc[];
+  groups?: string[];
+  has_more?: boolean;
+  has_more_shares?: boolean;
+  has_rich_preview?: boolean;
+  headers?: Headers;
+  hls?: string;
+  hls_embed?: string;
+  id?: string;
+  image_exif_rotation?: number;
+  ims?: string[];
+  initial_comment?: InitialComment;
+  is_channel_space?: boolean;
+  is_external?: boolean;
+  is_public?: boolean;
+  is_starred?: boolean;
+  last_editor?: string;
+  last_read?: number;
+  lines?: number;
+  lines_more?: number;
+  linked_channel_id?: string;
+  media_display_type?: string;
+  media_progress?: MediaProgress;
+  mimetype?: string;
+  mode?: string;
+  mp4?: string;
+  mp4_low?: string;
+  name?: string;
+  non_owner_editable?: boolean;
+  num_stars?: number;
+  org_or_workspace_access?: string;
+  original_attachment_count?: number;
+  original_h?: string;
+  original_w?: string;
+  permalink?: string;
+  permalink_public?: string;
+  pinned_to?: string[];
+  pjpeg?: string;
+  plain_text?: string;
+  pretty_type?: string;
+  preview?: string;
+  preview_highlight?: string;
+  preview_is_truncated?: boolean;
+  preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
+  public_url_shared?: boolean;
+  quip_thread_id?: string;
+  reactions?: Reaction[];
+  saved?: Saved;
+  sent_to_self?: boolean;
+  shares?: Shares;
+  simplified_html?: string;
+  size?: number;
+  source_team?: string;
+  subject?: string;
+  subtype?: string;
+  teams_shared_with?: string[];
+  thumb_1024?: string;
+  thumb_1024_gif?: string;
+  thumb_1024_h?: string;
+  thumb_1024_w?: string;
+  thumb_160?: string;
+  thumb_160_gif?: string;
+  thumb_160_h?: string;
+  thumb_160_w?: string;
+  thumb_360?: string;
+  thumb_360_gif?: string;
+  thumb_360_h?: string;
+  thumb_360_w?: string;
+  thumb_480?: string;
+  thumb_480_gif?: string;
+  thumb_480_h?: string;
+  thumb_480_w?: string;
+  thumb_64?: string;
+  thumb_64_gif?: string;
+  thumb_64_h?: string;
+  thumb_64_w?: string;
+  thumb_720?: string;
+  thumb_720_gif?: string;
+  thumb_720_h?: string;
+  thumb_720_w?: string;
+  thumb_80?: string;
+  thumb_800?: string;
+  thumb_800_gif?: string;
+  thumb_800_h?: string;
+  thumb_800_w?: string;
+  thumb_80_gif?: string;
+  thumb_80_h?: string;
+  thumb_80_w?: string;
+  thumb_960?: string;
+  thumb_960_gif?: string;
+  thumb_960_h?: string;
+  thumb_960_w?: string;
+  thumb_gif?: string;
+  thumb_pdf?: string;
+  thumb_pdf_h?: string;
+  thumb_pdf_w?: string;
+  thumb_tiny?: string;
+  thumb_video?: string;
+  thumb_video_h?: number;
+  thumb_video_w?: number;
+  timestamp?: number;
+  title?: string;
+  title_blocks?: TitleBlockElement[];
+  to?: Cc[];
+  transcription?: Transcription;
+  updated?: number;
+  url_private?: string;
+  url_private_download?: string;
+  url_static_preview?: string;
+  user?: string;
+  user_team?: string;
+  username?: string;
+  vtt?: string;
+}
+
+export interface Room {
+  app_id?: string;
+  attached_file_ids?: string[];
+  background_id?: string;
+  call_family?: string;
+  canvas_background?: string;
+  canvas_thread_ts?: string;
+  channels?: string[];
+  created_by?: string;
+  date_end?: number;
+  date_start?: number;
+  display_id?: string;
+  external_unique_id?: string;
+  has_ended?: boolean;
+  id?: string;
+  is_dm_call?: boolean;
+  is_prewarmed?: boolean;
+  is_scheduled?: boolean;
+  media_backend_type?: string;
+  media_server?: string;
+  name?: string;
+  participant_history?: string[];
+  participants?: string[];
+  participants_camera_off?: string[];
+  participants_camera_on?: string[];
+  participants_screenshare_off?: string[];
+  participants_screenshare_on?: string[];
+  pending_invitees?: PendingInvitees;
+  thread_root_ts?: string;
+  was_accepted?: boolean;
+  was_missed?: boolean;
+  was_rejected?: boolean;
+}
+
+export interface PendingInvitees {}
 
 export interface Paging {
   count?: number;

@@ -23,6 +23,7 @@ export interface Message {
   bot_id?: string;
   bot_profile?: BotProfile;
   metadata?: Metadata;
+  room?: Room;
   team?: string;
   text?: string;
   type?: string;
@@ -41,30 +42,30 @@ export interface Block {
   button_label?: string;
   call?: Call;
   call_id?: string;
-  description?: Description;
+  description?: DescriptionElement;
   dispatch_action?: boolean;
   element?: Accessory;
   elements?: Accessory[];
   external_id?: string;
   fallback?: string;
-  fields?: Description[];
+  fields?: DescriptionElement[];
   file?: File;
   file_id?: string;
   function_trigger_id?: string;
-  hint?: Description;
+  hint?: DescriptionElement;
   image_bytes?: number;
   image_height?: number;
   image_url?: string;
   image_width?: number;
   is_workflow_app?: boolean;
-  label?: Description;
+  label?: DescriptionElement;
   optional?: boolean;
   provider_icon_url?: string;
   provider_name?: string;
   source?: string;
-  text?: Description;
+  text?: DescriptionElement;
   thumbnail_url?: string;
-  title?: Description;
+  title?: DescriptionElement;
   title_url?: string;
   type?: string;
   url?: string;
@@ -103,10 +104,10 @@ export interface Accessory {
   offset?: number;
   option_groups?: OptionGroup[];
   options?: Option[];
-  placeholder?: Description;
+  placeholder?: DescriptionElement;
   response_url_enabled?: boolean;
   style?: string;
-  text?: Description;
+  text?: DescriptionElement;
   timezone?: string;
   type?: string;
   url?: string;
@@ -114,18 +115,24 @@ export interface Accessory {
 }
 
 export interface Confirm {
-  confirm?: Description;
-  deny?: Description;
+  confirm?: DescriptionElement;
+  deny?: DescriptionElement;
   style?: string;
-  text?: Description;
-  title?: Description;
+  text?: DescriptionElement;
+  title?: DescriptionElement;
 }
 
-export interface Description {
+export interface DescriptionElement {
   emoji?: boolean;
   text?: string;
-  type?: string;
+  type?: DescriptionType;
   verbatim?: boolean;
+}
+
+export enum DescriptionType {
+  Empty = "",
+  Mrkdwn = "mrkdwn",
+  PlainText = "plain_text",
 }
 
 export interface AccessoryElement {
@@ -146,7 +153,7 @@ export interface PurpleElement {
   team_id?: string;
   text?: string;
   timestamp?: string;
-  type?: string;
+  type?: ElementType;
   unicode?: string;
   url?: string;
   user_id?: string;
@@ -161,6 +168,20 @@ export interface Style {
   strike?: boolean;
 }
 
+export enum ElementType {
+  Broadcast = "broadcast",
+  Channel = "channel",
+  Color = "color",
+  Date = "date",
+  Emoji = "emoji",
+  Empty = "",
+  Link = "link",
+  Team = "team",
+  Text = "text",
+  User = "user",
+  Usergroup = "usergroup",
+}
+
 export interface Filter {
   exclude_bot_users?: boolean;
   exclude_external_shared_channels?: boolean;
@@ -168,14 +189,14 @@ export interface Filter {
 }
 
 export interface Option {
-  description?: Description;
-  text?: Description;
+  description?: DescriptionElement;
+  text?: DescriptionElement;
   url?: string;
   value?: string;
 }
 
 export interface OptionGroup {
-  label?: Description;
+  label?: DescriptionElement;
   options?: Option[];
 }
 
@@ -227,6 +248,7 @@ export interface AppIconUrls {
 }
 
 export interface File {
+  access?: string;
   alt_txt?: string;
   app_id?: string;
   app_name?: string;
@@ -241,6 +263,7 @@ export interface File {
   deanimate?: string;
   deanimate_gif?: string;
   display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   duration_ms?: number;
   edit_link?: string;
   editable?: boolean;
@@ -262,12 +285,15 @@ export interface File {
   image_exif_rotation?: number;
   ims?: string[];
   initial_comment?: InitialComment;
+  is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
   is_starred?: boolean;
   last_editor?: string;
+  last_read?: number;
   lines?: number;
   lines_more?: number;
+  linked_channel_id?: string;
   media_display_type?: string;
   media_progress?: MediaProgress;
   mimetype?: string;
@@ -277,6 +303,7 @@ export interface File {
   name?: string;
   non_owner_editable?: boolean;
   num_stars?: number;
+  org_or_workspace_access?: string;
   original_attachment_count?: number;
   original_h?: string;
   original_w?: string;
@@ -290,7 +317,9 @@ export interface File {
   preview_highlight?: string;
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
   public_url_shared?: boolean;
+  quip_thread_id?: string;
   reactions?: Reaction[];
   saved?: Saved;
   sent_to_self?: boolean;
@@ -300,6 +329,7 @@ export interface File {
   source_team?: string;
   subject?: string;
   subtype?: string;
+  teams_shared_with?: any[];
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -346,11 +376,13 @@ export interface File {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
+  title_blocks?: TitleBlock[];
   to?: Cc[];
   transcription?: Transcription;
   updated?: number;
   url_private?: string;
   url_private_download?: string;
+  url_static_preview?: string;
   user?: string;
   user_team?: string;
   username?: string;
@@ -361,6 +393,11 @@ export interface Cc {
   address?: string;
   name?: string;
   original?: string;
+}
+
+export interface DmMpdmUsersWithFileAccess {
+  access?: string;
+  user_id?: string;
 }
 
 export interface Headers {
@@ -417,6 +454,36 @@ export interface Private {
   ts?: string;
 }
 
+export interface TitleBlock {
+  accessory?: Accessory;
+  alt_text?: string;
+  app_collaborators?: string[];
+  app_id?: string;
+  author_name?: string;
+  block_id?: string;
+  bot_user_id?: string;
+  button_label?: string;
+  description?: DescriptionElement | string;
+  elements?: Accessory[];
+  fallback?: string;
+  fields?: DescriptionElement[];
+  function_trigger_id?: string;
+  image_bytes?: number;
+  image_height?: number;
+  image_url?: string;
+  image_width?: number;
+  is_workflow_app?: boolean;
+  provider_icon_url?: string;
+  provider_name?: string;
+  text?: DescriptionElement;
+  thumbnail_url?: string;
+  title?: DescriptionElement | string;
+  title_url?: string;
+  type?: string;
+  url?: string;
+  video_url?: string;
+}
+
 export interface Transcription {
   locale?: string;
   status?: string;
@@ -444,6 +511,40 @@ export interface Metadata {
 }
 
 export interface EventPayload {}
+
+export interface Room {
+  app_id?: string;
+  attached_file_ids?: string[];
+  background_id?: string;
+  call_family?: string;
+  canvas_background?: string;
+  canvas_thread_ts?: string;
+  channels?: string[];
+  created_by?: string;
+  date_end?: number;
+  date_start?: number;
+  display_id?: string;
+  external_unique_id?: string;
+  has_ended?: boolean;
+  id?: string;
+  is_dm_call?: boolean;
+  is_prewarmed?: boolean;
+  is_scheduled?: boolean;
+  media_backend_type?: string;
+  media_server?: string;
+  name?: string;
+  participant_history?: string[];
+  participants?: string[];
+  participants_camera_off?: string[];
+  participants_camera_on?: string[];
+  participants_screenshare_off?: string[];
+  participants_screenshare_on?: string[];
+  pending_invitees?: any;
+  thread_root_ts?: string;
+  was_accepted?: boolean;
+  was_missed?: boolean;
+  was_rejected?: boolean;
+}
 
 export interface ResponseMetadata {
   messages?: string[];
