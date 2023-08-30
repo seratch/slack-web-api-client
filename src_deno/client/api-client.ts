@@ -1265,16 +1265,14 @@ export class SlackAPIClient {
   };
 
   public readonly functions = {
-    complete: {
-      success: this.bindApiCall<
-        FunctionsCompleteSuccessRequest,
-        FunctionsCompleteSuccessResponse
-      >(this, "functions.completeSuccess"),
-      error: this.bindApiCall<
-        FunctionsCompleteErrorRequest,
-        FunctionsCompleteErrorResponse
-      >(this, "functions.completeError"),
-    },
+    completeSuccess: this.bindApiCall<
+      FunctionsCompleteSuccessRequest,
+      FunctionsCompleteSuccessResponse
+    >(this, "functions.completeSuccess"),
+    completeError: this.bindApiCall<
+      FunctionsCompleteErrorRequest,
+      FunctionsCompleteErrorResponse
+    >(this, "functions.completeError"),
   };
 
   public readonly migration = {
