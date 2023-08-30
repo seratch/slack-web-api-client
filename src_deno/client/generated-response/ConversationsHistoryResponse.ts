@@ -498,7 +498,6 @@ export interface BlockFile {
   thumb_pdf_w?: string;
   thumb_tiny?: string;
   thumb_video?: string;
-  thumb_video_h?: number;
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;

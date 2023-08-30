@@ -1269,11 +1269,11 @@ export class SlackAPIClient {
       success: this.bindApiCall<
         FunctionsCompleteSuccessRequest,
         FunctionsCompleteSuccessResponse
-      >(this, "functions.complete.success"),
+      >(this, "functions.completeSuccess"),
       error: this.bindApiCall<
         FunctionsCompleteErrorRequest,
         FunctionsCompleteErrorResponse
-      >(this, "functions.complete.error"),
+      >(this, "functions.completeError"),
     },
   };
 
