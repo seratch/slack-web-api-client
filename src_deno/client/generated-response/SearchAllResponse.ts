@@ -288,6 +288,7 @@ export interface Accessory {
   type?: AccessoryType;
   url?: string;
   value?: string;
+  workflow?: Workflow;
 }
 
 export interface AccessoryConfirm {
@@ -382,6 +383,7 @@ export enum AccessoryType {
   StaticSelect = "static_select",
   Timepicker = "timepicker",
   UsersSelect = "users_select",
+  WorkflowButton = "workflow_button",
 }
 
 export interface Filter {
@@ -400,6 +402,20 @@ export interface InitialOptionElement {
 export interface AccessoryOptionGroup {
   label?: DescriptionElement;
   options?: InitialOptionElement[];
+}
+
+export interface Workflow {
+  trigger?: Trigger;
+}
+
+export interface Trigger {
+  customizable_input_parameters?: CustomizableInputParameter[];
+  url?: string;
+}
+
+export interface CustomizableInputParameter {
+  name?: string;
+  value?: string;
 }
 
 export interface Call {

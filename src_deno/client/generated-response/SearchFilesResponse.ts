@@ -286,6 +286,7 @@ export interface Accessory {
   type?: string;
   url?: string;
   value?: string;
+  workflow?: Workflow;
 }
 
 export interface AccessoryConfirm {
@@ -380,6 +381,20 @@ export interface InitialOptionElement {
 export interface AccessoryOptionGroup {
   label?: Subtitle;
   options?: InitialOptionElement[];
+}
+
+export interface Workflow {
+  trigger?: Trigger;
+}
+
+export interface Trigger {
+  customizable_input_parameters?: CustomizableInputParameter[];
+  url?: string;
+}
+
+export interface CustomizableInputParameter {
+  name?: string;
+  value?: string;
 }
 
 export interface Call {
@@ -554,6 +569,7 @@ export interface BlockFile {
   thumb_pdf_w?: string;
   thumb_tiny?: string;
   thumb_video?: string;
+  thumb_video_h?: number;
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;

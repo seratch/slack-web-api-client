@@ -302,6 +302,7 @@ export interface Accessory {
   type?: string;
   url?: string;
   value?: string;
+  workflow?: Workflow;
 }
 
 export interface Confirm {
@@ -396,6 +397,20 @@ export interface Option {
 export interface OptionGroup {
   label?: DescriptionElement;
   options?: Option[];
+}
+
+export interface Workflow {
+  trigger?: Trigger;
+}
+
+export interface Trigger {
+  customizable_input_parameters?: CustomizableInputParameter[];
+  url?: string;
+}
+
+export interface CustomizableInputParameter {
+  name?: string;
+  value?: string;
 }
 
 export interface Call {
