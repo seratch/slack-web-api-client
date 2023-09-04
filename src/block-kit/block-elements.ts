@@ -1,6 +1,7 @@
 import type { Confirm } from "./confirm";
 import type { AnyOption, PlainTextOption } from "./options";
 import type { PlainTextField } from "./text-fields";
+import type { Workflow } from "./workflows";
 
 // -----------------------------
 // Basic types
@@ -24,6 +25,7 @@ export type AnyActionBlockElementType =
   | "external_select"
   | "multi_external_select"
   | "button"
+  | "workflow_button"
   | "overflow"
   | "datepicker"
   | "timepicker"
@@ -63,6 +65,9 @@ export declare type AnyBlockElement =
   | URLInput
   | EmailInput
   | NumberInput
+  | Button
+  | WorkflowButton
+  | Overflow
   | RadioButtons
   | Checkboxes;
 
@@ -225,6 +230,13 @@ export interface Button extends ActionBlockElement<"button">, Confirmable {
   text: PlainTextField;
   value?: string;
   url?: string;
+  style?: "danger" | "primary";
+  accessibility_label?: string;
+}
+export interface WorkflowButton extends ActionBlockElement<"workflow_button"> {
+  type: "workflow_button";
+  text: PlainTextField;
+  workflow: Workflow;
   style?: "danger" | "primary";
   accessibility_label?: string;
 }
