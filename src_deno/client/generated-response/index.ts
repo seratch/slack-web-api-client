@@ -1,6 +1,9 @@
+export type { AdminAppsActivitiesListResponse } from "./AdminAppsActivitiesListResponse.ts";
 export type { AdminAppsApproveResponse } from "./AdminAppsApproveResponse.ts";
 export type { AdminAppsApprovedListResponse } from "./AdminAppsApprovedListResponse.ts";
 export type { AdminAppsClearResolutionResponse } from "./AdminAppsClearResolutionResponse.ts";
+export type { AdminAppsConfigLookupResponse } from "./AdminAppsConfigLookupResponse.ts";
+export type { AdminAppsConfigSetResponse } from "./AdminAppsConfigSetResponse.ts";
 export type { AdminAppsRequestsCancelResponse } from "./AdminAppsRequestsCancelResponse.ts";
 export type { AdminAppsRequestsListResponse } from "./AdminAppsRequestsListResponse.ts";
 export type { AdminAppsRestrictResponse } from "./AdminAppsRestrictResponse.ts";
@@ -46,6 +49,9 @@ export type { AdminEmojiAddAliasResponse } from "./AdminEmojiAddAliasResponse.ts
 export type { AdminEmojiListResponse } from "./AdminEmojiListResponse.ts";
 export type { AdminEmojiRemoveResponse } from "./AdminEmojiRemoveResponse.ts";
 export type { AdminEmojiRenameResponse } from "./AdminEmojiRenameResponse.ts";
+export type { AdminFunctionsListResponse } from "./AdminFunctionsListResponse.ts";
+export type { AdminFunctionsPermissionsLookupResponse } from "./AdminFunctionsPermissionsLookupResponse.ts";
+export type { AdminFunctionsPermissionsSetResponse } from "./AdminFunctionsPermissionsSetResponse.ts";
 export type { AdminInviteRequestsApproveResponse } from "./AdminInviteRequestsApproveResponse.ts";
 export type { AdminInviteRequestsApprovedListResponse } from "./AdminInviteRequestsApprovedListResponse.ts";
 export type { AdminInviteRequestsDeniedListResponse } from "./AdminInviteRequestsDeniedListResponse.ts";
@@ -84,6 +90,11 @@ export type { AdminUsersSetExpirationResponse } from "./AdminUsersSetExpirationR
 export type { AdminUsersSetOwnerResponse } from "./AdminUsersSetOwnerResponse.ts";
 export type { AdminUsersSetRegularResponse } from "./AdminUsersSetRegularResponse.ts";
 export type { AdminUsersUnsupportedVersionsExportResponse } from "./AdminUsersUnsupportedVersionsExportResponse.ts";
+export type { AdminWorkflowsCollaboratorsAddResponse } from "./AdminWorkflowsCollaboratorsAddResponse.ts";
+export type { AdminWorkflowsCollaboratorsRemoveResponse } from "./AdminWorkflowsCollaboratorsRemoveResponse.ts";
+export type { AdminWorkflowsPermissionsLookupResponse } from "./AdminWorkflowsPermissionsLookupResponse.ts";
+export type { AdminWorkflowsSearchResponse } from "./AdminWorkflowsSearchResponse.ts";
+export type { AdminWorkflowsUnpublishResponse } from "./AdminWorkflowsUnpublishResponse.ts";
 export type { ApiTestResponse } from "./ApiTestResponse.ts";
 export type { AppsConnectionsOpenResponse } from "./AppsConnectionsOpenResponse.ts";
 export type { AppsEventAuthorizationsListResponse } from "./AppsEventAuthorizationsListResponse.ts";

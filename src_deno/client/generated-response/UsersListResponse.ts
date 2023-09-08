@@ -5,6 +5,7 @@
 
 import { SlackAPIResponse } from "../response.ts";
 export type UsersListResponse = SlackAPIResponse & {
+  arg?: string;
   cache_ts?: number;
   error?: string;
   members?: Member[];

@@ -1,6 +1,7 @@
 import { SlackAPIError } from "../errors";
 import type {
   APITestRequest,
+  AdminAppsActivitiesListRequest,
   AdminAppsApproveRequest,
   AdminAppsApprovedListRequest,
   AdminAppsClearResolutionRequest,
@@ -46,6 +47,9 @@ import type {
   AdminEmojiListRequest,
   AdminEmojiRemoveRequest,
   AdminEmojiRenameRequest,
+  AdminFunctionsListRequest,
+  AdminFunctionsPermissionsLookupRequest,
+  AdminFunctionsPermissionsSetRequest,
   AdminInviteRequestsApproveRequest,
   AdminInviteRequestsApprovedListRequest,
   AdminInviteRequestsDeniedListRequest,
@@ -84,6 +88,11 @@ import type {
   AdminUsersSetOwnerRequest,
   AdminUsersSetRegularRequest,
   AdminUsersUnsupportedVersionsExportRequest,
+  AdminWorkflowsCollaboratorsAddRequest,
+  AdminWorkflowsCollaboratorsRemoveRequest,
+  AdminWorkflowsPermissionsLookupRequest,
+  AdminWorkflowsSearchRequest,
+  AdminWorkflowsUnpublishRequest,
   AppsConnectionsOpenRequest,
   AppsDatastoreDeleteRequest,
   AppsDatastoreGetRequest,
@@ -414,6 +423,15 @@ import type {
   AdminRolesAddAssignmentsResponse,
   AdminRolesListAssignmentsResponse,
   AdminRolesRemoveAssignmentsResponse,
+  AdminAppsActivitiesListResponse,
+  AdminFunctionsListResponse,
+  AdminFunctionsPermissionsLookupResponse,
+  AdminFunctionsPermissionsSetResponse,
+  AdminWorkflowsSearchResponse,
+  AdminWorkflowsUnpublishResponse,
+  AdminWorkflowsPermissionsLookupResponse,
+  AdminWorkflowsCollaboratorsAddResponse,
+  AdminWorkflowsCollaboratorsRemoveResponse,
 } from "./generated-response/index";
 
 import type { SlackAPIResponse } from "./response";
@@ -605,6 +623,12 @@ export class SlackAPIClient {
         AdminAppsUninstallRequest,
         AdminAppsUninstallResponse
       >(this, "admin.apps.uninstall"),
+      activities: {
+        list: this.bindApiCall<
+          AdminAppsActivitiesListRequest,
+          AdminAppsActivitiesListResponse
+        >(this, "admin.apps.activities.list"),
+      },
     },
     auth: {
       policy: {
@@ -767,6 +791,22 @@ export class SlackAPIClient {
         AdminEmojiRenameRequest,
         AdminEmojiRenameResponse
       >(this, "admin.emoji.rename"),
+    },
+    functions: {
+      list: this.bindApiCall<
+        AdminFunctionsListRequest,
+        AdminFunctionsListResponse
+      >(this, "admin.functions.list"),
+      permissions: {
+        lookup: this.bindApiCall<
+          AdminFunctionsPermissionsLookupRequest,
+          AdminFunctionsPermissionsLookupResponse
+        >(this, "admin.functions.permissions.lookup"),
+        set: this.bindApiCall<
+          AdminFunctionsPermissionsSetRequest,
+          AdminFunctionsPermissionsSetResponse
+        >(this, "admin.functions.permissions.set"),
+      },
     },
     inviteRequests: {
       approve: this.bindApiCall<
@@ -943,6 +983,32 @@ export class SlackAPIClient {
         AdminUsersSetRegularRequest,
         AdminUsersSetRegularResponse
       >(this, "admin.users.setRegular"),
+    },
+    workflows: {
+      search: this.bindApiCall<
+        AdminWorkflowsSearchRequest,
+        AdminWorkflowsSearchResponse
+      >(this, "admin.workflows.search"),
+      unpublish: this.bindApiCall<
+        AdminWorkflowsUnpublishRequest,
+        AdminWorkflowsUnpublishResponse
+      >(this, "admin.workflows.unpublish"),
+      collaborators: {
+        add: this.bindApiCall<
+          AdminWorkflowsCollaboratorsAddRequest,
+          AdminWorkflowsCollaboratorsAddResponse
+        >(this, "admin.workflows.collaborators.add"),
+        remove: this.bindApiCall<
+          AdminWorkflowsCollaboratorsRemoveRequest,
+          AdminWorkflowsCollaboratorsRemoveResponse
+        >(this, "admin.workflows.collaborators.remove"),
+      },
+      permissions: {
+        lookup: this.bindApiCall<
+          AdminWorkflowsPermissionsLookupRequest,
+          AdminWorkflowsPermissionsLookupResponse
+        >(this, "admin.workflows.permissions.lookup"),
+      },
     },
   };
 

@@ -95,6 +95,27 @@ export interface AdminAppsUninstallRequest extends SlackAPIRequest {
   enterprise_id?: string;
   team_ids?: string[];
 }
+export interface AdminAppsActivitiesListRequest extends SlackAPIRequest, CursorPaginationEnabled {
+  app_id?: string;
+  component_id?: string;
+  component_type?: string;
+  log_event_type?: string;
+  max_date_created?: number;
+  min_date_created?: number;
+  min_log_level?: string;
+  sort_direction?: string;
+  source?: string;
+  team_id?: string;
+  trace_id?: string;
+}
+export interface AdminAppsConfigLookupRequest extends SlackAPIRequest {
+  app_ids: string[];
+}
+export interface AdminAppsConfigSetRequest extends SlackAPIRequest {
+  app_id: string;
+  domain_restrictions?: Record<string, unknown>;
+  workflow_auth_strategy?: string;
+}
 export interface AdminAuthPolicyAssignEntitiesRequest extends SlackAPIRequest {
   entity_ids: string[];
   entity_type: string;
@@ -268,6 +289,19 @@ export interface AdminEmojiRemoveRequest extends SlackAPIRequest {
 export interface AdminEmojiRenameRequest extends SlackAPIRequest {
   name: string;
   new_name: string;
+}
+export interface AdminFunctionsListRequest extends SlackAPIRequest, CursorPaginationEnabled {
+  app_ids: string[];
+  team_id?: string;
+}
+export interface AdminFunctionsPermissionsLookupRequest
+  extends SlackAPIRequest {
+    function_ids: string[];
+  }
+export interface AdminFunctionsPermissionsSetRequest extends SlackAPIRequest {
+  function_id: string;
+  visibility: string;
+  user_ids?: string[];
 }
 export interface AdminInviteRequestsApproveRequest extends SlackAPIRequest {
   invite_request_id: string;
@@ -453,6 +487,35 @@ export interface AdminUsersUnsupportedVersionsExportRequest
   extends SlackAPIRequest {
   date_end_of_support?: number;
   date_sessions_started?: number;
+}
+
+export interface AdminWorkflowsCollaboratorsAddRequest
+  extends SlackAPIRequest {
+    collaborator_ids: string[];
+    workflow_ids: string[];
+  }
+export interface AdminWorkflowsCollaboratorsRemoveRequest
+  extends SlackAPIRequest {
+    collaborator_ids: string[];
+    workflow_ids: string[];
+  }
+export interface AdminWorkflowsPermissionsLookupRequest
+  extends SlackAPIRequest {
+    workflow_ids: string[];
+    max_workflow_triggers?: number;
+  }
+export interface AdminWorkflowsSearchRequest extends SlackAPIRequest, CursorPaginationEnabled {
+  app_id?: string;
+  collaborator_ids?: string[];
+  no_collaborators?: boolean;
+  num_trigger_ids?: number;
+  query?: string;
+  sort?: string;
+  sort_dir?: string;
+  source?: string;
+}
+export interface AdminWorkflowsUnpublishRequest extends SlackAPIRequest {
+  workflow_ids: string[];
 }
 
 /*

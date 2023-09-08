@@ -31,15 +31,15 @@ export interface Message {
   edited?: Edited;
   files?: FileElement[];
   icons?: MessageIcons;
-  inviter?: string;
+  inviter?: Inviter;
   is_locked?: boolean;
   latest_reply?: string;
   metadata?: MessageMetadata;
-  parent_user_id?: string;
+  parent_user_id?: Inviter;
   purpose?: string;
   reactions?: Reaction[];
   reply_count?: number;
-  reply_users?: string[];
+  reply_users?: Inviter[];
   reply_users_count?: number;
   root?: Root;
   subscribed?: boolean;
@@ -51,7 +51,7 @@ export interface Message {
   ts?: string;
   type?: string;
   upload?: boolean;
-  user?: string;
+  user?: Inviter;
   username?: string;
   x_files?: string[];
 }
@@ -568,7 +568,12 @@ export interface Reaction {
   count?: number;
   name?: string;
   url?: string;
-  users?: string[];
+  users?: Inviter[];
+}
+
+export enum Inviter {
+  Empty = "",
+  U00000000 = "U00000000",
 }
 
 export interface Saved {
@@ -881,9 +886,9 @@ export interface Root {
   bot_id?: string;
   icons?: RootIcons;
   latest_reply?: string;
-  parent_user_id?: string;
+  parent_user_id?: Inviter;
   reply_count?: number;
-  reply_users?: string[];
+  reply_users?: Inviter[];
   reply_users_count?: number;
   subscribed?: boolean;
   subtype?: string;

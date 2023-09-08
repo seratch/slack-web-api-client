@@ -1,5 +1,6 @@
 import { SlackAPIError } from "../errors.ts";
 import type {
+  AdminAppsActivitiesListRequest,
   AdminAppsApprovedListRequest,
   AdminAppsApproveRequest,
   AdminAppsClearResolutionRequest,
@@ -45,6 +46,9 @@ import type {
   AdminEmojiListRequest,
   AdminEmojiRemoveRequest,
   AdminEmojiRenameRequest,
+  AdminFunctionsListRequest,
+  AdminFunctionsPermissionsLookupRequest,
+  AdminFunctionsPermissionsSetRequest,
   AdminInviteRequestsApprovedListRequest,
   AdminInviteRequestsApproveRequest,
   AdminInviteRequestsDeniedListRequest,
@@ -83,6 +87,11 @@ import type {
   AdminUsersSetOwnerRequest,
   AdminUsersSetRegularRequest,
   AdminUsersUnsupportedVersionsExportRequest,
+  AdminWorkflowsCollaboratorsAddRequest,
+  AdminWorkflowsCollaboratorsRemoveRequest,
+  AdminWorkflowsPermissionsLookupRequest,
+  AdminWorkflowsSearchRequest,
+  AdminWorkflowsUnpublishRequest,
   APITestRequest,
   AppsConnectionsOpenRequest,
   AppsDatastoreDeleteRequest,
@@ -214,6 +223,7 @@ import type {
   WorkflowsTriggersUpdateRequest,
 } from "./request.ts";
 import type {
+  AdminAppsActivitiesListResponse,
   AdminAppsApprovedListResponse,
   AdminAppsApproveResponse,
   AdminAppsClearResolutionResponse,
@@ -259,6 +269,9 @@ import type {
   AdminEmojiListResponse,
   AdminEmojiRemoveResponse,
   AdminEmojiRenameResponse,
+  AdminFunctionsListResponse,
+  AdminFunctionsPermissionsLookupResponse,
+  AdminFunctionsPermissionsSetResponse,
   AdminInviteRequestsApprovedListResponse,
   AdminInviteRequestsApproveResponse,
   AdminInviteRequestsDeniedListResponse,
@@ -297,6 +310,11 @@ import type {
   AdminUsersSetOwnerResponse,
   AdminUsersSetRegularResponse,
   AdminUsersUnsupportedVersionsExportResponse,
+  AdminWorkflowsCollaboratorsAddResponse,
+  AdminWorkflowsCollaboratorsRemoveResponse,
+  AdminWorkflowsPermissionsLookupResponse,
+  AdminWorkflowsSearchResponse,
+  AdminWorkflowsUnpublishResponse,
   ApiTestResponse,
   AppsConnectionsOpenResponse,
   AppsEventAuthorizationsListResponse,
@@ -605,6 +623,12 @@ export class SlackAPIClient {
         AdminAppsUninstallRequest,
         AdminAppsUninstallResponse
       >(this, "admin.apps.uninstall"),
+      activities: {
+        list: this.bindApiCall<
+          AdminAppsActivitiesListRequest,
+          AdminAppsActivitiesListResponse
+        >(this, "admin.apps.activities.list"),
+      },
     },
     auth: {
       policy: {
@@ -767,6 +791,22 @@ export class SlackAPIClient {
         AdminEmojiRenameRequest,
         AdminEmojiRenameResponse
       >(this, "admin.emoji.rename"),
+    },
+    functions: {
+      list: this.bindApiCall<
+        AdminFunctionsListRequest,
+        AdminFunctionsListResponse
+      >(this, "admin.functions.list"),
+      permissions: {
+        lookup: this.bindApiCall<
+          AdminFunctionsPermissionsLookupRequest,
+          AdminFunctionsPermissionsLookupResponse
+        >(this, "admin.functions.permissions.lookup"),
+        set: this.bindApiCall<
+          AdminFunctionsPermissionsSetRequest,
+          AdminFunctionsPermissionsSetResponse
+        >(this, "admin.functions.permissions.set"),
+      },
     },
     inviteRequests: {
       approve: this.bindApiCall<
@@ -943,6 +983,32 @@ export class SlackAPIClient {
         AdminUsersSetRegularRequest,
         AdminUsersSetRegularResponse
       >(this, "admin.users.setRegular"),
+    },
+    workflows: {
+      search: this.bindApiCall<
+        AdminWorkflowsSearchRequest,
+        AdminWorkflowsSearchResponse
+      >(this, "admin.workflows.search"),
+      unpublish: this.bindApiCall<
+        AdminWorkflowsUnpublishRequest,
+        AdminWorkflowsUnpublishResponse
+      >(this, "admin.workflows.unpublish"),
+      collaborators: {
+        add: this.bindApiCall<
+          AdminWorkflowsCollaboratorsAddRequest,
+          AdminWorkflowsCollaboratorsAddResponse
+        >(this, "admin.workflows.collaborators.add"),
+        remove: this.bindApiCall<
+          AdminWorkflowsCollaboratorsRemoveRequest,
+          AdminWorkflowsCollaboratorsRemoveResponse
+        >(this, "admin.workflows.collaborators.remove"),
+      },
+      permissions: {
+        lookup: this.bindApiCall<
+          AdminWorkflowsPermissionsLookupRequest,
+          AdminWorkflowsPermissionsLookupResponse
+        >(this, "admin.workflows.permissions.lookup"),
+      },
     },
   };
 

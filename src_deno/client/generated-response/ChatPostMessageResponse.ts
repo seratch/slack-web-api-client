@@ -242,10 +242,13 @@ export interface AccessoryElement {
   border?: number;
   elements?: PurpleElement[];
   indent?: number;
+  name?: string;
   offset?: number;
   style?: string;
   text?: string;
   type?: FluffyType;
+  unicode?: string;
+  url?: string;
 }
 
 export interface PurpleElement {

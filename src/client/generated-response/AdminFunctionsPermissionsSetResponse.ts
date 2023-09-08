@@ -4,7 +4,7 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response";
-export type AdminAppsRequestsCancelResponse = SlackAPIResponse & {
+export type AdminFunctionsPermissionsSetResponse = SlackAPIResponse & {
   error?: string;
   needed?: string;
   ok: boolean;

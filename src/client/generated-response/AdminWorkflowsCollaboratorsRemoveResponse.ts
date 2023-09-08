@@ -4,14 +4,16 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response";
-export type AdminAppsRequestsCancelResponse = SlackAPIResponse & {
+export type AdminWorkflowsCollaboratorsRemoveResponse = SlackAPIResponse & {
   error?: string;
+  errors?: Error[];
   needed?: string;
   ok: boolean;
   provided?: string;
-  response_metadata?: ResponseMetadata;
 };
 
-export interface ResponseMetadata {
-  messages?: string[];
+export interface Error {
+  message?: string;
+  user?: string;
+  workflow?: string;
 }
