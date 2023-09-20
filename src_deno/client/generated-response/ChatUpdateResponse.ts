@@ -5,6 +5,7 @@
 
 import { SlackAPIResponse } from "../response.ts";
 import { AnyMessageBlock } from "../../block-kit/blocks.ts";
+import { MessageAttachment } from "../../block-kit/message-attachment.ts";
 export type ChatUpdateResponse = SlackAPIResponse & {
   channel?: string;
   error?: string;
@@ -136,7 +137,6 @@ export interface DescriptionElement {
 }
 
 export enum DescriptionType {
-  Empty = "",
   Mrkdwn = "mrkdwn",
   PlainText = "plain_text",
 }
@@ -180,7 +180,6 @@ export enum PurpleType {
   Color = "color",
   Date = "date",
   Emoji = "emoji",
-  Empty = "",
   Link = "link",
   Team = "team",
   Text = "text",
@@ -189,7 +188,6 @@ export enum PurpleType {
 }
 
 export enum FluffyType {
-  Empty = "",
   RichTextList = "rich_text_list",
   RichTextPreformatted = "rich_text_preformatted",
   RichTextQuote = "rich_text_quote",
@@ -199,7 +197,7 @@ export enum FluffyType {
 export interface Filter {
   exclude_bot_users?: boolean;
   exclude_external_shared_channels?: boolean;
-  include?: string[];
+  include?: any[];
 }
 
 export interface Option {
@@ -276,6 +274,208 @@ export interface AppIconUrls {
 }
 
 export interface BlockFile {
+  access?: string;
+  alt_txt?: string;
+  app_id?: string;
+  app_name?: string;
+  attachments?: MessageAttachment[];
+  blocks?: AnyMessageBlock[];
+  bot_id?: string;
+  cc?: any[];
+  channel_actions_count?: number;
+  channel_actions_ts?: string;
+  channels?: any[];
+  comments_count?: number;
+  converted_pdf?: string;
+  created?: number;
+  deanimate?: string;
+  deanimate_gif?: string;
+  display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: any[];
+  duration_ms?: number;
+  edit_link?: string;
+  editable?: boolean;
+  editor?: string;
+  external_id?: string;
+  external_type?: string;
+  external_url?: string;
+  file_access?: string;
+  filetype?: string;
+  from?: any[];
+  groups?: any[];
+  has_more?: boolean;
+  has_more_shares?: boolean;
+  has_rich_preview?: boolean;
+  headers?: Headers;
+  hls?: string;
+  hls_embed?: string;
+  id?: string;
+  image_exif_rotation?: number;
+  ims?: any[];
+  initial_comment?: InitialComment;
+  is_channel_space?: boolean;
+  is_external?: boolean;
+  is_public?: boolean;
+  is_starred?: boolean;
+  last_editor?: string;
+  last_read?: number;
+  lines?: number;
+  lines_more?: number;
+  linked_channel_id?: string;
+  media_display_type?: string;
+  media_progress?: MediaProgress;
+  mimetype?: string;
+  mode?: string;
+  mp4?: string;
+  mp4_low?: string;
+  name?: string;
+  non_owner_editable?: boolean;
+  num_stars?: number;
+  org_or_workspace_access?: string;
+  original_attachment_count?: number;
+  original_h?: string;
+  original_w?: string;
+  permalink?: string;
+  permalink_public?: string;
+  pinned_to?: any[];
+  pjpeg?: string;
+  plain_text?: string;
+  pretty_type?: string;
+  preview?: string;
+  preview_highlight?: string;
+  preview_is_truncated?: boolean;
+  preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
+  public_url_shared?: boolean;
+  quip_thread_id?: string;
+  reactions?: any[];
+  saved?: Saved;
+  sent_to_self?: boolean;
+  shares?: any;
+  simplified_html?: string;
+  size?: number;
+  source_team?: string;
+  subject?: string;
+  subtype?: string;
+  teams_shared_with?: any[];
+  thumb_1024?: string;
+  thumb_1024_gif?: string;
+  thumb_1024_h?: string;
+  thumb_1024_w?: string;
+  thumb_160?: string;
+  thumb_160_gif?: string;
+  thumb_160_h?: string;
+  thumb_160_w?: string;
+  thumb_360?: string;
+  thumb_360_gif?: string;
+  thumb_360_h?: string;
+  thumb_360_w?: string;
+  thumb_480?: string;
+  thumb_480_gif?: string;
+  thumb_480_h?: string;
+  thumb_480_w?: string;
+  thumb_64?: string;
+  thumb_64_gif?: string;
+  thumb_64_h?: string;
+  thumb_64_w?: string;
+  thumb_720?: string;
+  thumb_720_gif?: string;
+  thumb_720_h?: string;
+  thumb_720_w?: string;
+  thumb_80?: string;
+  thumb_800?: string;
+  thumb_800_gif?: string;
+  thumb_800_h?: string;
+  thumb_800_w?: string;
+  thumb_80_gif?: string;
+  thumb_80_h?: string;
+  thumb_80_w?: string;
+  thumb_960?: string;
+  thumb_960_gif?: string;
+  thumb_960_h?: string;
+  thumb_960_w?: string;
+  thumb_gif?: string;
+  thumb_pdf?: string;
+  thumb_pdf_h?: string;
+  thumb_pdf_w?: string;
+  thumb_tiny?: string;
+  thumb_video?: string;
+  thumb_video_h?: number;
+  thumb_video_w?: number;
+  timestamp?: number;
+  title?: string;
+  title_blocks?: any[];
+  to?: any[];
+  transcription?: Transcription;
+  updated?: number;
+  url_private?: string;
+  url_private_download?: string;
+  url_static_preview?: string;
+  user?: string;
+  user_team?: string;
+  username?: string;
+  vtt?: string;
+}
+
+export interface Headers {
+  date?: string;
+  in_reply_to?: string;
+  message_id?: string;
+  reply_to?: string;
+}
+
+export interface InitialComment {
+  channel?: string;
+  comment?: string;
+  created?: number;
+  id?: string;
+  is_intro?: boolean;
+  timestamp?: number;
+  user?: string;
+}
+
+export interface MediaProgress {
+  duration_ms?: number;
+  max_offset_ms?: number;
+  offset_ms?: number;
+}
+
+export interface Saved {
+  date_completed?: number;
+  date_due?: number;
+  is_archived?: boolean;
+  state?: string;
+}
+
+export interface EventPayload {}
+
+export interface Transcription {
+  locale?: string;
+  status?: string;
+}
+
+export interface BotProfile {
+  app_id?: string;
+  deleted?: boolean;
+  icons?: Icons;
+  id?: string;
+  name?: string;
+  team_id?: string;
+  updated?: number;
+}
+
+export interface Icons {
+  image_36?: string;
+  image_48?: string;
+  image_72?: string;
+}
+
+export interface Edited {
+  ts?: string;
+  user?: string;
+}
+
+export interface FileElement {
   access?: string;
   alt_txt?: string;
   app_id?: string;
@@ -428,41 +628,11 @@ export interface DmMpdmUsersWithFileAccess {
   user_id?: string;
 }
 
-export interface Headers {
-  date?: string;
-  in_reply_to?: string;
-  message_id?: string;
-  reply_to?: string;
-}
-
-export interface InitialComment {
-  channel?: string;
-  comment?: string;
-  created?: number;
-  id?: string;
-  is_intro?: boolean;
-  timestamp?: number;
-  user?: string;
-}
-
-export interface MediaProgress {
-  duration_ms?: number;
-  max_offset_ms?: number;
-  offset_ms?: number;
-}
-
 export interface Reaction {
   count?: number;
   name?: string;
   url?: string;
   users?: string[];
-}
-
-export interface Saved {
-  date_completed?: number;
-  date_due?: number;
-  is_archived?: boolean;
-  state?: string;
 }
 
 export interface Shares {
@@ -512,180 +682,10 @@ export interface TitleBlock {
   video_url?: string;
 }
 
-export interface Transcription {
-  locale?: string;
-  status?: string;
-}
-
-export interface BotProfile {
-  app_id?: string;
-  deleted?: boolean;
-  icons?: Icons;
-  id?: string;
-  name?: string;
-  team_id?: string;
-  updated?: number;
-}
-
-export interface Icons {
-  image_36?: string;
-  image_48?: string;
-  image_72?: string;
-}
-
-export interface Edited {
-  ts?: string;
-  user?: string;
-}
-
-export interface FileElement {
-  access?: string;
-  alt_txt?: string;
-  app_id?: string;
-  app_name?: string;
-  bot_id?: string;
-  cc?: Cc[];
-  channel_actions_count?: number;
-  channel_actions_ts?: string;
-  channels?: string[];
-  comments_count?: number;
-  converted_pdf?: string;
-  created?: number;
-  deanimate?: string;
-  deanimate_gif?: string;
-  display_as_bot?: boolean;
-  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
-  duration_ms?: number;
-  edit_link?: string;
-  editable?: boolean;
-  editor?: string;
-  external_id?: string;
-  external_type?: string;
-  external_url?: string;
-  file_access?: string;
-  filetype?: string;
-  from?: Cc[];
-  groups?: string[];
-  has_more?: boolean;
-  has_more_shares?: boolean;
-  has_rich_preview?: boolean;
-  headers?: Headers;
-  hls?: string;
-  hls_embed?: string;
-  id?: string;
-  image_exif_rotation?: number;
-  ims?: string[];
-  initial_comment?: InitialComment;
-  is_channel_space?: boolean;
-  is_external?: boolean;
-  is_public?: boolean;
-  is_starred?: boolean;
-  last_editor?: string;
-  last_read?: number;
-  lines?: number;
-  lines_more?: number;
-  linked_channel_id?: string;
-  media_display_type?: string;
-  media_progress?: MediaProgress;
-  mimetype?: string;
-  mode?: string;
-  mp4?: string;
-  mp4_low?: string;
-  name?: string;
-  non_owner_editable?: boolean;
-  num_stars?: number;
-  org_or_workspace_access?: string;
-  original_attachment_count?: number;
-  original_h?: string;
-  original_w?: string;
-  permalink?: string;
-  permalink_public?: string;
-  pinned_to?: string[];
-  pjpeg?: string;
-  plain_text?: string;
-  pretty_type?: string;
-  preview?: string;
-  preview_highlight?: string;
-  preview_is_truncated?: boolean;
-  preview_plain_text?: string;
-  private_channels_with_file_access_count?: number;
-  public_url_shared?: boolean;
-  quip_thread_id?: string;
-  reactions?: Reaction[];
-  saved?: Saved;
-  sent_to_self?: boolean;
-  shares?: Shares;
-  simplified_html?: string;
-  size?: number;
-  source_team?: string;
-  subject?: string;
-  subtype?: string;
-  teams_shared_with?: string[];
-  thumb_1024?: string;
-  thumb_1024_gif?: string;
-  thumb_1024_h?: string;
-  thumb_1024_w?: string;
-  thumb_160?: string;
-  thumb_160_gif?: string;
-  thumb_160_h?: string;
-  thumb_160_w?: string;
-  thumb_360?: string;
-  thumb_360_gif?: string;
-  thumb_360_h?: string;
-  thumb_360_w?: string;
-  thumb_480?: string;
-  thumb_480_gif?: string;
-  thumb_480_h?: string;
-  thumb_480_w?: string;
-  thumb_64?: string;
-  thumb_64_gif?: string;
-  thumb_64_h?: string;
-  thumb_64_w?: string;
-  thumb_720?: string;
-  thumb_720_gif?: string;
-  thumb_720_h?: string;
-  thumb_720_w?: string;
-  thumb_80?: string;
-  thumb_800?: string;
-  thumb_800_gif?: string;
-  thumb_800_h?: string;
-  thumb_800_w?: string;
-  thumb_80_gif?: string;
-  thumb_80_h?: string;
-  thumb_80_w?: string;
-  thumb_960?: string;
-  thumb_960_gif?: string;
-  thumb_960_h?: string;
-  thumb_960_w?: string;
-  thumb_gif?: string;
-  thumb_pdf?: string;
-  thumb_pdf_h?: string;
-  thumb_pdf_w?: string;
-  thumb_tiny?: string;
-  thumb_video?: string;
-  thumb_video_h?: number;
-  thumb_video_w?: number;
-  timestamp?: number;
-  title?: string;
-  title_blocks?: AnyMessageBlock[];
-  to?: Cc[];
-  transcription?: Transcription;
-  updated?: number;
-  url_private?: string;
-  url_private_download?: string;
-  url_static_preview?: string;
-  user?: string;
-  user_team?: string;
-  username?: string;
-  vtt?: string;
-}
-
 export interface Metadata {
   event_payload?: any;
   event_type?: string;
 }
-
-export interface EventPayload {}
 
 export interface Room {
   app_id?: string;

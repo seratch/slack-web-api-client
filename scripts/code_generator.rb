@@ -27,7 +27,7 @@ class TsWriter
       stdin.close()
       generated_code = stdout.read
       source = "#{NOTICE}\nimport { SlackAPIResponse } from '../response';\n"
-      if generated_code.match? /blocks\?:\s+Block\[\]/
+      if generated_code.match? /\s+blocks\?:\s+.+\[\]/
         if root_class_name.start_with? "Views"
           if root_class_name.start_with? "viewsPublish"
             source += "import { AnyModalBlock } from '../../block-kit/blocks';\n"
@@ -38,7 +38,7 @@ class TsWriter
           source += "import { AnyMessageBlock } from '../../block-kit/blocks';\n"
         end
       end
-      if generated_code.match? /attachments\?:\s+Attachment\[\]/
+      if generated_code.match? /\s+attachments\?:\s+.+\[\]/
         source += "import { MessageAttachment } from '../../block-kit/message-attachment';\n"
       end
       source += generated_code
@@ -49,19 +49,19 @@ class TsWriter
       )
       source.gsub!(" ok?:", " ok: ")
 
-      if generated_code.match? /blocks\?:\s+Block\[\]/
+      if generated_code.match? /\s+blocks\?:\s+.+\[\]/
         if root_class_name.start_with? "Views"
           if root_class_name.start_with? "viewsPublish"
-            source.gsub!(" Block[];", " AnyModalBlock[];")
+            source.gsub!(/\sblocks\?:\s+.+\[\];/, " blocks?: AnyModalBlock[];")
           else
-            source.gsub!(" Block[];", " AnyHomeTabBlock[];")
+            source.gsub!(/\sblocks\?:\s+.+\[\];/, " blocks?: AnyHomeTabBlock[];")
           end
         else
-          source.gsub!(" Block[];", " AnyMessageBlock[];")
+          source.gsub!(/\sblocks\?:\s+.+\[\];/, " blocks?: AnyMessageBlock[];")
         end
       end
-      if generated_code.match? /attachments\?:\s+Attachment\[\]/
-        source.gsub!(" Attachment[];", " MessageAttachment[];")
+      if generated_code.match? /\s+attachments\?:\s+.+\[\]/
+        source.gsub!(/\sattachments\?:\s+.+\[\];/, " attachments?: MessageAttachment[];")
       end
       source.gsub!(" EventPayload;", " any;")
 

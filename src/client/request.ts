@@ -95,7 +95,9 @@ export interface AdminAppsUninstallRequest extends SlackAPIRequest {
   enterprise_id?: string;
   team_ids?: string[];
 }
-export interface AdminAppsActivitiesListRequest extends SlackAPIRequest, CursorPaginationEnabled {
+export interface AdminAppsActivitiesListRequest
+  extends SlackAPIRequest,
+    CursorPaginationEnabled {
   app_id?: string;
   component_id?: string;
   component_type?: string;
@@ -290,14 +292,16 @@ export interface AdminEmojiRenameRequest extends SlackAPIRequest {
   name: string;
   new_name: string;
 }
-export interface AdminFunctionsListRequest extends SlackAPIRequest, CursorPaginationEnabled {
+export interface AdminFunctionsListRequest
+  extends SlackAPIRequest,
+    CursorPaginationEnabled {
   app_ids: string[];
   team_id?: string;
 }
 export interface AdminFunctionsPermissionsLookupRequest
   extends SlackAPIRequest {
-    function_ids: string[];
-  }
+  function_ids: string[];
+}
 export interface AdminFunctionsPermissionsSetRequest extends SlackAPIRequest {
   function_id: string;
   visibility: string;
@@ -489,22 +493,23 @@ export interface AdminUsersUnsupportedVersionsExportRequest
   date_sessions_started?: number;
 }
 
-export interface AdminWorkflowsCollaboratorsAddRequest
-  extends SlackAPIRequest {
-    collaborator_ids: string[];
-    workflow_ids: string[];
-  }
+export interface AdminWorkflowsCollaboratorsAddRequest extends SlackAPIRequest {
+  collaborator_ids: string[];
+  workflow_ids: string[];
+}
 export interface AdminWorkflowsCollaboratorsRemoveRequest
   extends SlackAPIRequest {
-    collaborator_ids: string[];
-    workflow_ids: string[];
-  }
+  collaborator_ids: string[];
+  workflow_ids: string[];
+}
 export interface AdminWorkflowsPermissionsLookupRequest
   extends SlackAPIRequest {
-    workflow_ids: string[];
-    max_workflow_triggers?: number;
-  }
-export interface AdminWorkflowsSearchRequest extends SlackAPIRequest, CursorPaginationEnabled {
+  workflow_ids: string[];
+  max_workflow_triggers?: number;
+}
+export interface AdminWorkflowsSearchRequest
+  extends SlackAPIRequest,
+    CursorPaginationEnabled {
   app_id?: string;
   collaborator_ids?: string[];
   no_collaborators?: boolean;

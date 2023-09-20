@@ -11,6 +11,7 @@ export type AdminConversationsSearchResponse = SlackAPIResponse & {
   next_cursor?: string;
   ok: boolean;
   provided?: string;
+  total_count?: number;
 };
 
 export interface Conversation {
@@ -19,6 +20,7 @@ export interface Conversation {
   channel_manager_count?: number;
   connected_limited_team_ids?: string[];
   connected_team_ids?: string[];
+  context_team_id?: string;
   conversation_host_id?: string;
   created?: number;
   creator_id?: string;

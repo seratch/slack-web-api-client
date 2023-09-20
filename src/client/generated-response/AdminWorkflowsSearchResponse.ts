@@ -16,6 +16,7 @@ export type AdminWorkflowsSearchResponse = SlackAPIResponse & {
 
 export interface ResponseMetadata {
   messages?: string[];
+  next_cursor?: string;
 }
 
 export interface Workflow {
