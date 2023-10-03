@@ -159,6 +159,7 @@ export interface TitleBlockElement {
   bot_user_id?: string;
   button_label?: string;
   description?: DescriptionElement | string;
+  developer_trace_id?: string;
   elements?: Accessory[];
   fallback?: string;
   fields?: DescriptionElement[];
@@ -168,15 +169,21 @@ export interface TitleBlockElement {
   image_url?: string;
   image_width?: number;
   is_workflow_app?: boolean;
+  owning_team_id?: string;
   provider_icon_url?: string;
   provider_name?: string;
+  sales_home_workflow_app_type?: number;
+  share_url?: string;
   text?: DescriptionElement;
   thumbnail_url?: string;
   title?: DescriptionElement | string;
   title_url?: string;
+  trigger_subtype?: string;
+  trigger_type?: string;
   type?: BlockType;
   url?: string;
   video_url?: string;
+  workflow_id?: string;
 }
 
 export interface Accessory {
@@ -930,6 +937,7 @@ export interface PurpleBlock {
   call?: Call;
   call_id?: string;
   description?: DescriptionElement;
+  developer_trace_id?: string;
   dispatch_action?: boolean;
   element?: Accessory;
   elements?: Accessory[];
@@ -947,16 +955,22 @@ export interface PurpleBlock {
   is_workflow_app?: boolean;
   label?: DescriptionElement;
   optional?: boolean;
+  owning_team_id?: string;
   provider_icon_url?: string;
   provider_name?: string;
+  sales_home_workflow_app_type?: number;
+  share_url?: string;
   source?: string;
   text?: DescriptionElement;
   thumbnail_url?: string;
   title?: DescriptionElement;
   title_url?: string;
+  trigger_subtype?: string;
+  trigger_type?: string;
   type?: BlockType;
   url?: string;
   video_url?: string;
+  workflow_id?: string;
 }
 
 export interface Call {

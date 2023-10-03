@@ -44,6 +44,7 @@ export interface Block {
   call?: Call;
   call_id?: string;
   description?: Description;
+  developer_trace_id?: string;
   dispatch_action?: boolean;
   element?: Accessory;
   elements?: Accessory[];
@@ -61,16 +62,22 @@ export interface Block {
   is_workflow_app?: boolean;
   label?: Description;
   optional?: boolean;
+  owning_team_id?: string;
   provider_icon_url?: string;
   provider_name?: string;
+  sales_home_workflow_app_type?: number;
+  share_url?: string;
   source?: string;
   text?: Description;
   thumbnail_url?: string;
   title?: Description;
   title_url?: string;
+  trigger_subtype?: string;
+  trigger_type?: string;
   type?: string;
   url?: string;
   video_url?: string;
+  workflow_id?: string;
 }
 
 export interface Accessory {

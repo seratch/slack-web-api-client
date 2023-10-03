@@ -2,6 +2,7 @@ import type { Confirm } from "./confirm.ts";
 import type { AnyOption, PlainTextOption } from "./options.ts";
 import type { PlainTextField } from "./text-fields.ts";
 import type { Workflow } from "./workflows.ts";
+import type { RichTextBlock } from "./rich-text-block.ts";
 
 // -----------------------------
 // Basic types
@@ -32,6 +33,7 @@ export type AnyActionBlockElementType =
   | "radio_buttons"
   | "datetimepicker"
   | "checkboxes"
+  | "rich_text_input"
   | "plain_text_input"
   | "url_text_input"
   | "email_text_input"
@@ -61,6 +63,7 @@ export declare type AnyBlockElement =
   | Datepicker
   | Timepicker
   | DateTimepicker
+  | RichTextInput
   | PlainTextInput
   | URLInput
   | EmailInput
@@ -291,6 +294,17 @@ export interface Checkboxes
   type: "checkboxes";
   initial_options?: AnyOption[];
   options: AnyOption[];
+}
+export interface RichTextInput
+  extends
+    ActionBlockElement<"rich_text_input">,
+    Dispatchable,
+    Focusable,
+    Placeholdable {
+  type: "rich_text_input";
+  initial_value?: RichTextBlock;
+  dispatch_action_config?: DispatchActionConfig;
+  focus_on_load?: boolean;
 }
 export interface PlainTextInput
   extends

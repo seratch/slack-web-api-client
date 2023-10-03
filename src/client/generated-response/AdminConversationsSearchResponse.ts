@@ -11,12 +11,13 @@ export type AdminConversationsSearchResponse = SlackAPIResponse & {
   next_cursor?: string;
   ok: boolean;
   provided?: string;
+  response_metadata?: ResponseMetadata;
   total_count?: number;
 };
 
 export interface Conversation {
   canvas?: Canvas;
-  channel_email_addresses?: string[];
+  channel_email_addresses?: ChannelEmailAddress[];
   channel_manager_count?: number;
   connected_limited_team_ids?: string[];
   connected_team_ids?: string[];
@@ -55,4 +56,24 @@ export interface Canvas {
 export interface OwnershipDetail {
   count?: number;
   team_id?: string;
+}
+
+export interface ChannelEmailAddress {
+  address?: string;
+  conversation_id?: string;
+  date_created?: number;
+  icons?: Icons;
+  name?: string;
+  team_id?: string;
+  user_id?: string;
+}
+
+export interface Icons {
+  image_36?: string;
+  image_48?: string;
+  image_72?: string;
+}
+
+export interface ResponseMetadata {
+  messages?: string[];
 }

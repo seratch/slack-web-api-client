@@ -1,6 +1,5 @@
 import type {
   AnyMultiSelectElement,
-  AnyRichTextBlockElement,
   AnySelectElement,
   Button,
   Checkboxes,
@@ -12,9 +11,11 @@ import type {
   Overflow,
   PlainTextInput,
   RadioButtons,
+  RichTextInput,
   Timepicker,
   URLInput,
 } from "./block-elements";
+import type { RichTextBlock } from "./rich-text-block";
 import type { PlainTextField, AnyTextField } from "./text-fields";
 
 // -----------------------------
@@ -49,7 +50,7 @@ export declare type AnySendableMessageBlock =
   | FileBlock
   | HeaderBlock
   | ImageBlock
-  | InputBlock
+  | MessageInputBlock
   | SectionBlock
   | VideoBlock;
 
@@ -61,7 +62,7 @@ export declare type AnyModalBlock =
   | DividerBlock
   | HeaderBlock
   | ImageBlock
-  | InputBlock
+  | ViewInputBlock
   | SectionBlock
   | VideoBlock;
 
@@ -71,7 +72,7 @@ export declare type AnyHomeTabBlock =
   | DividerBlock
   | HeaderBlock
   | ImageBlock
-  | InputBlock
+  | ViewInputBlock
   | SectionBlock
   | VideoBlock;
 
@@ -121,7 +122,7 @@ export interface ImageBlock extends Block<"image"> {
   title?: PlainTextField;
 }
 
-export interface InputBlock extends Block<"input"> {
+export interface MessageInputBlock extends Block<"input"> {
   type: "input";
   label: PlainTextField;
   hint?: PlainTextField;
@@ -132,6 +133,27 @@ export interface InputBlock extends Block<"input"> {
     | Datepicker
     | Timepicker
     | DateTimepicker
+    | PlainTextInput
+    | URLInput
+    | EmailInput
+    | NumberInput
+    | RadioButtons
+    | Checkboxes;
+  dispatch_action?: boolean;
+}
+
+export interface ViewInputBlock extends Block<"input"> {
+  type: "input";
+  label: PlainTextField;
+  hint?: PlainTextField;
+  optional?: boolean;
+  element:
+    | AnySelectElement
+    | AnyMultiSelectElement
+    | Datepicker
+    | Timepicker
+    | DateTimepicker
+    | RichTextInput
     | PlainTextInput
     | URLInput
     | EmailInput
@@ -168,9 +190,4 @@ export interface VideoBlock extends Block<"video"> {
   provider_name?: string;
   provider_icon_url?: string;
   description?: PlainTextField;
-}
-
-export interface RichTextBlock extends Block<"rich_text"> {
-  type: "rich_text";
-  elements: AnyRichTextBlockElement[];
 }
