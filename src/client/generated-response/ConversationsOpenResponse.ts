@@ -291,6 +291,7 @@ export interface File {
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
+  canvas_template_mode?: string;
   cc?: any[];
   channel_actions_count?: number;
   channel_actions_ts?: string;
@@ -368,6 +369,11 @@ export interface File {
   subject?: string;
   subtype?: string;
   teams_shared_with?: any[];
+  template_conversion_ts?: number;
+  template_description?: string;
+  template_icon?: string;
+  template_name?: string;
+  template_title?: string;
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -417,6 +423,7 @@ export interface File {
   title_blocks?: any[];
   to?: any[];
   transcription?: Transcription;
+  update_notification?: number;
   updated?: number;
   url_private?: string;
   url_private_download?: string;

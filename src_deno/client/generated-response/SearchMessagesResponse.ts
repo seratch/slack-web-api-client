@@ -363,6 +363,7 @@ export interface FileElement {
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
+  canvas_template_mode?: string;
   cc?: Cc[];
   channel_actions_count?: number;
   channel_actions_ts?: string;
@@ -440,6 +441,11 @@ export interface FileElement {
   subject?: string;
   subtype?: string;
   teams_shared_with?: any[];
+  template_conversion_ts?: number;
+  template_description?: string;
+  template_icon?: string;
+  template_name?: string;
+  template_title?: string;
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -489,6 +495,7 @@ export interface FileElement {
   title_blocks?: TitleBlockElement[];
   to?: Cc[];
   transcription?: Transcription;
+  update_notification?: number;
   updated?: number;
   url_private?: string;
   url_private_download?: string;
@@ -553,6 +560,7 @@ export interface PurpleShares {
 }
 
 export interface Private {
+  access?: string;
   channel_name?: string;
   latest_reply?: string;
   reply_count?: number;
@@ -695,6 +703,7 @@ export interface MessageFile {
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
+  canvas_template_mode?: string;
   cc?: any[];
   channel_actions_count?: number;
   channel_actions_ts?: string;
@@ -772,6 +781,11 @@ export interface MessageFile {
   subject?: string;
   subtype?: string;
   teams_shared_with?: any[];
+  template_conversion_ts?: number;
+  template_description?: string;
+  template_icon?: string;
+  template_name?: string;
+  template_title?: string;
   thumb_1024?: string;
   thumb_1024_gif?: string;
   thumb_1024_h?: string;
@@ -821,6 +835,7 @@ export interface MessageFile {
   title_blocks?: any[];
   to?: any[];
   transcription?: Transcription;
+  update_notification?: number;
   updated?: number;
   url_private?: string;
   url_private_download?: string;

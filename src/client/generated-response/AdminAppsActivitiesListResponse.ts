@@ -30,6 +30,8 @@ export interface Activity {
 export interface Payload {
   actor?: string;
   billing_reason?: string[];
+  bot_user_id?: string;
+  channel_id?: string;
   current_step?: number;
   error?: string;
   exec_outcome?: string;
