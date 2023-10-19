@@ -3,7 +3,7 @@ import type {
   ScheduleTriggerSettings,
   WebhookTriggerSettings,
 } from "./automation-response/types.ts";
-import type { AnySendableMessageBlock } from "../block-kit/blocks.ts";
+import type { AnyMessageBlock } from "../block-kit/blocks.ts";
 import type { LinkUnfurls } from "../block-kit/link-unfurls.ts";
 import type { MessageAttachment } from "../block-kit/message-attachment.ts";
 import type { MessageMetadata } from "../block-kit/message-metadata.ts";
@@ -624,7 +624,7 @@ export interface ChatPostEphemeralRequest extends SlackAPIRequest {
   channel: string;
   text: string;
   user: string;
-  blocks?: AnySendableMessageBlock[];
+  blocks?: AnyMessageBlock[];
   attachments?: MessageAttachment[];
   thread_ts?: string;
 
@@ -641,7 +641,7 @@ export interface ChatPostEphemeralRequest extends SlackAPIRequest {
 export interface ChatPostMessageRequest extends SlackAPIRequest {
   channel: string;
   text: string;
-  blocks?: AnySendableMessageBlock[];
+  blocks?: AnyMessageBlock[];
   attachments?: MessageAttachment[];
   metadata?: MessageMetadata;
   thread_ts?: string;
@@ -664,7 +664,7 @@ export interface ChatScheduleMessageRequest extends SlackAPIRequest {
   channel: string;
   text: string;
   post_at: string | number;
-  blocks?: AnySendableMessageBlock[];
+  blocks?: AnyMessageBlock[];
   attachments?: MessageAttachment[];
   thread_ts?: string;
   metadata?: MessageMetadata;
@@ -706,13 +706,13 @@ export type ChatUnfurlRequest =
     user_auth_message?: string;
     user_auth_required?: boolean;
     user_auth_url?: string;
-    user_auth_blocks?: AnySendableMessageBlock[];
+    user_auth_blocks?: AnyMessageBlock[];
   };
 export interface ChatUpdateRequest extends SlackAPIRequest {
   channel: string;
   text: string;
   ts: string;
-  blocks?: AnySendableMessageBlock[];
+  blocks?: AnyMessageBlock[];
   attachments?: MessageAttachment[];
   metadata?: MessageMetadata;
   file_ids?: string[];

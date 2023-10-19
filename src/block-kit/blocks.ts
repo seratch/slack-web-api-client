@@ -43,7 +43,7 @@ export interface Block<T extends AnyBlockType = AnyBlockType> {
 // Union types
 // -----------------------------
 
-export declare type AnySendableMessageBlock =
+export declare type AnyMessageBlock =
   | ActionsBlock
   | ContextBlock
   | DividerBlock
@@ -52,9 +52,8 @@ export declare type AnySendableMessageBlock =
   | ImageBlock
   | MessageInputBlock
   | SectionBlock
-  | VideoBlock;
-
-export declare type AnyMessageBlock = AnySendableMessageBlock | RichTextBlock;
+  | VideoBlock
+  | RichTextBlock;
 
 export declare type AnyModalBlock =
   | ActionsBlock
@@ -64,7 +63,8 @@ export declare type AnyModalBlock =
   | ImageBlock
   | ViewInputBlock
   | SectionBlock
-  | VideoBlock;
+  | VideoBlock
+  | RichTextBlock;
 
 export declare type AnyHomeTabBlock =
   | ActionsBlock
@@ -74,7 +74,8 @@ export declare type AnyHomeTabBlock =
   | ImageBlock
   | ViewInputBlock
   | SectionBlock
-  | VideoBlock;
+  | VideoBlock
+  | RichTextBlock;
 
 // -----------------------------
 // Blocks

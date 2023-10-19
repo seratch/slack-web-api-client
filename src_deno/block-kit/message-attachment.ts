@@ -1,8 +1,8 @@
-import type { AnySendableMessageBlock } from "./blocks.ts";
+import type { AnyMessageBlock } from "./blocks.ts";
 import type { PlainTextField } from "./text-fields.ts";
 
 export interface MessageAttachment {
-  blocks?: AnySendableMessageBlock[];
+  blocks?: AnyMessageBlock[];
   fallback?: string;
   color?: "good" | "warning" | "danger" | string;
   pretext?: string;
