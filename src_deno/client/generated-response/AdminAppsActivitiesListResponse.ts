@@ -39,6 +39,7 @@ export interface Payload {
   function_id?: string;
   function_name?: string;
   function_type?: string;
+  inputs?: Inputs;
   is_billing_excluded?: boolean;
   log?: string;
   total_steps?: number;
@@ -46,6 +47,8 @@ export interface Payload {
   type?: string;
   workflow_name?: string;
 }
+
+export interface Inputs {}
 
 export interface Trigger {
   config?: Config;
@@ -57,6 +60,7 @@ export interface Trigger {
 export interface Config {
   description?: string;
   name?: string;
+  schema?: Inputs;
 }
 
 export interface TripInformation {

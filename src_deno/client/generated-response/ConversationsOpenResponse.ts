@@ -34,6 +34,7 @@ export interface Channel {
 }
 
 export interface Latest {
+  app_id?: string;
   blocks?: AnyMessageBlock[];
   bot_id?: string;
   bot_profile?: BotProfile;

@@ -69,6 +69,7 @@ export interface Canvas {
 
 export interface PostingRestrictedTo {
   type?: string[];
+  user?: string[];
 }
 
 export interface Purpose {

@@ -68,6 +68,7 @@ export interface Attachment {
   footer?: string;
   footer_icon?: string;
   from_url?: string;
+  hide_color?: boolean;
   id?: number;
   image_bytes?: number;
   image_height?: number;
@@ -75,6 +76,7 @@ export interface Attachment {
   image_width?: number;
   indent?: boolean;
   is_app_unfurl?: boolean;
+  is_file_attachment?: boolean;
   is_msg_unfurl?: boolean;
   is_reply_unfurl?: boolean;
   is_thread_root_unfurl?: boolean;
