@@ -13,4 +13,5 @@ end
 
 File.open(__dir__ + '/../src_deno/mod.ts', 'w') { |f|
   f.write('export * from "./index.ts"' + "\n")
+  f.write('export type * from "./index.ts"' + "\n")
 }

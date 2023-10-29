@@ -14,6 +14,8 @@ export * from "./block-kit/options.ts";
 export type * from "./block-kit/options.ts";
 export * from "./block-kit/text-fields.ts";
 export type * from "./block-kit/text-fields.ts";
+export * from "./block-kit/rich-text-block.ts";
+export type * from "./block-kit/rich-text-block.ts";
 export * from "./block-kit/views.ts";
 export type * from "./block-kit/views.ts";
 

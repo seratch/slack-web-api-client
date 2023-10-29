@@ -14,6 +14,8 @@ export * from "./block-kit/options";
 export type * from "./block-kit/options";
 export * from "./block-kit/text-fields";
 export type * from "./block-kit/text-fields";
+export * from "./block-kit/rich-text-block";
+export type * from "./block-kit/rich-text-block";
 export * from "./block-kit/views";
 export type * from "./block-kit/views";
 
