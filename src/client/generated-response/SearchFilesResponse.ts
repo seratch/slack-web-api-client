@@ -430,8 +430,10 @@ export interface FileElement {
   dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   duration_ms?: number;
   edit_link?: string;
+  edit_timestamp?: number;
   editable?: boolean;
   editor?: string;
+  editors?: string[];
   external_id?: string;
   external_type?: string;
   external_url?: string;
@@ -770,8 +772,10 @@ export interface MessageFile {
   dm_mpdm_users_with_file_access?: any[];
   duration_ms?: number;
   edit_link?: string;
+  edit_timestamp?: number;
   editable?: boolean;
   editor?: string;
+  editors?: any[];
   external_id?: string;
   external_type?: string;
   external_url?: string;
