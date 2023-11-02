@@ -433,6 +433,8 @@ export interface AdminUsersListRequest
   extends SlackAPIRequest,
     CursorPaginationEnabled {
   team_id: string;
+  include_deactivated_user_workspaces?: boolean;
+  is_active?: boolean;
 }
 export interface AdminUsersRemoveRequest extends SlackAPIRequest {
   team_id: string;
