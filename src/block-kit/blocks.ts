@@ -14,6 +14,7 @@ import type {
   RichTextInput,
   Timepicker,
   URLInput,
+  WorkflowButton,
 } from "./block-elements";
 import type { RichTextBlock } from "./rich-text-block";
 import type { PlainTextField, AnyTextField } from "./text-fields";
@@ -85,6 +86,7 @@ export interface ActionsBlock extends Block<"actions"> {
   type: "actions";
   elements: (
     | Button
+    | WorkflowButton
     | Overflow
     | Datepicker
     | Timepicker
@@ -171,6 +173,7 @@ export interface SectionBlock extends Block<"section"> {
   accessory?:
     | ImageElement
     | Button
+    | WorkflowButton
     | Overflow
     | Datepicker
     | Timepicker
