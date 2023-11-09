@@ -100,6 +100,11 @@ import type {
   AppsDatastoreQueryRequest,
   AppsDatastoreUpdateRequest,
   AppsEventAuthorizationsListRequest,
+  AppsManifestCreateRequest,
+  AppsManifestDeleteRequest,
+  AppsManifestExportRequest,
+  AppsManifestUpdateRequest,
+  AppsManifestValidateRequest,
   AppsUninstallRequest,
   AuthRevokeRequest,
   AuthTeamsListRequest,
@@ -195,6 +200,7 @@ import type {
   TeamIntegrationLogsRequest,
   TeamPreferencesListRequest,
   TeamProfileGetRequest,
+  ToolingTokensRotateRequest,
   UsergroupsCreateRequest,
   UsergroupsDisableRequest,
   UsergroupsEnableRequest,
@@ -432,6 +438,12 @@ import type {
   AdminWorkflowsPermissionsLookupResponse,
   AdminWorkflowsCollaboratorsAddResponse,
   AdminWorkflowsCollaboratorsRemoveResponse,
+  AppsManifestCreateResponse,
+  AppsManifestDeleteResponse,
+  AppsManifestUpdateResponse,
+  AppsManifestExportResponse,
+  AppsManifestValidateResponse,
+  ToolingTokensRotateResponse,
 } from "./generated-response/index";
 
 import type { SlackAPIResponse } from "./response";
@@ -1053,6 +1065,28 @@ export class SlackAPIClient {
         >(this, "apps.event.authorizations.list"),
       },
     },
+    manifest: {
+      create: this.bindApiCall<
+        AppsManifestCreateRequest,
+        AppsManifestCreateResponse
+      >(this, "apps.manifest.create"),
+      delete: this.bindApiCall<
+        AppsManifestDeleteRequest,
+        AppsManifestDeleteResponse
+      >(this, "apps.manifest.delete"),
+      update: this.bindApiCall<
+        AppsManifestUpdateRequest,
+        AppsManifestUpdateResponse
+      >(this, "apps.manifest.update"),
+      export: this.bindApiCall<
+        AppsManifestExportRequest,
+        AppsManifestExportResponse
+      >(this, "apps.manifest.export"),
+      validate: this.bindApiCall<
+        AppsManifestValidateRequest,
+        AppsManifestValidateResponse
+      >(this, "apps.manifest.validate"),
+    },
     uninstall: this.bindApiCall<AppsUninstallRequest, AppsUninstallResponse>(
       this,
       "apps.uninstall"
@@ -1489,6 +1523,15 @@ export class SlackAPIClient {
         this,
         "team.profile.get"
       ),
+    },
+  };
+
+  public readonly tooling = {
+    tokens: {
+      rotate: this.bindApiCall<
+        ToolingTokensRotateRequest,
+        ToolingTokensRotateResponse
+      >(this, "tooling.tokens.rotate"),
     },
   };
 

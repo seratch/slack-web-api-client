@@ -4,7 +4,6 @@ export class SlackAPIError extends Error {
   apiName: string;
   error: string;
   result: SlackAPIResponse;
-  // deno-lint-ignore no-explicit-any
   constructor(apiName: string, error: string, result: SlackAPIResponse) {
     const message = `Failed to call ${apiName} due to ${error}: ${JSON.stringify(
       result

@@ -32,6 +32,9 @@ export type * from "./client/generated-response/index";
 export * from "./client/webhook-client";
 export type * from "./client/webhook-client";
 
+export * from "./manifest/manifest";
+export type * from "./manifest/manifest";
+
 export * from "./token-rotation/token-refresh-targets";
 export type * from "./token-rotation/token-refresh-targets";
 export * from "./token-rotation/token-refresh-results";

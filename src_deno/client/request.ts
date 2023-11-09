@@ -8,6 +8,7 @@ import type { LinkUnfurls } from "../block-kit/link-unfurls.ts";
 import type { MessageAttachment } from "../block-kit/message-attachment.ts";
 import type { MessageMetadata } from "../block-kit/message-metadata.ts";
 import type { HomeTabView, ModalView } from "../block-kit/views.ts";
+import { Manifest } from "../manifest/manifest.ts";
 
 export interface SlackAPIRequest {
   token?: string;
@@ -546,6 +547,25 @@ export interface AppsEventAuthorizationsListRequest
   extends SlackAPIRequest, CursorPaginationEnabled {
   event_context: string;
 }
+
+export interface AppsManifestCreateRequest extends SlackAPIRequest {
+  manifest: Manifest | string;
+}
+export interface AppsManifestDeleteRequest extends SlackAPIRequest {
+  app_id: string;
+}
+export interface AppsManifestUpdateRequest extends SlackAPIRequest {
+  app_id: string;
+  manifest: Manifest | string;
+}
+export interface AppsManifestExportRequest extends SlackAPIRequest {
+  app_id: string;
+}
+export interface AppsManifestValidateRequest extends SlackAPIRequest {
+  app_id?: string;
+  manifest: Manifest | string;
+}
+
 export interface AppsUninstallRequest extends SlackAPIRequest {
   client_id: string;
   client_secret: string;
@@ -1150,6 +1170,10 @@ export interface TeamProfileGetRequest extends SlackAPIRequest {
   team_id?: string;
 }
 export type TeamPreferencesListRequest = SlackAPIRequest;
+
+export interface ToolingTokensRotateRequest extends SlackAPIRequest {
+  refresh_token: string;
+}
 
 /*
  * `usergroups.*`
