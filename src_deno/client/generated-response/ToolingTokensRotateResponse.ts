@@ -4,20 +4,20 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response.ts";
-export type AuthTestResponse = SlackAPIResponse & {
-  app_id?: string;
-  app_name?: string;
-  bot_id?: string;
-  enterprise_id?: string;
+export type ToolingTokensRotateResponse = SlackAPIResponse & {
   error?: string;
-  expires_in?: number;
-  is_enterprise_install?: boolean;
+  exp?: number;
+  iat?: number;
   needed?: string;
   ok: boolean;
   provided?: string;
-  team?: string;
+  refresh_token?: string;
+  response_metadata?: ResponseMetadata;
   team_id?: string;
-  url?: string;
-  user?: string;
+  token?: string;
   user_id?: string;
 };
+
+export interface ResponseMetadata {
+  messages?: string[];
+}

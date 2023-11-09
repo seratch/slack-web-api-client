@@ -4,20 +4,11 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response.ts";
-export type AuthTestResponse = SlackAPIResponse & {
+export type AppsManifestUpdateResponse = SlackAPIResponse & {
   app_id?: string;
-  app_name?: string;
-  bot_id?: string;
-  enterprise_id?: string;
   error?: string;
-  expires_in?: number;
-  is_enterprise_install?: boolean;
   needed?: string;
   ok: boolean;
+  permissions_updated?: boolean;
   provided?: string;
-  team?: string;
-  team_id?: string;
-  url?: string;
-  user?: string;
-  user_id?: string;
 };
