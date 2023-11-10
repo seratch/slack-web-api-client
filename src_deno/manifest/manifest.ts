@@ -19,32 +19,32 @@ export interface ManifestDisplayInformation {
 }
 
 export interface ManifestFeatures {
-  app_home?: AppHome;
-  bot_user?: BotUser;
-  shortcuts?: Shortcut[];
-  slash_commands?: SlashCommand[];
+  app_home?: ManifestAppHome;
+  bot_user?: ManifestBotUser;
+  shortcuts?: ManifestShortcut[];
+  slash_commands?: ManifestSlashCommand[];
   unfurl_domains?: string[];
 }
 
-export interface AppHome {
+export interface ManifestAppHome {
   home_tab_enabled?: boolean;
   messages_tab_enabled?: boolean;
   messages_tab_read_only_enabled?: boolean;
 }
 
-export interface BotUser {
+export interface ManifestBotUser {
   display_name: string;
   always_online?: boolean;
 }
 
-export interface Shortcut {
+export interface ManifestShortcut {
   type: "global" | "message";
   name: string;
   callback_id: string;
   description: string;
 }
 
-export interface SlashCommand {
+export interface ManifestSlashCommand {
   command: string;
   usage_hint: string;
   description: string;
@@ -53,11 +53,11 @@ export interface SlashCommand {
 }
 
 export interface ManifestOAuthConfig {
-  scopes: Scopes;
+  scopes: ManifestOAuthScopes;
   redirect_urls?: string[];
 }
 
-export interface Scopes {
+export interface ManifestOAuthScopes {
   bot?: string[];
   user?: string[];
 }
@@ -66,21 +66,21 @@ export interface ManifestSettings {
   allowed_ip_address_ranges?: string[];
   background_color?: string;
   description?: string;
-  event_subscriptions?: EventSubscriptions;
-  interactivity?: Interactivity;
+  event_subscriptions?: ManifestEventSubscriptions;
+  interactivity?: ManifestInteractivity;
   long_description?: string;
   org_deploy_enabled?: boolean;
   socket_mode_enabled?: boolean;
   token_rotation_enabled?: boolean;
 }
 
-export interface EventSubscriptions {
+export interface ManifestEventSubscriptions {
   bot_events?: string[];
   user_events?: string[];
   request_url?: string; // can be absent when enabling Socket Mode
 }
 
-export interface Interactivity {
+export interface ManifestInteractivity {
   is_enabled: boolean;
   message_menu_options_url?: string;
   request_url?: string; // can be absent when enabling Socket Mode
