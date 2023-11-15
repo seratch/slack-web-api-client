@@ -37,7 +37,8 @@ export type AnyActionBlockElementType =
   | "plain_text_input"
   | "url_text_input"
   | "email_text_input"
-  | "number_input";
+  | "number_input"
+  | "file_input";
 
 export interface BlockElement<
   T extends AnyBlockElementType = AnyBlockElementType
@@ -338,6 +339,12 @@ export interface NumberInput
   initial_value?: string;
   min_value?: string;
   max_value?: string;
+}
+export interface FileInput
+  extends ActionBlockElement<"file_input"> {
+  type: "file_input";
+  filetypes?: string[];
+  max_files?: number;
 }
 
 // https://api.slack.com/changelog/2019-09-what-they-see-is-what-you-get-and-more-and-less

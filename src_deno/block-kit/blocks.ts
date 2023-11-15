@@ -6,6 +6,7 @@ import type {
   Datepicker,
   DateTimepicker,
   EmailInput,
+  FileInput,
   ImageElement,
   NumberInput,
   Overflow,
@@ -161,6 +162,7 @@ export interface ViewInputBlock extends Block<"input"> {
     | URLInput
     | EmailInput
     | NumberInput
+    | FileInput
     | RadioButtons
     | Checkboxes;
   dispatch_action?: boolean;
