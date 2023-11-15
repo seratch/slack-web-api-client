@@ -60,10 +60,13 @@ export interface Shares {
 
 export interface Public {
   channel_name?: string;
+  latest_reply?: string;
   reply_count?: number;
   reply_users?: string[];
   reply_users_count?: number;
   share_user_id?: string;
+  source?: string;
   team_id?: string;
+  thread_ts?: string;
   ts?: string;
 }
