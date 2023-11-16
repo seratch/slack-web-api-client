@@ -1,14 +1,15 @@
-export interface Manifest {
+export interface ManifestParams {
   _metadata?: ManifestMetadata;
   display_information: ManifestDisplayInformation;
   features?: ManifestFeatures;
   oauth_config?: ManifestOAuthConfig;
   settings?: ManifestSettings;
+  functions?: Record<string, ManifestFunction>;
 }
 
 export interface ManifestMetadata {
-  major_version?: string;
-  minor_version?: string;
+  major_version?: number;
+  minor_version?: number;
 }
 
 export interface ManifestDisplayInformation {
@@ -55,6 +56,7 @@ export interface ManifestSlashCommand {
 export interface ManifestOAuthConfig {
   scopes: ManifestOAuthScopes;
   redirect_urls?: string[];
+  token_management_enabled?: boolean;
 }
 
 export interface ManifestOAuthScopes {
@@ -72,6 +74,7 @@ export interface ManifestSettings {
   org_deploy_enabled?: boolean;
   socket_mode_enabled?: boolean;
   token_rotation_enabled?: boolean;
+  function_runtime?: string;
 }
 
 export interface ManifestEventSubscriptions {
@@ -84,4 +87,42 @@ export interface ManifestInteractivity {
   is_enabled: boolean;
   message_menu_options_url?: string;
   request_url?: string; // can be absent when enabling Socket Mode
+}
+
+export interface ManifestFunction {
+  title: string;
+  description?: string;
+  input_parameters: ManifestParameters;
+  output_parameters: ManifestParameters;
+}
+
+export interface ManifestParameters {
+  properties: Record<string, ManifestParameterProperty>;
+  required: string[];
+}
+
+export type ManifestParameterProperty =
+  | CommonManifestParameterProperty
+  | StringManifestParameterProperty
+  | NumberManifestParameterProperty;
+
+export interface CommonManifestParameterProperty {
+  type: string;
+  description?: string;
+  title?: string;
+  hint?: string;
+}
+
+export interface StringManifestParameterProperty
+  extends CommonManifestParameterProperty {
+  type: "string";
+  minLength?: number;
+  maxLength?: number;
+}
+
+export interface NumberManifestParameterProperty
+  extends CommonManifestParameterProperty {
+  type: "number";
+  minimum?: number;
+  maximum?: number;
 }

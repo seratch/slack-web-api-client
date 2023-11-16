@@ -340,8 +340,7 @@ export interface NumberInput
   min_value?: string;
   max_value?: string;
 }
-export interface FileInput
-  extends ActionBlockElement<"file_input"> {
+export interface FileInput extends ActionBlockElement<"file_input"> {
   type: "file_input";
   filetypes?: string[];
   max_files?: number;

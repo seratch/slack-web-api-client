@@ -17,6 +17,7 @@ export interface Error {
   code?: string;
   message?: string;
   pointer?: string;
+  related_component?: string;
 }
 
 export interface ResponseMetadata {

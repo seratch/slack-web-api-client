@@ -8,7 +8,7 @@ import type { LinkUnfurls } from "../block-kit/link-unfurls";
 import type { MessageAttachment } from "../block-kit/message-attachment";
 import type { MessageMetadata } from "../block-kit/message-metadata";
 import type { ModalView, HomeTabView } from "../block-kit/views";
-import { Manifest } from "../manifest/manifest";
+import { ManifestParams } from "../manifest/manifest-params";
 
 export interface SlackAPIRequest {
   token?: string;
@@ -572,21 +572,21 @@ export interface AppsEventAuthorizationsListRequest
 }
 
 export interface AppsManifestCreateRequest extends SlackAPIRequest {
-  manifest: Manifest | string;
+  manifest: ManifestParams | string;
 }
 export interface AppsManifestDeleteRequest extends SlackAPIRequest {
   app_id: string;
 }
 export interface AppsManifestUpdateRequest extends SlackAPIRequest {
   app_id: string;
-  manifest: Manifest | string;
+  manifest: ManifestParams | string;
 }
 export interface AppsManifestExportRequest extends SlackAPIRequest {
   app_id: string;
 }
 export interface AppsManifestValidateRequest extends SlackAPIRequest {
   app_id?: string;
-  manifest: Manifest | string;
+  manifest: ManifestParams | string;
 }
 
 export interface AppsUninstallRequest extends SlackAPIRequest {
