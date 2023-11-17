@@ -25,6 +25,7 @@ export interface Files {
 }
 
 export interface FilesMatch {
+  access?: string;
   attachments?: MessageAttachment[];
   bot_id?: string;
   cc?: Cc[];
@@ -33,9 +34,11 @@ export interface FilesMatch {
   converted_pdf?: string;
   created?: number;
   display_as_bot?: boolean;
+  dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   edit_link?: string;
   editable?: boolean;
   editors?: string[];
+  editors_count?: number;
   external_id?: string;
   external_type?: string;
   external_url?: string;
@@ -61,6 +64,7 @@ export interface FilesMatch {
   mode?: string;
   name?: string;
   non_owner_editable?: boolean;
+  org_or_workspace_access?: string;
   original_attachment_count?: number;
   original_h?: number;
   original_w?: number;
@@ -72,11 +76,15 @@ export interface FilesMatch {
   preview_highlight?: string;
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
+  private_channels_with_file_access_count?: number;
   public_url_shared?: boolean;
+  quip_thread_id?: string;
   sent_to_self?: boolean;
   shares?: MatchShares;
   size?: number;
   subject?: string;
+  team_pref_version_history_enabled?: boolean;
+  teams_shared_with?: string[];
   thumb_1024?: string;
   thumb_1024_h?: number;
   thumb_1024_w?: number;
@@ -105,10 +113,13 @@ export interface FilesMatch {
   thumb_video?: string;
   timestamp?: number;
   title?: string;
+  title_blocks?: MatchTitleBlock[];
   to?: Cc[];
+  update_notification?: number;
   updated?: number;
   url_private?: string;
   url_private_download?: string;
+  url_static_preview?: string;
   user?: string;
   user_team?: string;
   username?: string;
@@ -234,7 +245,7 @@ export enum ActionType {
   WorkflowButton = "workflow_button",
 }
 
-export interface TitleBlockElement {
+export interface AttachmentBlock {
   accessory?: Accessory;
   alt_text?: string;
   app_collaborators?: string[];
@@ -568,7 +579,7 @@ export interface FileElement {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
-  title_blocks?: TitleBlockElement[];
+  title_blocks?: AttachmentBlock[];
   to?: Cc[];
   transcription?: Transcription;
   update_notification?: number;
@@ -1041,50 +1052,7 @@ export interface Public {
   ts?: string;
 }
 
-export interface Pagination {
-  first?: number;
-  last?: number;
-  page?: number;
-  page_count?: number;
-  per_page?: number;
-  total_count?: number;
-}
-
-export interface Paging {
-  count?: number;
-  page?: number;
-  pages?: number;
-  total?: number;
-}
-
-export interface Messages {
-  matches?: MessagesMatch[];
-  pagination?: Pagination;
-  paging?: Paging;
-  total?: number;
-}
-
-export interface MessagesMatch {
-  attachments?: MessageAttachment[];
-  blocks?: AnyMessageBlock[];
-  channel?: Channel;
-  files?: FileElement[];
-  iid?: string;
-  is_mpim?: boolean;
-  no_reactions?: boolean;
-  permalink?: string;
-  previous?: Previous;
-  previous_2?: Previous;
-  score?: number;
-  team?: string;
-  text?: string;
-  ts?: string;
-  type?: string;
-  user?: string;
-  username?: string;
-}
-
-export interface MatchBlock {
+export interface MatchTitleBlock {
   accessory?: Accessory;
   alt_text?: string;
   api_decoration_available?: boolean;
@@ -1178,6 +1146,49 @@ export interface AppIconUrls {
   image_72?: string;
   image_96?: string;
   image_original?: string;
+}
+
+export interface Pagination {
+  first?: number;
+  last?: number;
+  page?: number;
+  page_count?: number;
+  per_page?: number;
+  total_count?: number;
+}
+
+export interface Paging {
+  count?: number;
+  page?: number;
+  pages?: number;
+  total?: number;
+}
+
+export interface Messages {
+  matches?: MessagesMatch[];
+  pagination?: Pagination;
+  paging?: Paging;
+  total?: number;
+}
+
+export interface MessagesMatch {
+  attachments?: MessageAttachment[];
+  blocks?: AnyMessageBlock[];
+  channel?: Channel;
+  files?: FileElement[];
+  iid?: string;
+  is_mpim?: boolean;
+  no_reactions?: boolean;
+  permalink?: string;
+  previous?: Previous;
+  previous_2?: Previous;
+  score?: number;
+  team?: string;
+  text?: string;
+  ts?: string;
+  type?: string;
+  user?: string;
+  username?: string;
 }
 
 export interface Channel {
