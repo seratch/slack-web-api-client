@@ -1145,7 +1145,8 @@ export interface TeamAccessLogsRequest extends SlackAPIRequest {
   page?: number;
   team_id?: string;
 }
-export interface TeamBillableInfoRequest extends SlackAPIRequest {
+export interface TeamBillableInfoRequest
+  extends SlackAPIRequest, CursorPaginationEnabled {
   user?: string;
   team_id?: string;
 }

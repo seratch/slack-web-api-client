@@ -171,6 +171,8 @@ export type { FilesRemoteUpdateResponse } from "./FilesRemoteUpdateResponse";
 export type { FilesRevokePublicURLResponse } from "./FilesRevokePublicURLResponse";
 export type { FilesSharedPublicURLResponse } from "./FilesSharedPublicURLResponse";
 export type { FilesUploadResponse } from "./FilesUploadResponse";
+export type { FunctionsCompleteErrorResponse } from "./FunctionsCompleteErrorResponse";
+export type { FunctionsCompleteSuccessResponse } from "./FunctionsCompleteSuccessResponse";
 export type { MigrationExchangeResponse } from "./MigrationExchangeResponse";
 export type { OAuthV2AccessResponse } from "./OAuthV2AccessResponse";
 export type { OAuthV2ExchangeResponse } from "./OAuthV2ExchangeResponse";

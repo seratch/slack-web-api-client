@@ -4,19 +4,9 @@
 ///////////////////////////////////
 
 import { SlackAPIResponse } from "../response.ts";
-export type TeamBillableInfoResponse = SlackAPIResponse & {
-  billable_info?: { [key: string]: BillableInfo };
+export type FunctionsCompleteSuccessResponse = SlackAPIResponse & {
   error?: string;
   needed?: string;
   ok: boolean;
   provided?: string;
-  response_metadata?: ResponseMetadata;
 };
-
-export interface BillableInfo {
-  billing_active?: boolean;
-}
-
-export interface ResponseMetadata {
-  next_cursor?: string;
-}

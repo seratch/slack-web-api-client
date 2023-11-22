@@ -1,3 +1,5 @@
+import { AnyManifestBotScope, AnyManifestUserScope } from "./scopes.ts";
+
 export interface ManifestParams {
   _metadata?: ManifestMetadata;
   display_information: ManifestDisplayInformation;
@@ -60,8 +62,8 @@ export interface ManifestOAuthConfig {
 }
 
 export interface ManifestOAuthScopes {
-  bot?: string[];
-  user?: string[];
+  bot?: AnyManifestBotScope[];
+  user?: AnyManifestUserScope[];
 }
 
 export interface ManifestSettings {

@@ -444,6 +444,8 @@ import type {
   AppsManifestExportResponse,
   AppsManifestValidateResponse,
   ToolingTokensRotateResponse,
+  FunctionsCompleteErrorResponse,
+  FunctionsCompleteSuccessResponse,
 } from "./generated-response/index";
 
 import type { SlackAPIResponse } from "./response";
@@ -455,8 +457,6 @@ import type {
   AppsDatastorePutResponse,
   AppsDatastoreQueryResponse,
   AppsDatastoreUpdateResponse,
-  FunctionsCompleteErrorResponse,
-  FunctionsCompleteSuccessResponse,
   WorkflowsTriggersCreateResponse,
   WorkflowsTriggersDeleteResponse,
   WorkflowsTriggersListResponse,

@@ -171,6 +171,8 @@ export type { FilesRemoteUpdateResponse } from "./FilesRemoteUpdateResponse.ts";
 export type { FilesRevokePublicURLResponse } from "./FilesRevokePublicURLResponse.ts";
 export type { FilesSharedPublicURLResponse } from "./FilesSharedPublicURLResponse.ts";
 export type { FilesUploadResponse } from "./FilesUploadResponse.ts";
+export type { FunctionsCompleteErrorResponse } from "./FunctionsCompleteErrorResponse.ts";
+export type { FunctionsCompleteSuccessResponse } from "./FunctionsCompleteSuccessResponse.ts";
 export type { MigrationExchangeResponse } from "./MigrationExchangeResponse.ts";
 export type { OAuthV2AccessResponse } from "./OAuthV2AccessResponse.ts";
 export type { OAuthV2ExchangeResponse } from "./OAuthV2ExchangeResponse.ts";

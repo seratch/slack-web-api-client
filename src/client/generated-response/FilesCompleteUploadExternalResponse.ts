@@ -13,6 +13,7 @@ export type FilesCompleteUploadExternalResponse = SlackAPIResponse & {
 };
 
 export interface File {
+  alt_txt?: string;
   channels?: string[];
   comments_count?: number;
   created?: number;
@@ -36,6 +37,8 @@ export interface File {
   mimetype?: string;
   mode?: string;
   name?: string;
+  original_h?: number;
+  original_w?: number;
   permalink?: string;
   permalink_public?: string;
   pretty_type?: string;
@@ -45,6 +48,13 @@ export interface File {
   public_url_shared?: boolean;
   shares?: Shares;
   size?: number;
+  thumb_160?: string;
+  thumb_360?: string;
+  thumb_360_h?: number;
+  thumb_360_w?: number;
+  thumb_64?: string;
+  thumb_80?: string;
+  thumb_tiny?: string;
   timestamp?: number;
   title?: string;
   url_private?: string;

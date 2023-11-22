@@ -34,6 +34,8 @@ export type * from "./client/webhook-client.ts";
 
 export * from "./manifest/manifest-params.ts";
 export type * from "./manifest/manifest-params.ts";
+export * from "./manifest/scopes.ts";
+export type * from "./manifest/scopes.ts";
 
 export * from "./token-rotation/token-refresh-targets.ts";
 export type * from "./token-rotation/token-refresh-targets.ts";
