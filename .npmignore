@@ -4,3 +4,6 @@ tsconfig.json
 src/
 src_deno/
 scripts/
+test/
+vite.config.ts
+.env

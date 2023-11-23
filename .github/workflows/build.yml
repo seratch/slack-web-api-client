@@ -21,3 +21,5 @@ jobs:
     - run: npm i
     - name: Compile
       run: npm i && npm run build
+    - name: Test
+      run: npm run ci-test
