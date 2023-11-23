@@ -1,3 +1,4 @@
+import { AnyMafifestEvent } from "./events.ts";
 import { AnyManifestBotScope, AnyManifestUserScope } from "./scopes.ts";
 
 export interface ManifestParams {
@@ -16,7 +17,7 @@ export interface ManifestMetadata {
 
 export interface ManifestDisplayInformation {
   name: string;
-  description: string;
+  description?: string;
   long_description?: string;
   background_color?: string;
 }
@@ -80,8 +81,8 @@ export interface ManifestSettings {
 }
 
 export interface ManifestEventSubscriptions {
-  bot_events?: string[];
-  user_events?: string[];
+  bot_events?: AnyMafifestEvent[];
+  user_events?: AnyMafifestEvent[];
   request_url?: string; // can be absent when enabling Socket Mode
 }
 
@@ -93,7 +94,7 @@ export interface ManifestInteractivity {
 
 export interface ManifestFunction {
   title: string;
-  description?: string;
+  description: string;
   input_parameters: ManifestParameters;
   output_parameters: ManifestParameters;
 }

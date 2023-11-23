@@ -19,6 +19,8 @@ export type * from "./block-kit/rich-text-block";
 export * from "./block-kit/views";
 export type * from "./block-kit/views";
 
+export * from "./client/api-client-options";
+export type * from "./client/api-client-options";
 export * from "./client/api-client";
 export type * from "./client/api-client";
 export * from "./client/request";
@@ -34,6 +36,8 @@ export type * from "./client/webhook-client";
 
 export * from "./manifest/manifest-params";
 export type * from "./manifest/manifest-params";
+export * from "./manifest/events";
+export type * from "./manifest/events";
 export * from "./manifest/scopes";
 export type * from "./manifest/scopes";
 

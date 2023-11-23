@@ -19,6 +19,8 @@ export type * from "./block-kit/rich-text-block.ts";
 export * from "./block-kit/views.ts";
 export type * from "./block-kit/views.ts";
 
+export * from "./client/api-client-options.ts";
+export type * from "./client/api-client-options.ts";
 export * from "./client/api-client.ts";
 export type * from "./client/api-client.ts";
 export * from "./client/request.ts";
@@ -34,6 +36,8 @@ export type * from "./client/webhook-client.ts";
 
 export * from "./manifest/manifest-params.ts";
 export type * from "./manifest/manifest-params.ts";
+export * from "./manifest/events.ts";
+export type * from "./manifest/events.ts";
 export * from "./manifest/scopes.ts";
 export type * from "./manifest/scopes.ts";
 
