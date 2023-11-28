@@ -444,6 +444,7 @@ export interface FileElement {
   source_team?: string;
   subject?: string;
   subtype?: string;
+  team_pref_version_history_enabled?: boolean;
   teams_shared_with?: any[];
   template_conversion_ts?: number;
   template_description?: string;
@@ -788,6 +789,7 @@ export interface MessageFile {
   source_team?: string;
   subject?: string;
   subtype?: string;
+  team_pref_version_history_enabled?: boolean;
   teams_shared_with?: any[];
   template_conversion_ts?: number;
   template_description?: string;
