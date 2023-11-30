@@ -51,12 +51,14 @@ export interface Match {
   id?: string;
   image_exif_rotation?: number;
   ims?: string[];
+  is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
   is_starred?: boolean;
   last_editor?: string;
   lines?: number;
   lines_more?: number;
+  linked_channel_id?: string;
   media_display_type?: string;
   mimetype?: string;
   mode?: string;
