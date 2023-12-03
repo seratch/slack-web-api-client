@@ -4,9 +4,9 @@
 [![deno module](https://shield.deno.dev/x/slack_web_api_client)](https://deno.land/x/slack_web_api_client)
 
 The **slack-web-api-client** library is a type-safe Slack Web API client that provides several key benefits, including:
-* A fetch-based implementation, which is compatible with most runtimes
-* Strong types for Web API responses and Block Kit, which make coding enjoyable and predictable
-* Zero additional dependencies, allowing developers to integrate this library into their projects without any obstacles
+* **A fetch-based implementation**, which is compatible with most runtimes
+* **Strong types for Web API responses and Block Kit**, which make coding enjoyable and predictable
+* **Zero additional dependencies**, allowing developers to integrate this library into their projects without any obstacles
 
 ### Getting Started
 
@@ -14,7 +14,7 @@ The **slack-web-api-client** library is a type-safe Slack Web API client that pr
 
 To install the **slack-web-api-client** library, simply use the standard npm/yarn command:
 ```
-npm i slack-web-api-client
+npm i slack-web-api-client@latest
 ```
 
 Once you have added the **slack-web-api-client** library to your project's dependencies using the npm/yarn command, you can easily import any functionality you need from `"slack-web-api-client"` in your TypeScript code:
