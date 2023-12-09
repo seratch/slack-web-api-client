@@ -791,6 +791,7 @@ export interface ConversationsInfoRequest extends SlackAPIRequest, LocaleAware {
 export interface ConversationsInviteRequest extends SlackAPIRequest {
   channel: string;
   users: string; // comma-separated list of users
+  force?: boolean;
 }
 export interface ConversationsInviteSharedRequest extends SlackAPIRequest {
   channel: string;
