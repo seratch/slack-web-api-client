@@ -100,6 +100,7 @@ export interface File {
   saved?: Saved;
   sent_to_self?: boolean;
   shares?: Shares;
+  show_badge?: boolean;
   simplified_html?: string;
   size?: number;
   source_team?: string;

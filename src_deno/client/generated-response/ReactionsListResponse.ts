@@ -435,6 +435,7 @@ export interface FileElement {
   saved?: Saved;
   sent_to_self?: boolean;
   shares?: Shares;
+  show_badge?: boolean;
   simplified_html?: string;
   size?: number;
   source_team?: string;
@@ -780,6 +781,7 @@ export interface BlockFile {
   saved?: Saved;
   sent_to_self?: boolean;
   shares?: PendingInvitees;
+  show_badge?: boolean;
   simplified_html?: string;
   size?: number;
   source_team?: string;
