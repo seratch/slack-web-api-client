@@ -41,13 +41,13 @@ export type AnyActionBlockElementType =
   | "file_input";
 
 export interface BlockElement<
-  T extends AnyBlockElementType = AnyBlockElementType
+  T extends AnyBlockElementType = AnyBlockElementType,
 > {
   type: T;
 }
 
 export interface ActionBlockElement<
-  T extends AnyActionBlockElementType = AnyActionBlockElementType
+  T extends AnyActionBlockElementType = AnyActionBlockElementType,
 > extends BlockElement<T> {
   type: T;
   action_id?: string;

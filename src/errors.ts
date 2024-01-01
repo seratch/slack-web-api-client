@@ -6,7 +6,7 @@ export class SlackAPIError extends Error {
   result: SlackAPIResponse;
   constructor(apiName: string, error: string, result: SlackAPIResponse) {
     const message = `Failed to call ${apiName} due to ${error}: ${JSON.stringify(
-      result
+      result,
     )}`;
     super(message);
     this.name = "SlackAPIError";

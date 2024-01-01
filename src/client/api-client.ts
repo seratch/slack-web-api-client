@@ -465,7 +465,7 @@ import type {
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,
-  Resp extends SlackAPIResponse
+  Resp extends SlackAPIResponse,
 > {
   (args?: Req): Promise<Resp>;
 }
@@ -476,7 +476,7 @@ export class SlackAPIClient {
 
   constructor(
     token: string | undefined = undefined,
-    options: SlackAPIClientOptions = { logLevel: "INFO" }
+    options: SlackAPIClientOptions = { logLevel: "INFO" },
   ) {
     this.#token = token;
     this.#options = options;
@@ -485,7 +485,7 @@ export class SlackAPIClient {
   async call(
     name: string,
     // deno-lint-ignore no-explicit-any
-    params: Record<string, any>
+    params: Record<string, any>,
   ): Promise<SlackAPIResponse> {
     const url = `https://slack.com/api/${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
@@ -535,7 +535,7 @@ export class SlackAPIClient {
   async sendMultipartData(
     name: string,
     // deno-lint-ignore no-explicit-any
-    params: Record<string, any>
+    params: Record<string, any>,
   ): Promise<SlackAPIResponse> {
     const url = `https://slack.com/api/${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
@@ -583,14 +583,14 @@ export class SlackAPIClient {
 
   bindApiCall<A extends SlackAPIRequest, R extends SlackAPIResponse>(
     self: SlackAPIClient,
-    method: string
+    method: string,
   ): SlackAPI<A, R> {
     return self.call.bind(self, method) as SlackAPI<A, R>;
   }
 
   bindMultipartApiCall<A extends SlackAPIRequest, R extends SlackAPIResponse>(
     self: SlackAPIClient,
-    method: string
+    method: string,
   ): SlackAPI<A, R> {
     return self.sendMultipartData.bind(self, method) as SlackAPI<A, R>;
   }
@@ -785,7 +785,7 @@ export class SlackAPIClient {
     emoji: {
       add: this.bindApiCall<AdminEmojiAddRequest, AdminEmojiAddResponse>(
         this,
-        "admin.emoji.add"
+        "admin.emoji.add",
       ),
       addAlias: this.bindApiCall<
         AdminEmojiAddAliasRequest,
@@ -793,7 +793,7 @@ export class SlackAPIClient {
       >(this, "admin.emoji.addAlias"),
       list: this.bindApiCall<AdminEmojiListRequest, AdminEmojiListResponse>(
         this,
-        "admin.emoji.list"
+        "admin.emoji.list",
       ),
       remove: this.bindApiCall<
         AdminEmojiRemoveRequest,
@@ -873,7 +873,7 @@ export class SlackAPIClient {
       >(this, "admin.teams.create"),
       list: this.bindApiCall<AdminTeamsListRequest, AdminTeamsListResponse>(
         this,
-        "admin.teams.list"
+        "admin.teams.list",
       ),
       owners: {
         list: this.bindApiCall<
@@ -937,7 +937,7 @@ export class SlackAPIClient {
       >(this, "admin.users.invite"),
       list: this.bindApiCall<AdminUsersListRequest, AdminUsersListResponse>(
         this,
-        "admin.users.list"
+        "admin.users.list",
       ),
       remove: this.bindApiCall<
         AdminUsersRemoveRequest,
@@ -1038,7 +1038,7 @@ export class SlackAPIClient {
     datastore: {
       put: this.bindApiCall<AppsDatastorePutRequest, AppsDatastorePutResponse>(
         this,
-        "apps.datastore.put"
+        "apps.datastore.put",
       ),
       update: this.bindApiCall<
         AppsDatastoreUpdateRequest,
@@ -1046,7 +1046,7 @@ export class SlackAPIClient {
       >(this, "apps.datastore.update"),
       get: this.bindApiCall<AppsDatastoreGetRequest, AppsDatastoreGetResponse>(
         this,
-        "apps.datastore.get"
+        "apps.datastore.get",
       ),
       query: this.bindApiCall<
         AppsDatastoreQueryRequest,
@@ -1089,57 +1089,57 @@ export class SlackAPIClient {
     },
     uninstall: this.bindApiCall<AppsUninstallRequest, AppsUninstallResponse>(
       this,
-      "apps.uninstall"
+      "apps.uninstall",
     ),
   };
 
   public readonly auth = {
     revoke: this.bindApiCall<AuthRevokeRequest, AuthRevokeResponse>(
       this,
-      "auth.revoke"
+      "auth.revoke",
     ),
     teams: {
       list: this.bindApiCall<AuthTeamsListRequest, AuthTeamsListResponse>(
         this,
-        "auth.teams.list"
+        "auth.teams.list",
       ),
     },
     test: this.bindApiCall<AuthTestRequest, AuthTestResponse>(
       this,
-      "auth.test"
+      "auth.test",
     ),
   };
 
   public readonly bots = {
     info: this.bindApiCall<BotsInfoRequest, BotsInfoResponse>(
       this,
-      "bots.info"
+      "bots.info",
     ),
   };
 
   public readonly bookmarks = {
     add: this.bindApiCall<BookmarksAddRequest, BookmarksAddResponse>(
       this,
-      "bookmarks.add"
+      "bookmarks.add",
     ),
     edit: this.bindApiCall<BookmarksEditRequest, BookmarksEditResponse>(
       this,
-      "bookmarks.edit"
+      "bookmarks.edit",
     ),
     list: this.bindApiCall<BookmarksListRequest, BookmarksListResponse>(
       this,
-      "bookmarks.list"
+      "bookmarks.list",
     ),
     remove: this.bindApiCall<BookmarksRemoveRequest, BookmarksRemoveResponse>(
       this,
-      "bookmarks.remove"
+      "bookmarks.remove",
     ),
   };
 
   public readonly chat = {
     delete: this.bindApiCall<ChatDeleteRequest, ChatDeleteResponse>(
       this,
-      "chat.delete"
+      "chat.delete",
     ),
     deleteScheduledMessage: this.bindApiCall<
       ChatDeleteScheduledMessageRequest,
@@ -1151,7 +1151,7 @@ export class SlackAPIClient {
     >(this, "chat.getPermalink"),
     meMessage: this.bindApiCall<ChatMeMessageRequest, ChatMeMessageResponse>(
       this,
-      "chat.meMessage"
+      "chat.meMessage",
     ),
     postEphemeral: this.bindApiCall<
       ChatPostEphemeralRequest,
@@ -1173,11 +1173,11 @@ export class SlackAPIClient {
     },
     unfurl: this.bindApiCall<ChatUnfurlRequest, ChatUnfurlResponse>(
       this,
-      "chat.unfurl"
+      "chat.unfurl",
     ),
     update: this.bindApiCall<ChatUpdateRequest, ChatUpdateResponse>(
       this,
-      "chat.update"
+      "chat.update",
     ),
   };
 
@@ -1212,7 +1212,7 @@ export class SlackAPIClient {
     >(this, "conversations.history"),
     info: this.bindApiCall<ConversationsInfoRequest, ConversationsInfoResponse>(
       this,
-      "conversations.info"
+      "conversations.info",
     ),
     invite: this.bindApiCall<
       ConversationsInviteRequest,
@@ -1224,11 +1224,11 @@ export class SlackAPIClient {
     >(this, "conversations.inviteShared"),
     join: this.bindApiCall<ConversationsJoinRequest, ConversationsJoinResponse>(
       this,
-      "conversations.join"
+      "conversations.join",
     ),
     kick: this.bindApiCall<ConversationsKickRequest, ConversationsKickResponse>(
       this,
-      "conversations.kick"
+      "conversations.kick",
     ),
     leave: this.bindApiCall<
       ConversationsLeaveRequest,
@@ -1236,7 +1236,7 @@ export class SlackAPIClient {
     >(this, "conversations.leave"),
     list: this.bindApiCall<ConversationsListRequest, ConversationsListResponse>(
       this,
-      "conversations.list"
+      "conversations.list",
     ),
     listConnectInvites: this.bindApiCall<
       ConversationsListConnectInvitesRequest,
@@ -1244,7 +1244,7 @@ export class SlackAPIClient {
     >(this, "conversations.listConnectInvites"),
     mark: this.bindApiCall<ConversationsMarkRequest, ConversationsMarkResponse>(
       this,
-      "conversations.mark"
+      "conversations.mark",
     ),
     members: this.bindApiCall<
       ConversationsMembersRequest,
@@ -1252,7 +1252,7 @@ export class SlackAPIClient {
     >(this, "conversations.members"),
     open: this.bindApiCall<ConversationsOpenRequest, ConversationsOpenResponse>(
       this,
-      "conversations.open"
+      "conversations.open",
     ),
     rename: this.bindApiCall<
       ConversationsRenameRequest,
@@ -1279,42 +1279,42 @@ export class SlackAPIClient {
   public readonly dnd = {
     endDnd: this.bindApiCall<DndEndDndRequest, DndEndDndResponse>(
       this,
-      "dnd.endDnd"
+      "dnd.endDnd",
     ),
     endSnooze: this.bindApiCall<DndEndSnoozeRequest, DndEndSnoozeResponse>(
       this,
-      "dnd.endSnooze"
+      "dnd.endSnooze",
     ),
     info: this.bindApiCall<DndInfoRequest, DndInfoResponse>(this, "dnd.info"),
     setSnooze: this.bindApiCall<DndSetSnoozeRequest, DndSetSnoozeResponse>(
       this,
-      "dnd.setSnooze"
+      "dnd.setSnooze",
     ),
     teamInfo: this.bindApiCall<DndTeamInfoRequest, DndTeamInfoResponse>(
       this,
-      "dnd.teamInfo"
+      "dnd.teamInfo",
     ),
   };
 
   public readonly emoji = {
     list: this.bindApiCall<EmojiListRequest, EmojiListResponse>(
       this,
-      "emoji.list"
+      "emoji.list",
     ),
   };
 
   public readonly files = {
     delete: this.bindApiCall<FilesDeleteRequest, FilesDeleteResponse>(
       this,
-      "files.delete"
+      "files.delete",
     ),
     info: this.bindApiCall<FilesInfoRequest, FilesInfoResponse>(
       this,
-      "files.info"
+      "files.info",
     ),
     list: this.bindApiCall<FilesListRequest, FilesListResponse>(
       this,
-      "files.list"
+      "files.list",
     ),
     revokePublicURL: this.bindApiCall<
       FilesRevokePublicURLRequest,
@@ -1326,7 +1326,7 @@ export class SlackAPIClient {
     >(this, "files.sharedPublicURL"),
     upload: this.bindMultipartApiCall<FilesUploadRequest, FilesUploadResponse>(
       this,
-      "files.upload"
+      "files.upload",
     ),
     getUploadURLExternal: this.bindApiCall<
       FilesGetUploadURLExternalRequest,
@@ -1339,15 +1339,15 @@ export class SlackAPIClient {
     remote: {
       info: this.bindApiCall<FilesRemoteInfoRequest, FilesRemoteInfoResponse>(
         this,
-        "files.remote.info"
+        "files.remote.info",
       ),
       list: this.bindApiCall<FilesRemoteListRequest, FilesRemoteListResponse>(
         this,
-        "files.remote.list"
+        "files.remote.list",
       ),
       add: this.bindApiCall<FilesRemoteAddRequest, FilesRemoteAddResponse>(
         this,
-        "files.remote.add"
+        "files.remote.add",
       ),
       update: this.bindApiCall<
         FilesRemoteUpdateRequest,
@@ -1386,7 +1386,7 @@ export class SlackAPIClient {
     v2: {
       access: this.bindApiCall<OAuthV2AccessRequest, OAuthV2AccessResponse>(
         this,
-        "oauth.v2.access"
+        "oauth.v2.access",
       ),
       exchange: this.bindApiCall<
         OAuthV2ExchangeRequest,
@@ -1412,37 +1412,37 @@ export class SlackAPIClient {
     add: this.bindApiCall<PinsAddRequest, PinsAddResponse>(this, "pins.add"),
     list: this.bindApiCall<PinsListRequest, PinsListResponse>(
       this,
-      "pins.list"
+      "pins.list",
     ),
     remove: this.bindApiCall<PinsRemoveRequest, PinsRemoveResponse>(
       this,
-      "pins.remove"
+      "pins.remove",
     ),
   };
 
   public readonly reactions = {
     add: this.bindApiCall<ReactionsAddRequest, ReactionsAddResponse>(
       this,
-      "reactions.add"
+      "reactions.add",
     ),
     get: this.bindApiCall<ReactionsGetRequest, ReactionsGetResponse>(
       this,
-      "reactions.get"
+      "reactions.get",
     ),
     list: this.bindApiCall<ReactionsListRequest, ReactionsListResponse>(
       this,
-      "reactions.list"
+      "reactions.list",
     ),
     remove: this.bindApiCall<ReactionsRemoveRequest, ReactionsRemoveResponse>(
       this,
-      "reactions.remove"
+      "reactions.remove",
     ),
   };
 
   public readonly reminders = {
     add: this.bindApiCall<RemindersAddRequest, RemindersAddResponse>(
       this,
-      "reminders.add"
+      "reminders.add",
     ),
     complete: this.bindApiCall<
       RemindersCompleteRequest,
@@ -1450,30 +1450,30 @@ export class SlackAPIClient {
     >(this, "reminders.complete"),
     delete: this.bindApiCall<RemindersDeleteRequest, RemindersDeleteResponse>(
       this,
-      "reminders.delete"
+      "reminders.delete",
     ),
     info: this.bindApiCall<RemindersInfoRequest, RemindersInfoResponse>(
       this,
-      "reminders.info"
+      "reminders.info",
     ),
     list: this.bindApiCall<RemindersListRequest, RemindersListResponse>(
       this,
-      "reminders.list"
+      "reminders.list",
     ),
   };
 
   public readonly search = {
     all: this.bindApiCall<SearchAllRequest, SearchAllResponse>(
       this,
-      "search.all"
+      "search.all",
     ),
     files: this.bindApiCall<SearchFilesRequest, SearchFilesResponse>(
       this,
-      "search.files"
+      "search.files",
     ),
     messages: this.bindApiCall<SearchMessagesRequest, SearchMessagesResponse>(
       this,
-      "search.messages"
+      "search.messages",
     ),
   };
 
@@ -1481,18 +1481,18 @@ export class SlackAPIClient {
     add: this.bindApiCall<StarsAddRequest, StarsAddResponse>(this, "stars.add"),
     list: this.bindApiCall<StarsListRequest, StarsListResponse>(
       this,
-      "stars.list"
+      "stars.list",
     ),
     remove: this.bindApiCall<StarsRemoveRequest, StarsRemoveResponse>(
       this,
-      "stars.remove"
+      "stars.remove",
     ),
   };
 
   public readonly team = {
     accessLogs: this.bindApiCall<TeamAccessLogsRequest, TeamAccessLogsResponse>(
       this,
-      "team.accessLogs"
+      "team.accessLogs",
     ),
     billableInfo: this.bindApiCall<
       TeamBillableInfoRequest,
@@ -1501,12 +1501,12 @@ export class SlackAPIClient {
     billing: {
       info: this.bindApiCall<TeamBillingInfoRequest, TeamBillingInfoResponse>(
         this,
-        "team.billing.info"
+        "team.billing.info",
       ),
     },
     info: this.bindApiCall<TeamInfoRequest, TeamInfoResponse>(
       this,
-      "team.info"
+      "team.info",
     ),
     integrationLogs: this.bindApiCall<
       TeamIntegrationLogsRequest,
@@ -1521,7 +1521,7 @@ export class SlackAPIClient {
     profile: {
       get: this.bindApiCall<TeamProfileGetRequest, TeamProfileGetResponse>(
         this,
-        "team.profile.get"
+        "team.profile.get",
       ),
     },
   };
@@ -1538,7 +1538,7 @@ export class SlackAPIClient {
   public readonly usergroups = {
     create: this.bindApiCall<UsergroupsCreateRequest, UsergroupsCreateResponse>(
       this,
-      "usergroups.create"
+      "usergroups.create",
     ),
     disable: this.bindApiCall<
       UsergroupsDisableRequest,
@@ -1546,15 +1546,15 @@ export class SlackAPIClient {
     >(this, "usergroups.disable"),
     enable: this.bindApiCall<UsergroupsEnableRequest, UsergroupsEnableResponse>(
       this,
-      "usergroups.enable"
+      "usergroups.enable",
     ),
     list: this.bindApiCall<UsergroupsListRequest, UsergroupsListResponse>(
       this,
-      "usergroups.list"
+      "usergroups.list",
     ),
     update: this.bindApiCall<UsergroupsUpdateRequest, UsergroupsUpdateResponse>(
       this,
-      "usergroups.update"
+      "usergroups.update",
     ),
     users: {
       list: this.bindApiCall<
@@ -1583,15 +1583,15 @@ export class SlackAPIClient {
     >(this, "users.getPresence"),
     identity: this.bindApiCall<UsersIdentityRequest, UsersIdentityResponse>(
       this,
-      "users.identity"
+      "users.identity",
     ),
     info: this.bindApiCall<UsersInfoRequest, UsersInfoResponse>(
       this,
-      "users.info"
+      "users.info",
     ),
     list: this.bindApiCall<UsersListRequest, UsersListResponse>(
       this,
-      "users.list"
+      "users.list",
     ),
     lookupByEmail: this.bindApiCall<
       UsersLookupByEmailRequest,
@@ -1599,7 +1599,7 @@ export class SlackAPIClient {
     >(this, "users.lookupByEmail"),
     setPhoto: this.bindApiCall<UsersSetPhotoRequest, UsersSetPhotoResponse>(
       this,
-      "users.setPhoto"
+      "users.setPhoto",
     ),
     setPresence: this.bindApiCall<
       UsersSetPresenceRequest,
@@ -1608,11 +1608,11 @@ export class SlackAPIClient {
     profile: {
       get: this.bindApiCall<UsersProfileGetRequest, UsersProfileGetResponse>(
         this,
-        "users.profile.get"
+        "users.profile.get",
       ),
       set: this.bindApiCall<UsersProfileSetRequest, UsersProfileSetResponse>(
         this,
-        "users.profile.set"
+        "users.profile.set",
       ),
     },
   };
@@ -1620,19 +1620,19 @@ export class SlackAPIClient {
   public readonly views = {
     open: this.bindApiCall<ViewsOpenRequest, ViewsOpenResponse>(
       this,
-      "views.open"
+      "views.open",
     ),
     publish: this.bindApiCall<ViewsPublishRequest, ViewsPublishResponse>(
       this,
-      "views.publish"
+      "views.publish",
     ),
     push: this.bindApiCall<ViewsPushRequest, ViewsPushResponse>(
       this,
-      "views.push"
+      "views.push",
     ),
     update: this.bindApiCall<ViewsUpdateRequest, ViewsUpdateResponse>(
       this,
-      "views.update"
+      "views.update",
     ),
   };
 

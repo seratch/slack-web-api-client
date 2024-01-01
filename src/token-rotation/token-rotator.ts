@@ -16,11 +16,11 @@ export class TokenRotator {
   }
 
   async performRotation(
-    targets: TokenRefreshTargets
+    targets: TokenRefreshTargets,
   ): Promise<TokenRefreshResults> {
     const refreshResults: TokenRefreshResults = {};
     const randomSeconds = Math.round(
-      crypto.getRandomValues(new Uint16Array(1))[0] / 100
+      crypto.getRandomValues(new Uint16Array(1))[0] / 100,
     );
     const expireAt = new Date().getTime() / 1000 + randomSeconds;
     if (targets.bot && targets.bot.token_expires_at < expireAt) {

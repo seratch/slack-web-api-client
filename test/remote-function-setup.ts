@@ -32,7 +32,7 @@ if (needRefresh) {
   });
   await Deno.writeTextFile(
     ".env",
-    `SLACK_TOOLING_ACCESS_TOKEN=${response.token}\nSLACK_TOOLING_REFRESH_TOKEN=${response.refresh_token}\n`
+    `SLACK_TOOLING_ACCESS_TOKEN=${response.token}\nSLACK_TOOLING_REFRESH_TOKEN=${response.refresh_token}\n`,
   );
   accessToken = response.token;
 }
