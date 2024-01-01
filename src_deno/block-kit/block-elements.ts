@@ -1,8 +1,8 @@
 import type { Confirm } from "./confirm.ts";
 import type { AnyOption, PlainTextOption } from "./options.ts";
+import type { RichTextBlock } from "./rich-text-block.ts";
 import type { PlainTextField } from "./text-fields.ts";
 import type { Workflow } from "./workflows.ts";
-import type { RichTextBlock } from "./rich-text-block.ts";
 
 // -----------------------------
 // Basic types
@@ -382,7 +382,30 @@ export interface RichTextQuote extends RichTextBlockElement {
   type: "rich_text_quote";
   elements: RichTextBlockElement[];
 }
-export interface RichTextSection {
+export interface RichTextSection extends RichTextBlockElement {
+  type: "rich_text_section";
+  elements: AnyRichTextSectionElement[];
+}
+
+export type AnyRichTextBlockElement =
+  | RichTextList
+  | RichTextPreformatted
+  | RichTextQuote
+  | RichTextSection;
+
+export type AnyRichTextSectionElement =
+  | RichTextSectionText
+  | RichTextSectionChannel
+  | RichTextSectionUser
+  | RichTextSectionEmoji
+  | RichTextSectionLink
+  | RichTextSectionTeam
+  | RichTextSectionUsergroup
+  | RichTextSectionDate
+  | RichTextSectionBroadcast
+  | RichTextSectionColor;
+
+export interface RichTextSectionElement {
   type:
     | "text"
     | "channel"
@@ -394,55 +417,52 @@ export interface RichTextSection {
     | "date"
     | "broadcast"
     | "color";
-  style: RichTextSectionElementStyle;
+  style?: RichTextSectionElementStyle;
 }
-
-export type AnyRichTextBlockElement =
-  | RichTextList
-  | RichTextPreformatted
-  | RichTextQuote
-  | RichTextSection;
-
-export interface RichTextSectionText extends RichTextSection {
+export interface RichTextSectionText extends RichTextSectionElement {
   type: "text";
   text: string;
+  style?: RichTextSectionElementStyleWithCode;
 }
-export interface RichTextSectionChannel extends RichTextSection {
+export interface RichTextSectionChannel extends RichTextSectionElement {
   type: "channel";
   channel_id: string;
 }
-export interface RichTextSectionUser extends RichTextSection {
+export interface RichTextSectionUser extends RichTextSectionElement {
   type: "user";
   user_id: string;
 }
-export interface RichTextSectionEmoji extends RichTextSection {
+export interface RichTextSectionEmoji extends RichTextSectionElement {
   type: "emoji";
   name: string;
-  skin_tone: number;
-  unicode: string;
+  skin_tone?: number;
+  unicode?: string;
 }
-export interface RichTextSectionLink extends RichTextSection {
+export interface RichTextSectionLink extends RichTextSectionElement {
   type: "link";
   url: string;
   text: string;
+  style?: RichTextSectionElementStyleWithCode;
 }
-export interface RichTextSectionTeam extends RichTextSection {
+export interface RichTextSectionTeam extends RichTextSectionElement {
   type: "team";
   team_id: string;
 }
-export interface RichTextSectionUsergroup extends RichTextSection {
+export interface RichTextSectionUsergroup extends RichTextSectionElement {
   type: "usergroup";
   usergroup_id: string;
 }
-export interface RichTextSectionDate extends RichTextSection {
+export interface RichTextSectionDate extends RichTextSectionElement {
   type: "date";
-  timestamp: string;
+  timestamp: number;
+  format: string;
+  style?: RichTextSectionElementStyleWithCode;
 }
-export interface RichTextSectionBroadcast extends RichTextSection {
+export interface RichTextSectionBroadcast extends RichTextSectionElement {
   type: "broadcast";
-  range: string;
+  range: "channel" | "here" | "everyone";
 }
-export interface RichTextSectionColor extends RichTextSection {
+export interface RichTextSectionColor extends RichTextSectionElement {
   type: "color";
   value: string;
 }
@@ -451,10 +471,8 @@ export interface RichTextSectionElementStyle {
   bold?: boolean;
   italic?: boolean;
   strike?: boolean;
-  code?: boolean;
 }
-
-export interface RichTextSectionElement extends RichTextBlockElement {
-  type: "rich_text_section";
-  elements: RichTextSection[];
+export interface RichTextSectionElementStyleWithCode
+  extends RichTextSectionElementStyle {
+  code?: boolean;
 }
