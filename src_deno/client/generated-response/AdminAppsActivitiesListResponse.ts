@@ -59,12 +59,15 @@ export interface Trigger {
 
 export interface Config {
   description?: string;
+  event_type?: string;
   name?: string;
   schema?: Inputs;
 }
 
 export interface TripInformation {
   channel_id?: string;
+  message_ts?: string;
+  reaction?: string;
   user_id?: string;
 }
 
