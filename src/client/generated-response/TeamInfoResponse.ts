@@ -23,6 +23,7 @@ export interface Team {
   icon?: Icon;
   id?: string;
   is_verified?: boolean;
+  lob_sales_home_enabled?: boolean;
   name?: string;
   url?: string;
 }
