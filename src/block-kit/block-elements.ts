@@ -1,6 +1,7 @@
 import type { Confirm } from "./confirm";
 import type { AnyOption, PlainTextOption } from "./options";
 import type { RichTextBlock } from "./rich-text-block";
+import { AnySlackFile } from "./slack-files";
 import type { PlainTextField } from "./text-fields";
 import type { Workflow } from "./workflows";
 
@@ -113,11 +114,17 @@ export interface Dispatchable {
 // Elements
 // -----------------------------
 
-export interface ImageElement extends BlockElement<"image"> {
+export interface PublicImageElement extends BlockElement<"image"> {
   type: "image";
   image_url: string;
   alt_text: string;
 }
+export interface SlackFileImageElement extends BlockElement<"image"> {
+  type: "image";
+  slack_file: AnySlackFile;
+  alt_text: string;
+}
+export type ImageElement = PublicImageElement | SlackFileImageElement;
 
 export interface UsersSelect
   extends ActionBlockElement<"users_select">,

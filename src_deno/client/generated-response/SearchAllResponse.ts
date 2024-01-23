@@ -37,7 +37,7 @@ export interface FilesMatch {
   dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   edit_link?: string;
   editable?: boolean;
-  editors?: string[];
+  editors?: LastEditor[];
   editors_count?: number;
   external_id?: string;
   external_type?: string;
@@ -57,7 +57,7 @@ export interface FilesMatch {
   is_external?: boolean;
   is_public?: boolean;
   is_starred?: boolean;
-  last_editor?: string;
+  last_editor?: LastEditor;
   lines?: number;
   lines_more?: number;
   linked_channel_id?: string;
@@ -122,8 +122,8 @@ export interface FilesMatch {
   url_private?: string;
   url_private_download?: string;
   url_static_preview?: string;
-  user?: string;
-  user_team?: string;
+  user?: LastEditor;
+  user_team?: UserTeam;
   username?: string;
 }
 
@@ -605,7 +605,12 @@ export interface Cc {
 
 export interface DmMpdmUsersWithFileAccess {
   access?: string;
-  user_id?: string;
+  user_id?: LastEditor;
+}
+
+export enum LastEditor {
+  Empty = "",
+  U00000000 = "U00000000",
 }
 
 export interface FileHeaders {
@@ -646,11 +651,11 @@ export interface Saved {
 }
 
 export interface PurpleShares {
-  private?: { [key: string]: Private[] };
-  public?: { [key: string]: Private[] };
+  private?: { [key: string]: Public[] };
+  public?: { [key: string]: Public[] };
 }
 
-export interface Private {
+export interface Public {
   access?: string;
   channel_name?: string;
   date_last_shared?: number;
@@ -658,11 +663,21 @@ export interface Private {
   reply_count?: number;
   reply_users?: string[];
   reply_users_count?: number;
-  share_user_id?: string;
+  share_user_id?: LastEditor;
   source?: string;
-  team_id?: string;
+  team_id?: UserTeam;
   thread_ts?: string;
-  ts?: string;
+  ts?: Ts;
+}
+
+export enum UserTeam {
+  Empty = "",
+  T00000000 = "T00000000",
+}
+
+export enum Ts {
+  Empty = "",
+  The0000000000000000 = "0000000000.000000",
 }
 
 export interface Transcription {
@@ -1047,17 +1062,6 @@ export interface MatchShares {
   public?: { [key: string]: Public[] };
 }
 
-export interface Public {
-  channel_name?: string;
-  reply_count?: number;
-  reply_users?: string[];
-  reply_users_count?: number;
-  share_user_id?: string;
-  source?: string;
-  team_id?: string;
-  ts?: string;
-}
-
 export interface MatchTitleBlock {
   accessory?: Accessory;
   alt_text?: string;
@@ -1189,11 +1193,11 @@ export interface MessagesMatch {
   previous?: Previous;
   previous_2?: Previous;
   score?: number;
-  team?: string;
+  team?: UserTeam;
   text?: string;
-  ts?: string;
+  ts?: Ts;
   type?: string;
-  user?: string;
+  user?: LastEditor;
   username?: string;
 }
 
@@ -1212,7 +1216,7 @@ export interface Channel {
   name?: string;
   name_normalized?: string;
   pending_shared?: string[];
-  user?: string;
+  user?: LastEditor;
 }
 
 export interface Previous {
@@ -1221,9 +1225,9 @@ export interface Previous {
   iid?: string;
   permalink?: string;
   text?: string;
-  ts?: string;
+  ts?: Ts;
   type?: string;
-  user?: string;
+  user?: LastEditor;
   username?: string;
 }
 

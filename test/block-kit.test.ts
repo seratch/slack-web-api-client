@@ -1,5 +1,5 @@
 import { assert, test, describe } from "vitest";
-import { RichTextBlock } from "../src/index";
+import { AnyMessageBlock, RichTextBlock } from "../src/index";
 
 describe("Block Kit types", () => {
   test("parse rich text ones", async () => {
@@ -112,5 +112,50 @@ describe("Block Kit types", () => {
       },
     ];
     assert.equal(blocks.length, 1);
+  });
+  test("parse image blocks/elements", async () => {
+    // Verify if this compiles
+    const blocks: AnyMessageBlock[] = [
+      {
+        type: "image",
+        image_url: "https://example.com",
+        alt_text: "alt",
+      },
+      {
+        type: "image",
+        slack_file: { url: "https://slack.com" },
+        alt_text: "alt",
+      },
+      {
+        type: "image",
+        slack_file: { id: "F111" },
+        alt_text: "alt",
+      },
+      {
+        type: "section",
+        accessory: {
+          type: "image",
+          image_url: "https://example.com",
+          alt_text: "alt",
+        },
+      },
+      {
+        type: "section",
+        accessory: {
+          type: "image",
+          slack_file: { url: "https://slack.com" },
+          alt_text: "alt",
+        },
+      },
+      {
+        type: "section",
+        accessory: {
+          type: "image",
+          slack_file: { id: "F111" },
+          alt_text: "alt",
+        },
+      },
+    ];
+    assert.equal(blocks.length, 6);
   });
 });

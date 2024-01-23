@@ -625,11 +625,11 @@ export interface Saved {
 }
 
 export interface PurpleShares {
-  private?: { [key: string]: Private[] };
-  public?: { [key: string]: Private[] };
+  private?: { [key: string]: Public[] };
+  public?: { [key: string]: Public[] };
 }
 
-export interface Private {
+export interface Public {
   access?: string;
   channel_name?: string;
   date_last_shared?: number;
@@ -1024,17 +1024,6 @@ export interface MatchHeaders {
 
 export interface MatchShares {
   public?: { [key: string]: Public[] };
-}
-
-export interface Public {
-  channel_name?: string;
-  reply_count?: number;
-  reply_users?: string[];
-  reply_users_count?: number;
-  share_user_id?: string;
-  source?: string;
-  team_id?: string;
-  ts?: string;
 }
 
 export interface TitleBlock {

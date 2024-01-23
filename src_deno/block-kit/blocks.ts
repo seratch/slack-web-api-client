@@ -18,6 +18,7 @@ import type {
   WorkflowButton,
 } from "./block-elements.ts";
 import type { RichTextBlock } from "./rich-text-block.ts";
+import { AnySlackFile } from "./slack-files.ts";
 import type { AnyTextField, PlainTextField } from "./text-fields.ts";
 
 // -----------------------------
@@ -119,12 +120,19 @@ export interface HeaderBlock extends Block<"header"> {
   text: PlainTextField;
 }
 
-export interface ImageBlock extends Block<"image"> {
+export interface PublicImageBlock extends Block<"image"> {
   type: "image";
   image_url: string;
   alt_text: string;
   title?: PlainTextField;
 }
+export interface SlackFileImageBlock extends Block<"image"> {
+  type: "image";
+  slack_file: AnySlackFile;
+  alt_text: string;
+  title?: PlainTextField;
+}
+export type ImageBlock = PublicImageBlock | SlackFileImageBlock;
 
 export interface MessageInputBlock extends Block<"input"> {
   type: "input";
