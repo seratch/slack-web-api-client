@@ -260,12 +260,14 @@ export interface TitleBlock {
   image_height?: number;
   image_url?: string;
   image_width?: number;
+  is_animated?: boolean;
   is_workflow_app?: boolean;
   owning_team_id?: string;
   provider_icon_url?: string;
   provider_name?: string;
   sales_home_workflow_app_type?: number;
   share_url?: string;
+  slack_file?: SlackFile;
   text?: Text;
   thumbnail_url?: string;
   title?: Text | string;
@@ -312,6 +314,7 @@ export interface Accessory {
   options?: Option[];
   placeholder?: Text;
   response_url_enabled?: boolean;
+  slack_file?: SlackFile;
   style?: string;
   text?: Text;
   timezone?: string;
@@ -403,6 +406,11 @@ export interface Option {
 export interface OptionGroup {
   label?: Text;
   options?: Option[];
+}
+
+export interface SlackFile {
+  id?: string;
+  url?: string;
 }
 
 export interface Workflow {

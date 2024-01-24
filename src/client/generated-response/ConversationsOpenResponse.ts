@@ -75,6 +75,7 @@ export interface Block {
   image_height?: number;
   image_url?: string;
   image_width?: number;
+  is_animated?: boolean;
   is_workflow_app?: boolean;
   label?: Description;
   optional?: boolean;
@@ -83,6 +84,7 @@ export interface Block {
   provider_name?: string;
   sales_home_workflow_app_type?: number;
   share_url?: string;
+  slack_file?: SlackFile;
   source?: string;
   text?: Description;
   thumbnail_url?: string;
@@ -130,6 +132,7 @@ export interface Accessory {
   options?: Option[];
   placeholder?: Description;
   response_url_enabled?: boolean;
+  slack_file?: SlackFile;
   style?: string;
   text?: Description;
   timezone?: string;
@@ -221,6 +224,11 @@ export interface Option {
 export interface OptionGroup {
   label?: Description;
   options?: Option[];
+}
+
+export interface SlackFile {
+  id?: string;
+  url?: string;
 }
 
 export interface Workflow {
