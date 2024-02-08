@@ -788,7 +788,7 @@ export interface BlockFile {
   reactions?: any[];
   saved?: Saved;
   sent_to_self?: boolean;
-  shares?: PendingInvitees;
+  shares?: Knocks;
   show_badge?: boolean;
   simplified_html?: string;
   size?: number;
@@ -862,7 +862,7 @@ export interface BlockFile {
   vtt?: string;
 }
 
-export interface PendingInvitees {}
+export interface Knocks {}
 
 export interface RootIcons {
   emoji?: string;
@@ -894,6 +894,8 @@ export interface Room {
   is_dm_call?: boolean;
   is_prewarmed?: boolean;
   is_scheduled?: boolean;
+  knocks?: Knocks;
+  last_invite_status_by_user?: Knocks;
   media_backend_type?: string;
   media_server?: string;
   name?: string;
@@ -903,7 +905,7 @@ export interface Room {
   participants_camera_on?: string[];
   participants_screenshare_off?: string[];
   participants_screenshare_on?: string[];
-  pending_invitees?: PendingInvitees;
+  pending_invitees?: Knocks;
   thread_root_ts?: string;
   was_accepted?: boolean;
   was_missed?: boolean;
