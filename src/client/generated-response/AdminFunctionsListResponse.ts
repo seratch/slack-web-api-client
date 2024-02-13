@@ -18,6 +18,7 @@ export interface Function {
   callback_id?: string;
   date_created?: number;
   date_deleted?: number;
+  date_released?: number;
   date_updated?: number;
   description?: string;
   form_enabled?: boolean;

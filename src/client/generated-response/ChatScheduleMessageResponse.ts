@@ -507,6 +507,8 @@ export interface Room {
   is_dm_call?: boolean;
   is_prewarmed?: boolean;
   is_scheduled?: boolean;
+  knocks?: any;
+  last_invite_status_by_user?: any;
   media_backend_type?: string;
   media_server?: string;
   name?: string;
