@@ -366,30 +366,30 @@ export interface FileInput extends ActionBlockElement<"file_input"> {
 
 // https://api.slack.com/changelog/2019-09-what-they-see-is-what-you-get-and-more-and-less
 
-export type RichTextBlockElement = BlockElement<
+export type RichTextBlockSubElement = BlockElement<
   | "rich_text_list"
   | "rich_text_preformatted"
   | "rich_text_quote"
   | "rich_text_section"
 >;
 
-export interface RichTextList extends RichTextBlockElement {
+export interface RichTextList extends RichTextBlockSubElement {
   type: "rich_text_list";
   style?: "bullet" | "ordered";
   indent?: number;
   offset?: number;
   border?: number;
-  elements: RichTextBlockElement[];
+  elements: RichTextBlockSubElement[];
 }
-export interface RichTextPreformatted extends RichTextBlockElement {
+export interface RichTextPreformatted extends RichTextBlockSubElement {
   type: "rich_text_preformatted";
-  elements: RichTextBlockElement[];
+  elements: RichTextSectionElement[];
 }
-export interface RichTextQuote extends RichTextBlockElement {
+export interface RichTextQuote extends RichTextBlockSubElement {
   type: "rich_text_quote";
-  elements: RichTextBlockElement[];
+  elements: RichTextSectionElement[];
 }
-export interface RichTextSection extends RichTextBlockElement {
+export interface RichTextSection extends RichTextBlockSubElement {
   type: "rich_text_section";
   elements: AnyRichTextSectionElement[];
 }
