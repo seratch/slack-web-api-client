@@ -383,11 +383,11 @@ export interface RichTextList extends RichTextBlockSubElement {
 }
 export interface RichTextPreformatted extends RichTextBlockSubElement {
   type: "rich_text_preformatted";
-  elements: RichTextSectionElement[];
+  elements: AnyRichTextSectionElement[];
 }
 export interface RichTextQuote extends RichTextBlockSubElement {
   type: "rich_text_quote";
-  elements: RichTextSectionElement[];
+  elements: AnyRichTextSectionElement[];
 }
 export interface RichTextSection extends RichTextBlockSubElement {
   type: "rich_text_section";

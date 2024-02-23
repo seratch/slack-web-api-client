@@ -42,13 +42,13 @@ export type AnyActionBlockElementType =
   | "file_input";
 
 export interface BlockElement<
-  T extends AnyBlockElementType = AnyBlockElementType
+  T extends AnyBlockElementType = AnyBlockElementType,
 > {
   type: T;
 }
 
 export interface ActionBlockElement<
-  T extends AnyActionBlockElementType = AnyActionBlockElementType
+  T extends AnyActionBlockElementType = AnyActionBlockElementType,
 > extends BlockElement<T> {
   type: T;
   action_id?: string;
@@ -372,11 +372,11 @@ export interface RichTextList extends RichTextBlockSubElement {
 }
 export interface RichTextPreformatted extends RichTextBlockSubElement {
   type: "rich_text_preformatted";
-  elements: RichTextSectionElement[];
+  elements: AnyRichTextSectionElement[];
 }
 export interface RichTextQuote extends RichTextBlockSubElement {
   type: "rich_text_quote";
-  elements: RichTextSectionElement[];
+  elements: AnyRichTextSectionElement[];
 }
 export interface RichTextSection extends RichTextBlockSubElement {
   type: "rich_text_section";
