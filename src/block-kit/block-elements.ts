@@ -373,10 +373,12 @@ export interface RichTextList extends RichTextBlockSubElement {
 export interface RichTextPreformatted extends RichTextBlockSubElement {
   type: "rich_text_preformatted";
   elements: AnyRichTextSectionElement[];
+  border?: number;
 }
 export interface RichTextQuote extends RichTextBlockSubElement {
   type: "rich_text_quote";
   elements: AnyRichTextSectionElement[];
+  border?: number;
 }
 export interface RichTextSection extends RichTextBlockSubElement {
   type: "rich_text_section";
