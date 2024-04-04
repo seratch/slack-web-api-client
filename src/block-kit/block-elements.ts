@@ -1,5 +1,5 @@
 import type { Confirm } from "./confirm";
-import type { AnyOption, PlainTextOption } from "./options";
+import type { AnyDescriptionOption, PlainTextOption } from "./options";
 import type { RichTextBlock } from "./rich-text-block";
 import { AnySlackFile } from "./slack-files";
 import type { PlainTextField } from "./text-fields";
@@ -277,8 +277,8 @@ export interface RadioButtons
     Confirmable,
     Focusable {
   type: "radio_buttons";
-  initial_option?: AnyOption;
-  options: AnyOption[];
+  initial_option?: AnyDescriptionOption;
+  options: AnyDescriptionOption[];
 }
 export interface DateTimepicker
   extends ActionBlockElement<"datetimepicker">,
@@ -294,8 +294,8 @@ export interface Checkboxes
     Confirmable,
     Focusable {
   type: "checkboxes";
-  initial_options?: AnyOption[];
-  options: AnyOption[];
+  initial_options?: AnyDescriptionOption[];
+  options: AnyDescriptionOption[];
 }
 export interface RichTextInput
   extends ActionBlockElement<"rich_text_input">,

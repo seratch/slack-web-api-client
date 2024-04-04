@@ -1,5 +1,9 @@
 import { assert, test, describe } from "vitest";
-import { AnyMessageBlock, RichTextBlock } from "../src/index";
+import {
+  AnyMessageBlock,
+  MessageInputBlock,
+  RichTextBlock,
+} from "../src/index";
 
 describe("Block Kit types", () => {
   test("parse rich text ones", async () => {
@@ -157,5 +161,82 @@ describe("Block Kit types", () => {
       },
     ];
     assert.equal(blocks.length, 6);
+  });
+
+  test("parse description for an option", async () => {
+    // Verify if this compiles
+    const blocks: MessageInputBlock[] = [
+      {
+        type: "input",
+        block_id: "1",
+        label: { type: "plain_text", text: "Checkbox" },
+        element: {
+          type: "checkboxes",
+          options: [
+            {
+              text: { type: "plain_text", text: "1-p-p" },
+              description: { type: "plain_text", text: "1-p-p" },
+            },
+            {
+              text: { type: "plain_text", text: "1-p-m" },
+              description: { type: "mrkdwn", text: "1-p-m" },
+            },
+            {
+              text: { type: "mrkdwn", text: "1-m-p" },
+              description: { type: "plain_text", text: "1-m-p" },
+            },
+            {
+              text: { type: "mrkdwn", text: "1-m-m" },
+              description: { type: "mrkdwn", text: "1-m-m" },
+            },
+          ],
+        },
+      },
+      {
+        type: "input",
+        block_id: "2",
+        label: { type: "plain_text", text: "Radio Buttons" },
+        element: {
+          type: "radio_buttons",
+          options: [
+            {
+              text: { type: "plain_text", text: "2-p-p" },
+              description: { type: "plain_text", text: "2-p-p" },
+            },
+            {
+              text: { type: "plain_text", text: "2-p-m" },
+              description: { type: "mrkdwn", text: "2-p-m" },
+            },
+            {
+              text: { type: "mrkdwn", text: "2-m-p" },
+              description: { type: "plain_text", text: "2-m-p" },
+            },
+            {
+              text: { type: "mrkdwn", text: "2-m-m" },
+              description: { type: "mrkdwn", text: "2-m-m" },
+            },
+          ],
+        },
+      },
+      {
+        type: "input",
+        block_id: "3",
+        label: { type: "plain_text", text: "Static Select" },
+        element: {
+          type: "radio_buttons",
+          options: [
+            {
+              text: { type: "plain_text", text: "3-p-p" },
+              description: { type: "plain_text", text: "3-p-p" },
+            },
+            {
+              text: { type: "mrkdwn", text: "3-m-p" },
+              description: { type: "plain_text", text: "3-m-p" },
+            },
+          ],
+        },
+      },
+    ];
+    assert.isTrue(blocks.length > 0);
   });
 });

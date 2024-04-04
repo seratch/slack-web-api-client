@@ -1,5 +1,5 @@
 import type { Confirm } from "./confirm.ts";
-import type { AnyOption, PlainTextOption } from "./options.ts";
+import type { AnyDescriptionOption, PlainTextOption } from "./options.ts";
 import type { RichTextBlock } from "./rich-text-block.ts";
 import { AnySlackFile } from "./slack-files.ts";
 import type { PlainTextField } from "./text-fields.ts";
@@ -287,8 +287,8 @@ export interface Timepicker
 export interface RadioButtons
   extends ActionBlockElement<"radio_buttons">, Confirmable, Focusable {
   type: "radio_buttons";
-  initial_option?: AnyOption;
-  options: AnyOption[];
+  initial_option?: AnyDescriptionOption;
+  options: AnyDescriptionOption[];
 }
 export interface DateTimepicker
   extends ActionBlockElement<"datetimepicker">, Confirmable, Focusable {
@@ -300,8 +300,8 @@ export interface DateTimepicker
 export interface Checkboxes
   extends ActionBlockElement<"checkboxes">, Confirmable, Focusable {
   type: "checkboxes";
-  initial_options?: AnyOption[];
-  options: AnyOption[];
+  initial_options?: AnyDescriptionOption[];
+  options: AnyDescriptionOption[];
 }
 export interface RichTextInput
   extends
