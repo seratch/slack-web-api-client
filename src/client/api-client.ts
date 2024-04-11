@@ -465,7 +465,10 @@ import type {
   WorkflowsTriggersListResponse,
   WorkflowsTriggersUpdateResponse,
 } from "./automation-response/index";
-import { FilesUploadV2Response } from "./custom-response/FilesUploadV2Response";
+import {
+  FilesUploadV2ErrorResponse,
+  FilesUploadV2Response,
+} from "./custom-response/FilesUploadV2Response";
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,
@@ -590,78 +593,60 @@ export class SlackAPIClient {
   ): Promise<FilesUploadV2Response> {
     const files =
       "files" in params ? params.files! : [{ ...(params as FileUploadV2) }];
-    const completes: FileUploadComplete[] = [];
+    const completes: Promise<FileUploadComplete>[] = [];
     const uploadErrors: string[] = [];
     for (const f of files) {
-      const body: Uint8Array = f.file
-        ? new Uint8Array(
-            f.file instanceof Blob ? await f.file.arrayBuffer() : f.file,
-          )
-        : new TextEncoder().encode(f.content);
-      const getUrl = await this.files.getUploadURLExternal({
-        filename: f.filename,
-        length: body.length,
-        snippet_type: f.snippet_type,
-      });
-      if (isDebugLogEnabled(this.#options.logLevel)) {
-        console.log(
-          `Slack API response (files.getUploadURLExternal): ${JSON.stringify(getUrl)}}`,
-        );
-      }
-      if (getUrl.error) {
-        throw new SlackAPIError(
-          "files.getUploadURLExternal",
-          getUrl.error,
-          getUrl,
-        );
-      }
-      const { upload_url, file_id } = getUrl;
-      const upload = await fetch(upload_url!, { method: "POST", body });
-      const uploadBody = await upload.text();
-      if (isDebugLogEnabled(this.#options.logLevel)) {
-        console.log(
-          `Slack file upload result: (status: ${upload.status}, body: ${uploadBody})`,
-        );
-      }
-      if (upload.status !== 200) {
-        uploadErrors.push(uploadBody);
-      }
-      if (uploadErrors.length > 0) {
-        const errorResponse = {
-          ok: false,
-          error: "upload_failure",
-          uploadErrors,
-          headers: upload.headers,
+      // deno-lint-ignore no-this-alias
+      const client = this;
+      // deno-lint-ignore no-inner-declarations
+      async function uploadAsync(): Promise<FileUploadComplete> {
+        const body: Uint8Array = f.file
+          ? new Uint8Array(
+              f.file instanceof Blob ? await f.file.arrayBuffer() : f.file,
+            )
+          : new TextEncoder().encode(f.content);
+        const getUrl = await client.files.getUploadURLExternal({
+          filename: f.filename,
+          length: body.length,
+          snippet_type: f.snippet_type,
+        });
+        const { upload_url, file_id } = getUrl;
+        const upload = await fetch(upload_url!, { method: "POST", body });
+        const uploadBody = await upload.text();
+        if (isDebugLogEnabled(client.#options.logLevel)) {
+          console.log(
+            `Slack file upload result: (file ID: ${file_id}, status: ${upload.status}, body: ${uploadBody})`,
+          );
+        }
+        if (upload.status !== 200) {
+          uploadErrors.push(uploadBody);
+        }
+        if (uploadErrors.length > 0) {
+          const errorResponse: FilesUploadV2ErrorResponse = {
+            ok: false,
+            error: "upload_failure",
+            uploadErrors,
+            headers: upload.headers,
+          };
+          throw new SlackAPIError(
+            "files.slack.com",
+            "upload_error",
+            errorResponse,
+          );
+        }
+        return {
+          id: file_id!,
+          title: f.title ?? f.filename,
         };
-        throw new SlackAPIError(
-          "files.completeUploadExternal",
-          "upload_error",
-          errorResponse,
-        );
       }
-      completes.push({
-        id: file_id!,
-        title: f.title ?? f.filename,
-      });
+      completes.push(uploadAsync());
     }
     const completion = await this.files.completeUploadExternal({
-      files: completes,
+      files: await Promise.all(completes),
       channel_id: params.channel_id,
       initial_comment: params.initial_comment,
       thread_ts: params.thread_ts,
     });
-    if (isDebugLogEnabled(this.#options.logLevel)) {
-      console.log(
-        `Slack API response (files.completeUploadExternal): ${JSON.stringify(completion)}}`,
-      );
-    }
-    if (completion.error) {
-      throw new SlackAPIError(
-        "files.completeUploadExternal",
-        completion.error,
-        completion,
-      );
-    }
     return {
       ok: true,
       files: completion.files!,
