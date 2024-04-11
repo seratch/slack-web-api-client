@@ -921,6 +921,33 @@ interface FileUpload {
 export type FilesUploadRequest = FileUpload & SlackAPIRequest;
 
 /**
+ * files.upload V2 API files upload Request
+ */
+export interface FileUploadV2 {
+  filename: string;
+  title?: string;
+  alt_text?: string; // Description of image for screen-reader
+  snippet_type?: string; // Syntax type of the snippet being uploaded. E.g. `python`
+  content?: string; // if omitted, must provide `file`
+  file?: Blob | ArrayBuffer; // if omitted, must provide `content`
+  filetype?: string;
+}
+export interface FileUploadV2Share {
+  channel_id?: string;
+  thread_ts?: string; // if specified, `channel_id` must be set
+  initial_comment?: string; // if specified, `channel_id` must be set
+}
+export interface FilesUploadV2Request1
+  extends SlackAPIRequest, FileUploadV2, FileUploadV2Share {}
+export interface FilesUploadV2RequestN
+  extends SlackAPIRequest, FileUploadV2Share {
+  files: FileUploadV2[];
+}
+export type FilesUploadV2Request =
+  | FilesUploadV2Request1
+  | FilesUploadV2RequestN;
+
+/**
  * Gets a URL for an edge external file upload. Method:
  * {@link https://api.slack.com/methods/files.getUploadURLExternal files.getUploadURLExternal}
  */
@@ -940,7 +967,7 @@ export interface FilesCompleteUploadExternalRequest extends SlackAPIRequest {
   initial_comment?: string;
   thread_ts?: string;
 }
-interface FileUploadComplete {
+export interface FileUploadComplete {
   id: string; // file id
   title?: string; // filename
 }

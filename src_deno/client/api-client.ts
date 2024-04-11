@@ -167,6 +167,9 @@ import type {
   FilesRevokePublicURLRequest,
   FilesSharedPublicURLRequest,
   FilesUploadRequest,
+  FilesUploadV2Request,
+  FileUploadComplete,
+  FileUploadV2,
   FunctionsCompleteErrorRequest,
   FunctionsCompleteSuccessRequest,
   MigrationExchangeRequest,
@@ -462,6 +465,7 @@ import type {
   WorkflowsTriggersListResponse,
   WorkflowsTriggersUpdateResponse,
 } from "./automation-response/index.ts";
+import { FilesUploadV2Response } from "./custom-response/FilesUploadV2Response.ts";
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,
@@ -581,6 +585,95 @@ export class SlackAPIClient {
     return result;
   }
 
+  async uploadFilesV2(
+    params: FilesUploadV2Request,
+  ): Promise<FilesUploadV2Response> {
+    const files = "files" in params
+      ? params.files!
+      : [{ ...(params as FileUploadV2) }];
+    const completes: FileUploadComplete[] = [];
+    const uploadErrors: string[] = [];
+    for (const f of files) {
+      const body: Uint8Array = f.file
+        ? new Uint8Array(
+          f.file instanceof Blob ? await f.file.arrayBuffer() : f.file,
+        )
+        : new TextEncoder().encode(f.content);
+      const getUrl = await this.files.getUploadURLExternal({
+        filename: f.filename,
+        length: body.length,
+        snippet_type: f.snippet_type,
+      });
+      if (isDebugLogEnabled(this.#options.logLevel)) {
+        console.log(
+          `Slack API response (files.getUploadURLExternal): ${
+            JSON.stringify(getUrl)
+          }}`,
+        );
+      }
+      if (getUrl.error) {
+        throw new SlackAPIError(
+          "files.getUploadURLExternal",
+          getUrl.error,
+          getUrl,
+        );
+      }
+      const { upload_url, file_id } = getUrl;
+      const upload = await fetch(upload_url!, { method: "POST", body });
+      const uploadBody = await upload.text();
+      if (isDebugLogEnabled(this.#options.logLevel)) {
+        console.log(
+          `Slack file upload result: (status: ${upload.status}, body: ${uploadBody})`,
+        );
+      }
+      if (upload.status !== 200) {
+        uploadErrors.push(uploadBody);
+      }
+      if (uploadErrors.length > 0) {
+        const errorResponse = {
+          ok: false,
+          error: "upload_failure",
+          uploadErrors,
+          headers: upload.headers,
+        };
+        throw new SlackAPIError(
+          "files.completeUploadExternal",
+          "upload_error",
+          errorResponse,
+        );
+      }
+      completes.push({
+        id: file_id!,
+        title: f.title ?? f.filename,
+      });
+    }
+    const completion = await this.files.completeUploadExternal({
+      files: completes,
+      channel_id: params.channel_id,
+      initial_comment: params.initial_comment,
+      thread_ts: params.thread_ts,
+    });
+    if (isDebugLogEnabled(this.#options.logLevel)) {
+      console.log(
+        `Slack API response (files.completeUploadExternal): ${
+          JSON.stringify(completion)
+        }}`,
+      );
+    }
+    if (completion.error) {
+      throw new SlackAPIError(
+        "files.completeUploadExternal",
+        completion.error,
+        completion,
+      );
+    }
+    return {
+      ok: true,
+      files: completion.files!,
+      headers: completion.headers,
+    };
+  }
+
   bindApiCall<A extends SlackAPIRequest, R extends SlackAPIResponse>(
     self: SlackAPIClient,
     method: string,
@@ -593,6 +686,15 @@ export class SlackAPIClient {
     method: string,
   ): SlackAPI<A, R> {
     return self.sendMultipartData.bind(self, method) as SlackAPI<A, R>;
+  }
+
+  bindFilesUploadV2(
+    self: SlackAPIClient,
+  ): SlackAPI<FilesUploadV2Request, FilesUploadV2Response> {
+    return self.uploadFilesV2.bind(self) as SlackAPI<
+      FilesUploadV2Request,
+      FilesUploadV2Response
+    >;
   }
 
   public readonly admin = {
@@ -1328,6 +1430,7 @@ export class SlackAPIClient {
       this,
       "files.upload",
     ),
+    uploadV2: this.bindFilesUploadV2(this),
     getUploadURLExternal: this.bindApiCall<
       FilesGetUploadURLExternalRequest,
       FilesGetUploadURLExternalResponse
