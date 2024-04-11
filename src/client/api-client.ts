@@ -606,6 +606,7 @@ export class SlackAPIClient {
             )
           : new TextEncoder().encode(f.content);
         const getUrl = await client.files.getUploadURLExternal({
+          token: params.token,
           filename: f.filename,
           length: body.length,
           snippet_type: f.snippet_type,
@@ -642,6 +643,7 @@ export class SlackAPIClient {
       completes.push(uploadAsync());
     }
     const completion = await this.files.completeUploadExternal({
+      token: params.token,
       files: await Promise.all(completes),
       channel_id: params.channel_id,
       initial_comment: params.initial_comment,
