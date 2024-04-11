@@ -3,7 +3,7 @@
 // brew install deno
 // deno run --allow-env --allow-read --allow-write --allow-net test/remote-function-setup.ts
 
-import { load } from "https://deno.land/std@0.207.0/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
 console.log(await load({ export: true }));
 
 import {
