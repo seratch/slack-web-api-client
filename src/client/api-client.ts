@@ -1421,6 +1421,9 @@ export class SlackAPIClient {
       FilesSharedPublicURLRequest,
       FilesSharedPublicURLResponse
     >(this, "files.sharedPublicURL"),
+    /**
+     * @deprecated use files.uploadV2 instead
+     */
     upload: this.bindMultipartApiCall<FilesUploadRequest, FilesUploadResponse>(
       this,
       "files.upload",

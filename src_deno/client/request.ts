@@ -907,6 +907,7 @@ export interface FilesSharedPublicURLRequest extends SlackAPIRequest {
 }
 /**
  * Legacy files.upload API files upload Request
+ * @deprecated use files.uploadV2 instead
  */
 interface FileUpload {
   channels?: string; // comma-separated list of channels
@@ -918,6 +919,9 @@ interface FileUpload {
   thread_ts?: string; // if specified, `channels` must be set
   title?: string;
 }
+/**
+ * @deprecated use files.uploadV2 instead
+ */
 export type FilesUploadRequest = FileUpload & SlackAPIRequest;
 
 /**
