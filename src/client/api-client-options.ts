@@ -1,11 +1,14 @@
+export type SlackAPIClientLogLevel =
+  | "DEBUG"
+  | "INFO"
+  | "WARN"
+  | "ERROR"
+  | "debug"
+  | "info"
+  | "warn"
+  | "error";
+
 export interface SlackAPIClientOptions {
-  logLevel?:
-    | "DEBUG"
-    | "INFO"
-    | "WARN"
-    | "ERROR"
-    | "debug"
-    | "info"
-    | "warn"
-    | "error";
+  logLevel?: SlackAPIClientLogLevel;
+  throwSlackAPIError?: boolean;
 }

@@ -33,7 +33,8 @@ The second argument of the constructor allows for optional customizations:
 
 ```typescript
 const client = new SlackAPIClient(process.env.SLACK_BOT_TOKEN, {
-  logLevel: "DEBUG",
+  logLevel: "DEBUG", // default: "INFO"
+  throwSlackAPIError: false,  // default: true
 });
 ```
 
@@ -54,10 +55,12 @@ export const def = DefineFunction({
   output_parameters: { properties: {}, required: [] },
 });
 
-import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.9.2/mod.ts";
+import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.10.0/mod.ts";
 
 export default SlackFunction(def, async ({ token }) => {
-  const client = new SlackAPIClient(token);
+  const client = new SlackAPIClient(token, {
+    throwSlackAPIError: false // for the compatibility with deno-slack-api library
+  });
   const response = await client.chat.postMessage({
     channel: "#random",
     text: ":wave: what's up?",
