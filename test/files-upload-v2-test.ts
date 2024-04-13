@@ -23,7 +23,7 @@ const content = await client.files.uploadV2({
 });
 console.log(content);
 
-const uploadedFile = content.files[0];
+const uploadedFile = content.files![0];
 var shares = uploadedFile.shares;
 while (!shares || Object.keys(shares).length === 0) {
   await delay(1000);

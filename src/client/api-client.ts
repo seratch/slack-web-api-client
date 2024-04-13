@@ -1,4 +1,4 @@
-import { SlackAPIError } from "../errors";
+import { SlackAPIConnectionError, SlackAPIError } from "../errors";
 import type {
   APITestRequest,
   AdminAppsActivitiesListRequest,
@@ -487,6 +487,7 @@ export interface NoArgAllowedSlackAPI<
 const defaultOptions: SlackAPIClientOptions = {
   logLevel: "INFO",
   throwSlackAPIError: true,
+  baseUrl: "https://slack.com/api/",
 };
 
 export class SlackAPIClient {
@@ -494,6 +495,7 @@ export class SlackAPIClient {
   #options: SlackAPIClientOptions;
   #logLevel: SlackAPIClientLogLevel;
   #throwSlackAPIError: boolean;
+  #baseUrl: string;
 
   constructor(
     token: string | undefined = undefined,
@@ -503,6 +505,11 @@ export class SlackAPIClient {
     this.#options = options;
     this.#logLevel = this.#options.logLevel ?? defaultOptions.logLevel!;
     this.#throwSlackAPIError = this.#options.throwSlackAPIError ?? true;
+    this.#baseUrl = this.#options.baseUrl
+      ? this.#options.baseUrl.endsWith("/")
+        ? this.#options.baseUrl
+        : this.#options.baseUrl + "/"
+      : defaultOptions.baseUrl!;
   }
 
   // --------------------------------------
@@ -514,7 +521,7 @@ export class SlackAPIClient {
     // deno-lint-ignore no-explicit-any
     params: Record<string, any>,
   ): Promise<SlackAPIResponse> {
-    const url = `https://slack.com/api/${name}`;
+    const url = `${this.#baseUrl}${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
     // deno-lint-ignore no-explicit-any
     const _params: any = {};
@@ -540,11 +547,26 @@ export class SlackAPIClient {
     if (isDebugLogEnabled(this.#logLevel)) {
       console.log(`Slack API request (${name}): ${body}`);
     }
-    const response = await fetch(url, {
-      method: "POST",
-      headers,
-      body,
-    });
+    let response: Response;
+    try {
+      response = await fetch(url, {
+        method: "POST",
+        headers,
+        body,
+      });
+    } catch (e) {
+      throw new SlackAPIConnectionError(name, -1, "", undefined, e as Error);
+    }
+    if (response.status != 200) {
+      const body = await response.text();
+      throw new SlackAPIConnectionError(
+        name,
+        response.status,
+        body,
+        response.headers,
+        undefined,
+      );
+    }
     const responseBody = await response.json();
     const result: SlackAPIResponse = {
       ...responseBody,
@@ -564,7 +586,7 @@ export class SlackAPIClient {
     // deno-lint-ignore no-explicit-any
     params: Record<string, any>,
   ): Promise<SlackAPIResponse> {
-    const url = `https://slack.com/api/${name}`;
+    const url = `${this.#baseUrl}${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
     const body = new FormData();
     for (const [key, value] of Object.entries(params)) {
@@ -589,11 +611,26 @@ export class SlackAPIClient {
       const bodyParamNames = Array.from(body.keys()).join(", ");
       console.log(`Slack API request (${name}): Sending ${bodyParamNames}`);
     }
-    const response = await fetch(url, {
-      method: "POST",
-      headers,
-      body,
-    });
+    let response: Response;
+    try {
+      response = await fetch(url, {
+        method: "POST",
+        headers,
+        body,
+      });
+    } catch (e) {
+      throw new SlackAPIConnectionError(name, -1, "", undefined, e as Error);
+    }
+    if (response.status != 200) {
+      const body = await response.text();
+      throw new SlackAPIConnectionError(
+        name,
+        response.status,
+        body,
+        response.headers,
+        undefined,
+      );
+    }
     const responseBody = await response.json();
     const result: SlackAPIResponse = {
       ...responseBody,
@@ -634,14 +671,25 @@ export class SlackAPIClient {
           snippet_type: f.snippet_type,
         });
         const { upload_url, file_id } = getUrl;
-        const upload = await fetch(upload_url!, { method: "POST", body });
-        const uploadBody = await upload.text();
-        if (isDebugLogEnabled(client.#logLevel)) {
-          console.log(
-            `Slack file upload result: (file ID: ${file_id}, status: ${upload.status}, body: ${uploadBody})`,
+        let response: Response;
+        try {
+          response = await fetch(upload_url!, { method: "POST", body });
+        } catch (e) {
+          throw new SlackAPIConnectionError(
+            "files.slack.com",
+            -1,
+            "",
+            undefined,
+            e as Error,
           );
         }
-        if (upload.status !== 200) {
+        const uploadBody = await response.text();
+        if (isDebugLogEnabled(client.#logLevel)) {
+          console.log(
+            `Slack file upload result: (file ID: ${file_id}, status: ${response.status}, body: ${uploadBody})`,
+          );
+        }
+        if (response.status !== 200) {
           uploadErrors.push(uploadBody);
         }
         if (uploadErrors.length > 0) {
@@ -649,7 +697,7 @@ export class SlackAPIClient {
             ok: false,
             error: "upload_failure",
             uploadErrors,
-            headers: upload.headers,
+            headers: response.headers,
           };
           throw new SlackAPIError(
             "files.slack.com",
@@ -657,10 +705,7 @@ export class SlackAPIClient {
             errorResponse,
           );
         }
-        return {
-          id: file_id!,
-          title: f.title ?? f.filename,
-        };
+        return { id: file_id!, title: f.title ?? f.filename };
       }
       completes.push(uploadAsync());
     }
