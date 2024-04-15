@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/slack-web-api-client.svg)](https://badge.fury.io/js/slack-web-api-client) 
 [![deno module](https://shield.deno.dev/x/slack_web_api_client)](https://deno.land/x/slack_web_api_client)
+[![JSR](https://jsr.io/badges/@seratch/slack-web-api-client)](https://jsr.io/@seratch/slack-web-api-client)
 
 The **slack-web-api-client** library is a type-safe Slack Web API client that provides several key benefits, including:
 * **A fetch-based implementation**, which is compatible with most runtimes
