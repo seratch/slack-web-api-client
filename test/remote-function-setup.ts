@@ -3,7 +3,7 @@
 // brew install deno
 // deno run --allow-env --allow-read --allow-write --allow-net test/remote-function-setup.ts
 
-import { load } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.222.1/dotenv/mod.ts";
 console.log(await load({ export: true }));
 
 import {
@@ -21,12 +21,12 @@ if (accessToken) {
   try {
     await noTokenClient.auth.test({ token: accessToken });
     needRefresh = false;
-  } catch (e) {
+  } catch (_) {
     needRefresh = true;
   }
 }
 if (needRefresh) {
-  const refreshToken = Deno.env.get("SLACK_TOOLING_REFRESH_TOKEN");
+  const refreshToken = Deno.env.get("SLACK_TOOLING_REFRESH_TOKEN")!;
   const response = await noTokenClient.tooling.tokens.rotate({
     refresh_token: refreshToken,
   });
@@ -39,6 +39,7 @@ if (needRefresh) {
 
 const client = new SlackAPIClient(accessToken, clientOptions);
 const authTest = await client.auth.test();
+console.log(authTest);
 
 const manifest: ManifestParams = {
   _metadata: { major_version: 2 },
@@ -86,6 +87,7 @@ const manifest: ManifestParams = {
   },
 };
 const creation = await client.apps.manifest.create({ manifest });
+console.log(creation);
 // const deletion = await client.apps.manifest.delete({ app_id: creation.app_id! });
 
 // $ npx wrangler generate my-remote-func

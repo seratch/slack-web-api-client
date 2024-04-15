@@ -174,3 +174,4 @@ dist
 tmp/
 
 .env
+.vscode/

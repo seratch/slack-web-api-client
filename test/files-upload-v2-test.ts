@@ -1,10 +1,10 @@
 // brew install deno
 // deno run --allow-env --allow-read --allow-net test/files-upload-v2-test.ts
 
-import { load } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.222.1/dotenv/mod.ts";
 console.log(await load({ export: true }));
 
-import { delay } from "https://deno.land/std@0.221.0/async/mod.ts";
+import { delay } from "https://deno.land/std@0.222.1/async/mod.ts";
 import { SlackAPIClient } from "../src_deno/mod.ts";
 
 const client = new SlackAPIClient(Deno.env.get("SLACK_BOT_TOKEN"), {
@@ -24,7 +24,7 @@ const content = await client.files.uploadV2({
 console.log(content);
 
 const uploadedFile = content.files![0];
-var shares = uploadedFile.shares;
+let shares = uploadedFile.shares;
 while (!shares || Object.keys(shares).length === 0) {
   await delay(1000);
   const response = await client.files.info({ file: uploadedFile.id! });

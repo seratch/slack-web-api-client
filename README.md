@@ -83,8 +83,12 @@ An alternative way to use the **slack-web-api-client** library is through the sk
 import { SlackAPIClient } from "https://cdn.skypack.dev/slack-web-api-client?dts";
 ```
 
-Lastly, Slack's Automation Platform currently doesn't support jsr.io, although this library can be accessed there as well:
-
+Lastly, Slack's automation platform doesn't support jsr.io yet, though this library can be accessed there as well:
 https://jsr.io/@seratch/slack-web-api-client
 
-When you need this library for Deno apps outside of the Automation Platform, relying on jsr.io could be a simpler approach for resolving dependencies.
+```typescript
+// deno add @seratch/slack-web-api-client
+import { SlackAPIClient } from "@seratch/slack-web-api-client";
+```
+
+When you need this library for Deno apps outside of the automation platform, relying on jsr.io could be a simpler approach for resolving dependencies.
