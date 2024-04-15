@@ -1,5 +1,5 @@
-import { AnyTrigger } from "../types.ts";
-import { SlackAPIResponse } from "../../response.ts";
+import type { AnyTrigger } from "../types.ts";
+import type { SlackAPIResponse } from "../../response.ts";
 
 export interface WorkflowsTriggersCreateResponse extends SlackAPIResponse {
   trigger: AnyTrigger;

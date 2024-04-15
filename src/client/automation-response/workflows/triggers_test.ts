@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-unused-vars
 
-import {
+import type {
   EventTrigger,
   LinkTrigger,
   ScheduledTrigger,

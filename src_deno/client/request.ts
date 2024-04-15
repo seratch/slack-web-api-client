@@ -8,7 +8,7 @@ import type { LinkUnfurls } from "../block-kit/link-unfurls.ts";
 import type { MessageAttachment } from "../block-kit/message-attachment.ts";
 import type { MessageMetadata } from "../block-kit/message-metadata.ts";
 import type { HomeTabView, ModalView } from "../block-kit/views.ts";
-import { ManifestParams } from "../manifest/manifest-params.ts";
+import type { ManifestParams } from "../manifest/manifest-params.ts";
 
 export interface SlackAPIRequest {
   token?: string;

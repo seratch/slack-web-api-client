@@ -1,7 +1,7 @@
 import type { Confirm } from "./confirm.ts";
 import type { AnyDescriptionOption, PlainTextOption } from "./options.ts";
 import type { RichTextBlock } from "./rich-text-block.ts";
-import { AnySlackFile } from "./slack-files.ts";
+import type { AnySlackFile } from "./slack-files.ts";
 import type { PlainTextField } from "./text-fields.ts";
 import type { Workflow } from "./workflows.ts";
 

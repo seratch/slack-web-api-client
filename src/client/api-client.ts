@@ -468,7 +468,7 @@ import type {
   WorkflowsTriggersListResponse,
   WorkflowsTriggersUpdateResponse,
 } from "./automation-response/index";
-import { FilesUploadV2Response } from "./custom-response/FilesUploadV2Response";
+import type { FilesUploadV2Response } from "./custom-response/FilesUploadV2Response";
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,
@@ -581,7 +581,7 @@ export class SlackAPIClient {
     return result;
   }
 
-  async sendMultipartData(
+  async #sendMultipartData(
     name: string,
     // deno-lint-ignore no-explicit-any
     params: Record<string, any>,
@@ -748,7 +748,7 @@ export class SlackAPIClient {
     self: SlackAPIClient,
     method: string,
   ): SlackAPI<A, R> {
-    return self.sendMultipartData.bind(self, method) as SlackAPI<A, R>;
+    return self.#sendMultipartData.bind(self, method) as SlackAPI<A, R>;
   }
 
   #bindFilesUploadV2(

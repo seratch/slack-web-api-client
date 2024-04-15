@@ -1,4 +1,4 @@
-import { SlackAPIResponse } from "../../response.ts";
+import type { SlackAPIResponse } from "../../response.ts";
 
 interface ErrorResponse {
   ok: false;

@@ -1,5 +1,5 @@
-import { AnyMafifestEvent } from "./events";
-import { AnyManifestBotScope, AnyManifestUserScope } from "./scopes";
+import type { AnyMafifestEvent } from "./events";
+import type { AnyManifestBotScope, AnyManifestUserScope } from "./scopes";
 
 export interface ManifestParams {
   _metadata?: ManifestMetadata;

@@ -1,4 +1,4 @@
-import { SlackAPIResponse } from "./client/response";
+import type { SlackAPIResponse } from "./client/response";
 
 export class SlackAPIConnectionError extends Error {
   apiName: string;
@@ -39,9 +39,8 @@ export class SlackAPIError extends Error {
   error: string;
   result: SlackAPIResponse;
   constructor(apiName: string, error: string, result: SlackAPIResponse) {
-    const message = `Failed to call ${apiName} due to ${error}: ${JSON.stringify(
-      result,
-    )}`;
+    const resultToPrint = JSON.stringify(result);
+    const message = `Failed to call ${apiName} due to ${error}: ${resultToPrint}`;
     super(message);
     this.name = "SlackAPIError";
     this.apiName = apiName;
@@ -60,11 +59,19 @@ export class TokenRotationError extends Error {
 export class WebhookError extends Error {
   status: number;
   body: string;
-  constructor(status: number, body: string) {
-    const message = `Failed to send a message using incoming webhook/response_url (status: ${status}, body: ${body})`;
+  cause?: Error;
+  constructor(
+    status: number,
+    body: string,
+    cause: Error | undefined = undefined,
+  ) {
+    const message = cause
+      ? `Failed to send a message using incoming webhook/response_url (cause: ${cause})`
+      : `Failed to send a message using incoming webhook/response_url (status: ${status}, body: ${body})`;
     super(message);
-    this.name = "ResponseUrlError";
+    this.name = "WebhookError";
     this.status = status;
     this.body = body;
+    this.cause = cause;
   }
 }

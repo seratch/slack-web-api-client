@@ -1,7 +1,7 @@
 import { WebhookError } from "../errors";
-import { AnyMessageBlock } from "../block-kit/blocks";
-import { MessageAttachment } from "../block-kit/message-attachment";
-import { MessageMetadata } from "../block-kit/message-metadata";
+import type { AnyMessageBlock } from "../block-kit/blocks";
+import type { MessageAttachment } from "../block-kit/message-attachment";
+import type { MessageMetadata } from "../block-kit/message-metadata";
 
 export class WebhookSender {
   #url: string;
@@ -11,20 +11,24 @@ export class WebhookSender {
   }
 
   async call(params: WebhookParams): Promise<Response> {
-    const response = await fetch(this.#url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: JSON.stringify(params),
-    });
-    const responseBody = await response.text();
-    const body = responseBody.toLowerCase();
-    if (
-      response.status != 200 ||
-      (body !== "ok" && body.toLowerCase() !== '{"ok":true}')
-    ) {
-      throw new WebhookError(response.status, responseBody);
+    try {
+      const response = await fetch(this.#url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify(params),
+      });
+      const responseBody = await response.text();
+      const body = responseBody.toLowerCase();
+      if (
+        response.status != 200 ||
+        (body !== "ok" && body.toLowerCase() !== '{"ok":true}')
+      ) {
+        throw new WebhookError(response.status, responseBody);
+      }
+      return response;
+    } catch (e) {
+      throw new WebhookError(-1, "", e as Error);
     }
-    return response;
   }
 }
 

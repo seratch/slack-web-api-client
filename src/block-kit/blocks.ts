@@ -18,7 +18,7 @@ import type {
   WorkflowButton,
 } from "./block-elements";
 import type { RichTextBlock } from "./rich-text-block";
-import { AnySlackFile } from "./slack-files";
+import type { AnySlackFile } from "./slack-files";
 import type { PlainTextField, AnyTextField } from "./text-fields";
 
 // -----------------------------

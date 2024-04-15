@@ -18,7 +18,7 @@ import type {
   WorkflowButton,
 } from "./block-elements.ts";
 import type { RichTextBlock } from "./rich-text-block.ts";
-import { AnySlackFile } from "./slack-files.ts";
+import type { AnySlackFile } from "./slack-files.ts";
 import type { AnyTextField, PlainTextField } from "./text-fields.ts";
 
 // -----------------------------

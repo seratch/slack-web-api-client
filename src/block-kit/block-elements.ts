@@ -1,7 +1,7 @@
 import type { Confirm } from "./confirm";
 import type { AnyDescriptionOption, PlainTextOption } from "./options";
 import type { RichTextBlock } from "./rich-text-block";
-import { AnySlackFile } from "./slack-files";
+import type { AnySlackFile } from "./slack-files";
 import type { PlainTextField } from "./text-fields";
 import type { Workflow } from "./workflows";
 

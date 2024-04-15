@@ -1,5 +1,5 @@
-import { AnyMafifestEvent } from "./events.ts";
-import { AnyManifestBotScope, AnyManifestUserScope } from "./scopes.ts";
+import type { AnyMafifestEvent } from "./events.ts";
+import type { AnyManifestBotScope, AnyManifestUserScope } from "./scopes.ts";
 
 export interface ManifestParams {
   _metadata?: ManifestMetadata;

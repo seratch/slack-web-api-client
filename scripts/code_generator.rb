@@ -26,20 +26,20 @@ class TsWriter
       stdin.write(input_json)
       stdin.close()
       generated_code = stdout.read
-      source = "#{NOTICE}\nimport { SlackAPIResponse } from '../response';\n"
+      source = "#{NOTICE}\nimport type { SlackAPIResponse } from '../response';\n"
       if generated_code.match? /\s+blocks\?:\s+.+\[\]/
         if root_class_name.start_with? "Views"
           if root_class_name.start_with? "viewsPublish"
-            source += "import { AnyModalBlock } from '../../block-kit/blocks';\n"
+            source += "import type { AnyModalBlock } from '../../block-kit/blocks';\n"
           else
-            source += "import { AnyHomeTabBlock } from '../../block-kit/blocks';\n"
+            source += "import type { AnyHomeTabBlock } from '../../block-kit/blocks';\n"
           end
         else
-          source += "import { AnyMessageBlock } from '../../block-kit/blocks';\n"
+          source += "import type { AnyMessageBlock } from '../../block-kit/blocks';\n"
         end
       end
       if generated_code.match? /\s+attachments\?:\s+.+\[\]/
-        source += "import { MessageAttachment } from '../../block-kit/message-attachment';\n"
+        source += "import type { MessageAttachment } from '../../block-kit/message-attachment';\n"
       end
       source += generated_code
 
