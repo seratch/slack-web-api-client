@@ -17,7 +17,7 @@ The **slack-web-api-client** library also offers a native package for the
 following syntax:
 
 ```typescript
-import { SlackFunction } from "deno-slack-sdk/mod.ts.ts";
+import { SlackFunction } from "deno-slack-sdk/mod.ts";
 
 export const def = DefineFunction({
   callback_id: "hello",
@@ -27,7 +27,7 @@ export const def = DefineFunction({
   output_parameters: { properties: {}, required: [] },
 });
 
-import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.10.4/mod.ts.ts";
+import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.10.4/mod.ts";
 
 export default SlackFunction(def, async ({ token }) => {
   const client = new SlackAPIClient(token, {
@@ -56,7 +56,7 @@ section in your `manifest.ts` file. This allows you to use the library within
 your project:
 
 ```typescript
-import { SlackAPIClient } from "https://cdn.skypack.dev/slack-web-api-client?dts.ts";
+import { SlackAPIClient } from "https://cdn.skypack.dev/slack-web-api-client?dts";
 ```
 
 Lastly, Slack's automation platform doesn't support jsr.io yet, though this

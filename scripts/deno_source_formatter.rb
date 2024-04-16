@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-Dir.glob(__dir__ + '/../src_deno/**/*').select { |f| File.file? f }.each do |filepath|
+Dir.glob(__dir__ + '/../src_deno/**/*.ts').select { |f| File.file? f }.each do |filepath|
   output = "";
   File.readlines(filepath).each do |line|
     if line.include?(' from "')

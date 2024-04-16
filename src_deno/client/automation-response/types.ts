@@ -16,7 +16,9 @@ export interface ScheduleTriggerSettings {
 export interface EventTriggerSettings {
   event_type: string; // "slack#/events/reaction_added"
   channel_ids?: string[];
+  all_resources?: boolean;
   team_ids?: string[];
+  metadata_event_type?: string;
   filter?: { version: number; root: { statement: string } };
 }
 
