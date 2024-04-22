@@ -30,6 +30,7 @@
   "homepage": "https://github.com/seratch/slack-web-api-client#readme",
   "devDependencies": {
     "@vitest/coverage-v8": "^1.5.0",
+    "msw": "^2.2.14",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5",
     "vitest": "^1.5.0"

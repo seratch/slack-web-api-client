@@ -1,12 +1,33 @@
-import { assert, test, describe, expect } from "vitest";
+import {
+  assert,
+  test,
+  describe,
+  expect,
+  afterAll,
+  afterEach,
+  beforeAll,
+} from "vitest";
 import {
   SlackAPIClient,
   SlackAPIConnectionError,
   SlackAPIError,
 } from "../src/index";
 
+import { setupServer } from "msw/node";
+import { HttpResponse, http } from "msw";
+
+const server = setupServer();
+beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
+afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
+
 describe("SlackAPIClient", () => {
   test("api.test", async () => {
+    server.use(
+      http.post("https://slack.com/api/api.test", () => {
+        return HttpResponse.json({ ok: true });
+      }),
+    );
     const client = new SlackAPIClient(undefined, { logLevel: "DEBUG" });
     const response = await client.api.test();
     assert.equal(response.error, undefined);
@@ -14,6 +35,11 @@ describe("SlackAPIClient", () => {
 
   describe("auth.test w/ {throwSlackAPIError: true}", async () => {
     test("invalid_auth error as a SlackAPIError", async () => {
+      server.use(
+        http.post("https://slack.com/api/auth.test", () => {
+          return HttpResponse.json({ ok: false, error: "invalid_auth" });
+        }),
+      );
       const client = new SlackAPIClient("xoxb-invalid", {
         logLevel: "DEBUG",
       });
@@ -27,15 +53,12 @@ describe("SlackAPIClient", () => {
 
   describe("auth.test w/ {throwSlackAPIError: false}", async () => {
     test("invalid_auth error", async () => {
+      server.use(
+        http.post("https://slack.com/api/auth.test", () => {
+          return HttpResponse.json({ ok: false, error: "invalid_auth" });
+        }),
+      );
       const client = new SlackAPIClient(undefined, {
-        logLevel: "DEBUG",
-        throwSlackAPIError: false,
-      });
-      const response = await client.auth.test();
-      assert.equal(response.error, "not_authed");
-    });
-    test("invalid_auth error", async () => {
-      const client = new SlackAPIClient("xoxb-invalid", {
         logLevel: "DEBUG",
         throwSlackAPIError: false,
       });
@@ -46,6 +69,11 @@ describe("SlackAPIClient", () => {
 
   describe("files.uploadV2 w/ {throwSlackAPIError: true}", async () => {
     test("invalid_auth error as a SlackAPIError", async () => {
+      server.use(
+        http.post("https://slack.com/api/files.getUploadURLExternal", () => {
+          return HttpResponse.json({ ok: false, error: "invalid_auth" });
+        }),
+      );
       const client = new SlackAPIClient("xoxb-invalid", {
         logLevel: "DEBUG",
       });
@@ -63,6 +91,11 @@ describe("SlackAPIClient", () => {
   });
   describe("files.uploadV2 w/ {throwSlackAPIError: false}", async () => {
     test("invalid_auth error as a SlackAPIError", async () => {
+      server.use(
+        http.post("https://slack.com/api/files.getUploadURLExternal", () => {
+          return HttpResponse.json({ ok: false, error: "invalid_auth" });
+        }),
+      );
       const client = new SlackAPIClient("xoxb-invalid", {
         logLevel: "DEBUG",
         throwSlackAPIError: false,
@@ -76,26 +109,29 @@ describe("SlackAPIClient", () => {
   });
 
   test("connection error (status: 404)", async () => {
+    server.use(
+      http.post("https://localhost:9999/no-host/auth.test", () => {
+        return HttpResponse.text("foo", { status: 404 });
+      }),
+    );
     const client = new SlackAPIClient("xoxb-invalid", {
       logLevel: "DEBUG",
-      baseUrl: "https://httpbin.org/status/404",
+      baseUrl: "https://localhost:9999/no-host",
     });
     const rejects = expect(client.auth.test()).rejects;
     rejects.toThrowError(SlackAPIConnectionError);
-    rejects.toThrowError(
-      "Failed to call auth.test (status: 404, body: ><p>The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.</p>)",
-    );
+    rejects.toThrowError("Failed to call auth.test (status: 404, body: foo)");
   });
 
   test("connection error (type error)", async () => {
     const client = new SlackAPIClient("xoxb-invalid", {
       logLevel: "DEBUG",
-      baseUrl: "http://localhost:8765/",
+      baseUrl: "https://localhost:9999/xxx/",
     });
     const rejects = expect(client.auth.test()).rejects;
     rejects.toThrowError(SlackAPIConnectionError);
     rejects.toThrowError(
-      "Failed to call auth.test (cause: TypeError: fetch failed)",
+      "Failed to call auth.test (cause: TypeError: Failed to fetch)",
     );
   });
 });
