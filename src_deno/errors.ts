@@ -17,7 +17,7 @@ export class SlackAPIConnectionError extends Error {
     const substring = body
       .replaceAll("\r", "")
       .replaceAll("\n", "")
-      .substring(100);
+      .substring(0, 100);
     const bodyToPrint = substring.length === 1000
       ? substring + " ..."
       : substring;
@@ -51,9 +51,11 @@ export class SlackAPIError extends Error {
 }
 
 export class TokenRotationError extends Error {
-  constructor(message: string) {
+  cause: Error;
+  constructor(message: string, cause: Error) {
     super(message);
     this.name = "TokenRotationError";
+    this.cause = cause;
   }
 }
 

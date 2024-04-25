@@ -44,7 +44,10 @@ export class TokenRotator {
           };
         }
       } catch (e) {
-        throw new TokenRotationError(`Failed to refresh a bot token: ${e}`);
+        throw new TokenRotationError(
+          `Failed to refresh a bot token: ${e}`,
+          e as Error,
+        );
       }
     }
     if (targets.user && targets.user.token_expires_at < expireAt) {
@@ -68,7 +71,10 @@ export class TokenRotator {
           };
         }
       } catch (e) {
-        throw new TokenRotationError(`Failed to refresh a user token: ${e}`);
+        throw new TokenRotationError(
+          `Failed to refresh a user token: ${e}`,
+          e as Error,
+        );
       }
     }
     return refreshResults;
