@@ -1,12 +1,4 @@
-import {
-  assert,
-  test,
-  describe,
-  expect,
-  afterAll,
-  afterEach,
-  beforeAll,
-} from "vitest";
+import { test, describe, expect, afterAll, afterEach, beforeAll } from "vitest";
 import {
   ServerErrorRetryHandler,
   SlackAPIClient,
@@ -38,7 +30,7 @@ describe("Retry handlers", () => {
       );
       const client = new SlackAPIClient(undefined, { logLevel: "DEBUG" });
       const response = await client.auth.test();
-      assert.equal(response.error, undefined);
+      expect(response.ok).true;
     });
     test("exceeding max attempts", async () => {
       const responses = [
@@ -94,7 +86,7 @@ describe("Retry handlers", () => {
       const client = new SlackAPIClient(undefined, { logLevel: "DEBUG" });
       client.retryHanlders.push(new ServerErrorRetryHandler());
       const response = await client.auth.test();
-      assert.equal(response.error, undefined);
+      expect(response.ok).true;
     });
   });
 });
