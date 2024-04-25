@@ -27,12 +27,20 @@ export * from "./client/request";
 export type * from "./client/request";
 export * from "./client/response";
 export type * from "./client/response";
+export * from "./client/retry-handler/index";
+export type * from "./client/retry-handler/index";
 export * from "./client/automation-response/index";
 export type * from "./client/automation-response/index";
 export * from "./client/generated-response/index";
 export type * from "./client/generated-response/index";
 export * from "./client/webhook-client";
 export type * from "./client/webhook-client";
+
+export * from "./errors";
+export type * from "./errors";
+
+export * from "./logging/index";
+export type * from "./logging/index";
 
 export * from "./manifest/manifest-params";
 export type * from "./manifest/manifest-params";
@@ -49,8 +57,3 @@ export * from "./token-rotation/token-rotator-options";
 export type * from "./token-rotation/token-rotator-options";
 export * from "./token-rotation/token-rotator";
 export type * from "./token-rotation/token-rotator";
-
-export * from "./errors";
-export type * from "./errors";
-export * from "./logging/debug-logging";
-export type * from "./logging/debug-logging";
