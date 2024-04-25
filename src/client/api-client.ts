@@ -452,11 +452,9 @@ import type {
 } from "./generated-response/index";
 
 import type { SlackAPIResponse } from "./response";
-import { isDebugLogEnabled } from "../logging/debug-logging";
-import type {
-  SlackAPIClientLogLevel,
-  SlackAPIClientOptions,
-} from "./api-client-options";
+import { isDebugLogEnabled } from "../logging/index";
+import type { SlackAPIClientLogLevel } from "../logging/index";
+import type { SlackAPIClientOptions } from "./api-client-options";
 import type {
   AppsDatastoreDeleteResponse,
   AppsDatastoreGetResponse,
@@ -469,6 +467,8 @@ import type {
   WorkflowsTriggersUpdateResponse,
 } from "./automation-response/index";
 import type { FilesUploadV2Response } from "./custom-response/FilesUploadV2Response";
+import type { RetryHandler, RetryHandlerState } from "./retry-handler/index";
+import { RatelimitRetryHandler } from "./retry-handler/index";
 
 export interface SlackAPI<
   Req extends SlackAPIRequest,
@@ -496,6 +496,7 @@ export class SlackAPIClient {
   #logLevel: SlackAPIClientLogLevel;
   #throwSlackAPIError: boolean;
   #baseUrl: string;
+  retryHanlders: RetryHandler[];
 
   constructor(
     token: string | undefined = undefined,
@@ -510,6 +511,9 @@ export class SlackAPIClient {
         ? this.#options.baseUrl
         : this.#options.baseUrl + "/"
       : defaultOptions.baseUrl!;
+    this.retryHanlders = this.#options.rertryHandlers ?? [
+      new RatelimitRetryHandler(),
+    ];
   }
 
   // --------------------------------------
@@ -519,7 +523,8 @@ export class SlackAPIClient {
   async call(
     name: string,
     // deno-lint-ignore no-explicit-any
-    params: Record<string, any>,
+    params: Record<string, any> = {},
+    retryHandlerState: RetryHandlerState | undefined = undefined,
   ): Promise<SlackAPIResponse> {
     const url = `${this.#baseUrl}${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
@@ -547,15 +552,50 @@ export class SlackAPIClient {
     if (isDebugLogEnabled(this.#logLevel)) {
       console.log(`Slack API request (${name}): ${body}`);
     }
+    if (retryHandlerState) {
+      retryHandlerState.currentAttempt += 1;
+    }
+    const state: RetryHandlerState = retryHandlerState ?? {
+      currentAttempt: 0,
+      logLevel: this.#logLevel,
+    };
+    const request: Request = new Request(url, {
+      method: "POST",
+      headers,
+      body,
+    });
     let response: Response;
     try {
-      response = await fetch(url, {
-        method: "POST",
-        headers,
-        body,
-      });
+      response = await fetch(request);
+      for (const rh of this.retryHanlders) {
+        if (await rh.shouldRetry({ state, request, response })) {
+          if (isDebugLogEnabled(this.#logLevel)) {
+            console.log(
+              `Retrying ${name} API call (params: ${JSON.stringify(params)})`,
+            );
+          }
+          return await this.call(name, params, state);
+        }
+      }
     } catch (e) {
-      throw new SlackAPIConnectionError(name, -1, "", undefined, e as Error);
+      const error = new SlackAPIConnectionError(
+        name,
+        -1,
+        "",
+        undefined,
+        e as Error,
+      );
+      for (const rh of this.retryHanlders) {
+        if (await rh.shouldRetry({ state, request, error })) {
+          if (isDebugLogEnabled(this.#logLevel)) {
+            console.log(
+              `Retrying ${name} API call (params: ${JSON.stringify(params)})`,
+            );
+          }
+          return await this.call(name, params, state);
+        }
+      }
+      throw error;
     }
     if (response.status != 200) {
       const body = await response.text();
@@ -584,7 +624,8 @@ export class SlackAPIClient {
   async #sendMultipartData(
     name: string,
     // deno-lint-ignore no-explicit-any
-    params: Record<string, any>,
+    params: Record<string, any> = {},
+    retryHandlerState: RetryHandlerState | undefined = undefined,
   ): Promise<SlackAPIResponse> {
     const url = `${this.#baseUrl}${name}`;
     const token = params ? params.token ?? this.#token : this.#token;
@@ -611,15 +652,46 @@ export class SlackAPIClient {
       const bodyParamNames = Array.from(body.keys()).join(", ");
       console.log(`Slack API request (${name}): Sending ${bodyParamNames}`);
     }
+    if (retryHandlerState) {
+      retryHandlerState.currentAttempt += 1;
+    }
+    const state: RetryHandlerState = retryHandlerState ?? {
+      currentAttempt: 0,
+      logLevel: this.#logLevel,
+    };
+    const request: Request = new Request(url, {
+      method: "POST",
+      headers,
+      body,
+    });
     let response: Response;
     try {
-      response = await fetch(url, {
-        method: "POST",
-        headers,
-        body,
-      });
+      response = await fetch(request);
+      for (const rh of this.retryHanlders) {
+        if (await rh.shouldRetry({ state, request, response })) {
+          if (isDebugLogEnabled(this.#logLevel)) {
+            console.log(`Retrying ${name} API call`);
+          }
+          return await this.#sendMultipartData(name, params, state);
+        }
+      }
     } catch (e) {
-      throw new SlackAPIConnectionError(name, -1, "", undefined, e as Error);
+      const error = new SlackAPIConnectionError(
+        name,
+        -1,
+        "",
+        undefined,
+        e as Error,
+      );
+      for (const rh of this.retryHanlders) {
+        if (await rh.shouldRetry({ state, request, error })) {
+          if (isDebugLogEnabled(this.#logLevel)) {
+            console.log(`Retrying ${name} API call`);
+          }
+          return await this.#sendMultipartData(name, params, state);
+        }
+      }
+      throw error;
     }
     if (response.status != 200) {
       const body = await response.text();
