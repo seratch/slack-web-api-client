@@ -50,9 +50,11 @@ export class SlackAPIError extends Error {
 }
 
 export class TokenRotationError extends Error {
-  constructor(message: string) {
+  cause: Error;
+  constructor(message: string, cause: Error) {
     super(message);
     this.name = "TokenRotationError";
+    this.cause = cause;
   }
 }
 
