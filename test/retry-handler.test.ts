@@ -84,7 +84,7 @@ describe("Retry handlers", () => {
         }),
       );
       const client = new SlackAPIClient(undefined, { logLevel: "DEBUG" });
-      client.retryHanlders.push(new ServerErrorRetryHandler());
+      client.retryHandlers.push(new ServerErrorRetryHandler());
       const response = await client.auth.test();
       expect(response.ok).true;
     });

@@ -496,7 +496,7 @@ export class SlackAPIClient {
   #logLevel: SlackAPIClientLogLevel;
   #throwSlackAPIError: boolean;
   #baseUrl: string;
-  retryHanlders: RetryHandler[];
+  retryHandlers: RetryHandler[];
 
   constructor(
     token: string | undefined = undefined,
@@ -511,7 +511,7 @@ export class SlackAPIClient {
         ? this.#options.baseUrl
         : this.#options.baseUrl + "/"
       : defaultOptions.baseUrl!;
-    this.retryHanlders = this.#options.rertryHandlers ?? [
+    this.retryHandlers = this.#options.retryHandlers ?? [
       new RatelimitRetryHandler(),
     ];
   }
@@ -567,7 +567,7 @@ export class SlackAPIClient {
     let response: Response;
     try {
       response = await fetch(request);
-      for (const rh of this.retryHanlders) {
+      for (const rh of this.retryHandlers) {
         if (await rh.shouldRetry({ state, request, response })) {
           if (isDebugLogEnabled(this.#logLevel)) {
             console.log(
@@ -585,7 +585,7 @@ export class SlackAPIClient {
         undefined,
         e as Error,
       );
-      for (const rh of this.retryHanlders) {
+      for (const rh of this.retryHandlers) {
         if (await rh.shouldRetry({ state, request, error })) {
           if (isDebugLogEnabled(this.#logLevel)) {
             console.log(
@@ -667,7 +667,7 @@ export class SlackAPIClient {
     let response: Response;
     try {
       response = await fetch(request);
-      for (const rh of this.retryHanlders) {
+      for (const rh of this.retryHandlers) {
         if (await rh.shouldRetry({ state, request, response })) {
           if (isDebugLogEnabled(this.#logLevel)) {
             console.log(`Retrying ${name} API call`);
@@ -683,7 +683,7 @@ export class SlackAPIClient {
         undefined,
         e as Error,
       );
-      for (const rh of this.retryHanlders) {
+      for (const rh of this.retryHandlers) {
         if (await rh.shouldRetry({ state, request, error })) {
           if (isDebugLogEnabled(this.#logLevel)) {
             console.log(`Retrying ${name} API call`);

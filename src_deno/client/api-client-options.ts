@@ -5,5 +5,5 @@ export interface SlackAPIClientOptions {
   logLevel?: SlackAPIClientLogLevel;
   throwSlackAPIError?: boolean;
   baseUrl?: string;
-  rertryHandlers?: RetryHandler[];
+  retryHandlers?: RetryHandler[];
 }
