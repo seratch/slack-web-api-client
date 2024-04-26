@@ -27,7 +27,7 @@ export const def = DefineFunction({
   output_parameters: { properties: {}, required: [] },
 });
 
-import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.11.0/mod.ts";
+import { SlackAPIClient } from "https://deno.land/x/slack_web_api_client@0.11.1/mod.ts";
 
 export default SlackFunction(def, async ({ token }) => {
   const client = new SlackAPIClient(token, {
@@ -68,5 +68,5 @@ https://jsr.io/@seratch/slack-web-api-client
 import { SlackAPIClient } from "@seratch/slack-web-api-client.ts";
 ```
 
-When you need this library for Deno apps outside of the automation platform,
+When you need this library for Deno apps outside the automation platform,
 relying on jsr.io could be a simpler approach for resolving dependencies.
