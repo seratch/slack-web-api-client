@@ -7,3 +7,5 @@ scripts/
 test/
 vite.config.ts
 .env
+.github/
+vite.config.mjs
