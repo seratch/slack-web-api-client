@@ -8,4 +8,5 @@ test/
 vite.config.ts
 .env
 .github/
+.idea/
 vite.config.mjs
