@@ -10,6 +10,7 @@ export type AdminInviteRequestsApprovedListResponse = SlackAPIResponse & {
   needed?: string;
   ok: boolean;
   provided?: string;
+  response_metadata?: ResponseMetadata;
 };
 
 export interface ApprovedRequest {
@@ -46,4 +47,8 @@ export interface InviteRequest {
   id?: string;
   invite_type?: string;
   requester_ids?: string[];
+}
+
+export interface ResponseMetadata {
+  next_cursor?: string;
 }

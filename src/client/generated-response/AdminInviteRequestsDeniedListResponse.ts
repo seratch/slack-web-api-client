@@ -10,6 +10,7 @@ export type AdminInviteRequestsDeniedListResponse = SlackAPIResponse & {
   needed?: string;
   ok: boolean;
   provided?: string;
+  response_metadata?: ResponseMetadata;
 };
 
 export interface DeniedRequest {
@@ -30,4 +31,8 @@ export interface InviteRequest {
   invite_type?: string;
   request_reason?: string;
   requester_ids?: string[];
+}
+
+export interface ResponseMetadata {
+  next_cursor?: string;
 }

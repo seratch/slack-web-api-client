@@ -73,6 +73,7 @@ export interface Config {
 
 export interface TripInformation {
   channel_id?: string;
+  list_id?: string;
   message_ts?: string;
   reaction?: string;
   user_id?: string;
