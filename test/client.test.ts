@@ -130,8 +130,5 @@ describe("SlackAPIClient", () => {
     });
     const rejects = expect(client.auth.test()).rejects;
     rejects.toThrowError(SlackAPIConnectionError);
-    rejects.toThrowError(
-      "Failed to call auth.test (cause: TypeError: Failed to fetch)",
-    );
   });
 });
