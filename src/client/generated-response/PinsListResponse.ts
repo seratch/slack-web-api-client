@@ -47,6 +47,7 @@ export interface File {
   external_id?: string;
   external_type?: string;
   external_url?: string;
+  favorites?: Favorite[];
   file_access?: string;
   filetype?: string;
   from?: Cc[];
@@ -182,6 +183,12 @@ export interface Cc {
 export interface DmMpdmUsersWithFileAccess {
   access?: string;
   user_id?: string;
+}
+
+export interface Favorite {
+  collection_id?: string;
+  collection_name?: string;
+  position?: string;
 }
 
 export interface Headers {

@@ -305,6 +305,7 @@ export interface File {
   external_id?: string;
   external_type?: string;
   external_url?: string;
+  favorites?: any[];
   file_access?: string;
   filetype?: string;
   from?: any[];

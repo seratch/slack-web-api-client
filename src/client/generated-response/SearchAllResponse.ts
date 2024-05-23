@@ -484,6 +484,7 @@ export interface FileElement {
   external_id?: string;
   external_type?: string;
   external_url?: string;
+  favorites?: Favorite[];
   file_access?: string;
   filetype?: string;
   from?: Cc[];
@@ -624,6 +625,12 @@ export interface DmMpdmUsersWithFileAccess {
 export enum LastEditor {
   Empty = "",
   U00000000 = "U00000000",
+}
+
+export interface Favorite {
+  collection_id?: string;
+  collection_name?: string;
+  position?: string;
 }
 
 export interface FileHeaders {
@@ -845,6 +852,7 @@ export interface MessageFile {
   external_id?: string;
   external_type?: string;
   external_url?: string;
+  favorites?: any[];
   file_access?: string;
   filetype?: string;
   from?: any[];
