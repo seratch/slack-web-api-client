@@ -10,6 +10,7 @@ export type FilesCompleteUploadExternalResponse = SlackAPIResponse & {
   needed?: string;
   ok: boolean;
   provided?: string;
+  response_metadata?: ResponseMetadata;
 };
 
 export interface File {
@@ -86,4 +87,8 @@ export interface Public {
   team_id?: string;
   thread_ts?: string;
   ts?: string;
+}
+
+export interface ResponseMetadata {
+  messages?: string[];
 }
