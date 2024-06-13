@@ -646,6 +646,59 @@ export interface BookmarksRemoveRequest extends SlackAPIRequest {
 }
 
 /*
+ * `canvases.*`
+ */
+
+export interface CanvasesAccessDeleteRequest extends SlackAPIRequest {
+  canvas_id: string;
+  user_ids?: string[];
+  channel_ids?: string[];
+}
+
+export interface CanvasesAccessSetRequest extends SlackAPIRequest {
+  canvas_id: string;
+  access_level: "read" | "write";
+  user_ids?: string[];
+  channel_ids?: string[];
+}
+
+export interface CanvasDocumentContent {
+  type: "markdown";
+  markdown: string;
+}
+
+export interface CanvasesCreateRequest extends SlackAPIRequest {
+  title?: string;
+  document_content: CanvasDocumentContent;
+}
+export interface CanvasesDeleteRequest extends SlackAPIRequest {
+  canvas_id: string;
+}
+
+export interface CanvasesEditRequest extends SlackAPIRequest {
+  canvas_id: string;
+  changes: {
+    operation:
+      | "insert_after"
+      | "insert_before"
+      | "insert_at_start"
+      | "insert_at_end"
+      | "replace"
+      | "delete";
+    section_id: string;
+    document_content?: CanvasDocumentContent;
+  }[];
+}
+
+export interface CanvasesSectionsLookupRequest extends SlackAPIRequest {
+  canvas_id: string;
+  criteria: {
+    section_types?: ("any_header" | "h1" | "h2" | "h3")[];
+    contains_text?: string;
+  };
+}
+
+/*
  * `chat.*`
  */
 export interface ChatDeleteRequest extends SlackAPIRequest {
@@ -882,6 +935,10 @@ export interface ConversationsSetTopicRequest extends SlackAPIRequest {
 }
 export interface ConversationsUnarchiveRequest extends SlackAPIRequest {
   channel: string;
+}
+export interface ConversationsCanvasesCreateRequest extends SlackAPIRequest {
+  channel_id: string;
+  document_content: CanvasDocumentContent;
 }
 
 /*
@@ -1342,6 +1399,10 @@ export interface UsersProfileSetRequest extends SlackAPIRequest {
   user?: string;
   name?: string; // usable if `profile` is not passed
   value?: string; // usable if `profile` is not passed
+}
+export interface UsersDiscoverableContactsLookupRequest
+  extends SlackAPIRequest {
+  email: string;
 }
 
 /*

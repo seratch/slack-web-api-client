@@ -114,6 +114,12 @@ import type {
   BookmarksListRequest,
   BookmarksRemoveRequest,
   BotsInfoRequest,
+  CanvasesAccessDeleteRequest,
+  CanvasesAccessSetRequest,
+  CanvasesCreateRequest,
+  CanvasesDeleteRequest,
+  CanvasesEditRequest,
+  CanvasesSectionsLookupRequest,
   ChatDeleteRequest,
   ChatDeleteScheduledMessageRequest,
   ChatGetPermalinkRequest,
@@ -127,6 +133,7 @@ import type {
   ConversationsAcceptSharedInviteRequest,
   ConversationsApproveSharedInviteRequest,
   ConversationsArchiveRequest,
+  ConversationsCanvasesCreateRequest,
   ConversationsCloseRequest,
   ConversationsCreateRequest,
   ConversationsDeclineSharedInviteRequest,
@@ -213,6 +220,7 @@ import type {
   UsergroupsUsersUpdateRequest,
   UsersConversationsRequest,
   UsersDeletePhotoRequest,
+  UsersDiscoverableContactsLookupRequest,
   UsersGetPresenceRequest,
   UsersIdentityRequest,
   UsersInfoRequest,
@@ -341,6 +349,12 @@ import type {
   BookmarksListResponse,
   BookmarksRemoveResponse,
   BotsInfoResponse,
+  CanvasesAccessDeleteResponse,
+  CanvasesAccessSetResponse,
+  CanvasesCreateResponse,
+  CanvasesDeleteResponse,
+  CanvasesEditResponse,
+  CanvasesSectionsLookupResponse,
   ChatDeleteResponse,
   ChatDeleteScheduledMessageResponse,
   ChatGetPermalinkResponse,
@@ -354,6 +368,7 @@ import type {
   ConversationsAcceptSharedInviteResponse,
   ConversationsApproveSharedInviteResponse,
   ConversationsArchiveResponse,
+  ConversationsCanvasesCreateResponse,
   ConversationsCloseResponse,
   ConversationsCreateResponse,
   ConversationsDeclineSharedInviteResponse,
@@ -436,6 +451,7 @@ import type {
   UsergroupsUsersUpdateResponse,
   UsersConversationsResponse,
   UsersDeletePhotoResponse,
+  UsersDiscoverableContactsLookupResponse,
   UsersGetPresenceResponse,
   UsersIdentityResponse,
   UsersInfoResponse,
@@ -1381,6 +1397,37 @@ export class SlackAPIClient {
     ),
   };
 
+  public readonly canvases = {
+    access: {
+      delete: this.#bindApiCall<
+        CanvasesAccessDeleteRequest,
+        CanvasesAccessDeleteResponse
+      >(this, "canvases.access.delete"),
+      set: this.#bindApiCall<
+        CanvasesAccessSetRequest,
+        CanvasesAccessSetResponse
+      >(this, "canvases.access.set"),
+    },
+    create: this.#bindApiCall<CanvasesCreateRequest, CanvasesCreateResponse>(
+      this,
+      "canvases.create",
+    ),
+    edit: this.#bindApiCall<CanvasesEditRequest, CanvasesEditResponse>(
+      this,
+      "canvases.edit",
+    ),
+    delete: this.#bindApiCall<CanvasesDeleteRequest, CanvasesDeleteResponse>(
+      this,
+      "canvases.delete",
+    ),
+    sections: {
+      lookup: this.#bindApiCall<
+        CanvasesSectionsLookupRequest,
+        CanvasesSectionsLookupResponse
+      >(this, "canvases.sections.lookup"),
+    },
+  };
+
   public readonly chat = {
     delete: this.#bindApiCall<ChatDeleteRequest, ChatDeleteResponse>(
       this,
@@ -1519,6 +1566,12 @@ export class SlackAPIClient {
       ConversationsUnarchiveRequest,
       ConversationsUnarchiveResponse
     >(this, "conversations.unarchive"),
+    canvases: {
+      create: this.#bindApiCall<
+        ConversationsCanvasesCreateRequest,
+        ConversationsCanvasesCreateResponse
+      >(this, "conversations.canvases.create"),
+    },
   };
 
   public readonly dnd = {
@@ -1866,6 +1919,12 @@ export class SlackAPIClient {
         UsersProfileSetRequest,
         UsersProfileSetResponse
       >(this, "users.profile.set"),
+    },
+    discoverableContacts: {
+      lookup: this.#bindApiCall<
+        UsersDiscoverableContactsLookupRequest,
+        UsersDiscoverableContactsLookupResponse
+      >(this, "users.discoverableContacts.lookup"),
     },
   };
 

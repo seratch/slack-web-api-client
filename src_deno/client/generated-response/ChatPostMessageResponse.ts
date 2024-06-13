@@ -421,6 +421,7 @@ export interface FileElement {
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
   private_channels_with_file_access_count?: number;
+  private_file_with_access_count?: number;
   public_url_shared?: boolean;
   quip_thread_id?: string;
   reactions?: Reaction[];
@@ -774,6 +775,7 @@ export interface MessageFile {
   preview_is_truncated?: boolean;
   preview_plain_text?: string;
   private_channels_with_file_access_count?: number;
+  private_file_with_access_count?: number;
   public_url_shared?: boolean;
   quip_thread_id?: string;
   reactions?: any[];
