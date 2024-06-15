@@ -10,3 +10,4 @@ vite.config.ts
 .github/
 .idea/
 vite.config.mjs
+coverage/
