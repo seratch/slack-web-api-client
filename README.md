@@ -9,6 +9,8 @@ The **slack-web-api-client** library is a type-safe Slack Web API client that pr
 * **Strong types for Web API responses and Block Kit**, which make coding enjoyable and predictable
 * **Zero additional dependencies**, allowing developers to integrate this library into their projects without any obstacles
 
+If you're looking for a solution to utilize the full features of the Slack platform, [**slack-edge**](https://github.com/seratch/slack-edge) is the one for you. The **slack-edge** library uses this **slack-web-api-client** internally, making it compatible with most JavaScript/TypeScript runtimes.
+
 ### Getting Started
 
 #### Working with the npm package
