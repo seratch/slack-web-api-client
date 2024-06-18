@@ -12,8 +12,6 @@ export type MigrationExchangeResponse = SlackAPIResponse & {
   ok: boolean;
   provided?: string;
   team_id?: string;
-  user_id_map?: UseridMap;
+  user_id_map?: { [key: string]: string };
   warning?: string;
 };
-
-export interface UseridMap {}
