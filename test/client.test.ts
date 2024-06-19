@@ -108,6 +108,31 @@ describe("SlackAPIClient", () => {
     });
   });
 
+  test("conversations.list", async () => {
+    server.use(
+      http.post(
+        "https://slack.com/api/conversations.list",
+        async ({ request }) => {
+          const params = await request.formData();
+          const expected = params.get("types") === "mpim,private_channel";
+          if (expected) {
+            return HttpResponse.json({ ok: true });
+          } else {
+            return HttpResponse.json({
+              ok: false,
+              error: "invalid_request_format",
+            });
+          }
+        },
+      ),
+    );
+    const client = new SlackAPIClient("xoxb-valid", { logLevel: "DEBUG" });
+    const response = await client.conversations.list({
+      types: ["mpim", "private_channel"],
+    });
+    assert.equal(response.error, undefined);
+  });
+
   test("connection error (status: 404)", async () => {
     server.use(
       http.post("https://localhost:9999/no-host/auth.test", () => {

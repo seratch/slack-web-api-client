@@ -101,13 +101,13 @@ export interface AdminAppsActivitiesListRequest
     CursorPaginationEnabled {
   app_id?: string;
   component_id?: string;
-  component_type?: string;
+  component_type?: "events_api" | "workflows" | "functions" | "tables";
   log_event_type?: string;
   max_date_created?: number;
   min_date_created?: number;
-  min_log_level?: string;
-  sort_direction?: string;
-  source?: string;
+  min_log_level?: "trace" | "debug" | "info" | "warn" | "error" | "fatal";
+  sort_direction?: "asc" | "desc";
+  source?: "slack" | "developer";
   team_id?: string;
   trace_id?: string;
 }
@@ -121,24 +121,28 @@ export interface AdminAppsConfigSetRequest extends SlackAPIRequest {
 }
 export interface AdminAuthPolicyAssignEntitiesRequest extends SlackAPIRequest {
   entity_ids: string[];
-  entity_type: string;
-  policy_name: string;
+  // https://api.slack.com/methods/admin.auth.policy.assignEntities
+  entity_type: "USER";
+  policy_name: "email_password";
 }
 export interface AdminAuthPolicyGetEntitiesRequest
   extends SlackAPIRequest,
     CursorPaginationEnabled {
-  policy_name: string;
-  entity_type?: string;
+  //https://api.slack.com/methods/admin.auth.policy.getEntities
+  policy_name: "email_password";
+  entity_type?: "USER";
 }
 export interface AdminAuthPolicyRemoveEntitiesRequest extends SlackAPIRequest {
   entity_ids: string[];
-  entity_type: string;
-  policy_name: string;
+  // https://api.slack.com/methods/admin.auth.policy.removeEntities
+  entity_type: "USER";
+  policy_name: "email_password";
 }
 export interface AdminBarriersCreateRequest extends SlackAPIRequest {
   barriered_from_usergroup_ids: string[];
   primary_usergroup_id: string;
-  restricted_subjects: string[];
+  // https://api.slack.com/methods/admin.barriers.create
+  restricted_subjects: ["im", "mpim", "call"];
 }
 
 export interface AdminBarriersDeleteRequest extends SlackAPIRequest {
@@ -153,7 +157,8 @@ export interface AdminBarriersUpdateRequest extends SlackAPIRequest {
   barrier_id: string;
   barriered_from_usergroup_ids: string[];
   primary_usergroup_id: string;
-  restricted_subjects: string[];
+  // https://api.slack.com/methods/admin.barriers.update
+  restricted_subjects: ["im", "mpim", "call"];
 }
 
 export interface AdminConversationsArchiveRequest extends SlackAPIRequest {
@@ -305,7 +310,7 @@ export interface AdminFunctionsPermissionsLookupRequest
 }
 export interface AdminFunctionsPermissionsSetRequest extends SlackAPIRequest {
   function_id: string;
-  visibility: string;
+  visibility: "everyone" | "app_collaborators" | "named_entities" | "no_one";
   user_ids?: string[];
 }
 export interface AdminInviteRequestsApproveRequest extends SlackAPIRequest {
@@ -341,7 +346,7 @@ export interface AdminRolesListAssignmentsRequest
     CursorPaginationEnabled {
   entity_ids?: string[];
   role_ids?: string[];
-  sort_dir?: string;
+  sort_dir?: "ASC" | "DESC";
 }
 export interface AdminRolesRemoveAssignmentsRequest extends SlackAPIRequest {
   role_id: string;
@@ -357,7 +362,7 @@ export interface AdminTeamsCreateRequest extends SlackAPIRequest {
   team_domain: string;
   team_name: string;
   team_description?: string;
-  team_discoverability?: string;
+  team_discoverability?: "open" | "closed" | "invite_only" | "unlisted";
 }
 export interface AdminTeamsListRequest
   extends SlackAPIRequest,
@@ -868,7 +873,7 @@ export interface ConversationsInfoRequest extends SlackAPIRequest, LocaleAware {
 }
 export interface ConversationsInviteRequest extends SlackAPIRequest {
   channel: string;
-  users: string; // comma-separated list of users
+  users: string | string[];
   force?: boolean;
 }
 export interface ConversationsInviteSharedRequest extends SlackAPIRequest {
@@ -890,7 +895,7 @@ export interface ConversationsListRequest
   extends SlackAPIRequest,
     CursorPaginationEnabled {
   exclude_archived?: boolean;
-  types?: string; // comma-separated list of conversation types
+  types?: ("public_channel" | "private_channel" | "mpim" | "im")[];
   team_id?: string;
 }
 export interface ConversationsListConnectInvitesRequest
@@ -910,7 +915,7 @@ export interface ConversationsMembersRequest
 }
 export interface ConversationsOpenRequest extends SlackAPIRequest {
   channel?: string;
-  users?: string; // comma-separated list of users
+  users?: string | string[];
   return_im?: boolean;
 }
 export interface ConversationsRenameRequest extends SlackAPIRequest {
@@ -953,7 +958,7 @@ export interface DndSetSnoozeRequest extends SlackAPIRequest {
   num_minutes: number;
 }
 export interface DndTeamInfoRequest extends SlackAPIRequest {
-  users?: string; // comma-separated list of users
+  users?: string | string[];
 }
 
 /*
@@ -983,7 +988,7 @@ export interface FilesListRequest
   user?: string;
   ts_from?: string;
   ts_to?: string;
-  types?: string; // comma-separated list of file types
+  types?: string | string[];
   show_files_hidden_by_limit?: boolean;
   team_id?: string;
 }
@@ -998,7 +1003,7 @@ export interface FilesSharedPublicURLRequest extends SlackAPIRequest {
  * @deprecated use files.uploadV2 instead
  * */
 interface FileUpload {
-  channels?: string; // comma-separated list of channels
+  channels?: string | string[];
   content?: string; // if omitted, must provide `file`
   file?: Blob | ArrayBuffer; // if omitted, must provide `content`
   filename?: string;
@@ -1104,8 +1109,7 @@ export interface FilesRemoteRemoveRequest extends SlackAPIRequest {
   external_id?: string;
 }
 export interface FilesRemoteShareRequest extends SlackAPIRequest {
-  channels: string; // comma-separated list of channel ids
-
+  channels: string | string[];
   // either one of the file or external_id Request are required
   file?: string;
   external_id?: string;
@@ -1128,7 +1132,7 @@ export interface FunctionsCompleteErrorRequest extends SlackAPIRequest {
  * `migration.*`
  */
 export interface MigrationExchangeRequest extends SlackAPIRequest {
-  users: string; // comma-separated list of users
+  users: string | string[];
   to_old?: boolean;
   team_id?: string;
 }
@@ -1294,7 +1298,7 @@ export interface TeamInfoRequest extends SlackAPIRequest {
 }
 export interface TeamIntegrationLogsRequest extends SlackAPIRequest {
   app_id?: string;
-  change_type?: string; // TODO: list types: 'x' | 'y' | 'z'
+  change_type?: "added" | "removed" | "enabled" | "disabled" | "updated";
   count?: number;
   page?: number;
   service_id?: string;
@@ -1308,11 +1312,15 @@ export interface TeamProfileGetRequest extends SlackAPIRequest {
 export type TeamPreferencesListRequest = SlackAPIRequest;
 
 export interface TeamExternalTeamsListRequest extends SlackAPIRequest {
-  connection_status_filter?: string;
+  connection_status_filter?:
+    | "CONNECTED"
+    | "DISCONNECTED"
+    | "BLOCKED"
+    | "IN_REVIEW";
   limit?: number;
   slack_connect_pref_filter?: string[];
-  sort_direction?: string;
-  sort_field?: string;
+  sort_direction?: "asc" | "desc";
+  sort_field?: "team_name" | "last_active_timestamp" | "connection_status";
   workspace_filter?: string[];
 }
 
@@ -1325,7 +1333,7 @@ export interface ToolingTokensRotateRequest extends SlackAPIRequest {
  */
 export interface UsergroupsCreateRequest extends SlackAPIRequest {
   name: string;
-  channels?: string; // comma-separated list of channels
+  channels?: string | string[];
   description?: string;
   handle?: string;
   include_count?: boolean;
@@ -1345,7 +1353,7 @@ export interface UsergroupsListRequest extends SlackAPIRequest {
 }
 export interface UsergroupsUpdateRequest extends SlackAPIRequest {
   usergroup: string;
-  channels?: string; // comma-separated list of channels
+  channels?: string | string[];
   description?: string;
   handle?: string;
   include_count?: boolean;
@@ -1357,7 +1365,7 @@ export interface UsergroupsUsersListRequest extends SlackAPIRequest {
 }
 export interface UsergroupsUsersUpdateRequest extends SlackAPIRequest {
   usergroup: string;
-  users: string; // comma-separated list of users
+  users: string | string[];
   include_count?: boolean;
 }
 
@@ -1368,7 +1376,7 @@ export interface UsersConversationsRequest
   extends SlackAPIRequest,
     CursorPaginationEnabled {
   exclude_archived?: boolean;
-  types?: string; // comma-separated list of conversation types
+  types?: ("public_channel" | "private_channel" | "mpim" | "im")[];
   user?: string;
   team_id?: string;
 }
