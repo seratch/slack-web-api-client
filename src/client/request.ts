@@ -916,6 +916,7 @@ export interface ConversationsMembersRequest
 export interface ConversationsOpenRequest extends SlackAPIRequest {
   channel?: string;
   users?: string | string[];
+  prevent_creation?: boolean;
   return_im?: boolean;
 }
 export interface ConversationsRenameRequest extends SlackAPIRequest {
