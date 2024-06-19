@@ -440,6 +440,7 @@ export interface RichTextSectionLink extends RichTextSectionElement {
   type: "link";
   url: string;
   text: string;
+  unsafe?: boolean;
   style?: RichTextSectionElementStyleWithCode;
 }
 export interface RichTextSectionTeam extends RichTextSectionElement {
@@ -469,6 +470,9 @@ export interface RichTextSectionElementStyle {
   bold?: boolean;
   italic?: boolean;
   strike?: boolean;
+  highlight?: boolean;
+  client_highlight?: boolean;
+  unlink?: boolean;
 }
 export interface RichTextSectionElementStyleWithCode
   extends RichTextSectionElementStyle {
