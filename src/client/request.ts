@@ -1307,6 +1307,15 @@ export interface TeamProfileGetRequest extends SlackAPIRequest {
 }
 export type TeamPreferencesListRequest = SlackAPIRequest;
 
+export interface TeamExternalTeamsListRequest extends SlackAPIRequest {
+  connection_status_filter?: string;
+  limit?: number;
+  slack_connect_pref_filter?: string[];
+  sort_direction?: string;
+  sort_field?: string;
+  workspace_filter?: string[];
+}
+
 export interface ToolingTokensRotateRequest extends SlackAPIRequest {
   refresh_token: string;
 }

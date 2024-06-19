@@ -206,6 +206,7 @@ import type {
   TeamAccessLogsRequest,
   TeamBillableInfoRequest,
   TeamBillingInfoRequest,
+  TeamExternalTeamsListRequest,
   TeamInfoRequest,
   TeamIntegrationLogsRequest,
   TeamPreferencesListRequest,
@@ -437,6 +438,7 @@ import type {
   TeamAccessLogsResponse,
   TeamBillableInfoResponse,
   TeamBillingInfoResponse,
+  TeamExternalTeamsListResponse,
   TeamInfoResponse,
   TeamIntegrationLogsResponse,
   TeamPreferencesListResponse,
@@ -1828,6 +1830,12 @@ export class SlackAPIClient {
         TeamProfileGetRequest,
         TeamProfileGetResponse
       >(this, "team.profile.get"),
+    },
+    externalTeams: {
+      list: this.#bindApiCall<
+        TeamExternalTeamsListRequest,
+        TeamExternalTeamsListResponse
+      >(this, "team.externalTeams.list"),
     },
   };
 

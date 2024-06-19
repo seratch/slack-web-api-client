@@ -206,6 +206,7 @@ export type { StarsRemoveResponse } from "./StarsRemoveResponse.ts";
 export type { TeamAccessLogsResponse } from "./TeamAccessLogsResponse.ts";
 export type { TeamBillableInfoResponse } from "./TeamBillableInfoResponse.ts";
 export type { TeamBillingInfoResponse } from "./TeamBillingInfoResponse.ts";
+export type { TeamExternalTeamsListResponse } from "./TeamExternalTeamsListResponse.ts";
 export type { TeamInfoResponse } from "./TeamInfoResponse.ts";
 export type { TeamIntegrationLogsResponse } from "./TeamIntegrationLogsResponse.ts";
 export type { TeamPreferencesListResponse } from "./TeamPreferencesListResponse.ts";
