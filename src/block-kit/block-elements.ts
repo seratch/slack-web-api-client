@@ -368,7 +368,7 @@ export interface RichTextList extends RichTextBlockSubElement {
   indent?: number;
   offset?: number;
   border?: number;
-  elements: RichTextBlockSubElement[];
+  elements: AnyRichTextBlockElement[];
 }
 export interface RichTextPreformatted extends RichTextBlockSubElement {
   type: "rich_text_preformatted";

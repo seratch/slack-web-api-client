@@ -1,6 +1,7 @@
 import { assert, test, describe } from "vitest";
 import {
   AnyMessageBlock,
+  AnyRichTextBlockElement,
   MessageInputBlock,
   RichTextBlock,
 } from "../src/index";
@@ -238,5 +239,316 @@ describe("Block Kit types", () => {
       },
     ];
     assert.isTrue(blocks.length > 0);
+  });
+
+  describe("parse rich text block elements", async () => {
+    test("pattern 1", async () => {
+      const elements: AnyRichTextBlockElement[] = [
+        {
+          type: "rich_text_section",
+          elements: [
+            { type: "text", text: "This is my friend " },
+            { type: "user", user_id: "U060JP64TQF" },
+            { type: "text", text: "." },
+          ],
+        },
+        {
+          type: "rich_text_section",
+          elements: [
+            {
+              type: "text",
+              text: "This is a rich text section with regular text. ",
+            },
+            { type: "text", text: "This is bold", style: { bold: true } },
+            { type: "text", text: ". " },
+            { type: "text", text: "This is italics.", style: { italic: true } },
+            { type: "text", text: " ", style: { bold: true, italic: true } },
+            {
+              type: "text",
+              text: "This is strikethrough.",
+              style: { strike: true },
+            },
+            { type: "text", text: " " },
+            { type: "text", text: "This is code.", style: { code: true } },
+            { type: "text", text: "\n\n" },
+          ],
+        },
+        {
+          type: "rich_text_list",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "This is an" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "ordered" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "list" }],
+            },
+          ],
+          style: "ordered",
+          indent: 0,
+          border: 0,
+        },
+        { type: "rich_text_section", elements: [{ type: "text", text: "\n" }] },
+        {
+          type: "rich_text_list",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "This is an" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "unordered" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "list" }],
+            },
+          ],
+          style: "bullet",
+          indent: 0,
+          border: 0,
+        },
+        {
+          type: "rich_text_section",
+          elements: [{ type: "text", text: "\n" }],
+        },
+        {
+          type: "rich_text_quote",
+          elements: [{ type: "text", text: "This is a \ntext quote" }],
+        },
+        {
+          type: "rich_text_section",
+          elements: [{ type: "text", text: "\n" }],
+        },
+        {
+          type: "rich_text_preformatted",
+          elements: [
+            { type: "text", text: "This is a\nmulti-line \ncode block" },
+          ],
+          border: 0,
+        },
+        {
+          type: "rich_text_section",
+          elements: [
+            { type: "text", text: "\nThis is a " },
+            { type: "link", url: "https://www.google.com/", text: "link" },
+            { type: "text", text: " to google.\n\n" },
+          ],
+        },
+        {
+          type: "rich_text_list",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: "We should also support nested styling like this bolded text",
+                  style: { bold: true },
+                },
+              ],
+            },
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: "in an unordered list",
+                  style: { bold: true },
+                },
+              ],
+            },
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: "on a text quote.",
+                  style: { bold: true },
+                },
+              ],
+            },
+          ],
+          style: "bullet",
+          indent: 0,
+          border: 1,
+        },
+        {
+          type: "rich_text_section",
+          elements: [
+            { type: "text", text: "Or this " },
+            { type: "text", text: "bolded", style: { bold: true, code: true } },
+            { type: "text", text: " code", style: { code: true } },
+            {
+              type: "text",
+              text: ".\n\n\n\nAnd preserve whitespace/newlines?",
+            },
+          ],
+        },
+      ];
+      assert.isTrue(elements.length > 0);
+    });
+
+    test("pattern 2", async () => {
+      const elements: AnyRichTextBlockElement[] = [
+        {
+          type: "rich_text_section",
+          elements: [
+            { type: "text", text: "This is my friend " },
+            { type: "user", user_id: "U060JP64TQF" },
+            { type: "text", text: "." },
+          ],
+        },
+        {
+          type: "rich_text_section",
+          elements: [
+            {
+              type: "text",
+              text: "This is a rich text section with regular text. ",
+            },
+            { type: "text", text: "This is bold", style: { bold: true } },
+            { type: "text", text: ". " },
+            { type: "text", text: "This is italics.", style: { italic: true } },
+            { type: "text", text: " ", style: { bold: true, italic: true } },
+            {
+              type: "text",
+              text: "This is strikethrough.",
+              style: { strike: true },
+            },
+            { type: "text", text: " " },
+            { type: "text", text: "This is code.", style: { code: true } },
+            { type: "text", text: "\n\n" },
+          ],
+        },
+        {
+          type: "rich_text_list",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "This is an" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "ordered" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "list" }],
+            },
+          ],
+          style: "ordered",
+          indent: 0,
+          border: 0,
+        },
+        {
+          type: "rich_text_section",
+          elements: [{ type: "text", text: "\n" }],
+        },
+        {
+          type: "rich_text_list",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "This is an" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "unordered" }],
+            },
+            {
+              type: "rich_text_section",
+              elements: [{ type: "text", text: "list" }],
+            },
+          ],
+          style: "bullet",
+          indent: 0,
+          border: 0,
+        },
+        {
+          type: "rich_text_section",
+          elements: [{ type: "text", text: "\n" }],
+        },
+        {
+          type: "rich_text_quote",
+          elements: [{ type: "text", text: "This is a \ntext quote" }],
+        },
+        {
+          type: "rich_text_section",
+          elements: [{ type: "text", text: "\n" }],
+        },
+        {
+          type: "rich_text_preformatted",
+          elements: [
+            { type: "text", text: "This is a\nmulti-line \ncode block" },
+          ],
+          border: 0,
+        },
+        {
+          type: "rich_text_section",
+          elements: [
+            { type: "text", text: "\nThis is a " },
+            { type: "link", url: "https://www.google.com/", text: "link" },
+            { type: "text", text: " to google.\n\n" },
+          ],
+        },
+        {
+          type: "rich_text_list",
+          elements: [
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: "We should also support nested styling like this bolded text",
+                  style: { bold: true },
+                },
+              ],
+            },
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: "in an unordered list",
+                  style: { bold: true },
+                },
+              ],
+            },
+            {
+              type: "rich_text_section",
+              elements: [
+                {
+                  type: "text",
+                  text: "on a text quote.",
+                  style: { bold: true },
+                },
+              ],
+            },
+          ],
+          style: "bullet",
+          indent: 0,
+          border: 1,
+        },
+        {
+          type: "rich_text_section",
+          elements: [
+            { type: "text", text: "Or this " },
+            { type: "text", text: "bolded", style: { bold: true, code: true } },
+            { type: "text", text: " code", style: { code: true } },
+            {
+              type: "text",
+              text: ".\n\n\n\nAnd preserve whitespace/newlines?",
+            },
+          ],
+        },
+      ];
+      assert.isTrue(elements.length > 0);
+    });
   });
 });
