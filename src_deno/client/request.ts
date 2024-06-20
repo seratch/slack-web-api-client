@@ -112,8 +112,11 @@ export interface AdminAppsConfigLookupRequest extends SlackAPIRequest {
 }
 export interface AdminAppsConfigSetRequest extends SlackAPIRequest {
   app_id: string;
-  domain_restrictions?: Record<string, unknown>;
-  workflow_auth_strategy?: string;
+  domain_restrictions?: {
+    urls?: string[];
+    emails?: string[];
+  };
+  workflow_auth_strategy?: "builder_choice" | "end_user_only";
 }
 export interface AdminAuthPolicyAssignEntitiesRequest extends SlackAPIRequest {
   entity_ids: string[];
@@ -259,7 +262,13 @@ export interface AdminConversationsSearchRequest
 export interface AdminConversationsSetConversationPrefsRequest
   extends SlackAPIRequest {
   channel_id: string;
-  prefs: Record<string, unknown>;
+  prefs: {
+    who_can_post?: string;
+    can_thread?: string;
+    can_huddle?: string;
+    enable_at_channel?: string;
+    enable_at_here?: string;
+  };
 }
 export interface AdminConversationsSetTeamsRequest extends SlackAPIRequest {
   channel_id: string;
@@ -405,7 +414,7 @@ export interface AdminUsersAssignRequest extends SlackAPIRequest {
   is_ultra_restricted?: boolean;
 }
 export interface AdminUsersInviteRequest extends SlackAPIRequest {
-  channel_ids: string;
+  channel_ids: string | string[];
   email: string;
   team_id: string;
   custom_message?: string;
@@ -1364,7 +1373,7 @@ export interface UsersProfileGetRequest extends SlackAPIRequest {
   user?: string;
 }
 export interface UsersProfileSetRequest extends SlackAPIRequest {
-  profile?: string; // url-encoded json
+  profile?: Record<string, unknown> | string;
   user?: string;
   name?: string; // usable if `profile` is not passed
   value?: string; // usable if `profile` is not passed

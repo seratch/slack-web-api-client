@@ -133,6 +133,33 @@ describe("SlackAPIClient", () => {
     assert.equal(response.error, undefined);
   });
 
+  test("users.profile.set", async () => {
+    server.use(
+      http.post(
+        "https://slack.com/api/users.profile.set",
+        async ({ request }) => {
+          const params = await request.formData();
+          const expected =
+            params.get("profile") === '{"first_name":"John","age":95}';
+          if (expected) {
+            return HttpResponse.json({ ok: true });
+          } else {
+            return HttpResponse.json({
+              ok: false,
+              error: "invalid_request_format",
+            });
+          }
+        },
+      ),
+    );
+    const client = new SlackAPIClient("xoxb-valid", { logLevel: "DEBUG" });
+    const response = await client.users.profile.set({
+      profile: { first_name: "John", age: 95 },
+      user: "W12345",
+    });
+    assert.equal(response.error, undefined);
+  });
+
   test("connection error (status: 404)", async () => {
     server.use(
       http.post("https://localhost:9999/no-host/auth.test", () => {
