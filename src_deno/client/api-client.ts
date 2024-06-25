@@ -137,6 +137,7 @@ import type {
   ConversationsCloseRequest,
   ConversationsCreateRequest,
   ConversationsDeclineSharedInviteRequest,
+  ConversationsExternalInvitePermissionsSetRequest,
   ConversationsHistoryRequest,
   ConversationsInfoRequest,
   ConversationsInviteRequest,
@@ -373,6 +374,7 @@ import type {
   ConversationsCloseResponse,
   ConversationsCreateResponse,
   ConversationsDeclineSharedInviteResponse,
+  ConversationsExternalInvitePermissionsSetResponse,
   ConversationsHistoryResponse,
   ConversationsInfoResponse,
   ConversationsInviteResponse,
@@ -1577,6 +1579,12 @@ export class SlackAPIClient {
         ConversationsCanvasesCreateRequest,
         ConversationsCanvasesCreateResponse
       >(this, "conversations.canvases.create"),
+    },
+    externalInvitePermissions: {
+      set: this.#bindApiCall<
+        ConversationsExternalInvitePermissionsSetRequest,
+        ConversationsExternalInvitePermissionsSetResponse
+      >(this, "conversations.externalInvitePermissions.set"),
     },
   };
 

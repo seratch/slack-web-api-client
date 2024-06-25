@@ -955,6 +955,12 @@ export interface ConversationsCanvasesCreateRequest extends SlackAPIRequest {
   channel_id: string;
   document_content: CanvasDocumentContent;
 }
+export interface ConversationsExternalInvitePermissionsSetRequest
+  extends SlackAPIRequest {
+  action: "upgrade" | "downgrade";
+  channel: string;
+  target_team: string;
+}
 
 /*
  * `dnd.*`

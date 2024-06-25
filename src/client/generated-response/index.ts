@@ -141,6 +141,7 @@ export type { ConversationsCanvasesCreateResponse } from "./ConversationsCanvase
 export type { ConversationsCloseResponse } from "./ConversationsCloseResponse";
 export type { ConversationsCreateResponse } from "./ConversationsCreateResponse";
 export type { ConversationsDeclineSharedInviteResponse } from "./ConversationsDeclineSharedInviteResponse";
+export type { ConversationsExternalInvitePermissionsSetResponse } from "./ConversationsExternalInvitePermissionsSetResponse";
 export type { ConversationsHistoryResponse } from "./ConversationsHistoryResponse";
 export type { ConversationsInfoResponse } from "./ConversationsInfoResponse";
 export type { ConversationsInviteResponse } from "./ConversationsInviteResponse";
