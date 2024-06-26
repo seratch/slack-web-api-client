@@ -556,7 +556,11 @@ export class SlackAPIClient {
     }
     for (const [key, value] of Object.entries(_params)) {
       if (typeof value === "object") {
-        if (Array.isArray(value)) {
+        if (
+          Array.isArray(value) &&
+          value.length > 0 &&
+          typeof value[0] !== "object"
+        ) {
           _params[key] = value.map((v) => v.toString()).join(",");
         } else {
           _params[key] = JSON.stringify(value);
