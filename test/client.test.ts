@@ -1,17 +1,5 @@
-import {
-  assert,
-  test,
-  describe,
-  expect,
-  afterAll,
-  afterEach,
-  beforeAll,
-} from "vitest";
-import {
-  SlackAPIClient,
-  SlackAPIConnectionError,
-  SlackAPIError,
-} from "../src/index";
+import { assert, test, describe, expect, afterAll, afterEach, beforeAll } from "vitest";
+import { SlackAPIClient, SlackAPIConnectionError, SlackAPIError } from "../src/index";
 
 import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
@@ -45,9 +33,7 @@ describe("SlackAPIClient", () => {
       });
       const rejects = expect(client.auth.test()).rejects;
       rejects.toThrowError(SlackAPIError);
-      rejects.toThrowError(
-        'Failed to call auth.test due to invalid_auth: {"ok":false,"error":"invalid_auth","headers":{}}',
-      );
+      rejects.toThrowError('Failed to call auth.test due to invalid_auth: {"ok":false,"error":"invalid_auth","headers":{}}');
     });
   });
 
@@ -110,21 +96,18 @@ describe("SlackAPIClient", () => {
 
   test("conversations.list", async () => {
     server.use(
-      http.post(
-        "https://slack.com/api/conversations.list",
-        async ({ request }) => {
-          const params = await request.formData();
-          const expected = params.get("types") === "mpim,private_channel";
-          if (expected) {
-            return HttpResponse.json({ ok: true });
-          } else {
-            return HttpResponse.json({
-              ok: false,
-              error: "invalid_request_format",
-            });
-          }
-        },
-      ),
+      http.post("https://slack.com/api/conversations.list", async ({ request }) => {
+        const params = await request.formData();
+        const expected = params.get("types") === "mpim,private_channel";
+        if (expected) {
+          return HttpResponse.json({ ok: true });
+        } else {
+          return HttpResponse.json({
+            ok: false,
+            error: "invalid_request_format",
+          });
+        }
+      }),
     );
     const client = new SlackAPIClient("xoxb-valid", { logLevel: "DEBUG" });
     const response = await client.conversations.list({
@@ -135,22 +118,18 @@ describe("SlackAPIClient", () => {
 
   test("users.profile.set", async () => {
     server.use(
-      http.post(
-        "https://slack.com/api/users.profile.set",
-        async ({ request }) => {
-          const params = await request.formData();
-          const expected =
-            params.get("profile") === '{"first_name":"John","age":95}';
-          if (expected) {
-            return HttpResponse.json({ ok: true });
-          } else {
-            return HttpResponse.json({
-              ok: false,
-              error: "invalid_request_format",
-            });
-          }
-        },
-      ),
+      http.post("https://slack.com/api/users.profile.set", async ({ request }) => {
+        const params = await request.formData();
+        const expected = params.get("profile") === '{"first_name":"John","age":95}';
+        if (expected) {
+          return HttpResponse.json({ ok: true });
+        } else {
+          return HttpResponse.json({
+            ok: false,
+            error: "invalid_request_format",
+          });
+        }
+      }),
     );
     const client = new SlackAPIClient("xoxb-valid", { logLevel: "DEBUG" });
     const response = await client.users.profile.set({
@@ -162,23 +141,18 @@ describe("SlackAPIClient", () => {
 
   test("chat.postMessage", async () => {
     server.use(
-      http.post(
-        "https://slack.com/api/chat.postMessage",
-        async ({ request }) => {
-          const params = await request.formData();
-          const expected =
-            params.get("text") === "Hi there" &&
-            params.get("attachments") === '[{"color":"#36a64f","blocks":[]}]';
-          if (expected) {
-            return HttpResponse.json({ ok: true });
-          } else {
-            return HttpResponse.json({
-              ok: false,
-              error: "invalid_request_format",
-            });
-          }
-        },
-      ),
+      http.post("https://slack.com/api/chat.postMessage", async ({ request }) => {
+        const params = await request.formData();
+        const expected = params.get("text") === "Hi there" && params.get("attachments") === '[{"color":"#36a64f","blocks":[]}]';
+        if (expected) {
+          return HttpResponse.json({ ok: true });
+        } else {
+          return HttpResponse.json({
+            ok: false,
+            error: "invalid_request_format",
+          });
+        }
+      }),
     );
     const client = new SlackAPIClient("xoxb-valid", { logLevel: "DEBUG" });
     const response = await client.chat.postMessage({
@@ -191,21 +165,18 @@ describe("SlackAPIClient", () => {
 
   test("conversations.open", async () => {
     server.use(
-      http.post(
-        "https://slack.com/api/conversations.open",
-        async ({ request }) => {
-          const params = await request.formData();
-          const expected = params.get("users") === "W11111,W22222";
-          if (expected) {
-            return HttpResponse.json({ ok: true });
-          } else {
-            return HttpResponse.json({
-              ok: false,
-              error: "invalid_request_format",
-            });
-          }
-        },
-      ),
+      http.post("https://slack.com/api/conversations.open", async ({ request }) => {
+        const params = await request.formData();
+        const expected = params.get("users") === "W11111,W22222";
+        if (expected) {
+          return HttpResponse.json({ ok: true });
+        } else {
+          return HttpResponse.json({
+            ok: false,
+            error: "invalid_request_format",
+          });
+        }
+      }),
     );
     const client = new SlackAPIClient("xoxb-valid", { logLevel: "DEBUG" });
     const response = await client.conversations.open({

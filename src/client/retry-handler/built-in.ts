@@ -12,18 +12,15 @@ export interface FixedIntervalRetryHandlerOptions {
   maxAttempts: number;
   intervalSeconds: number;
 }
-export const DefaultFixedIntervalRetryHandlerOptions: FixedIntervalRetryHandlerOptions =
-  {
-    maxAttempts: 1,
-    intervalSeconds: 0.3,
-  };
+export const DefaultFixedIntervalRetryHandlerOptions: FixedIntervalRetryHandlerOptions = {
+  maxAttempts: 1,
+  intervalSeconds: 0.3,
+};
 
 export class RatelimitRetryHandler implements RetryHandler {
   #maxAttempts: number;
 
-  constructor(
-    options: BasicRetryHandlerOptions = DefaultBasicRetryHandlerOptions,
-  ) {
+  constructor(options: BasicRetryHandlerOptions = DefaultBasicRetryHandlerOptions) {
     this.#maxAttempts = options.maxAttempts;
   }
   async shouldRetry({ state, response }: RetryHandlerArgs): Promise<boolean> {
@@ -33,9 +30,7 @@ export class RatelimitRetryHandler implements RetryHandler {
     if (response.status !== 429) {
       return false;
     }
-    const retryAfter =
-      response.headers.get("retry-after") ||
-      response.headers.get("Retry-After");
+    const retryAfter = response.headers.get("retry-after") || response.headers.get("Retry-After");
     if (!retryAfter || Number.isNaN(retryAfter)) {
       // This could be a Slack server-side issue
       // because the retry-after header is missing while the status is 429
@@ -52,9 +47,7 @@ export class ConnectionErrorRetryHandler implements RetryHandler {
   #maxAttempts: number;
   #intervalSeconds: number;
 
-  constructor(
-    options: FixedIntervalRetryHandlerOptions = DefaultFixedIntervalRetryHandlerOptions,
-  ) {
+  constructor(options: FixedIntervalRetryHandlerOptions = DefaultFixedIntervalRetryHandlerOptions) {
     this.#maxAttempts = options.maxAttempts;
     this.#intervalSeconds = options.intervalSeconds;
   }
@@ -74,9 +67,7 @@ export class ServerErrorRetryHandler implements RetryHandler {
   #maxAttempts: number;
   #intervalSeconds: number;
 
-  constructor(
-    options: FixedIntervalRetryHandlerOptions = DefaultFixedIntervalRetryHandlerOptions,
-  ) {
+  constructor(options: FixedIntervalRetryHandlerOptions = DefaultFixedIntervalRetryHandlerOptions) {
     this.#maxAttempts = options.maxAttempts;
     this.#intervalSeconds = options.intervalSeconds;
   }

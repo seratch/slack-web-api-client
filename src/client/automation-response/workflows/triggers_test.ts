@@ -1,11 +1,6 @@
 // deno-lint-ignore-file no-unused-vars
 
-import type {
-  EventTrigger,
-  LinkTrigger,
-  ScheduledTrigger,
-  WebhookTrigger,
-} from "../types";
+import type { EventTrigger, LinkTrigger, ScheduledTrigger, WebhookTrigger } from "../types";
 
 const eventTrigger: EventTrigger = {
   id: "Ft055EQZ1J2G",
@@ -42,14 +37,7 @@ const eventTrigger: EventTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -139,14 +127,7 @@ const eventTrigger: EventTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -305,14 +286,7 @@ const linkTrigger: LinkTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -368,14 +342,7 @@ const linkTrigger: LinkTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -476,14 +443,7 @@ const scheduledTrigger: ScheduledTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -517,14 +477,7 @@ const scheduledTrigger: ScheduledTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -605,14 +558,7 @@ const webhookTrigger: WebhookTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,
@@ -646,14 +592,7 @@ const webhookTrigger: WebhookTrigger = {
     "{{type}}": {
       type: "string",
       name: "type",
-      enum: [
-        "event",
-        "shortcut",
-        "webhook",
-        "scheduled",
-        "external",
-        "blockkit",
-      ],
+      enum: ["event", "shortcut", "webhook", "scheduled", "external", "blockkit"],
       title: "Trigger type",
       is_required: true,
       is_hidden: true,

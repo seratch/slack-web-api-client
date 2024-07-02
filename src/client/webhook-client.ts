@@ -19,10 +19,7 @@ export class WebhookSender {
       });
       const responseBody = await response.text();
       const body = responseBody.toLowerCase();
-      if (
-        response.status != 200 ||
-        (body !== "ok" && body.toLowerCase() !== '{"ok":true}')
-      ) {
+      if (response.status != 200 || (body !== "ok" && body.toLowerCase() !== '{"ok":true}')) {
         throw new WebhookError(response.status, responseBody);
       }
       return response;

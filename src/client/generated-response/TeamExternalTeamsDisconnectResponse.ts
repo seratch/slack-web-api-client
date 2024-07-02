@@ -4,7 +4,7 @@
 ///////////////////////////////////
 
 import type { SlackAPIResponse } from "../response";
-export type AdminConversationsRestrictAccessRemoveGroupResponse = SlackAPIResponse & {
+export type TeamExternalTeamsDisconnectResponse = SlackAPIResponse & {
   error?: string;
   needed?: string;
   ok: boolean;

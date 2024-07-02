@@ -6,11 +6,7 @@
 import { load } from "https://deno.land/std@0.222.1/dotenv/mod.ts";
 console.log(await load({ export: true }));
 
-import {
-  ManifestParams,
-  SlackAPIClient,
-  SlackAPIClientOptions,
-} from "../src_deno/mod.ts";
+import { ManifestParams, SlackAPIClient, SlackAPIClientOptions } from "../src_deno/mod.ts";
 
 const clientOptions: SlackAPIClientOptions = { logLevel: "DEBUG" };
 const noTokenClient = new SlackAPIClient(undefined, clientOptions);
@@ -30,10 +26,7 @@ if (needRefresh) {
   const response = await noTokenClient.tooling.tokens.rotate({
     refresh_token: refreshToken,
   });
-  await Deno.writeTextFile(
-    ".env",
-    `SLACK_TOOLING_ACCESS_TOKEN=${response.token}\nSLACK_TOOLING_REFRESH_TOKEN=${response.refresh_token}\n`,
-  );
+  await Deno.writeTextFile(".env", `SLACK_TOOLING_ACCESS_TOKEN=${response.token}\nSLACK_TOOLING_REFRESH_TOKEN=${response.refresh_token}\n`);
   accessToken = response.token;
 }
 

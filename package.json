@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "build:clean": "rm -rf ./dist && tsc",
-    "format": "npx prettier --write src/ test/",
+    "format": "npx @biomejs/biome format --write src/ test/",
     "test": "npm run format && npx vitest",
     "ci-test": "npx vitest run --coverage"
   },
@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/seratch/slack-web-api-client#readme",
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@vitest/coverage-v8": "^1.6.0",
     "msw": "^2.3.1",
-    "prettier": "^3.3.2",
-    "typescript": "^5.5.2",
+    "typescript": "^5.5.3",
     "vitest": "^1.6.0"
   }
 }

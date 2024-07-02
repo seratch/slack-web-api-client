@@ -1,11 +1,14 @@
 // https://api.slack.com/events?filter=Events
 // var events = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyMafifestEvent = " + events + ";");
 export type AnyMafifestEvent =
+  | "app_deleted"
   | "app_home_opened"
+  | "app_installed"
   | "app_mention"
   | "app_rate_limited"
   | "app_requested"
   | "app_uninstalled"
+  | "app_uninstalled_team"
   | "call_rejected"
   | "channel_archive"
   | "channel_created"
@@ -30,6 +33,7 @@ export type AnyMafifestEvent =
   | "file_public"
   | "file_shared"
   | "file_unshared"
+  | "function_executed"
   | "grid_migration_finished"
   | "grid_migration_started"
   | "group_archive"
@@ -69,6 +73,7 @@ export type AnyMafifestEvent =
   | "shared_channel_invite_approved"
   | "shared_channel_invite_declined"
   | "shared_channel_invite_received"
+  | "shared_channel_invite_requested"
   | "star_added"
   | "star_removed"
   | "subteam_created"

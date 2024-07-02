@@ -1,10 +1,5 @@
 import { assert, test, describe } from "vitest";
-import {
-  SlackAPIError,
-  SlackAPIResponse,
-  TokenRotationError,
-  WebhookError,
-} from "../src/index";
+import { SlackAPIError, SlackAPIResponse, TokenRotationError, WebhookError } from "../src/index";
 
 describe("Errors", () => {
   test("SlackAPIError", async () => {

@@ -122,8 +122,4 @@ export interface ScheduledTrigger extends Trigger {
   type: "scheduled";
   schedule: ScheduleTriggerSettings;
 }
-export type AnyTrigger =
-  | LinkTrigger
-  | EventTrigger
-  | WebhookTrigger
-  | ScheduledTrigger;
+export type AnyTrigger = LinkTrigger | EventTrigger | WebhookTrigger | ScheduledTrigger;

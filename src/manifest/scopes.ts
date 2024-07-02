@@ -1,11 +1,15 @@
 // https://api.slack.com/scopes?filter=granular_bot
 // var scopes = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyManifestBotScope = " + scopes + ";");
 export type AnyManifestBotScope =
+  | "app_configurations:read"
+  | "app_configurations:write"
   | "app_mentions:read"
   | "bookmarks:read"
   | "bookmarks:write"
   | "calls:read"
   | "calls:write"
+  | "canvases:read"
+  | "canvases:write"
   | "channels:history"
   | "channels:join"
   | "channels:manage"
@@ -91,11 +95,16 @@ export type AnyManifestUserScope =
   | "admin.users:write"
   | "admin.workflows:read"
   | "admin.workflows:write"
+  | "app_configurations:read"
+  | "app_configurations:write"
+  | "apps.requests:write"
   | "auditlogs:read"
   | "bookmarks:read"
   | "bookmarks:write"
   | "calls:read"
   | "calls:write"
+  | "canvases:read"
+  | "canvases:write"
   | "channels:history"
   | "channels:read"
   | "channels:write"
@@ -117,6 +126,8 @@ export type AnyManifestUserScope =
   | "groups:write"
   | "groups:write.invites"
   | "groups:write.topic"
+  | "hosting:read"
+  | "hosting:write"
   | "identity.avatar"
   | "identity.basic"
   | "identity.email"
@@ -150,6 +161,8 @@ export type AnyManifestUserScope =
   | "team.preferences:read"
   | "team:read"
   | "tokens.basic"
+  | "triggers:read"
+  | "triggers:write"
   | "usergroups:read"
   | "usergroups:write"
   | "users.profile:read"
@@ -160,10 +173,6 @@ export type AnyManifestUserScope =
 
 // https://api.slack.com/scopes?query=Configuration
 // var scopes = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyConfigurationScope = " + scopes + ";");
-export type AnyManifestConfigurationScope =
-  | "app_configurations:read"
-  | "app_configurations:write";
+export type AnyManifestConfigurationScope = "app_configurations:read" | "app_configurations:write";
 
-export type AppManifestLevelScopes =
-  | "authorizations:read"
-  | "connections:write";
+export type AppManifestLevelScopes = "authorizations:read" | "connections:write";

@@ -4,10 +4,9 @@
 ///////////////////////////////////
 
 import type { SlackAPIResponse } from "../response";
-export type AdminConversationsSetConversationPrefsResponse =
-  SlackAPIResponse & {
-    error?: string;
-    needed?: string;
-    ok: boolean;
-    provided?: string;
-  };
+export type AdminConversationsSetConversationPrefsResponse = SlackAPIResponse & {
+  error?: string;
+  needed?: string;
+  ok: boolean;
+  provided?: string;
+};

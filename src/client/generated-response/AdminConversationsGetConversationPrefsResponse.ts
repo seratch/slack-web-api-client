@@ -4,14 +4,13 @@
 ///////////////////////////////////
 
 import type { SlackAPIResponse } from "../response";
-export type AdminConversationsGetConversationPrefsResponse =
-  SlackAPIResponse & {
-    error?: string;
-    needed?: string;
-    ok: boolean;
-    prefs?: Prefs;
-    provided?: string;
-  };
+export type AdminConversationsGetConversationPrefsResponse = SlackAPIResponse & {
+  error?: string;
+  needed?: string;
+  ok: boolean;
+  prefs?: Prefs;
+  provided?: string;
+};
 
 export interface Prefs {
   can_huddle?: CanHuddle;

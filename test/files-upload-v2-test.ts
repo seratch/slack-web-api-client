@@ -30,9 +30,7 @@ while (!shares || Object.keys(shares).length === 0) {
   const response = await client.files.info({ file: uploadedFile.id! });
   shares = response.file?.shares;
 }
-const threadTs = shares.public
-  ? shares.public[Object.keys(shares.public)[0]][0].ts
-  : undefined;
+const threadTs = shares.public ? shares.public[Object.keys(shares.public)[0]][0].ts : undefined;
 
 const file = await client.files.uploadV2({
   channel_id: channelId,

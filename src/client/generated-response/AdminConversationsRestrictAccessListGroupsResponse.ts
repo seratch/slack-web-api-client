@@ -4,15 +4,14 @@
 ///////////////////////////////////
 
 import type { SlackAPIResponse } from "../response";
-export type AdminConversationsRestrictAccessListGroupsResponse =
-  SlackAPIResponse & {
-    error?: string;
-    group_ids?: string[];
-    needed?: string;
-    ok: boolean;
-    provided?: string;
-    response_metadata?: ResponseMetadata;
-  };
+export type AdminConversationsRestrictAccessListGroupsResponse = SlackAPIResponse & {
+  error?: string;
+  group_ids?: string[];
+  needed?: string;
+  ok: boolean;
+  provided?: string;
+  response_metadata?: ResponseMetadata;
+};
 
 export interface ResponseMetadata {
   messages?: string[];

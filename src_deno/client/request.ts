@@ -785,10 +785,7 @@ interface SourceAndUnfurlIDRequest {
   unfurl_id: string;
 }
 export type ChatUnfurlRequest =
-  & (
-    | ChannelAndTSRequest
-    | SourceAndUnfurlIDRequest
-  )
+  & (ChannelAndTSRequest | SourceAndUnfurlIDRequest)
   & SlackAPIRequest
   & {
     unfurls: LinkUnfurls;
@@ -1292,6 +1289,10 @@ export interface TeamExternalTeamsListRequest extends SlackAPIRequest {
   sort_direction?: "asc" | "desc";
   sort_field?: "team_name" | "last_active_timestamp" | "connection_status";
   workspace_filter?: string[];
+}
+
+export interface TeamExternalTeamsDisconnectRequest extends SlackAPIRequest {
+  target_team: string;
 }
 
 export interface ToolingTokensRotateRequest extends SlackAPIRequest {

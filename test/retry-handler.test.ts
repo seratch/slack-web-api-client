@@ -1,9 +1,5 @@
 import { test, describe, expect, afterAll, afterEach, beforeAll } from "vitest";
-import {
-  ServerErrorRetryHandler,
-  SlackAPIClient,
-  SlackAPIConnectionError,
-} from "../src/index";
+import { ServerErrorRetryHandler, SlackAPIClient, SlackAPIConnectionError } from "../src/index";
 
 import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
@@ -52,17 +48,12 @@ describe("Retry handlers", () => {
       const client = new SlackAPIClient(undefined, { logLevel: "DEBUG" });
       const rejects = expect(client.auth.test()).rejects;
       rejects.toThrowError(SlackAPIConnectionError);
-      rejects.toThrowError(
-        "Failed to call auth.test (cause: SlackAPIConnectionError: Failed to call auth.test (status: 429, body: ))",
-      );
+      rejects.toThrowError("Failed to call auth.test (cause: SlackAPIConnectionError: Failed to call auth.test (status: 429, body: ))");
     });
   });
   describe("ServerError", async () => {
     test("it's not enabled by default", async () => {
-      const responses = [
-        HttpResponse.text("foo", { status: 500 }),
-        HttpResponse.json({ ok: true }),
-      ];
+      const responses = [HttpResponse.text("foo", { status: 500 }), HttpResponse.json({ ok: true })];
       server.use(
         http.post("https://slack.com/api/auth.test", () => {
           return responses.shift();
@@ -74,10 +65,7 @@ describe("Retry handlers", () => {
       rejects.toThrowError("Failed to call auth.test (status: 500, body: foo)");
     });
     test("successful retry", async () => {
-      const responses = [
-        HttpResponse.text("", { status: 500 }),
-        HttpResponse.json({ ok: true }),
-      ];
+      const responses = [HttpResponse.text("", { status: 500 }), HttpResponse.json({ ok: true })];
       server.use(
         http.post("https://slack.com/api/auth.test", () => {
           return responses.shift();

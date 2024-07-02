@@ -4,10 +4,9 @@
 ///////////////////////////////////
 
 import type { SlackAPIResponse } from "../response";
-export type AdminConversationsRemoveCustomRetentionResponse =
-  SlackAPIResponse & {
-    error?: string;
-    needed?: string;
-    ok: boolean;
-    provided?: string;
-  };
+export type AdminConversationsRemoveCustomRetentionResponse = SlackAPIResponse & {
+  error?: string;
+  needed?: string;
+  ok: boolean;
+  provided?: string;
+};

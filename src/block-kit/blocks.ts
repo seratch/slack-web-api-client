@@ -25,17 +25,7 @@ import type { PlainTextField, AnyTextField } from "./text-fields";
 // Basic types
 // -----------------------------
 
-export type AnyBlockType =
-  | "image"
-  | "context"
-  | "actions"
-  | "divider"
-  | "section"
-  | "input"
-  | "file"
-  | "header"
-  | "video"
-  | "rich_text";
+export type AnyBlockType = "image" | "context" | "actions" | "divider" | "section" | "input" | "file" | "header" | "video" | "rich_text";
 
 export interface Block<T extends AnyBlockType = AnyBlockType> {
   type: T;

@@ -7,19 +7,9 @@ export class SlackAPIConnectionError extends Error {
   headers: Headers | undefined;
   cause: Error | undefined;
 
-  constructor(
-    apiName: string,
-    status: number,
-    body: string,
-    headers: Headers | undefined,
-    cause: Error | undefined,
-  ) {
-    const substring = body
-      .replaceAll("\r", "")
-      .replaceAll("\n", "")
-      .substring(0, 100);
-    const bodyToPrint =
-      substring.length === 1000 ? substring + " ..." : substring;
+  constructor(apiName: string, status: number, body: string, headers: Headers | undefined, cause: Error | undefined) {
+    const substring = body.replaceAll("\r", "").replaceAll("\n", "").substring(0, 100);
+    const bodyToPrint = substring.length === 1000 ? substring + " ..." : substring;
     const message =
       cause !== undefined
         ? `Failed to call ${apiName} (cause: ${cause})`
@@ -62,11 +52,7 @@ export class WebhookError extends Error {
   status: number;
   body: string;
   cause?: Error;
-  constructor(
-    status: number,
-    body: string,
-    cause: Error | undefined = undefined,
-  ) {
+  constructor(status: number, body: string, cause: Error | undefined = undefined) {
     const message = cause
       ? `Failed to send a message using incoming webhook/response_url (cause: ${cause})`
       : `Failed to send a message using incoming webhook/response_url (status: ${status}, body: ${body})`;

@@ -207,6 +207,7 @@ import type {
   TeamAccessLogsRequest,
   TeamBillableInfoRequest,
   TeamBillingInfoRequest,
+  TeamExternalTeamsDisconnectRequest,
   TeamExternalTeamsListRequest,
   TeamInfoRequest,
   TeamIntegrationLogsRequest,
@@ -440,6 +441,7 @@ import type {
   TeamAccessLogsResponse,
   TeamBillableInfoResponse,
   TeamBillingInfoResponse,
+  TeamExternalTeamsDisconnectResponse,
   TeamExternalTeamsListResponse,
   TeamInfoResponse,
   TeamIntegrationLogsResponse,
@@ -531,9 +533,8 @@ export class SlackAPIClient {
         ? this.#options.baseUrl
         : this.#options.baseUrl + "/"
       : defaultOptions.baseUrl!;
-    this.retryHandlers = this.#options.retryHandlers ?? [
-      new RatelimitRetryHandler(),
-    ];
+    this.retryHandlers = this.#options.retryHandlers ??
+      [new RatelimitRetryHandler()];
   }
 
   // --------------------------------------
@@ -840,7 +841,10 @@ export class SlackAPIClient {
   #bindNoArgAllowedApiCall<
     A extends SlackAPIRequest,
     R extends SlackAPIResponse,
-  >(self: SlackAPIClient, method: string): NoArgAllowedSlackAPI<A, R> {
+  >(
+    self: SlackAPIClient,
+    method: string,
+  ): NoArgAllowedSlackAPI<A, R> {
     return self.call.bind(self, method) as NoArgAllowedSlackAPI<A, R>;
   }
 
@@ -879,7 +883,10 @@ export class SlackAPIClient {
       clearResolution: this.#bindApiCall<
         AdminAppsClearResolutionRequest,
         AdminAppsClearResolutionResponse
-      >(this, "admin.apps.clearResolution"),
+      >(
+        this,
+        "admin.apps.clearResolution",
+      ),
       requests: {
         cancel: this.#bindApiCall<
           AdminAppsRequestsCancelRequest,
@@ -898,7 +905,10 @@ export class SlackAPIClient {
         list: this.#bindNoArgAllowedApiCall<
           AdminAppsRestrictedListRequest,
           AdminAppsRestrictedListResponse
-        >(this, "admin.apps.restricted.list"),
+        >(
+          this,
+          "admin.apps.restricted.list",
+        ),
       },
       uninstall: this.#bindApiCall<
         AdminAppsUninstallRequest,
@@ -908,7 +918,10 @@ export class SlackAPIClient {
         list: this.#bindNoArgAllowedApiCall<
           AdminAppsActivitiesListRequest,
           AdminAppsActivitiesListResponse
-        >(this, "admin.apps.activities.list"),
+        >(
+          this,
+          "admin.apps.activities.list",
+        ),
       },
     },
     auth: {
@@ -916,15 +929,24 @@ export class SlackAPIClient {
         assignEntities: this.#bindApiCall<
           AdminAuthPolicyAssignEntitiesRequest,
           AdminAuthPolicyAssignEntitiesResponse
-        >(this, "admin.auth.policy.assignEntities"),
+        >(
+          this,
+          "admin.auth.policy.assignEntities",
+        ),
         getEntities: this.#bindApiCall<
           AdminAuthPolicyGetEntitiesRequest,
           AdminAuthPolicyGetEntitiesResponse
-        >(this, "admin.auth.policy.getEntities"),
+        >(
+          this,
+          "admin.auth.policy.getEntities",
+        ),
         removeEntities: this.#bindApiCall<
           AdminAuthPolicyRemoveEntitiesRequest,
           AdminAuthPolicyRemoveEntitiesResponse
-        >(this, "admin.auth.policy.removeEntities"),
+        >(
+          this,
+          "admin.auth.policy.removeEntities",
+        ),
       },
     },
     barriers: {
@@ -953,23 +975,38 @@ export class SlackAPIClient {
       bulkArchive: this.#bindApiCall<
         AdminConversationsBulkArchiveRequest,
         AdminConversationsBulkArchiveResponse
-      >(this, "admin.conversations.bulkArchive"),
+      >(
+        this,
+        "admin.conversations.bulkArchive",
+      ),
       bulkDelete: this.#bindApiCall<
         AdminConversationsBulkDeleteRequest,
         AdminConversationsBulkDeleteResponse
-      >(this, "admin.conversations.bulkDelete"),
+      >(
+        this,
+        "admin.conversations.bulkDelete",
+      ),
       bulkMove: this.#bindApiCall<
         AdminConversationsBulkMoveRequest,
         AdminConversationsBulkMoveResponse
-      >(this, "admin.conversations.bulkMove"),
+      >(
+        this,
+        "admin.conversations.bulkMove",
+      ),
       convertToPrivate: this.#bindApiCall<
         AdminConversationsConvertToPrivateRequest,
         AdminConversationsConvertToPrivateResponse
-      >(this, "admin.conversations.convertToPrivate"),
+      >(
+        this,
+        "admin.conversations.convertToPrivate",
+      ),
       convertToPublic: this.#bindApiCall<
         AdminConversationsConvertToPublicRequest,
         AdminConversationsConvertToPublicResponse
-      >(this, "admin.conversations.convertToPublic"),
+      >(
+        this,
+        "admin.conversations.convertToPublic",
+      ),
       create: this.#bindApiCall<
         AdminConversationsCreateRequest,
         AdminConversationsCreateResponse
@@ -981,7 +1018,10 @@ export class SlackAPIClient {
       disconnectShared: this.#bindApiCall<
         AdminConversationsDisconnectSharedRequest,
         AdminConversationsDisconnectSharedResponse
-      >(this, "admin.conversations.disconnectShared"),
+      >(
+        this,
+        "admin.conversations.disconnectShared",
+      ),
       ekm: {
         listOriginalConnectedChannelInfo: this.#bindNoArgAllowedApiCall<
           AdminConversationsEKMListOriginalConnectedChannelInfoRequest,
@@ -995,7 +1035,10 @@ export class SlackAPIClient {
       getTeams: this.#bindApiCall<
         AdminConversationsGetTeamsRequest,
         AdminConversationsGetTeamsResponse
-      >(this, "admin.conversations.getTeams"),
+      >(
+        this,
+        "admin.conversations.getTeams",
+      ),
       invite: this.#bindApiCall<
         AdminConversationsInviteRequest,
         AdminConversationsInviteResponse
@@ -1008,7 +1051,10 @@ export class SlackAPIClient {
         addGroup: this.#bindApiCall<
           AdminConversationsRestrictAccessAddGroupRequest,
           AdminConversationsRestrictAccessAddGroupResponse
-        >(this, "admin.conversations.restrictAccess.addGroup"),
+        >(
+          this,
+          "admin.conversations.restrictAccess.addGroup",
+        ),
         listGroups: this.#bindApiCall<
           AdminConversationsRestrictAccessListGroupsRequest,
           AdminConversationsRestrictAccessListGroupsResponse
@@ -1021,11 +1067,17 @@ export class SlackAPIClient {
       getCustomRetention: this.#bindApiCall<
         AdminConversationsGetCustomRetentionRequest,
         AdminConversationsGetCustomRetentionResponse
-      >(this, "admin.conversations.getCustomRetention"),
+      >(
+        this,
+        "admin.conversations.getCustomRetention",
+      ),
       setCustomRetention: this.#bindApiCall<
         AdminConversationsSetCustomRetentionRequest,
         AdminConversationsSetCustomRetentionResponse
-      >(this, "admin.conversations.setCustomRetention"),
+      >(
+        this,
+        "admin.conversations.setCustomRetention",
+      ),
       removeCustomRetention: this.#bindApiCall<
         AdminConversationsRemoveCustomRetentionRequest,
         AdminConversationsRemoveCustomRetentionResponse
@@ -1037,7 +1089,10 @@ export class SlackAPIClient {
       search: this.#bindNoArgAllowedApiCall<
         AdminConversationsSearchRequest,
         AdminConversationsSearchResponse
-      >(this, "admin.conversations.search"),
+      >(
+        this,
+        "admin.conversations.search",
+      ),
       setConversationPrefs: this.#bindApiCall<
         AdminConversationsSetConversationPrefsRequest,
         AdminConversationsSetConversationPrefsResponse
@@ -1045,11 +1100,17 @@ export class SlackAPIClient {
       setTeams: this.#bindApiCall<
         AdminConversationsSetTeamsRequest,
         AdminConversationsSetTeamsResponse
-      >(this, "admin.conversations.setTeams"),
+      >(
+        this,
+        "admin.conversations.setTeams",
+      ),
       unarchive: this.#bindApiCall<
         AdminConversationsUnarchiveRequest,
         AdminConversationsUnarchiveResponse
-      >(this, "admin.conversations.unarchive"),
+      >(
+        this,
+        "admin.conversations.unarchive",
+      ),
     },
     emoji: {
       add: this.#bindApiCall<AdminEmojiAddRequest, AdminEmojiAddResponse>(
@@ -1082,29 +1143,44 @@ export class SlackAPIClient {
         lookup: this.#bindApiCall<
           AdminFunctionsPermissionsLookupRequest,
           AdminFunctionsPermissionsLookupResponse
-        >(this, "admin.functions.permissions.lookup"),
+        >(
+          this,
+          "admin.functions.permissions.lookup",
+        ),
         set: this.#bindApiCall<
           AdminFunctionsPermissionsSetRequest,
           AdminFunctionsPermissionsSetResponse
-        >(this, "admin.functions.permissions.set"),
+        >(
+          this,
+          "admin.functions.permissions.set",
+        ),
       },
     },
     inviteRequests: {
       approve: this.#bindApiCall<
         AdminInviteRequestsApproveRequest,
         AdminInviteRequestsApproveResponse
-      >(this, "admin.inviteRequests.approve"),
+      >(
+        this,
+        "admin.inviteRequests.approve",
+      ),
       approved: {
         list: this.#bindApiCall<
           AdminInviteRequestsApprovedListRequest,
           AdminInviteRequestsApprovedListResponse
-        >(this, "admin.inviteRequests.approved.list"),
+        >(
+          this,
+          "admin.inviteRequests.approved.list",
+        ),
       },
       denied: {
         list: this.#bindApiCall<
           AdminInviteRequestsDeniedListRequest,
           AdminInviteRequestsDeniedListResponse
-        >(this, "admin.inviteRequests.denied.list"),
+        >(
+          this,
+          "admin.inviteRequests.denied.list",
+        ),
       },
       deny: this.#bindApiCall<
         AdminInviteRequestsDenyRequest,
@@ -1119,15 +1195,24 @@ export class SlackAPIClient {
       addAssignments: this.#bindApiCall<
         AdminRolesAddAssignmentsRequest,
         AdminRolesAddAssignmentsResponse
-      >(this, "admin.roles.addAssignments"),
+      >(
+        this,
+        "admin.roles.addAssignments",
+      ),
       listAssignments: this.#bindNoArgAllowedApiCall<
         AdminRolesListAssignmentsRequest,
         AdminRolesListAssignmentsResponse
-      >(this, "admin.roles.listAssignments"),
+      >(
+        this,
+        "admin.roles.listAssignments",
+      ),
       removeAssignments: this.#bindApiCall<
         AdminRolesRemoveAssignmentsRequest,
         AdminRolesRemoveAssignmentsResponse
-      >(this, "admin.roles.removeAssignments"),
+      >(
+        this,
+        "admin.roles.removeAssignments",
+      ),
     },
     teams: {
       admins: {
@@ -1158,30 +1243,48 @@ export class SlackAPIClient {
         setDefaultChannels: this.#bindApiCall<
           AdminTeamsSettingsSetDefaultChannelsRequest,
           AdminTeamsSettingsSetDefaultChannelsResponse
-        >(this, "admin.teams.settings.setDefaultChannels"),
+        >(
+          this,
+          "admin.teams.settings.setDefaultChannels",
+        ),
         setDescription: this.#bindApiCall<
           AdminTeamsSettingsSetDescriptionRequest,
           AdminTeamsSettingsSetDescriptionResponse
-        >(this, "admin.teams.settings.setDescription"),
+        >(
+          this,
+          "admin.teams.settings.setDescription",
+        ),
         setDiscoverability: this.#bindApiCall<
           AdminTeamsSettingsSetDiscoverabilityRequest,
           AdminTeamsSettingsSetDiscoverabilityResponse
-        >(this, "admin.teams.settings.setDiscoverability"),
+        >(
+          this,
+          "admin.teams.settings.setDiscoverability",
+        ),
         setIcon: this.#bindApiCall<
           AdminTeamsSettingsSetIconRequest,
           AdminTeamsSettingsSetIconResponse
-        >(this, "admin.teams.settings.setIcon"),
+        >(
+          this,
+          "admin.teams.settings.setIcon",
+        ),
         setName: this.#bindApiCall<
           AdminTeamsSettingsSetNameRequest,
           AdminTeamsSettingsSetNameResponse
-        >(this, "admin.teams.settings.setName"),
+        >(
+          this,
+          "admin.teams.settings.setName",
+        ),
       },
     },
     usergroups: {
       addChannels: this.#bindApiCall<
         AdminUsergroupsAddChannelsRequest,
         AdminUsergroupsAddChannelsResponse
-      >(this, "admin.usergroups.addChannels"),
+      >(
+        this,
+        "admin.usergroups.addChannels",
+      ),
       addTeams: this.#bindApiCall<
         AdminUsergroupsAddTeamsRequest,
         AdminUsergroupsAddTeamsResponse
@@ -1189,11 +1292,17 @@ export class SlackAPIClient {
       listChannels: this.#bindApiCall<
         AdminUsergroupsListChannelsRequest,
         AdminUsergroupsListChannelsResponse
-      >(this, "admin.usergroups.listChannels"),
+      >(
+        this,
+        "admin.usergroups.listChannels",
+      ),
       removeChannels: this.#bindApiCall<
         AdminUsergroupsRemoveChannelsRequest,
         AdminUsergroupsRemoveChannelsResponse
-      >(this, "admin.usergroups.removeChannels"),
+      >(
+        this,
+        "admin.usergroups.removeChannels",
+      ),
     },
     users: {
       assign: this.#bindApiCall<
@@ -1224,29 +1333,47 @@ export class SlackAPIClient {
         resetBulk: this.#bindApiCall<
           AdminUsersSessionResetBulkRequest,
           AdminUsersSessionResetBulkResponse
-        >(this, "admin.users.session.resetBulk"),
+        >(
+          this,
+          "admin.users.session.resetBulk",
+        ),
         invalidate: this.#bindApiCall<
           AdminUsersSessionInvalidateRequest,
           AdminUsersSessionInvalidateResponse
-        >(this, "admin.users.session.invalidate"),
+        >(
+          this,
+          "admin.users.session.invalidate",
+        ),
         getSettings: this.#bindApiCall<
           AdminUsersSessionGetSettingsRequest,
           AdminUsersSessionGetSettingsResponse
-        >(this, "admin.users.session.getSettings"),
+        >(
+          this,
+          "admin.users.session.getSettings",
+        ),
         setSettings: this.#bindApiCall<
           AdminUsersSessionSetSettingsRequest,
           AdminUsersSessionSetSettingsResponse
-        >(this, "admin.users.session.setSettings"),
+        >(
+          this,
+          "admin.users.session.setSettings",
+        ),
         clearSettings: this.#bindApiCall<
           AdminUsersSessionClearSettingsRequest,
           AdminUsersSessionClearSettingsResponse
-        >(this, "admin.users.session.clearSettings"),
+        >(
+          this,
+          "admin.users.session.clearSettings",
+        ),
       },
       unsupportedVersions: {
         export: this.#bindNoArgAllowedApiCall<
           AdminUsersUnsupportedVersionsExportRequest,
           AdminUsersUnsupportedVersionsExportResponse
-        >(this, "admin.users.unsupportedVersions.export"),
+        >(
+          this,
+          "admin.users.unsupportedVersions.export",
+        ),
       },
       setAdmin: this.#bindApiCall<
         AdminUsersSetAdminRequest,
@@ -1278,17 +1405,26 @@ export class SlackAPIClient {
         add: this.#bindApiCall<
           AdminWorkflowsCollaboratorsAddRequest,
           AdminWorkflowsCollaboratorsAddResponse
-        >(this, "admin.workflows.collaborators.add"),
+        >(
+          this,
+          "admin.workflows.collaborators.add",
+        ),
         remove: this.#bindApiCall<
           AdminWorkflowsCollaboratorsRemoveRequest,
           AdminWorkflowsCollaboratorsRemoveResponse
-        >(this, "admin.workflows.collaborators.remove"),
+        >(
+          this,
+          "admin.workflows.collaborators.remove",
+        ),
       },
       permissions: {
         lookup: this.#bindApiCall<
           AdminWorkflowsPermissionsLookupRequest,
           AdminWorkflowsPermissionsLookupResponse
-        >(this, "admin.workflows.permissions.lookup"),
+        >(
+          this,
+          "admin.workflows.permissions.lookup",
+        ),
       },
     },
   };
@@ -1334,7 +1470,10 @@ export class SlackAPIClient {
         list: this.#bindApiCall<
           AppsEventAuthorizationsListRequest,
           AppsEventAuthorizationsListResponse
-        >(this, "apps.event.authorizations.list"),
+        >(
+          this,
+          "apps.event.authorizations.list",
+        ),
       },
     },
     manifest: {
@@ -1447,7 +1586,10 @@ export class SlackAPIClient {
     deleteScheduledMessage: this.#bindApiCall<
       ChatDeleteScheduledMessageRequest,
       ChatDeleteScheduledMessageResponse
-    >(this, "chat.deleteScheduledMessage"),
+    >(
+      this,
+      "chat.deleteScheduledMessage",
+    ),
     getPermalink: this.#bindApiCall<
       ChatGetPermalinkRequest,
       ChatGetPermalinkResponse
@@ -1488,11 +1630,17 @@ export class SlackAPIClient {
     acceptSharedInvite: this.#bindApiCall<
       ConversationsAcceptSharedInviteRequest,
       ConversationsAcceptSharedInviteResponse
-    >(this, "conversations.acceptSharedInvite"),
+    >(
+      this,
+      "conversations.acceptSharedInvite",
+    ),
     approveSharedInvite: this.#bindApiCall<
       ConversationsApproveSharedInviteRequest,
       ConversationsApproveSharedInviteResponse
-    >(this, "conversations.approveSharedInvite"),
+    >(
+      this,
+      "conversations.approveSharedInvite",
+    ),
     archive: this.#bindApiCall<
       ConversationsArchiveRequest,
       ConversationsArchiveResponse
@@ -1508,7 +1656,10 @@ export class SlackAPIClient {
     declineSharedInvite: this.#bindApiCall<
       ConversationsDeclineSharedInviteRequest,
       ConversationsDeclineSharedInviteResponse
-    >(this, "conversations.declineSharedInvite"),
+    >(
+      this,
+      "conversations.declineSharedInvite",
+    ),
     history: this.#bindApiCall<
       ConversationsHistoryRequest,
       ConversationsHistoryResponse
@@ -1524,7 +1675,10 @@ export class SlackAPIClient {
     inviteShared: this.#bindApiCall<
       ConversationsInviteSharedRequest,
       ConversationsInviteSharedResponse
-    >(this, "conversations.inviteShared"),
+    >(
+      this,
+      "conversations.inviteShared",
+    ),
     join: this.#bindApiCall<
       ConversationsJoinRequest,
       ConversationsJoinResponse
@@ -1544,7 +1698,10 @@ export class SlackAPIClient {
     listConnectInvites: this.#bindNoArgAllowedApiCall<
       ConversationsListConnectInvitesRequest,
       ConversationsListConnectInvitesResponse
-    >(this, "conversations.listConnectInvites"),
+    >(
+      this,
+      "conversations.listConnectInvites",
+    ),
     mark: this.#bindApiCall<
       ConversationsMarkRequest,
       ConversationsMarkResponse
@@ -1581,13 +1738,19 @@ export class SlackAPIClient {
       create: this.#bindApiCall<
         ConversationsCanvasesCreateRequest,
         ConversationsCanvasesCreateResponse
-      >(this, "conversations.canvases.create"),
+      >(
+        this,
+        "conversations.canvases.create",
+      ),
     },
     externalInvitePermissions: {
       set: this.#bindApiCall<
         ConversationsExternalInvitePermissionsSetRequest,
         ConversationsExternalInvitePermissionsSetResponse
-      >(this, "conversations.externalInvitePermissions.set"),
+      >(
+        this,
+        "conversations.externalInvitePermissions.set",
+      ),
     },
   };
 
@@ -1650,11 +1813,17 @@ export class SlackAPIClient {
     getUploadURLExternal: this.#bindApiCall<
       FilesGetUploadURLExternalRequest,
       FilesGetUploadURLExternalResponse
-    >(this, "files.getUploadURLExternal"),
+    >(
+      this,
+      "files.getUploadURLExternal",
+    ),
     completeUploadExternal: this.#bindApiCall<
       FilesCompleteUploadExternalRequest,
       FilesCompleteUploadExternalResponse
-    >(this, "files.completeUploadExternal"),
+    >(
+      this,
+      "files.completeUploadExternal",
+    ),
     remote: {
       info: this.#bindNoArgAllowedApiCall<
         FilesRemoteInfoRequest,
@@ -1687,7 +1856,10 @@ export class SlackAPIClient {
     completeSuccess: this.#bindApiCall<
       FunctionsCompleteSuccessRequest,
       FunctionsCompleteSuccessResponse
-    >(this, "functions.completeSuccess"),
+    >(
+      this,
+      "functions.completeSuccess",
+    ),
     completeError: this.#bindApiCall<
       FunctionsCompleteErrorRequest,
       FunctionsCompleteErrorResponse
@@ -1851,6 +2023,13 @@ export class SlackAPIClient {
         TeamExternalTeamsListRequest,
         TeamExternalTeamsListResponse
       >(this, "team.externalTeams.list"),
+      disconnect: this.#bindApiCall<
+        TeamExternalTeamsDisconnectRequest,
+        TeamExternalTeamsDisconnectResponse
+      >(
+        this,
+        "team.externalTeams.disconnect",
+      ),
     },
   };
 
@@ -1947,7 +2126,10 @@ export class SlackAPIClient {
       lookup: this.#bindApiCall<
         UsersDiscoverableContactsLookupRequest,
         UsersDiscoverableContactsLookupResponse
-      >(this, "users.discoverableContacts.lookup"),
+      >(
+        this,
+        "users.discoverableContacts.lookup",
+      ),
     },
   };
 

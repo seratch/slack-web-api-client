@@ -1,10 +1,5 @@
 import { assert, test, describe } from "vitest";
-import {
-  AnyMessageBlock,
-  AnyRichTextBlockElement,
-  MessageInputBlock,
-  RichTextBlock,
-} from "../src/index";
+import { AnyMessageBlock, AnyRichTextBlockElement, MessageInputBlock, RichTextBlock } from "../src/index";
 
 describe("Block Kit types", () => {
   test("parse rich text ones", async () => {
@@ -19,12 +14,7 @@ describe("Block Kit types", () => {
               {
                 type: "text",
                 text: "Hello world",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                  code: true,
-                },
+                style: { bold: true, italic: true, strike: true, code: true },
               },
               {
                 type: "channel",
@@ -38,78 +28,44 @@ describe("Block Kit types", () => {
               {
                 type: "user",
                 user_id: "U0123456789",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                },
+                style: { bold: true, italic: true, strike: true },
               },
               {
                 type: "emoji",
                 name: "+1",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                },
+                style: { bold: true, italic: true, strike: true },
               },
               {
                 type: "link",
                 url: "https:///www.slack.com",
                 text: "Link here",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                  code: true,
-                },
+                style: { bold: true, italic: true, strike: true, code: true },
               },
               {
                 type: "team",
                 team_id: "T0123456789",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                },
+                style: { bold: true, italic: true, strike: true },
               },
               {
                 type: "usergroup",
                 usergroup_id: "S0123456789",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                },
+                style: { bold: true, italic: true, strike: true },
               },
               {
                 type: "date",
                 timestamp: 1703908656,
                 format: "YYYY-MM-DD",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                  code: true,
-                },
+                style: { bold: true, italic: true, strike: true, code: true },
               },
               {
                 type: "broadcast",
                 range: "here",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                },
+                style: { bold: true, italic: true, strike: true },
               },
               {
                 type: "color",
                 value: "red",
-                style: {
-                  bold: true,
-                  italic: true,
-                  strike: true,
-                },
+                style: { bold: true, italic: true, strike: true },
               },
             ],
           },
@@ -328,9 +284,7 @@ describe("Block Kit types", () => {
         },
         {
           type: "rich_text_preformatted",
-          elements: [
-            { type: "text", text: "This is a\nmulti-line \ncode block" },
-          ],
+          elements: [{ type: "text", text: "This is a\nmulti-line \ncode block" }],
           border: 0,
         },
         {
@@ -356,23 +310,11 @@ describe("Block Kit types", () => {
             },
             {
               type: "rich_text_section",
-              elements: [
-                {
-                  type: "text",
-                  text: "in an unordered list",
-                  style: { bold: true },
-                },
-              ],
+              elements: [{ type: "text", text: "in an unordered list", style: { bold: true } }],
             },
             {
               type: "rich_text_section",
-              elements: [
-                {
-                  type: "text",
-                  text: "on a text quote.",
-                  style: { bold: true },
-                },
-              ],
+              elements: [{ type: "text", text: "on a text quote.", style: { bold: true } }],
             },
           ],
           style: "bullet",
@@ -385,10 +327,7 @@ describe("Block Kit types", () => {
             { type: "text", text: "Or this " },
             { type: "text", text: "bolded", style: { bold: true, code: true } },
             { type: "text", text: " code", style: { code: true } },
-            {
-              type: "text",
-              text: ".\n\n\n\nAnd preserve whitespace/newlines?",
-            },
+            { type: "text", text: ".\n\n\n\nAnd preserve whitespace/newlines?" },
           ],
         },
       ];
@@ -408,19 +347,12 @@ describe("Block Kit types", () => {
         {
           type: "rich_text_section",
           elements: [
-            {
-              type: "text",
-              text: "This is a rich text section with regular text. ",
-            },
+            { type: "text", text: "This is a rich text section with regular text. " },
             { type: "text", text: "This is bold", style: { bold: true } },
             { type: "text", text: ". " },
             { type: "text", text: "This is italics.", style: { italic: true } },
             { type: "text", text: " ", style: { bold: true, italic: true } },
-            {
-              type: "text",
-              text: "This is strikethrough.",
-              style: { strike: true },
-            },
+            { type: "text", text: "This is strikethrough.", style: { strike: true } },
             { type: "text", text: " " },
             { type: "text", text: "This is code.", style: { code: true } },
             { type: "text", text: "\n\n" },
@@ -429,64 +361,32 @@ describe("Block Kit types", () => {
         {
           type: "rich_text_list",
           elements: [
-            {
-              type: "rich_text_section",
-              elements: [{ type: "text", text: "This is an" }],
-            },
-            {
-              type: "rich_text_section",
-              elements: [{ type: "text", text: "ordered" }],
-            },
-            {
-              type: "rich_text_section",
-              elements: [{ type: "text", text: "list" }],
-            },
+            { type: "rich_text_section", elements: [{ type: "text", text: "This is an" }] },
+            { type: "rich_text_section", elements: [{ type: "text", text: "ordered" }] },
+            { type: "rich_text_section", elements: [{ type: "text", text: "list" }] },
           ],
           style: "ordered",
           indent: 0,
           border: 0,
         },
-        {
-          type: "rich_text_section",
-          elements: [{ type: "text", text: "\n" }],
-        },
+        { type: "rich_text_section", elements: [{ type: "text", text: "\n" }] },
         {
           type: "rich_text_list",
           elements: [
-            {
-              type: "rich_text_section",
-              elements: [{ type: "text", text: "This is an" }],
-            },
-            {
-              type: "rich_text_section",
-              elements: [{ type: "text", text: "unordered" }],
-            },
-            {
-              type: "rich_text_section",
-              elements: [{ type: "text", text: "list" }],
-            },
+            { type: "rich_text_section", elements: [{ type: "text", text: "This is an" }] },
+            { type: "rich_text_section", elements: [{ type: "text", text: "unordered" }] },
+            { type: "rich_text_section", elements: [{ type: "text", text: "list" }] },
           ],
           style: "bullet",
           indent: 0,
           border: 0,
         },
-        {
-          type: "rich_text_section",
-          elements: [{ type: "text", text: "\n" }],
-        },
-        {
-          type: "rich_text_quote",
-          elements: [{ type: "text", text: "This is a \ntext quote" }],
-        },
-        {
-          type: "rich_text_section",
-          elements: [{ type: "text", text: "\n" }],
-        },
+        { type: "rich_text_section", elements: [{ type: "text", text: "\n" }] },
+        { type: "rich_text_quote", elements: [{ type: "text", text: "This is a \ntext quote" }] },
+        { type: "rich_text_section", elements: [{ type: "text", text: "\n" }] },
         {
           type: "rich_text_preformatted",
-          elements: [
-            { type: "text", text: "This is a\nmulti-line \ncode block" },
-          ],
+          elements: [{ type: "text", text: "This is a\nmulti-line \ncode block" }],
           border: 0,
         },
         {
@@ -512,23 +412,11 @@ describe("Block Kit types", () => {
             },
             {
               type: "rich_text_section",
-              elements: [
-                {
-                  type: "text",
-                  text: "in an unordered list",
-                  style: { bold: true },
-                },
-              ],
+              elements: [{ type: "text", text: "in an unordered list", style: { bold: true } }],
             },
             {
               type: "rich_text_section",
-              elements: [
-                {
-                  type: "text",
-                  text: "on a text quote.",
-                  style: { bold: true },
-                },
-              ],
+              elements: [{ type: "text", text: "on a text quote.", style: { bold: true } }],
             },
           ],
           style: "bullet",
@@ -541,10 +429,7 @@ describe("Block Kit types", () => {
             { type: "text", text: "Or this " },
             { type: "text", text: "bolded", style: { bold: true, code: true } },
             { type: "text", text: " code", style: { code: true } },
-            {
-              type: "text",
-              text: ".\n\n\n\nAnd preserve whitespace/newlines?",
-            },
+            { type: "text", text: ".\n\n\n\nAnd preserve whitespace/newlines?" },
           ],
         },
       ];

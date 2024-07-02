@@ -41,15 +41,11 @@ export type AnyActionBlockElementType =
   | "number_input"
   | "file_input";
 
-export interface BlockElement<
-  T extends AnyBlockElementType = AnyBlockElementType,
-> {
+export interface BlockElement<T extends AnyBlockElementType = AnyBlockElementType> {
   type: T;
 }
 
-export interface ActionBlockElement<
-  T extends AnyActionBlockElementType = AnyActionBlockElementType,
-> extends BlockElement<T> {
+export interface ActionBlockElement<T extends AnyActionBlockElementType = AnyActionBlockElementType> extends BlockElement<T> {
   type: T;
   action_id?: string;
 }
@@ -76,12 +72,7 @@ export declare type AnyBlockElement =
   | RadioButtons
   | Checkboxes;
 
-export declare type AnySelectElement =
-  | UsersSelect
-  | StaticSelect
-  | ConversationsSelect
-  | ChannelsSelect
-  | ExternalSelect;
+export declare type AnySelectElement = UsersSelect | StaticSelect | ConversationsSelect | ChannelsSelect | ExternalSelect;
 
 export declare type AnyMultiSelectElement =
   | MultiUsersSelect
@@ -126,28 +117,16 @@ export interface SlackFileImageElement extends BlockElement<"image"> {
 }
 export type ImageElement = PublicImageElement | SlackFileImageElement;
 
-export interface UsersSelect
-  extends ActionBlockElement<"users_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface UsersSelect extends ActionBlockElement<"users_select">, Confirmable, Focusable, Placeholdable {
   type: "users_select";
   initial_user?: string;
 }
-export interface MultiUsersSelect
-  extends ActionBlockElement<"multi_users_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface MultiUsersSelect extends ActionBlockElement<"multi_users_select">, Confirmable, Focusable, Placeholdable {
   type: "multi_users_select";
   initial_users?: string[];
   max_selected_items?: number;
 }
-export interface StaticSelect
-  extends ActionBlockElement<"static_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface StaticSelect extends ActionBlockElement<"static_select">, Confirmable, Focusable, Placeholdable {
   type: "static_select";
   initial_option?: PlainTextOption;
   options?: PlainTextOption[];
@@ -156,11 +135,7 @@ export interface StaticSelect
     options: PlainTextOption[];
   }[];
 }
-export interface MultiStaticSelect
-  extends ActionBlockElement<"multi_static_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface MultiStaticSelect extends ActionBlockElement<"multi_static_select">, Confirmable, Focusable, Placeholdable {
   type: "multi_static_select";
   initial_options?: PlainTextOption[];
   options?: PlainTextOption[];
@@ -170,11 +145,7 @@ export interface MultiStaticSelect
   }[];
   max_selected_items?: number;
 }
-export interface ConversationsSelect
-  extends ActionBlockElement<"conversations_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface ConversationsSelect extends ActionBlockElement<"conversations_select">, Confirmable, Focusable, Placeholdable {
   type: "conversations_select";
   initial_conversation?: string;
   response_url_enabled?: boolean;
@@ -185,11 +156,7 @@ export interface ConversationsSelect
     exclude_bot_users?: boolean;
   };
 }
-export interface MultiConversationsSelect
-  extends ActionBlockElement<"multi_conversations_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface MultiConversationsSelect extends ActionBlockElement<"multi_conversations_select">, Confirmable, Focusable, Placeholdable {
   type: "multi_conversations_select";
   initial_conversations?: string[];
   max_selected_items?: number;
@@ -200,37 +167,21 @@ export interface MultiConversationsSelect
     exclude_bot_users?: boolean;
   };
 }
-export interface ChannelsSelect
-  extends ActionBlockElement<"channels_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface ChannelsSelect extends ActionBlockElement<"channels_select">, Confirmable, Focusable, Placeholdable {
   type: "channels_select";
   initial_channel?: string;
 }
-export interface MultiChannelsSelect
-  extends ActionBlockElement<"multi_channels_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface MultiChannelsSelect extends ActionBlockElement<"multi_channels_select">, Confirmable, Focusable, Placeholdable {
   type: "multi_channels_select";
   initial_channels?: string[];
   max_selected_items?: number;
 }
-export interface ExternalSelect
-  extends ActionBlockElement<"external_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface ExternalSelect extends ActionBlockElement<"external_select">, Confirmable, Focusable, Placeholdable {
   type: "external_select";
   initial_option?: PlainTextOption;
   min_query_length?: number;
 }
-export interface MultiExternalSelect
-  extends ActionBlockElement<"multi_external_select">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface MultiExternalSelect extends ActionBlockElement<"multi_external_select">, Confirmable, Focusable, Placeholdable {
   type: "multi_external_select";
   initial_options?: PlainTextOption[];
   min_query_length?: number;
@@ -255,63 +206,38 @@ export interface Overflow extends ActionBlockElement<"overflow">, Confirmable {
   type: "overflow";
   options: PlainTextOption[];
 }
-export interface Datepicker
-  extends ActionBlockElement<"datepicker">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface Datepicker extends ActionBlockElement<"datepicker">, Confirmable, Focusable, Placeholdable {
   type: "datepicker";
   initial_date?: string;
 }
-export interface Timepicker
-  extends ActionBlockElement<"timepicker">,
-    Confirmable,
-    Focusable,
-    Placeholdable {
+export interface Timepicker extends ActionBlockElement<"timepicker">, Confirmable, Focusable, Placeholdable {
   type: "timepicker";
   initial_time?: string;
   timezone?: string;
 }
-export interface RadioButtons
-  extends ActionBlockElement<"radio_buttons">,
-    Confirmable,
-    Focusable {
+export interface RadioButtons extends ActionBlockElement<"radio_buttons">, Confirmable, Focusable {
   type: "radio_buttons";
   initial_option?: AnyDescriptionOption;
   options: AnyDescriptionOption[];
 }
-export interface DateTimepicker
-  extends ActionBlockElement<"datetimepicker">,
-    Confirmable,
-    Focusable {
+export interface DateTimepicker extends ActionBlockElement<"datetimepicker">, Confirmable, Focusable {
   type: "datetimepicker";
   // The initial date and time that is selected when the element is loaded,
   // represented as a UNIX timestamp (seconds)
   initial_date_time?: number;
 }
-export interface Checkboxes
-  extends ActionBlockElement<"checkboxes">,
-    Confirmable,
-    Focusable {
+export interface Checkboxes extends ActionBlockElement<"checkboxes">, Confirmable, Focusable {
   type: "checkboxes";
   initial_options?: AnyDescriptionOption[];
   options: AnyDescriptionOption[];
 }
-export interface RichTextInput
-  extends ActionBlockElement<"rich_text_input">,
-    Dispatchable,
-    Focusable,
-    Placeholdable {
+export interface RichTextInput extends ActionBlockElement<"rich_text_input">, Dispatchable, Focusable, Placeholdable {
   type: "rich_text_input";
   initial_value?: RichTextBlock;
   dispatch_action_config?: DispatchActionConfig;
   focus_on_load?: boolean;
 }
-export interface PlainTextInput
-  extends ActionBlockElement<"plain_text_input">,
-    Dispatchable,
-    Focusable,
-    Placeholdable {
+export interface PlainTextInput extends ActionBlockElement<"plain_text_input">, Dispatchable, Focusable, Placeholdable {
   type: "plain_text_input";
   initial_value?: string;
   multiline?: boolean;
@@ -320,27 +246,15 @@ export interface PlainTextInput
   dispatch_action_config?: DispatchActionConfig;
   focus_on_load?: boolean;
 }
-export interface URLInput
-  extends ActionBlockElement<"url_text_input">,
-    Dispatchable,
-    Focusable,
-    Placeholdable {
+export interface URLInput extends ActionBlockElement<"url_text_input">, Dispatchable, Focusable, Placeholdable {
   type: "url_text_input";
   initial_value?: string;
 }
-export interface EmailInput
-  extends ActionBlockElement<"email_text_input">,
-    Dispatchable,
-    Focusable,
-    Placeholdable {
+export interface EmailInput extends ActionBlockElement<"email_text_input">, Dispatchable, Focusable, Placeholdable {
   type: "email_text_input";
   initial_value?: string;
 }
-export interface NumberInput
-  extends ActionBlockElement<"number_input">,
-    Dispatchable,
-    Focusable,
-    Placeholdable {
+export interface NumberInput extends ActionBlockElement<"number_input">, Dispatchable, Focusable, Placeholdable {
   type: "number_input";
   is_decimal_allowed: boolean;
   initial_value?: string;
@@ -355,12 +269,7 @@ export interface FileInput extends ActionBlockElement<"file_input"> {
 
 // https://api.slack.com/changelog/2019-09-what-they-see-is-what-you-get-and-more-and-less
 
-export type RichTextBlockSubElement = BlockElement<
-  | "rich_text_list"
-  | "rich_text_preformatted"
-  | "rich_text_quote"
-  | "rich_text_section"
->;
+export type RichTextBlockSubElement = BlockElement<"rich_text_list" | "rich_text_preformatted" | "rich_text_quote" | "rich_text_section">;
 
 export interface RichTextList extends RichTextBlockSubElement {
   type: "rich_text_list";
@@ -385,11 +294,7 @@ export interface RichTextSection extends RichTextBlockSubElement {
   elements: AnyRichTextSectionElement[];
 }
 
-export type AnyRichTextBlockElement =
-  | RichTextList
-  | RichTextPreformatted
-  | RichTextQuote
-  | RichTextSection;
+export type AnyRichTextBlockElement = RichTextList | RichTextPreformatted | RichTextQuote | RichTextSection;
 
 export type AnyRichTextSectionElement =
   | RichTextSectionText
@@ -404,17 +309,7 @@ export type AnyRichTextSectionElement =
   | RichTextSectionColor;
 
 export interface RichTextSectionElement {
-  type:
-    | "text"
-    | "channel"
-    | "user"
-    | "emoji"
-    | "link"
-    | "team"
-    | "usergroup"
-    | "date"
-    | "broadcast"
-    | "color";
+  type: "text" | "channel" | "user" | "emoji" | "link" | "team" | "usergroup" | "date" | "broadcast" | "color";
   style?: RichTextSectionElementStyle;
 }
 export interface RichTextSectionText extends RichTextSectionElement {
@@ -474,7 +369,6 @@ export interface RichTextSectionElementStyle {
   client_highlight?: boolean;
   unlink?: boolean;
 }
-export interface RichTextSectionElementStyleWithCode
-  extends RichTextSectionElementStyle {
+export interface RichTextSectionElementStyleWithCode extends RichTextSectionElementStyle {
   code?: boolean;
 }

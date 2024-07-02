@@ -6,17 +6,13 @@
 import type { SlackAPIResponse } from "../response.ts";
 export type UsersDiscoverableContactsLookupResponse = SlackAPIResponse & {
   error?: string;
+  is_discoverable?: boolean;
   needed?: string;
   ok: boolean;
   provided?: string;
   response_metadata?: ResponseMetadata;
-  user?: User;
 };
 
 export interface ResponseMetadata {
   messages?: string[];
-}
-
-export interface User {
-  is_discoverable?: boolean;
 }

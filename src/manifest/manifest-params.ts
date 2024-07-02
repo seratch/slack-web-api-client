@@ -104,10 +104,7 @@ export interface ManifestParameters {
   required: string[];
 }
 
-export type ManifestParameterProperty =
-  | CommonManifestParameterProperty
-  | StringManifestParameterProperty
-  | NumberManifestParameterProperty;
+export type ManifestParameterProperty = CommonManifestParameterProperty | StringManifestParameterProperty | NumberManifestParameterProperty;
 
 export interface CommonManifestParameterProperty {
   type: string;
@@ -116,15 +113,13 @@ export interface CommonManifestParameterProperty {
   hint?: string;
 }
 
-export interface StringManifestParameterProperty
-  extends CommonManifestParameterProperty {
+export interface StringManifestParameterProperty extends CommonManifestParameterProperty {
   type: "string";
   minLength?: number;
   maxLength?: number;
 }
 
-export interface NumberManifestParameterProperty
-  extends CommonManifestParameterProperty {
+export interface NumberManifestParameterProperty extends CommonManifestParameterProperty {
   type: "number";
   minimum?: number;
   maximum?: number;

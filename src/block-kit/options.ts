@@ -30,6 +30,4 @@ export interface AnyDescriptionPlainTextOption extends BasePlainTextOption {
 
 export declare type AnyOption = MrkdwnOption | PlainTextOption;
 
-export declare type AnyDescriptionOption =
-  | AnyDescriptionMrkdwnOption
-  | AnyDescriptionPlainTextOption;
+export declare type AnyDescriptionOption = AnyDescriptionMrkdwnOption | AnyDescriptionPlainTextOption;

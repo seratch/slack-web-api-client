@@ -14,10 +14,10 @@ export class SlackAPIConnectionError extends Error {
     headers: Headers | undefined,
     cause: Error | undefined,
   ) {
-    const substring = body
-      .replaceAll("\r", "")
-      .replaceAll("\n", "")
-      .substring(0, 100);
+    const substring = body.replaceAll("\r", "").replaceAll("\n", "").substring(
+      0,
+      100,
+    );
     const bodyToPrint = substring.length === 1000
       ? substring + " ..."
       : substring;

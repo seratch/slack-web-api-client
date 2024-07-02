@@ -1,9 +1,6 @@
 export function isDebugLogEnabled(logLevel: string | undefined): boolean {
-  return (
-    logLevel !== undefined &&
-    logLevel !== null &&
-    logLevel.toUpperCase() === "DEBUG"
-  );
+  return logLevel !== undefined && logLevel !== null &&
+    logLevel.toUpperCase() === "DEBUG";
 }
 
 // deno-lint-ignore no-explicit-any

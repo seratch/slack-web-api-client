@@ -32,9 +32,7 @@ export class TokenRotator {
           refresh_token: targets.bot.refresh_token,
         });
         if (
-          response &&
-          response.access_token &&
-          response.refresh_token &&
+          response && response.access_token && response.refresh_token &&
           response.expires_in
         ) {
           refreshResults.bot = {
@@ -59,9 +57,7 @@ export class TokenRotator {
           refresh_token: targets.user.refresh_token,
         });
         if (
-          response &&
-          response.access_token &&
-          response.refresh_token &&
+          response && response.access_token && response.refresh_token &&
           response.expires_in
         ) {
           refreshResults.user = {

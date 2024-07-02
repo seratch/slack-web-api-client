@@ -34,12 +34,8 @@ interface ListItemRepsonse {
   items: Record<string, any>[];
 }
 
-export type AppsDatastoreGetResponse = SlackAPIResponse &
-  (SingleItemRepsonse | ErrorResponse);
-export type AppsDatastorePutResponse = SlackAPIResponse &
-  (SingleItemRepsonse | ErrorResponse);
-export type AppsDatastoreUpdateResponse = SlackAPIResponse &
-  (SingleItemRepsonse | ErrorResponse);
-export type AppsDatastoreQueryResponse = SlackAPIResponse &
-  (ListItemRepsonse | ErrorResponse);
+export type AppsDatastoreGetResponse = SlackAPIResponse & (SingleItemRepsonse | ErrorResponse);
+export type AppsDatastorePutResponse = SlackAPIResponse & (SingleItemRepsonse | ErrorResponse);
+export type AppsDatastoreUpdateResponse = SlackAPIResponse & (SingleItemRepsonse | ErrorResponse);
+export type AppsDatastoreQueryResponse = SlackAPIResponse & (ListItemRepsonse | ErrorResponse);
 export type AppsDatastoreDeleteResponse = SlackAPIResponse;
