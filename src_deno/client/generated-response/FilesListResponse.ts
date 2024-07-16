@@ -456,6 +456,8 @@ export interface AccessoryElement {
 
 export interface PurpleElement {
   channel_id?: string;
+  fallback?: string;
+  format?: string;
   name?: string;
   range?: string;
   skin_tone?: number;
@@ -465,6 +467,7 @@ export interface PurpleElement {
   timestamp?: string;
   type?: ElementType;
   unicode?: string;
+  unsafe?: boolean;
   url?: string;
   user_id?: string;
   usergroup_id?: string;
@@ -473,9 +476,12 @@ export interface PurpleElement {
 
 export interface Style {
   bold?: boolean;
+  client_highlight?: boolean;
   code?: boolean;
+  highlight?: boolean;
   italic?: boolean;
   strike?: boolean;
+  unlink?: boolean;
 }
 
 export enum ElementType {

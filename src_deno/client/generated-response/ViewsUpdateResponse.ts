@@ -191,6 +191,8 @@ export interface FluffyElement {
 
 export interface TentacledElement {
   channel_id?: string;
+  fallback?: string;
+  format?: string;
   name?: string;
   range?: string;
   skin_tone?: number;
@@ -200,6 +202,7 @@ export interface TentacledElement {
   timestamp?: string;
   type?: ElementType;
   unicode?: string;
+  unsafe?: boolean;
   url?: string;
   user_id?: string;
   usergroup_id?: string;
@@ -208,9 +211,12 @@ export interface TentacledElement {
 
 export interface Style {
   bold?: boolean;
+  client_highlight?: boolean;
   code?: boolean;
+  highlight?: boolean;
   italic?: boolean;
   strike?: boolean;
+  unlink?: boolean;
 }
 
 export enum ElementType {
