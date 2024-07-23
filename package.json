@@ -1,6 +1,6 @@
 {
   "name": "slack-web-api-client",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "description": "Streamlined Slack Web API client for TypeScript",
   "main": "dist/index.js",
   "scripts": {
@@ -30,9 +30,9 @@
   "homepage": "https://github.com/seratch/slack-web-api-client#readme",
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@vitest/coverage-v8": "^2.0.3",
-    "msw": "^2.3.1",
-    "typescript": "^5.5.3",
-    "vitest": "^2.0.3"
+    "@vitest/coverage-v8": "^2.0.4",
+    "msw": "^2.3.2",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.4"
   }
 }
