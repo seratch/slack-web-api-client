@@ -37,7 +37,7 @@ export interface Match {
   dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   edit_link?: string;
   editable?: boolean;
-  editors?: LastEditor[];
+  editors?: string[];
   editors_count?: number;
   external_id?: string;
   external_type?: string;

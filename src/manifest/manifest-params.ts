@@ -1,4 +1,4 @@
-import type { AnyMafifestEvent } from "./events";
+import type { AnyManifestEvent } from "./events";
 import type { AnyManifestBotScope, AnyManifestUserScope } from "./scopes";
 
 export interface ManifestParams {
@@ -81,8 +81,8 @@ export interface ManifestSettings {
 }
 
 export interface ManifestEventSubscriptions {
-  bot_events?: AnyMafifestEvent[];
-  user_events?: AnyMafifestEvent[];
+  bot_events?: AnyManifestEvent[];
+  user_events?: AnyManifestEvent[];
   request_url?: string; // can be absent when enabling Socket Mode
 }
 

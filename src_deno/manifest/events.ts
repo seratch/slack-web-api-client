@@ -1,6 +1,6 @@
 // https://api.slack.com/events?filter=Events
-// var events = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyMafifestEvent = " + events + ";");
-export type AnyMafifestEvent =
+// var events = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyManifestEvent = " + events + ";");
+export type AnyManifestEvent =
   | "app_deleted"
   | "app_home_opened"
   | "app_installed"
@@ -100,3 +100,12 @@ export type AnyMafifestEvent =
   | "workflow_step_deleted"
   | "workflow_step_execute"
   | "workflow_unpublished";
+
+export type AnyEventType = Exclude<
+  AnyManifestEvent,
+  | "message.app_home"
+  | "message.channels"
+  | "message.groups"
+  | "message.im"
+  | "message.mpim"
+>;
