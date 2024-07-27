@@ -31,7 +31,7 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@vitest/coverage-v8": "^2.0.4",
-    "msw": "^2.3.2",
+    "msw": "^2.3.4",
     "typescript": "^5.5.4",
     "vitest": "^2.0.4"
   }
