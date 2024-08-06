@@ -30,9 +30,9 @@
   "homepage": "https://github.com/seratch/slack-web-api-client#readme",
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@vitest/coverage-v8": "^2.0.4",
-    "msw": "^2.3.4",
+    "@vitest/coverage-v8": "^2.0.5",
+    "msw": "^2.3.5",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.4"
+    "vitest": "^2.0.5"
   }
 }
