@@ -35,6 +35,7 @@ export interface File {
   app_id?: string;
   app_name?: string;
   bot_id?: string;
+  can_toggle_canvas_lock?: boolean;
   canvas_template_mode?: string;
   cc?: Cc[];
   channel_actions_count?: number;

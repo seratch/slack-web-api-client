@@ -372,6 +372,7 @@ export interface FileElement {
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
+  can_toggle_canvas_lock?: boolean;
   canvas_template_mode?: string;
   cc?: Cc[];
   channel_actions_count?: number;
@@ -892,6 +893,7 @@ export interface PurpleFile {
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
+  can_toggle_canvas_lock?: boolean;
   canvas_template_mode?: string;
   cc?: any[];
   channel_actions_count?: number;
