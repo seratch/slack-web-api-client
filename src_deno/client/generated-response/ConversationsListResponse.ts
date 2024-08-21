@@ -56,6 +56,7 @@ export interface Channel {
 export interface Properties {
   canvas?: Canvas;
   posting_restricted_to?: RestrictedTo;
+  tabs?: Tab[];
   threads_restricted_to?: RestrictedTo;
 }
 
@@ -68,6 +69,12 @@ export interface Canvas {
 export interface RestrictedTo {
   type?: string[];
   user?: string[];
+}
+
+export interface Tab {
+  id?: string;
+  label?: string;
+  type?: string;
 }
 
 export interface Purpose {
