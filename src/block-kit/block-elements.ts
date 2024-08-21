@@ -351,6 +351,8 @@ export interface RichTextSectionDate extends RichTextSectionElement {
   timestamp: number;
   format: string;
   style?: RichTextSectionElementStyleWithCode;
+  url?: string;
+  fallback?: string;
 }
 export interface RichTextSectionBroadcast extends RichTextSectionElement {
   type: "broadcast";
