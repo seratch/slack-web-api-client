@@ -277,7 +277,7 @@ export interface RichTextList extends RichTextBlockSubElement {
   indent?: number;
   offset?: number;
   border?: number;
-  elements: AnyRichTextBlockElement[];
+  elements: RichTextSection[];
 }
 export interface RichTextPreformatted extends RichTextBlockSubElement {
   type: "rich_text_preformatted";
