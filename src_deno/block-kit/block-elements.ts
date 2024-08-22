@@ -450,7 +450,7 @@ export interface RichTextSectionEmoji extends RichTextSectionElement {
 export interface RichTextSectionLink extends RichTextSectionElement {
   type: "link";
   url: string;
-  text: string;
+  text?: string;
   unsafe?: boolean;
   style?: RichTextSectionElementStyleWithCode;
 }
