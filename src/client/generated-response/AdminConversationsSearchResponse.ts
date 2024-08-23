@@ -82,6 +82,7 @@ export interface Properties {
   canvas?: PropertiesCanvas;
   huddles_restricted?: boolean;
   posting_restricted_to?: PostingRestrictedTo;
+  tabs?: Tab[];
   threads_restricted_to?: ThreadsRestrictedTo;
 }
 
@@ -94,6 +95,12 @@ export interface PropertiesCanvas {
 export interface PostingRestrictedTo {
   type?: string[];
   user?: string[];
+}
+
+export interface Tab {
+  id?: string;
+  label?: string;
+  type?: string;
 }
 
 export interface ThreadsRestrictedTo {
