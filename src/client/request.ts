@@ -1321,10 +1321,17 @@ export interface ViewsOpenAutomationPlatformRequest extends SlackAPIRequest {
   view: ModalView;
 }
 
-export interface ViewsPushRequest extends SlackAPIRequest {
+export type ViewsPushRequest = ViewsPushAppPlatformRequest | ViewsPushAutomationPlatformRequest;
+
+export interface ViewsPushAppPlatformRequest extends SlackAPIRequest {
   trigger_id: string;
   view: ModalView;
 }
+export interface ViewsPushAutomationPlatformRequest extends SlackAPIRequest {
+  interactivity_pointer: string;
+  view: ModalView;
+}
+
 
 export interface ViewsPublishRequest extends SlackAPIRequest {
   user_id: string;
