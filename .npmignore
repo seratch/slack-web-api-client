@@ -9,5 +9,6 @@ vite.config.ts
 .env
 .github/
 .idea/
+.vscode/
 vite.config.mjs
 coverage/
