@@ -1,8 +1,8 @@
-import type { AnyTextField, PlainTextField } from "./text-fields.ts";
+import type { PlainTextField } from "./text-fields.ts";
 
 export interface Confirm {
   title?: PlainTextField;
-  text: AnyTextField;
+  text: PlainTextField;
   confirm?: PlainTextField;
   deny?: PlainTextField;
   style?: "primary" | "danger";
