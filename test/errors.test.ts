@@ -12,7 +12,7 @@ describe("Errors", () => {
     assert.equal(response.error, error.error);
   });
   test("TokenRotationError", async () => {
-    const error = new TokenRotationError("error");
+    const error = new TokenRotationError("error", new Error());
     assert.equal("error", error.message);
   });
   test("WebhookError", async () => {

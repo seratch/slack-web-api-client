@@ -265,7 +265,7 @@ export interface PurpleElement {
   style?: Style;
   team_id?: string;
   text?: string;
-  timestamp?: string;
+  timestamp?: number;
   type?: PurpleType;
   unicode?: string;
   unsafe?: boolean;
@@ -867,7 +867,7 @@ export interface Comment {
   preview_is_truncated?: boolean;
   public_url_shared?: boolean;
   size?: number;
-  timestamp?: string;
+  timestamp?: number;
   title?: string;
   url_private?: string;
   url_private_download?: boolean;

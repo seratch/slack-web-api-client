@@ -1332,7 +1332,6 @@ export interface ViewsPushAutomationPlatformRequest extends SlackAPIRequest {
   view: ModalView;
 }
 
-
 export interface ViewsPublishRequest extends SlackAPIRequest {
   user_id: string;
   view: HomeTabView;

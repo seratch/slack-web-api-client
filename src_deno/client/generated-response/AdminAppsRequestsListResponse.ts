@@ -35,6 +35,7 @@ export interface App {
   icons?: Icons;
   id?: string;
   is_app_directory_approved?: boolean;
+  is_granular_bot_app?: boolean;
   is_internal?: boolean;
   name?: string;
   privacy_policy_url?: string;
