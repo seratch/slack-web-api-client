@@ -44,7 +44,15 @@ export interface WebhookPostUpdateParams {
   unfurl_links?: boolean;
   unfurl_media?: boolean;
 }
+// https://api.slack.com/interactivity/handling#publishing_in_thread
+export interface WebhookPostInThreadParams extends WebhookPostUpdateParams {
+  replace_original: false;
+  thread_ts: string;
+}
 export interface WebhookDeleteParams {
   delete_original: boolean;
 }
-export type WebhookParams = WebhookPostUpdateParams | WebhookDeleteParams;
+export type WebhookParams =
+  | WebhookPostUpdateParams
+  | WebhookPostInThreadParams
+  | WebhookDeleteParams;

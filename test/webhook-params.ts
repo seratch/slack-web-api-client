@@ -12,6 +12,13 @@ describe("WebhookParams", () => {
       replace_original: true,
     };
     assert(update.replace_original === true);
+    const inThread: WebhookParams = {
+      text: "Hi there!",
+      replace_original: false,
+      thread_ts: "111.222",
+    };
+    assert(inThread.replace_original === false);
+    assert(inThread.thread_ts !== undefined);
     const del: WebhookParams = {
       delete_original: true,
     };
