@@ -34,14 +34,17 @@ export class WebhookSender {
 
 export const ResponseUrlSender = WebhookSender;
 
-export interface WebhookParams {
+export interface WebhookPostUpdateParams {
   response_type?: "ephemeral" | "in_channel";
   text: string;
   blocks?: AnyMessageBlock[];
   attachments?: MessageAttachment[];
   metadata?: MessageMetadata;
   replace_original?: boolean;
-  delete_original?: boolean;
   unfurl_links?: boolean;
   unfurl_media?: boolean;
 }
+export interface WebhookDeleteParams {
+  delete_original: boolean;
+}
+export type WebhookParams = WebhookPostUpdateParams | WebhookDeleteParams;
