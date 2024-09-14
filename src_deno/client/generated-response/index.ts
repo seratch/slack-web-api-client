@@ -156,6 +156,8 @@ export type { ConversationsMembersResponse } from "./ConversationsMembersRespons
 export type { ConversationsOpenResponse } from "./ConversationsOpenResponse.ts";
 export type { ConversationsRenameResponse } from "./ConversationsRenameResponse.ts";
 export type { ConversationsRepliesResponse } from "./ConversationsRepliesResponse.ts";
+export type { ConversationsRequestSharedInviteApproveResponse } from "./ConversationsRequestSharedInviteApproveResponse.ts";
+export type { ConversationsRequestSharedInviteDenyResponse } from "./ConversationsRequestSharedInviteDenyResponse.ts";
 export type { ConversationsSetPurposeResponse } from "./ConversationsSetPurposeResponse.ts";
 export type { ConversationsSetTopicResponse } from "./ConversationsSetTopicResponse.ts";
 export type { ConversationsUnarchiveResponse } from "./ConversationsUnarchiveResponse.ts";

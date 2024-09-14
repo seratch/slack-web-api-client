@@ -929,6 +929,21 @@ export interface ConversationsExternalInvitePermissionsSetRequest
   channel: string;
   target_team: string;
 }
+export interface ConversationsRequestSharedInviteApproveRequest
+  extends SlackAPIRequest {
+  invite_id: string;
+  team_id?: string;
+  is_external_limited?: boolean;
+  message?: {
+    text: string;
+    is_override: boolean;
+  };
+}
+export interface ConversationsRequestSharedInviteDenyRequest
+  extends SlackAPIRequest {
+  invite_id: string;
+  message: string;
+}
 
 /*
  * `dnd.*`

@@ -152,6 +152,8 @@ import type {
   ConversationsOpenRequest,
   ConversationsRenameRequest,
   ConversationsRepliesRequest,
+  ConversationsRequestSharedInviteApproveRequest,
+  ConversationsRequestSharedInviteDenyRequest,
   ConversationsSetPurposeRequest,
   ConversationsSetTopicRequest,
   ConversationsUnarchiveRequest,
@@ -471,6 +473,8 @@ import type {
   TeamExternalTeamsListResponse,
   ConversationsExternalInvitePermissionsSetResponse,
   TeamExternalTeamsDisconnectResponse,
+  ConversationsRequestSharedInviteApproveResponse,
+  ConversationsRequestSharedInviteDenyResponse,
 } from "./generated-response/index";
 
 import type { SlackAPIResponse } from "./response";
@@ -538,7 +542,7 @@ export class SlackAPIClient {
     retryHandlerState: RetryHandlerState | undefined = undefined,
   ): Promise<SlackAPIResponse> {
     const url = `${this.#baseUrl}${name}`;
-    const token = params ? params.token ?? this.#token : this.#token;
+    const token = params ? (params.token ?? this.#token) : this.#token;
     // deno-lint-ignore no-explicit-any
     const _params: any = {};
     Object.assign(_params, params);
@@ -627,7 +631,7 @@ export class SlackAPIClient {
     retryHandlerState: RetryHandlerState | undefined = undefined,
   ): Promise<SlackAPIResponse> {
     const url = `${this.#baseUrl}${name}`;
-    const token = params ? params.token ?? this.#token : this.#token;
+    const token = params ? (params.token ?? this.#token) : this.#token;
     const body = new FormData();
     for (const [key, value] of Object.entries(params)) {
       if (value === undefined || value === null || key === "token") {
@@ -903,6 +907,16 @@ export class SlackAPIClient {
           AdminConversationsRestrictAccessRemoveGroupRequest,
           AdminConversationsRestrictAccessRemoveGroupResponse
         >(this, "admin.conversations.restrictAccess.removeGroup"),
+      },
+      requestSharedInvite: {
+        approve: this.#bindApiCall<ConversationsRequestSharedInviteApproveRequest, ConversationsRequestSharedInviteApproveResponse>(
+          this,
+          "conversations.requestSharedInvite.approve",
+        ),
+        deny: this.#bindApiCall<ConversationsRequestSharedInviteDenyRequest, ConversationsRequestSharedInviteDenyResponse>(
+          this,
+          "conversations.requestSharedInvite.deny",
+        ),
       },
       getCustomRetention: this.#bindApiCall<AdminConversationsGetCustomRetentionRequest, AdminConversationsGetCustomRetentionResponse>(
         this,

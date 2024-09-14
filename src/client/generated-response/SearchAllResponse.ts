@@ -39,7 +39,7 @@ export interface FilesMatch {
   dm_mpdm_users_with_file_access?: DmMpdmUsersWithFileAccess[];
   edit_link?: string;
   editable?: boolean;
-  editors?: LastEditor[];
+  editors?: string[];
   editors_count?: number;
   external_id?: string;
   external_type?: string;
@@ -993,7 +993,7 @@ export interface Comment {
   preview_is_truncated?: boolean;
   public_url_shared?: boolean;
   size?: number;
-  timestamp?: number;
+  timestamp?: string;
   title?: string;
   url_private?: string;
   url_private_download?: boolean;
