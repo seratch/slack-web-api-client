@@ -20,6 +20,7 @@ export type ChatUpdateResponse = SlackAPIResponse & {
 
 export interface Message {
   app_id?: string;
+  assistant_app_thread?: AssistantAppThread;
   blocks?: AnyMessageBlock[];
   bot_id?: string;
   bot_profile?: BotProfile;
@@ -36,7 +37,13 @@ export interface Message {
   x_files?: string[];
 }
 
-export interface MessageBlock {
+export interface AssistantAppThread {
+  first_user_thread_reply?: string;
+  title?: string;
+  title_blocks?: AssistantAppThreadBlock[];
+}
+
+export interface AssistantAppThreadBlock {
   accessory?: Accessory;
   alt_text?: string;
   api_decoration_available?: boolean;
@@ -440,7 +447,7 @@ export interface File {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
-  title_blocks?: TitleBlockElement[];
+  title_blocks?: FileBlock[];
   to?: Cc[];
   transcription?: Transcription;
   update_notification?: number;
@@ -454,7 +461,7 @@ export interface File {
   vtt?: string;
 }
 
-export interface TitleBlockElement {
+export interface FileBlock {
   accessory?: Accessory;
   alt_text?: string;
   app_collaborators?: string[];

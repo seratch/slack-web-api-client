@@ -897,6 +897,7 @@ export interface RecordField {
 
 export interface Message {
   app_id?: string;
+  assistant_app_thread?: AssistantAppThread;
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
@@ -949,6 +950,12 @@ export interface Message {
   x_files?: any[];
 }
 
+export interface AssistantAppThread {
+  first_user_thread_reply?: string;
+  title?: string;
+  title_blocks?: any[];
+}
+
 export interface BotProfile {
   app_id?: string;
   deleted?: boolean;
@@ -993,7 +1000,7 @@ export interface Comment {
   preview_is_truncated?: boolean;
   public_url_shared?: boolean;
   size?: number;
-  timestamp?: number;
+  timestamp?: string;
   title?: string;
   url_private?: string;
   url_private_download?: boolean;

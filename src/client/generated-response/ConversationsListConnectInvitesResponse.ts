@@ -17,10 +17,19 @@ export type ConversationsListConnectInvitesResponse = SlackAPIResponse & {
 export interface InviteElement {
   acceptances?: Acceptance[];
   channel?: Channel;
+  date_created?: number;
+  date_invalid?: number;
   date_last_updated?: number;
   direction?: string;
+  id?: string;
   invite?: InviteInvite;
+  invite_payload?: InvitePayload;
   invite_type?: string;
+  inviting_team?: IngTeam;
+  inviting_user?: TingUser;
+  link?: string;
+  recipient_user_id?: string;
+  sig?: string;
   status?: string;
 }
 
@@ -42,6 +51,7 @@ export interface IngTeam {
   id?: string;
   is_verified?: boolean;
   name?: string;
+  requires_sponsorship?: boolean;
 }
 
 export interface Icon {
@@ -106,6 +116,14 @@ export interface InviteInvite {
   link?: string;
   recipient_email?: string;
   recipient_user_id?: string;
+  sig?: string;
+}
+
+export interface InvitePayload {
+  channel?: Channel;
+  invite_type?: string;
+  is_external_limited?: boolean;
+  is_sponsored?: boolean;
 }
 
 export interface ResponseMetadata {

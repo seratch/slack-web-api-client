@@ -541,6 +541,30 @@ export interface AppsUninstallRequest extends SlackAPIRequest {
 }
 
 /*
+ * `assistant.threads.*`
+ */
+
+export interface AssistantThreadsSetStatusRequest extends SlackAPIRequest {
+  channel_id: string;
+  thread_ts: string;
+  status: string;
+}
+export interface AssistantThreadsSetSuggestedPromptsRequest extends SlackAPIRequest {
+  channel_id: string;
+  thread_ts: string;
+  title?: string;
+  prompts: {
+    title: string;
+    message: string;
+  }[];
+}
+export interface AssistantThreadsSetTitleRequest extends SlackAPIRequest {
+  channel_id: string;
+  thread_ts: string;
+  title: string;
+}
+
+/*
  * `auth.*`
  */
 export interface AuthRevokeRequest extends SlackAPIRequest {

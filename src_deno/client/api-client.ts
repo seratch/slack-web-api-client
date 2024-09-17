@@ -106,6 +106,9 @@ import type {
   AppsManifestUpdateRequest,
   AppsManifestValidateRequest,
   AppsUninstallRequest,
+  AssistantThreadsSetStatusRequest,
+  AssistantThreadsSetSuggestedPromptsRequest,
+  AssistantThreadsSetTitleRequest,
   AuthRevokeRequest,
   AuthTeamsListRequest,
   AuthTestRequest,
@@ -344,6 +347,9 @@ import type {
   AppsManifestUpdateResponse,
   AppsManifestValidateResponse,
   AppsUninstallResponse,
+  AssistantThreadsSetStatusResponse,
+  AssistantThreadsSetSuggestedPromptsResponse,
+  AssistantThreadsSetTitleResponse,
   AuthRevokeResponse,
   AuthTeamsListResponse,
   AuthTestResponse,
@@ -548,7 +554,7 @@ export class SlackAPIClient {
     retryHandlerState: RetryHandlerState | undefined = undefined,
   ): Promise<SlackAPIResponse> {
     const url = `${this.#baseUrl}${name}`;
-    const token = params ? params.token ?? this.#token : this.#token;
+    const token = params ? (params.token ?? this.#token) : this.#token;
     // deno-lint-ignore no-explicit-any
     const _params: any = {};
     Object.assign(_params, params);
@@ -656,7 +662,7 @@ export class SlackAPIClient {
     retryHandlerState: RetryHandlerState | undefined = undefined,
   ): Promise<SlackAPIResponse> {
     const url = `${this.#baseUrl}${name}`;
-    const token = params ? params.token ?? this.#token : this.#token;
+    const token = params ? (params.token ?? this.#token) : this.#token;
     const body = new FormData();
     for (const [key, value] of Object.entries(params)) {
       if (value === undefined || value === null || key === "token") {
@@ -1502,6 +1508,29 @@ export class SlackAPIClient {
       this,
       "apps.uninstall",
     ),
+  };
+
+  public readonly assistant = {
+    threads: {
+      setStatus: this.#bindApiCall<
+        AssistantThreadsSetStatusRequest,
+        AssistantThreadsSetStatusResponse
+      >(
+        this,
+        "assistant.threads.setStatus",
+      ),
+      setSuggestedPrompts: this.#bindApiCall<
+        AssistantThreadsSetSuggestedPromptsRequest,
+        AssistantThreadsSetSuggestedPromptsResponse
+      >(
+        this,
+        "assistant.threads.setSuggestedPrompts",
+      ),
+      setTitle: this.#bindApiCall<
+        AssistantThreadsSetTitleRequest,
+        AssistantThreadsSetTitleResponse
+      >(this, "assistant.threads.setTitle"),
+    },
   };
 
   public readonly auth = {

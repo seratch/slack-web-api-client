@@ -460,7 +460,7 @@ export interface PurpleElement {
   style?: Style;
   team_id?: string;
   text?: string;
-  timestamp?: string;
+  timestamp?: number;
   type?: string;
   unicode?: string;
   url?: string;
