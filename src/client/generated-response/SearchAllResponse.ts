@@ -897,6 +897,7 @@ export interface RecordField {
 
 export interface Message {
   app_id?: string;
+  assistant_app_thread?: AssistantAppThread;
   attachments?: MessageAttachment[];
   blocks?: AnyMessageBlock[];
   bot_id?: string;
@@ -947,6 +948,12 @@ export interface Message {
   username?: string;
   wibblr?: boolean;
   x_files?: any[];
+}
+
+export interface AssistantAppThread {
+  first_user_thread_reply?: string;
+  title?: string;
+  title_blocks?: any[];
 }
 
 export interface BotProfile {

@@ -35,6 +35,7 @@ export interface Channel {
 
 export interface Latest {
   app_id?: string;
+  assistant_app_thread?: AssistantAppThread;
   blocks?: AnyMessageBlock[];
   bot_id?: string;
   bot_profile?: BotProfile;
@@ -47,7 +48,13 @@ export interface Latest {
   user?: string;
 }
 
-export interface LatestBlock {
+export interface AssistantAppThread {
+  first_user_thread_reply?: string;
+  title?: string;
+  title_blocks?: AssistantAppThreadBlock[];
+}
+
+export interface AssistantAppThreadBlock {
   accessory?: Accessory;
   alt_text?: string;
   api_decoration_available?: boolean;
@@ -92,7 +99,7 @@ export interface LatestBlock {
   title_url?: string;
   trigger_subtype?: string;
   trigger_type?: string;
-  type?: string;
+  type?: BlockType;
   url?: string;
   video_url?: string;
   workflow_id?: string;
@@ -451,7 +458,7 @@ export interface File {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
-  title_blocks?: TitleBlockElement[];
+  title_blocks?: FileBlock[];
   to?: Cc[];
   transcription?: Transcription;
   update_notification?: number;
@@ -465,7 +472,7 @@ export interface File {
   vtt?: string;
 }
 
-export interface TitleBlockElement {
+export interface FileBlock {
   accessory?: Accessory;
   alt_text?: string;
   app_collaborators?: string[];
@@ -498,10 +505,21 @@ export interface TitleBlockElement {
   title_url?: string;
   trigger_subtype?: string;
   trigger_type?: string;
-  type?: string;
+  type?: BlockType;
   url?: string;
   video_url?: string;
   workflow_id?: string;
+}
+
+export enum BlockType {
+  Actions = "actions",
+  Context = "context",
+  Divider = "divider",
+  Image = "image",
+  RichText = "rich_text",
+  Section = "section",
+  ShareShortcut = "share_shortcut",
+  Video = "video",
 }
 
 export interface Cc {

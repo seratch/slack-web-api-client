@@ -106,6 +106,9 @@ import type {
   AppsManifestUpdateRequest,
   AppsManifestValidateRequest,
   AppsUninstallRequest,
+  AssistantThreadsSetStatusRequest,
+  AssistantThreadsSetSuggestedPromptsRequest,
+  AssistantThreadsSetTitleRequest,
   AuthRevokeRequest,
   AuthTeamsListRequest,
   AuthTestRequest,
@@ -346,6 +349,9 @@ import type {
   AppsManifestUpdateResponse,
   AppsManifestValidateResponse,
   AppsUninstallResponse,
+  AssistantThreadsSetStatusResponse,
+  AssistantThreadsSetSuggestedPromptsResponse,
+  AssistantThreadsSetTitleResponse,
   AuthRevokeResponse,
   AuthTeamsListResponse,
   AuthTestResponse,
@@ -1522,6 +1528,29 @@ export class SlackAPIClient {
       this,
       "apps.uninstall",
     ),
+  };
+
+  public readonly assistant = {
+    threads: {
+      setStatus: this.#bindApiCall<
+        AssistantThreadsSetStatusRequest,
+        AssistantThreadsSetStatusResponse
+      >(
+        this,
+        "assistant.threads.setStatus",
+      ),
+      setSuggestedPrompts: this.#bindApiCall<
+        AssistantThreadsSetSuggestedPromptsRequest,
+        AssistantThreadsSetSuggestedPromptsResponse
+      >(
+        this,
+        "assistant.threads.setSuggestedPrompts",
+      ),
+      setTitle: this.#bindApiCall<
+        AssistantThreadsSetTitleRequest,
+        AssistantThreadsSetTitleResponse
+      >(this, "assistant.threads.setTitle"),
+    },
   };
 
   public readonly auth = {

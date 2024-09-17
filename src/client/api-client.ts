@@ -106,6 +106,9 @@ import type {
   AppsManifestUpdateRequest,
   AppsManifestValidateRequest,
   AppsUninstallRequest,
+  AssistantThreadsSetStatusRequest,
+  AssistantThreadsSetSuggestedPromptsRequest,
+  AssistantThreadsSetTitleRequest,
   AuthRevokeRequest,
   AuthTeamsListRequest,
   AuthTestRequest,
@@ -475,6 +478,9 @@ import type {
   TeamExternalTeamsDisconnectResponse,
   ConversationsRequestSharedInviteApproveResponse,
   ConversationsRequestSharedInviteDenyResponse,
+  AssistantThreadsSetStatusResponse,
+  AssistantThreadsSetSuggestedPromptsResponse,
+  AssistantThreadsSetTitleResponse,
 } from "./generated-response/index";
 
 import type { SlackAPIResponse } from "./response";
@@ -1143,6 +1149,20 @@ export class SlackAPIClient {
       validate: this.#bindApiCall<AppsManifestValidateRequest, AppsManifestValidateResponse>(this, "apps.manifest.validate"),
     },
     uninstall: this.#bindApiCall<AppsUninstallRequest, AppsUninstallResponse>(this, "apps.uninstall"),
+  };
+
+  public readonly assistant = {
+    threads: {
+      setStatus: this.#bindApiCall<AssistantThreadsSetStatusRequest, AssistantThreadsSetStatusResponse>(
+        this,
+        "assistant.threads.setStatus",
+      ),
+      setSuggestedPrompts: this.#bindApiCall<AssistantThreadsSetSuggestedPromptsRequest, AssistantThreadsSetSuggestedPromptsResponse>(
+        this,
+        "assistant.threads.setSuggestedPrompts",
+      ),
+      setTitle: this.#bindApiCall<AssistantThreadsSetTitleRequest, AssistantThreadsSetTitleResponse>(this, "assistant.threads.setTitle"),
+    },
   };
 
   public readonly auth = {
