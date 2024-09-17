@@ -2,6 +2,7 @@ export interface MessageMetadata<T extends string = string> {
   event_type: T;
   event_payload: {
     [key: string]:
+      | null
       | string
       | number
       | boolean
@@ -10,5 +11,5 @@ export interface MessageMetadata<T extends string = string> {
   };
 }
 export interface MessageMetadataEventPayload {
-  [key: string]: string | number | boolean;
+  [key: string]: null | string | number | boolean;
 }
