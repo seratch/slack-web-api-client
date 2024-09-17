@@ -9,6 +9,8 @@ export type AnyManifestEvent =
   | "app_requested"
   | "app_uninstalled"
   | "app_uninstalled_team"
+  | "assistant_thread_context_changed"
+  | "assistant_thread_started"
   | "call_rejected"
   | "channel_archive"
   | "channel_created"
