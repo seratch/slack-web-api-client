@@ -16,6 +16,8 @@ export type AdminFunctionsListResponse = SlackAPIResponse & {
 export interface Function {
   app_id?: string;
   callback_id?: string;
+  category_id?: string;
+  category_label?: string;
   date_created?: number;
   date_deleted?: number;
   date_released?: number;
