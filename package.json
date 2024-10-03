@@ -29,11 +29,11 @@
   },
   "homepage": "https://github.com/seratch/slack-web-api-client#readme",
   "devDependencies": {
-    "@biomejs/biome": "^1.9.2",
-    "@vitest/coverage-v8": "^2.1.1",
+    "@biomejs/biome": "^1.9.3",
+    "@vitest/coverage-v8": "^2.1.2",
     "msw": "^2.4.9",
     "typescript": "^5.6.2",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.2"
   },
   "overrides": {
     "msw": {
