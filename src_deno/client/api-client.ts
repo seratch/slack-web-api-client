@@ -157,6 +157,7 @@ import type {
   ConversationsRepliesRequest,
   ConversationsRequestSharedInviteApproveRequest,
   ConversationsRequestSharedInviteDenyRequest,
+  ConversationsRequestSharedInviteListRequest,
   ConversationsSetPurposeRequest,
   ConversationsSetTopicRequest,
   ConversationsUnarchiveRequest,
@@ -400,6 +401,7 @@ import type {
   ConversationsRepliesResponse,
   ConversationsRequestSharedInviteApproveResponse,
   ConversationsRequestSharedInviteDenyResponse,
+  ConversationsRequestSharedInviteListResponse,
   ConversationsSetPurposeResponse,
   ConversationsSetTopicResponse,
   ConversationsUnarchiveResponse,
@@ -1088,6 +1090,13 @@ export class SlackAPIClient {
         >(
           this,
           "conversations.requestSharedInvite.deny",
+        ),
+        list: this.#bindApiCall<
+          ConversationsRequestSharedInviteListRequest,
+          ConversationsRequestSharedInviteListResponse
+        >(
+          this,
+          "conversations.requestSharedInvite.list",
         ),
       },
       getCustomRetention: this.#bindApiCall<

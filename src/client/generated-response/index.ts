@@ -161,6 +161,7 @@ export type { ConversationsRenameResponse } from "./ConversationsRenameResponse"
 export type { ConversationsRepliesResponse } from "./ConversationsRepliesResponse";
 export type { ConversationsRequestSharedInviteApproveResponse } from "./ConversationsRequestSharedInviteApproveResponse";
 export type { ConversationsRequestSharedInviteDenyResponse } from "./ConversationsRequestSharedInviteDenyResponse";
+export type { ConversationsRequestSharedInviteListResponse } from "./ConversationsRequestSharedInviteListResponse";
 export type { ConversationsSetPurposeResponse } from "./ConversationsSetPurposeResponse";
 export type { ConversationsSetTopicResponse } from "./ConversationsSetTopicResponse";
 export type { ConversationsUnarchiveResponse } from "./ConversationsUnarchiveResponse";

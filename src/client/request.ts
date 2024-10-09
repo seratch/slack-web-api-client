@@ -902,6 +902,13 @@ export interface ConversationsRequestSharedInviteDenyRequest extends SlackAPIReq
   invite_id: string;
   message: string;
 }
+export interface ConversationsRequestSharedInviteListRequest extends SlackAPIRequest, CursorPaginationEnabled {
+  include_approved?: boolean;
+  include_denied?: boolean;
+  include_expired?: boolean;
+  invite_ids?: string[];
+  user_id?: string;
+}
 
 /*
  * `dnd.*`
