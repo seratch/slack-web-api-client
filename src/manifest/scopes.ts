@@ -59,6 +59,10 @@ export type AnyManifestBotScope =
   | "remote_files:read"
   | "remote_files:share"
   | "remote_files:write"
+  | "search:read.im"
+  | "search:read.mpim"
+  | "search:read.private"
+  | "search:read.public"
   | "team.billing:read"
   | "team.preferences:read"
   | "team:read"
@@ -130,10 +134,6 @@ export type AnyManifestUserScope =
   | "groups:write.topic"
   | "hosting:read"
   | "hosting:write"
-  | "identity.avatar"
-  | "identity.basic"
-  | "identity.email"
-  | "identity.team"
   | "im:history"
   | "im:read"
   | "im:write"
@@ -175,7 +175,7 @@ export type AnyManifestUserScope =
   | "users:write";
 
 // https://api.slack.com/scopes?query=Configuration
-// var scopes = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyConfigurationScope = " + scopes + ";");
+// var scopes = [].slice.call(document.getElementsByClassName('apiReferenceFilterableList__listItemLink')).map(e => '"' + e.innerText + '"').join(' | '); console.log("export type AnyManifestConfigurationScope = " + scopes + ";");
 export type AnyManifestConfigurationScope = "app_configurations:read" | "app_configurations:write";
 
 export type AppManifestLevelScopes = "authorizations:read" | "connections:write";
