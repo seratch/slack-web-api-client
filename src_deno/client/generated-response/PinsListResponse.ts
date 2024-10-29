@@ -313,6 +313,7 @@ export interface Column {
 export interface MediaProgress {
   duration_ms?: number;
   max_offset_ms?: number;
+  media_watched?: boolean;
   offset_ms?: number;
 }
 
@@ -544,5 +545,11 @@ export interface CustomizableInputParameter {
 
 export interface Transcription {
   locale?: string;
+  preview?: Preview;
   status?: string;
+}
+
+export interface Preview {
+  content?: string;
+  has_more?: boolean;
 }

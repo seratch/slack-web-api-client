@@ -650,6 +650,7 @@ export interface Column {
 export interface MediaProgress {
   duration_ms?: number;
   max_offset_ms?: number;
+  media_watched?: boolean;
   offset_ms?: number;
 }
 
@@ -689,7 +690,13 @@ export interface Private {
 
 export interface Transcription {
   locale?: string;
+  preview?: TranscriptionPreview;
   status?: string;
+}
+
+export interface TranscriptionPreview {
+  content?: string;
+  has_more?: boolean;
 }
 
 export interface Attachment {
@@ -743,7 +750,7 @@ export interface Attachment {
   msg_subtype?: string;
   original_url?: string;
   pretext?: string;
-  preview?: Preview;
+  preview?: AttachmentPreview;
   service_icon?: string;
   service_name?: string;
   service_url?: string;
@@ -1263,7 +1270,7 @@ export interface AttachmentMetadata {
   thumb_tiny?: string;
 }
 
-export interface Preview {
+export interface AttachmentPreview {
   can_remove?: boolean;
   icon_url?: string;
   subtitle?: DescriptionElement;
