@@ -370,6 +370,7 @@ export interface FileElement {
   is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
+  is_restricted_sharing_enabled?: boolean;
   is_starred?: boolean;
   last_editor?: string;
   last_read?: number;
@@ -1058,6 +1059,7 @@ export interface PurpleFile {
   is_channel_space?: boolean;
   is_external?: boolean;
   is_public?: boolean;
+  is_restricted_sharing_enabled?: boolean;
   is_starred?: boolean;
   last_editor?: string;
   last_read?: number;
