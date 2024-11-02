@@ -112,7 +112,7 @@ export interface Accessory {
   default_to_current_conversation?: boolean;
   elements?: AccessoryElement[];
   fallback?: string;
-  filter?: Filter;
+  filter?: AccessoryFilter;
   focus_on_load?: boolean;
   image_bytes?: number;
   image_height?: number;
@@ -141,7 +141,7 @@ export interface Accessory {
   style?: string;
   text?: DescriptionElement;
   timezone?: string;
-  type?: string;
+  type?: AccessoryType;
   url?: string;
   value?: string;
   workflow?: Workflow;
@@ -173,7 +173,7 @@ export interface AccessoryElement {
   indent?: number;
   offset?: number;
   style?: string;
-  type?: FluffyType;
+  type?: AccessoryType;
 }
 
 export interface PurpleElement {
@@ -219,14 +219,33 @@ export enum PurpleType {
   Usergroup = "usergroup",
 }
 
-export enum FluffyType {
+export enum AccessoryType {
+  Button = "button",
+  ChannelsSelect = "channels_select",
+  Checkboxes = "checkboxes",
+  ConversationsSelect = "conversations_select",
+  Datepicker = "datepicker",
+  Datetimepicker = "datetimepicker",
+  ExternalSelect = "external_select",
+  Image = "image",
+  MultiChannelsSelect = "multi_channels_select",
+  MultiConversationsSelect = "multi_conversations_select",
+  MultiExternalSelect = "multi_external_select",
+  MultiStaticSelect = "multi_static_select",
+  MultiUsersSelect = "multi_users_select",
+  Overflow = "overflow",
+  RadioButtons = "radio_buttons",
   RichTextList = "rich_text_list",
   RichTextPreformatted = "rich_text_preformatted",
   RichTextQuote = "rich_text_quote",
   RichTextSection = "rich_text_section",
+  StaticSelect = "static_select",
+  Timepicker = "timepicker",
+  UsersSelect = "users_select",
+  WorkflowButton = "workflow_button",
 }
 
-export interface Filter {
+export interface AccessoryFilter {
   exclude_bot_users?: boolean;
   exclude_external_shared_channels?: boolean;
   include?: any[];
@@ -365,6 +384,7 @@ export interface FileElement {
   lines?: number;
   lines_more?: number;
   linked_channel_id?: string;
+  list_csv_download_url?: string;
   list_limits?: ListLimits;
   list_metadata?: ListMetadata;
   media_display_type?: string;
@@ -457,7 +477,7 @@ export interface FileElement {
   thumb_video_w?: number;
   timestamp?: number;
   title?: string;
-  title_blocks?: FileBlock[];
+  title_blocks?: DescriptionBlockElement[];
   to?: Cc[];
   transcription?: Transcription;
   update_notification?: number;
@@ -471,7 +491,7 @@ export interface FileElement {
   vtt?: string;
 }
 
-export interface FileBlock {
+export interface DescriptionBlockElement {
   accessory?: Accessory;
   alt_text?: string;
   app_collaborators?: string[];
@@ -558,6 +578,7 @@ export interface InitialComment {
 export interface ListLimits {
   column_count?: number;
   column_count_limit?: number;
+  max_attachments_per_cell?: number;
   over_column_maximum?: boolean;
   over_row_maximum?: boolean;
   over_view_maximum?: boolean;
@@ -570,6 +591,7 @@ export interface ListLimits {
 export interface ListMetadata {
   creation_source?: CreationSource;
   description?: string;
+  description_blocks?: DescriptionBlockElement[];
   icon?: string;
   icon_team_id?: string;
   icon_url?: string;
@@ -636,11 +658,15 @@ export interface View {
   columns?: Column[];
   created_by?: string;
   date_created?: number;
+  default_view_key?: string;
+  filters?: FilterElement[];
+  grouping?: Grouping;
   id?: string;
   is_all_items_view?: boolean;
   is_locked?: boolean;
   name?: string;
   position?: string;
+  show_completed_items?: boolean;
   stick_column_left?: boolean;
   type?: string;
 }
@@ -651,6 +677,19 @@ export interface Column {
   position?: string;
   visible?: boolean;
   width?: number;
+}
+
+export interface FilterElement {
+  column_id?: string;
+  key?: string;
+  operator?: string;
+  typed_values?: any[];
+  values?: string[];
+}
+
+export interface Grouping {
+  group_by?: string;
+  group_by_column_id?: string;
 }
 
 export interface MediaProgress {
@@ -786,7 +825,7 @@ export interface Action {
   selected_options?: SelectedOptionElement[];
   style?: string;
   text?: string;
-  type?: string;
+  type?: AccessoryType;
   url?: string;
   value?: string;
 }
@@ -1054,6 +1093,7 @@ export interface PurpleFile {
   lines?: number;
   lines_more?: number;
   linked_channel_id?: string;
+  list_csv_download_url?: string;
   list_limits?: ListLimits;
   list_metadata?: ListMetadata;
   media_display_type?: string;
