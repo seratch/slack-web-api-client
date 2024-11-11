@@ -1221,10 +1221,19 @@ export interface Room {
   participants_camera_on?: any[];
   participants_screenshare_off?: any[];
   participants_screenshare_on?: any[];
+  recording?: Recording;
   thread_root_ts?: string;
   was_accepted?: boolean;
   was_missed?: boolean;
   was_rejected?: boolean;
+}
+
+export interface Recording {
+  can_record_summary?: string;
+  notetaking?: boolean;
+  summary?: boolean;
+  summary_status?: string;
+  transcript?: boolean;
 }
 
 export interface Root {

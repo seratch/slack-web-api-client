@@ -757,6 +757,7 @@ export interface Room {
   participants_screenshare_off?: string[];
   participants_screenshare_on?: string[];
   pending_invitees?: Knocks;
+  recording?: Recording;
   thread_root_ts?: string;
   was_accepted?: boolean;
   was_missed?: boolean;
@@ -764,3 +765,11 @@ export interface Room {
 }
 
 export interface Knocks {}
+
+export interface Recording {
+  can_record_summary?: string;
+  notetaking?: boolean;
+  summary?: boolean;
+  summary_status?: string;
+  transcript?: boolean;
+}
