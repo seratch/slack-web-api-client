@@ -389,6 +389,7 @@ export interface FileElement {
   blocks?: AnyMessageBlock[];
   bot_id?: string;
   can_toggle_canvas_lock?: boolean;
+  canvas_printing_enabled?: boolean;
   canvas_template_mode?: string;
   cc?: Cc[];
   channel_actions_count?: number;
@@ -945,6 +946,7 @@ export interface MessageFile {
   blocks?: AnyMessageBlock[];
   bot_id?: string;
   can_toggle_canvas_lock?: boolean;
+  canvas_printing_enabled?: boolean;
   canvas_template_mode?: string;
   cc?: any[];
   channel_actions_count?: number;
