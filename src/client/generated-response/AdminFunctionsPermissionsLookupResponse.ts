@@ -7,6 +7,7 @@ import type { SlackAPIResponse } from "../response";
 export type AdminFunctionsPermissionsLookupResponse = SlackAPIResponse & {
   error?: string;
   errors?: Errors;
+  metadata?: { [key: string]: Errors };
   needed?: string;
   ok: boolean;
   permissions?: { [key: string]: Permission };
