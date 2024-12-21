@@ -1223,6 +1223,7 @@ export interface Room {
   display_id?: string;
   external_unique_id?: string;
   has_ended?: boolean;
+  huddle_link?: string;
   id?: string;
   is_dm_call?: boolean;
   is_prewarmed?: boolean;
