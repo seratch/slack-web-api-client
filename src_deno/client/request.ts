@@ -526,6 +526,34 @@ export interface AdminWorkflowsUnpublishRequest extends SlackAPIRequest {
 }
 
 /*
+ * `agents.*`
+ */
+
+export interface AgentsSessionsSetStatusRequest extends SlackAPIRequest {
+  channel_id: string;
+  status: "active" | "processing" | "suspended" | "closed";
+  /** Required for thread-based sessions; must be omitted for session channels. */
+  thread_ts?: string;
+  /** Up to 200 characters. Applied only when the session is created; use `agents.sessions.rename` afterwards. */
+  title?: string;
+  /** Honored only when the session is created. The user must be a member of the channel. */
+  initiator_user_id?: string;
+  /** Requires the `chat:write.customize` scope. Takes priority over `icon_url`. */
+  icon_emoji?: string;
+  /** Requires the `chat:write.customize` scope. */
+  icon_url?: string;
+  /** Requires the `chat:write.customize` scope. Up to 200 characters. */
+  username?: string;
+}
+export interface AgentsSessionsRenameRequest extends SlackAPIRequest {
+  channel_id: string;
+  /** 1-200 characters. Renames the channel too when the session is a session channel. */
+  title: string;
+  /** Required for thread-based sessions; must be omitted for session channels. */
+  thread_ts?: string;
+}
+
+/*
  * `api.*`
  */
 export type APITestRequest = SlackAPIRequest;
