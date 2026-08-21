@@ -96,6 +96,8 @@ import type {
   AdminWorkflowsPermissionsLookupRequest,
   AdminWorkflowsSearchRequest,
   AdminWorkflowsUnpublishRequest,
+  AgentsSessionsRenameRequest,
+  AgentsSessionsSetStatusRequest,
   APITestRequest,
   AppsConnectionsOpenRequest,
   AppsDatastoreDeleteRequest,
@@ -562,6 +564,8 @@ import type {
   WorkflowsTriggersListResponse,
   WorkflowsTriggersUpdateResponse,
 } from "./automation-response/index.ts";
+import type { AgentsSessionsRenameResponse } from "./custom-response/AgentsSessionsRenameResponse.ts";
+import type { AgentsSessionsSetStatusResponse } from "./custom-response/AgentsSessionsSetStatusResponse.ts";
 import type { FilesUploadV2Response } from "./custom-response/FilesUploadV2Response.ts";
 import type { RetryHandler, RetryHandlerState } from "./retry-handler/index.ts";
 import { RatelimitRetryHandler } from "./retry-handler/index.ts";
@@ -1554,6 +1558,19 @@ export class SlackAPIClient {
           "admin.workflows.permissions.lookup",
         ),
       },
+    },
+  };
+
+  public readonly agents = {
+    sessions: {
+      setStatus: this.#bindApiCall<
+        AgentsSessionsSetStatusRequest,
+        AgentsSessionsSetStatusResponse
+      >(this, "agents.sessions.setStatus"),
+      rename: this.#bindApiCall<
+        AgentsSessionsRenameRequest,
+        AgentsSessionsRenameResponse
+      >(this, "agents.sessions.rename"),
     },
   };
 
